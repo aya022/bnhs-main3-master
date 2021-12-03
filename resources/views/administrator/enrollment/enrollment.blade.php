@@ -85,8 +85,8 @@
 <section class="section">
     <div class="section-body">
         <div class="container-fluid">
-            <div class="callout border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
-                <div class="row justify-content-between" style="margin-bottom: -20px;">
+            <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
+                <div class="row justify-content-between mb-2" style="margin-bottom: -20px;">
                     <div class="col-lg-3 col-md-3">
                         <p style="font-size: 25px;"><i class="fas fa-users text-dark"></i>&nbsp;&nbsp;Enrollee's List</p>
         
@@ -100,7 +100,7 @@
                                 @endforeach
                             </select>
                             <select class="form-select" name="selectedGL">
-                                <option value="all">All</option>
+                                {{-- <option value="all">All</option> --}}
                                 <option value="7">Grade 7</option>
                                 <option value="8">Grade 8</option>
                                 <option value="9">Grade 9</option>
