@@ -5,12 +5,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Confirmation</h5>
-                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                {{-- <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button> --}}
             </div>
             <div class="modal-body text-center">
                 <p class="mt-3 showText"></p>
-                <button type="button" class="btn btn-warning text-white btn-md pl-3 pr-3 btnYes">Yes</button>&nbsp;&nbsp;
-                <button type="button" class="btn btn-secondary text-white btn-md btnClose">Close</button>
+                <button type="button" class="btn btn-primary text-white btn-md pl-3 pr-3 btnYes">Yes</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-warning text-white btn-md btnClose">Close</button>
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
         <div class="col-md-4 col-12">
             <div class="row">
                 @if (isset($data))
-                {{empty($data->school_enrollment_url)}}
+                {{-- {{empty($data->school_enrollment_url)}} --}}
                 <div class="col-md-12 col-12">
                     <div class="card mb-3">
                         <div class="card-body pb-0">
@@ -121,17 +121,20 @@
                 </div>
                 @endif
                 {{--  --}}
-                <div class="col-md-12 col-12">
+                {{-- <div class="col-md-12 col-12">
                     <div class="card mb-3">
                         <div class="card-body">
-                            <a href="{{ route('admin.backup.run') }}" class="btn btn-block btn-warning text-white">BACK-UPDATABASE</a>
+                            <div class="input-group mb-3">
+                                <div class="input-group-text" id="btnGroupAddon"><b>Download Database:</b></div>
+                                <a href="{{ route('admin.backup.run') }}" class="btn btn-warning btn-block text-white">BACK-UPDATABASE</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         {{--  --}}
-        <div class="col-lg-12">
+        {{-- <div class="col-lg-12">
             <div class="row">
                 
             </div>
@@ -175,7 +178,7 @@
                 </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 

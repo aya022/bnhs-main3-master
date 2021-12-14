@@ -27,6 +27,7 @@ class AppointmentController extends Controller
             'data' => Holiday::select('id', 'holi_date_from', 'holi_date_to', 'description')->get()
         ]);
     }
+    
     public function holidayEdit(Holiday $holiday)
     {
         return response()->json($holiday);

@@ -1,5 +1,5 @@
 let filterSection = (strand) => {
-    let htmlHold = "<option value=''>Choose Section...</option>";
+    let htmlHold = "<option value=''>Choose Section</option>";
     $.ajax({
         url: `enrollee/filter/section/senior/${strand}`,
         type: "GET",
@@ -13,10 +13,11 @@ let filterSection = (strand) => {
             $('select[name="section_id"]').html(htmlHold);
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
             $(".btnSaveSection").html("Submit").attr("disabled", false);
         });
 };
+
 filterSection($('select[name="strand_id"]').prop("selectedIndex", 0).val());
 $("select[name='strand_id']").on("change", function () {
     filterSection($(this).val());
@@ -28,7 +29,7 @@ let gradeElevenTable = $("#gradeElevenTable").DataTable({
         processing: `
                 <div class="spinner-border spinner-border-sm" role="status">
                 <span class="sr-only">Loading...</span>
-              </div>`,
+            </div>`,
     },
 
     ajax:
@@ -65,13 +66,13 @@ let gradeElevenTable = $("#gradeElevenTable").DataTable({
             render: function (data) {
                 switch (data.enroll_status) {
                     case "Pending":
-                        return `<span class="badge badge-warning">${data.enroll_status}</span>`;
+                        return `<span class="badge bg-warning">${data.enroll_status}</span>`;
                         break;
                     case "Enrolled":
-                        return `<span class="badge badge-success">${data.enroll_status}</span>`;
+                        return `<span class="badge bg-success">${data.enroll_status}</span>`;
                         break;
                     case "Dropped":
-                        return `<span class="badge badge-danger">${data.enroll_status}</span>`;
+                        return `<span class="badge bg-danger">${data.enroll_status}</span>`;
                         break;
                     default:
                         return false;
@@ -106,8 +107,8 @@ let gradeElevenTable = $("#gradeElevenTable").DataTable({
                 if (data.req_grade != null || data.req_goodmoral != null || data.req_psa != null) {
                     
                     return `
-                        <button type="button" class="btn btn-warning btn-sm pt-0 pb-0 pl-3 pr-3 btnRequirement" value="${data.fullname + "^" + data.req_grade + '^' + data.req_goodmoral + '^' + data.req_psa}"><i class="fas fa-file-import"></i> view</button>
-                      `;
+                        <button type="button" class="btn btn-dark text-white btn-sm pt-0 pb-0 pl-3 pr-3 btnRequirement" value="${data.fullname + "^" + data.req_grade + '^' + data.req_goodmoral + '^' + data.req_psa}"><i class="fas fa-eye"></i> View</button>
+                    `;
                     } else {
                     return '--- None ---';
                 }
@@ -125,17 +126,13 @@ let gradeElevenTable = $("#gradeElevenTable").DataTable({
                     return `
                    ${
                        data.enroll_status == "Enrolled"
-                           ? `<button type="button" class="btn btn-sm btn-primary  cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
-                           <i class="fas fa-edit"></i>
-                            </button>&nbsp;
-                            <button type="button" class="btn btn-sm btn-info btnMain btnMain_${data.id} pt-0 pb-0 pl-3 pr-3 " value="${data.id}">
+                           ? `<button type="button" class="btn btn-sm btn-primary text-white  cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">Update</button>&nbsp;
+                            <button type="button" class="btn btn-sm btn-info text-white btnMain btnMain_${data.id} pt-0 pb-0 pl-3 pr-3 " value="${data.id}">
                                 Subjects
                             </button>`
                         :
-                        `<button type="button" class="btn btn-sm btn-danger cDelete btnDelete_${data.id}  pt-0 pb-0 pl-4 pr-4" id="${data.id}">
-                           <i class="fas fa-times"></i>
-                        </button>&nbsp;
-                        <button type="button" class="btn btn-sm btn-info cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
+                        `<button type="button" class="btn btn-sm btn-danger text-white cDelete btnDelete_${data.id}  pt-0 pb-0 pl-4 pr-4" id="${data.id}">Delete</button>&nbsp;
+                        <button type="button" class="btn btn-sm btn-info text-white cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
                             Enroll
                         </button>`
                    }
@@ -216,11 +213,11 @@ $(document).on("click", ".cDelete", function () {
             .done(function (response) {
                 //  $(".btnDelete_" + id).html("Delete");
                 gradeElevenTable.ajax.reload();
-                getToast("success", "Success", "deleted one record");
+                getToast("success", "Successfully", "Deleted one record");
             })
             .fail(function (jqxHR, textStatus, errorThrown) {
                 console.log(jqxHR, textStatus, errorThrown);
-                getToast("error", "Eror", errorThrown);
+                getToast("error", "Error", errorThrown);
             });
     } else {
         return false;
@@ -242,7 +239,7 @@ $(document).on("click", ".cEdit", function () {
         .done(function (response) {
             $(".alert-warning").hide();
             filterSection(response.strand_id);
-           setTimeout(() => {
+            // setTimeout(() => {
             $(".nameOfStudent").val(response.fullname);
             $('#sectionFilter').val(response.section_id);
             $("input[name='enroll_id']").val(response.id);
@@ -251,12 +248,12 @@ $(document).on("click", ".cEdit", function () {
                     ? `<i class="fas fa-edit"></i>`
                     : "Section"
             );
-            $("#setSectionModal").modal("show");
-           }, 3000);
+                $("#setSectionModal").modal("show");
+            // }, 1000);
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });
 
@@ -294,16 +291,17 @@ $("#setSectionForm").submit(function (e) {
             $("input[name='status_now']").val("");
             $(".btnSaveSectionNow").html("Save").attr("disabled", false);
             $("input[name='roll_no']").removeClass("is-valid");
-            getToast("success", "Ok", "Successfully assign section");
+            getToast("success", "Successfully", "Assign section");
             document.getElementById("setSectionForm").reset();
             gradeElevenTable.ajax.reload();
             monitorSection(
                 $("select[name='strand']").val(),
                 $("select[name='term']").val()
             );
+            $("#setSectionModal").modal("hide");
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
             $(".btnSaveSectionNow").html("Save").attr("disabled", false);
         });
 });
@@ -317,22 +315,38 @@ let monitorSection = (strand, term) => {
     })
         .done(function (data) {
             data.forEach((val) => {
+                // monitorHMTL += `
+                //     <div class="col-md-3 col-12">
+                //         <div class="btn-group" role="group" aria-label="Basic example">
+                //             <button type="button" class="btn btn-info btn-icon icon-left listenrolledBtn ml-3 p-2" value='${val.section_name}'>
+                //                 <i class="far fa-user text-white"></i>&nbsp;&nbsp;<span class="text-white">${val.section_name}</span>
+                //                 <span class="btnSection_${val.section_name}  text-white">: 
+                //                 <span class="badge bg-transparent ">${val.total}</span>
+                //                 </span>
+                //             </button>
+                //             <button type="button" class="btn btn-info text-white border-left p-2 pl-3 pr-3 printBtn" value='${val.section_name}_${term}'><i class="fa fa-print text-white" style="font-size:15px"></i>&nbsp;&nbsp; Print</button>
+                //         </div>
+                //     </div>
+                // `;
+
                 monitorHMTL += `
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-info btn-icon icon-left listenrolledBtn ml-3 p-2" value='${val.section_name}'>
-                        <i class="far fa-user"></i> ${val.section_name}
-                        <span class="btnSection_${val.section_name}">
-                        <span class="badge badge-transparent ">${val.total}</span>
-                        </span>
-                    </button>
-                    <button type="button" class="btn btn-info border-left p-2 pl-3 pr-3 printBtn" value='${val.section_id}_${term}'><i class="fa fa-print" style="font-size:15px"></i></button>
+                <div class="col-md-2">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-info text-white btn-icon icon-left listenrolledBtn p-2" value='${val.section_name}'>
+                            <i class="far fa-user"></i> ${val.section_name}
+                            <span class="btnSection_${val.section_name}">
+                            <span class="badge bg-transparent ">${val.total}</span>
+                            </span>
+                        </button>
+                        <button type="button" class="btn btn-info text-white border-left p-2 pl-3 pr-3 printBtn" value='${val.section_name}_${term}'><i class="fa fa-print" style="font-size:15px"></i></button>
+                    </div>
                 </div>
-               `;
+                `;
             });
             $(".sectionListAvailable").html(monitorHMTL);
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
             $(".btnSaveSectionNow").html("Save").attr("disabled", false);
         });
 };
@@ -354,4 +368,19 @@ $(document).on("click", ".printBtn", function () {
         w: 1200,
         h: 800,
     });
+});
+
+/**
+ * ----------------------exporting--------------------
+ **/
+$("#btnModalExport").on("click", function () {
+    $("#modalExport").modal("show");
+});
+
+$(".btnGenerate").on("click", function (e) {
+    e.preventDefault();
+    let myFormat = $("#myFormat").val();
+    let mystatus = $("#mystatus").val();
+    console.log(mystatus);
+    window.open(`export/excel/${myFormat}/${mystatus}/${current_curriculum}/${current_glc}`,"_blank");
 });

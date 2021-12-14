@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="{{ asset('css/select2/select2.min.css') }}">
 @endsection
 @section('content')
-<!-- Modal -->
 
 
 

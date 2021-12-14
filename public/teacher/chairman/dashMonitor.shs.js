@@ -14,49 +14,87 @@ let dashMonitor = () => {
         .done(function (data) {
             data.forEach((val, i) => {
                 dashHTML += `
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon ${myAsset[i].color}">
-                            <i class="${myAsset[i].font}"></i>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark">
+                        <div class="callout-icon ">
+                            <i class="${myAsset[i].font} text-info" style="font-size: 25px;"></i>
                         </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
+                        <div class="callout-wrap">
+                            <div class="callout-header">
                                 <h4>${val.strand}</h4>
                             </div>
-                            <div class="card-body">
-                               ${
-                                   val.pending == 0
-                                       ? `
-                                        <div class="card-body" style="font-size: 16px">
+                            <div class="callout-body">
+                                ${
+                                    val.pending == 0
+                                        ? `
+                                        <div class="callout-body" style="font-size: 16px">
                                         <small class="m-0">Enrolled: <b> ${val.enrolled}</b></small>
                                         `
-                                       : `
+                                        : `
                                         ${
                                             val.enrolled == 0
                                                 ? `
-                                                <div class="card-body" style="font-size: 16px">
+                                                <div class="callout-body" style="font-size: 16px">
                                                 <small class="m-0">Pending: <b> ${val.pending}</b></small>
                                                 `
                                                 : `
-                                                <div class="card-body" style="font-size: 16px">
+                                                <div class="callout-body" style="font-size: 16px">
                                                 <small class="m-0">Enrolled: <b> ${val.enrolled}</b></small>
                                                 <small class="m-0">Pending: <b> ${val.pending}</b></small>
-                                                 `
+                                                `
                                         }
 
-                                         `
-                               }
+                                        `
+                            }
                             </div>
                             </div>
                         </div>
                     </div>
-                </div>
-               `;
+                </div>`;
+                // dashHTML += `
+                // <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                //     <div class="card">
+                //         <div class="card-icon ${myAsset[i].color}">
+                //             <i class="${myAsset[i].font}"></i>
+                //         </div>
+                //         <div class="card-wrap">
+                //             <div class="card-header">
+                //                 <h4>${val.strand}</h4>
+                //             </div>
+                //             <div class="card-body">
+                //                 ${
+                //                     val.pending == 0
+                //                         ? `
+                //                         <div class="card-body" style="font-size: 16px">
+                //                         <small class="m-0">Enrolled: <b> ${val.enrolled}</b></small>
+                //                         `
+                //                         : `
+                //                         ${
+                //                             val.enrolled == 0
+                //                                 ? `
+                //                                 <div class="card-body" style="font-size: 16px">
+                //                                 <small class="m-0">Pending: <b> ${val.pending}</b></small>
+                //                                 `
+                //                                 : `
+                //                                 <div class="card-body" style="font-size: 16px">
+                //                                 <small class="m-0">Enrolled: <b> ${val.enrolled}</b></small>
+                //                                 <small class="m-0">Pending: <b> ${val.pending}</b></small>
+                //                                 `
+                //                         }
+
+                //                         `
+                //                 }
+                //             </div>
+                //             </div>
+                //         </div>
+                //     </div>
+                // </div>
+                // `;
             });
             $(".dashMonitor").html(dashHTML);
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
             $(".btnSaveSectionNow").html("Save").attr("disabled", false);
         });
 };

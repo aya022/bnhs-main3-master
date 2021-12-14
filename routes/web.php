@@ -267,6 +267,7 @@ Route::middleware(['auth:teacher', 'preventBackHistory'])->name('teacher.')->pre
     Route::get('table/list/filtered/{class}/{barangay}', [ChairmanController::class, 'tableListFiltred']);
     Route::get('table/list/enrolled/student/{section}', [ChairmanController::class, 'tableListEnrolledStudent']);
     Route::get('section/search/by/level/{curriculum}', [ChairmanController::class, 'searchSecionByLevel']);
+    // set section
     Route::post('section/set', [EnrollmentController::class, 'setSection']);
     Route::post('section/mass/sectioning', [EnrollmentController::class, 'massSectioning']);
     Route::get('edit/{enrollment}', [EnrollmentController::class, 'edit']);
@@ -314,15 +315,18 @@ Route::middleware(['auth:teacher', 'preventBackHistory'])->name('teacher.')->pre
 
     // export file
     Route::get('export/excel/{format}/{status}/{curriculum}/{grade_level}', [ExportController::class, 'exportNewEnrollee']);
+    // export file
+    Route::get('senior/export/excel/{format}/{status}/{curriculum}/{grade_level}', [ExportController::class, 'exportNewEnrollee']);
 
     //senior high--------------
     Route::get('senior/enrollee', [ChairmanSHSController::class, 'seniorEnrollee'])->name('senior.enrollee.page');
     Route::get('senior/student/enrolle/{strand}/{term}', [ChairmanSHSController::class, 'enrolleeSort']);
     Route::get('senior/enrollee/filter/section/senior/{strand}', [EnrollmentSHSController::class, 'filterSection']); //shs filter
-    Route::post('senior/enrollee/save', [EnrollmentSHSController::class, 'walkinEnrollee']); //shs walkin
+    Route::get('senior/enrollee/save', [EnrollmentSHSController::class, 'walkinEnrollee']); //shs walkin
     Route::delete('senior/enrollee/delete/{enrollment}', [EnrollmentSHSController::class, 'destroy']); //shs delete
     Route::get('senior/enrollee/edit/{enrollment}', [EnrollmentSHSController::class, 'editEnrollee']); //shs delete
     Route::post('senior/enrollee/section/set', [EnrollmentSHSController::class, 'setSection']);
+    Route::post('senior/shsmonitor/dropped/{enrollment}', [EnrollmentSHSController::class, 'dropped']);//shsClass monitor Drop
     Route::get('senior/enrollee/monitor/section/{strand}/{term}', [ChairmanSHSController::class, 'monitorSection']);
     Route::get('senior/enrollee/print/report/{section}/{term}', [ChairmanSHSController::class, 'printReport']);
 

@@ -190,8 +190,6 @@ class EnrollmentController extends Controller
         return $this->enrolledSubject($enrolled->id);
     }
 
-
-
     public function storeStudenRequest($request)
     {
         return  Student::create([
@@ -228,9 +226,11 @@ class EnrollmentController extends Controller
             Enrollment::select(
                 'enrollments.*',
                 'enrollments.section_id',
+                "students.roll_no",
                 "students.student_firstname",
                 "students.student_middlename",
                 "students.student_lastname",
+                DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname")
             )->join('students', 'enrollments.student_id', 'students.id')
                 ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
                 ->where('enrollments.id', $enrollment)->first()
@@ -361,23 +361,61 @@ class EnrollmentController extends Controller
         }
     }
 
+    // public function setSection(Request $request)
+    // {
+    //     if ($request->status_now == 'force') {
+    //         if ($this->totalStudentInSection($request->section_again) >= 45) {
+    //             return response()->json(['warning' => 'This section reach the maximum number of student']);
+    //         } else {
+    //             $this->updateSection($request);
+    //         }
+    //     } else {
+    //         if ($this->totalStudentInSection($request->section_again) > 40) {
+    //             return response()->json(['warning' => 'Section is full']);
+    //         } else {
+    //             $this->updateSection($request);
+    //         }
+    //     }
+    // }
     public function setSection(Request $request)
     {
-        if ($request->status_now == 'force') {
-            if ($this->totalStudentInSection($request->section) >= 45) {
-                return response()->json(['warning' => 'This section reach the maximum number of student']);
-            } else {
-                return $this->updateSection($request);
-            }
+        // if ($request->status_now == 'force') {
+        //     if ($this->totalStudentInSection($request->section_again) >= 45) {
+        //         return response()->json(['warning' => 'This section reach the maximum number of student']);
+        //     } else {
+        //         $this->updateSection($request);
+        //     }
+        // } else {
+        //     if ($this->totalStudentInSection($request->section_again) > 40) {
+        //         return response()->json(['warning' => 'Section is full']);
+        //     } else {
+        //         $this->updateSection($request);
+        //     }
+        // }
+        $stud_data = Enrollment::select('student_id', 'enroll_status', 'section_id')->whereId($request->enroll_id)->first();
+        if ($stud_data->enroll_status == 'Pending') {
+            $this->updateUserAccount($stud_data->student_id);
+            return  Enrollment::whereId($request->enroll_id)
+                ->where('school_year_id', Helper::activeAY()->id)
+                ->update([
+                    'section_id' => $request->section,
+                    'enroll_status' => 'Enrolled',
+                ]);
         } else {
-            if ($this->totalStudentInSection($request->section) > 40) {
-                return response()->json(['warning' => 'Section is full']);
-            } else {
-                return $this->updateSection($request);
-            }
+            Enrollment::where('section_id',$stud_data->section_id)
+            ->where('student_id',$stud_data->student_id)
+            ->update([
+                'section_id'=>$request->section
+            ]);
+            return  Enrollment::whereId($request->enroll_id)
+                ->where('school_year_id', Helper::activeAY()->id)
+                ->update([
+                    'section_id' => $request->section
+            ]);
         }
     }
 
+    // mass section
     public function massSectioning(Request $request)
     {
         $totalEnrollId = count($request->enroll_id);

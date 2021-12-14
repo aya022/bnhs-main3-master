@@ -81,9 +81,9 @@ class GradingImport implements ToCollection,WithStartRow
                 ]);
             }
 
-       }
+        }
         } else {
-             foreach($rows as $row){
+            foreach($rows as $row){
                     if (!empty($row[0])) {
                         $data= Grade::join('students','grades.student_id','students.id')
                         ->where('students.roll_no',$row[0])
@@ -130,7 +130,7 @@ class GradingImport implements ToCollection,WithStartRow
     //             'grades.third'=>$row[4] ?? null,
     //             'grades.fourth'=>$row[5] ?? null
     //         ]);
-       
+    
     // }
     // Grade::select('grades.id as gid','midterm','final','final_grade','students.roll_id','subjects.description','students.id as sid', DB::raw("CONCAT(students.lname,', ',students.fname,' ', students.mname) AS fullname"))
     //    ->join('students','grades.student_id','students.id')

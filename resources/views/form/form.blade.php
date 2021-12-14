@@ -287,13 +287,13 @@
                                                         <div class="form-group">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="customFile">Good Moral Certificate</label>
-                                                                <input type="file" class="form-control" name="req_goodmoral" id="chk">
+                                                                <input type="file" class="form-control" name="req_goodmoral" id="chk"  onchange="validate_fileupload(this.value);">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="customFile">PSA Birth Certificate</label>
-                                                                <input type="file" class="form-control" name="req_psa" id="chk">
+                                                                <input type="file" class="form-control" name="req_psa" id="chk"  onchange="validate_fileupload(this.value);">
                                                             </div>
                                                         </div>
                                                 </div>

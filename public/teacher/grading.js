@@ -15,7 +15,7 @@ let filterMyLoadSection = () => {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 };
 filterMyLoadSection();
@@ -29,7 +29,7 @@ let myClassTable = (section_id, subject_id) => {
             processing: `
                     <div class="spinner-border spinner-border-sm" role="status">
                     <span class="sr-only">Loading...</span>
-                  </div>`,
+                </div>`,
         },
 
         ajax: `grading/load/student/${section_id}/${subject_id}`,
@@ -40,6 +40,7 @@ let myClassTable = (section_id, subject_id) => {
                 orderable: false,
                 render: function (data) {
                     return `<input type="text" pattern="^[0-9]{3}$" onkeypress="return numberOnly(event)" maxlength="3"  name="inGrade" class="noborder text-center"
+                    ${data.first!=null ? 'disabled' : ''}
                         value="${
                             data.first == null
                                 ? ""
@@ -135,8 +136,8 @@ let myClassTable = (section_id, subject_id) => {
                               data.fourth == null
                                 ? ""
                                 : myAverage >= 75
-                                ? `<span class="ml-3 badge badge-success">Passed</span>`
-                                : `<span class="ml-3 badge badge-danger ">Failed</span>`
+                                ? `<span class="ml-3 badge bg-success">Passed</span>`
+                                : `<span class="ml-3 badge bg-danger ">Failed</span>`
                             : ""
                     }`;
                 },
@@ -145,7 +146,7 @@ let myClassTable = (section_id, subject_id) => {
         createdRow: function (row, data, index) {
             if (parseInt(data.avg) <= parseInt(75)) {
                 // $(row).find("td:eq(10)").css("color", "red");
-                $(row).css("backgroud-color", " red");
+                $(row).css("backgroud-color", "red");
             }
         },
     });
@@ -153,6 +154,7 @@ let myClassTable = (section_id, subject_id) => {
 
 $("#btnImport").hide();
 $(".btnDownload").hide();
+
 $("select[name='filterMyLoadSection']").on("change", function () {
     $("#btnImport").show()
     let containID = $(this).val().split("_");
@@ -167,11 +169,10 @@ $("select[name='filterMyLoadSection']").on("change", function () {
         $("#btnImport").hide();
         $("#gradingTable").html(`
         <tr>
-        <td colspan="7" class="text-center">No data available</td>
-    </tr>`);
+            <td colspan="7" class="text-center">No data available</td>
+        </tr>`);
     }
 });
-
 
 $("#btnImport").on('click', function () {
    $("#exampleModalCenter").modal("show") 
@@ -427,7 +428,7 @@ $("#importForm").submit(function (e) {
         let subject_id = containID[1];
         myClassTable(section_id, subject_id);
     }).fail(function (jqxHR, textStatus, errorThrown) {
-         $(".btnImportNow").html('Import Now')
+        $(".btnImportNow").html('Import Now')
         console.log(jqxHR, textStatus, errorThrown);
     });
 })

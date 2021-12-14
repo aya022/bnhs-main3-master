@@ -34,32 +34,24 @@ $("#enrollForm").submit(function (e) {
                 if (data.warning) {
                     getToast("warning", "Warning", data.warning);
                 } else {
-                    getToast(
-                        "success",
-                        "Ok",
-                        "Successfully added new enrolled"
-                    );
+                    getToast("success","Successfully","Added new enrolled Student");
                 }
                 // $("input[name='roll_no']").removeClass("is-valid");
 
                 $(".btnSaveEnroll").html("Enroll").attr("disabled", false);
                 document.getElementById("enrollForm").reset();
-                setTimeout(() => {
+                // setTimeout(() => {
                     monitorSection(
                         $("select[name='strand']").val(),
                         $("select[name='term']").val()
                     );
-                }, 1500);
+                // }, 1500);
             })
             .fail(function (jqxHR, textStatus, errorThrown) {
-                getToast("error", "Eror", errorThrown);
+                getToast("error", "Error", errorThrown);
                 $(".btnSaveEnroll").html("Enroll").attr("disabled", false);
             });
     } else {
-        getToast(
-            "warning",
-            "Warning",
-            "You must select student Status for verification"
-        );
+        getToast("warning","Warning","You must select student Status for verification");
     }
 });

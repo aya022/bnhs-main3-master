@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{BackSubject,Grade};
+use App\Models\BackSubject;
+use App\Models\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,8 +30,8 @@ class BackSubjectController extends Controller
     public function backrecordList()
     {
         return response()->json(
-           [ 
-               "data"=>Grade::select('grades.student_id', 'students.roll_no', DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname"))
+            [ 
+            "data"=>Grade::select('grades.student_id', 'students.roll_no', DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname"))
             ->join('students','grades.student_id','students.id')
             ->join('subjects','grades.subject_id','subjects.id')
             // ->whereNull('grades.avg')
@@ -69,6 +70,8 @@ class BackSubjectController extends Controller
             //     'back_subjects.prev_avg',
             //     'back_subjects.avg_now',
             //     'back_subjects.remarks',
+            //     'back_subjects.conducted_from',
+            //     'back_subjects.conducted_to',
             //     DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname")
             // )
             //     ->join('students', 'back_subjects.student_id', 'students.id')

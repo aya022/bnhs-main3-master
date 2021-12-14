@@ -20,8 +20,17 @@
     <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
         <div class="container">
             <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card  d-block d-md-flex row mb-3 shadow">
+                        <div class="card-body text-center">
+                            <img src="{{ asset('image/logo/bn.jpg') }}" class="img-fluid rounded-circle" style="height: 100px;">
+                            <h1>Balaogan National High School</h1>
+                            <p class="text-medium-emphasis">Balaogan, Bula, Camarines Sur</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-8">
-                    <div class="card-group d-block d-md-flex row">
+                    <div class="card-group d-block d-md-flex row shadow">
                         <div class="card col-md-7 p-4 mb-0">
                             <div class="card-body">
                                 <h1>Login</h1>
@@ -57,7 +66,7 @@
                         <div class="card col-md-5 text-white bg-info py-5">
                             <div class="card-body text-center">
                                 <div class="text-left">
-                                    <h2>BNHS Transactions</h2>
+                                    <h2>Transactions</h2>
                                     <a href="/appoint/register" class="btn btn-lg btn-outline-light mt-3">
                                         <span class="fas fa-calendar-check"></span>&nbsp;&nbsp;Get Appointment
                                     </a>

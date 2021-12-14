@@ -16,7 +16,7 @@
                 <img src="{{ asset('image/logo/bn.jpg') }}" class="img-fluid rounded-circle" width="110%">
             </div>
             <div class="col-9 my-2 text-center">
-                <h6 class="mb-0">Balaogan National High School</h6>
+                <h5 class="mb-0">Balaogan National High School</h5>
                 <small style="font-size: 12px;">Balaogan, Bula, Camarines Sur</small><br>
                 <small>Region V</small><br><br>
                 <small style="font-size: 14px;"><b>Appointment List</b></small><br>

@@ -1,6 +1,5 @@
+$(".cancelNow").hide();
 $("#tableStudent").css("width", "100%");
-
-
 $("select[name='term']").on("change", function () {
     tableAssign($(this).val());
     $("select[name='term_assign']").val($(this).val());
@@ -28,7 +27,7 @@ $("select[name='term']").on("change", function () {
 //         })
 //         .fail(function (jqxHR, textStatus, errorThrown) {
 //             console.log(jqxHR, textStatus, errorThrown);
-//             getToast("error", "Eror", errorThrown);
+//             getToast("error", "Error", errorThrown);
 //         });
 // });
 
@@ -57,7 +56,7 @@ let tableAssign = (term) => {
             if (data.length == 0) {
                 hold = `<tr>
                 <td colspan="4" class="text-center">
-                   No Data Available
+                    No Data Available
                 </td>
             </tr>`;
             } else {
@@ -70,9 +69,7 @@ let tableAssign = (term) => {
                         <td>
                             <button type="button" class="btn btn-sm btn-info editAssign  editA_${
                                 val.id
-                            } pt-1 pb-1 pl-2 pr-2" id="${val.id}" value="${val.term}">
-                            <i class="fas fa-edit"></i>
-                            </button>
+                            } pt-1 pb-1 pl-2 pr-2" id="${val.id}" value="${val.term}">Update</button>
                         </td>
                     </tr>
                 `;
@@ -82,10 +79,9 @@ let tableAssign = (term) => {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 };
-
 tableAssign($('select[name="term"]').val());
 
 $("#assignForm").submit(function (e) {
@@ -122,7 +118,7 @@ $("#assignForm").submit(function (e) {
         .fail(function (jqxHR, textStatus, errorThrown) {
             $(".assignBtn").html("Save");
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });
 
@@ -162,7 +158,7 @@ $(document).on("click", ".editAssign", function () {
             $(".editA_" + id)
                 .html(` <i class="fas fa-edit"></i>`)
                 .attr("disabled", false);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });
 
@@ -195,7 +191,7 @@ $(document).on("click", ".deleteAssign", function () {
             })
             .fail(function (jqxHR, textStatus, errorThrown) {
                 console.log(jqxHR, textStatus, errorThrown);
-                getToast("error", "Eror", errorThrown);
+                getToast("error", "Error", errorThrown);
             });
     } else {
         return false;
@@ -216,9 +212,9 @@ let filterSubjectsAssign = (term) => {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             $(".editA_" + id)
-                .html(` <i class="fas fa-edit"></i>`)
+                .html(`<i class="fas fa-edit"></i>`)
                 .attr("disabled", false);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 }
 filterSubjectsAssign($('select[name="term"]').val())

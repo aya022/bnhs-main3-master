@@ -1,7 +1,7 @@
 <div class="row">
     {{-- grade 11 first sem --}}
     <div class="col-lg-6 col-md-6 col-sm-12">
-        <table class="table table-bordered ">
+        <table class="table table-bordered mt-3 shadow">
             <thead>
                 <tr>
                     <td colspan="1">
@@ -14,11 +14,11 @@
                 <tr>
                     <td>
                         Section:
-                        <span class="badge badge-info">{{  $recordElevenFirst[0]->section_name ??'N/A' }}</span>
+                        <span class="badge bg-info">{{  $recordElevenFirst[0]->section_name ??'N/A' }}</span>
                     </td>
                     <td colspan="4" class="text-center">
                         Class Adviser:
-                        <span class="badge badge-info pt-1 pb-1">
+                        <span class="badge bg-info pt-1 pb-1">
                             {{  $recordElevenFirst[0]->fullname ?? 'N/A' }}
                         </span>
                     </td>
@@ -68,7 +68,7 @@
     {{-- grade 11 second sem --}}
     
     <div class="col-lg-6 col-md-6 col-sm-12">
-        <table class="table table-bordered ">
+        <table class="table table-bordered mt-3 shadow">
             <thead>
                 <tr>
                     <td colspan="1">
@@ -81,11 +81,11 @@
                 <tr>
                     <td>
                         Section:
-                        <span class="badge badge-info">{{  $recordElevenSecond[0]->section_name ??'N/A' }}</span>
+                        <span class="badge bg-info">{{  $recordElevenSecond[0]->section_name ??'N/A' }}</span>
                     </td>
                     <td colspan="4" class="text-center">
                         Class Adviser:
-                        <span class="badge badge-info pt-1 pb-1">
+                        <span class="badge bg-info pt-1 pb-1">
                             {{  $recordElevenSecond[0]->fullname ?? 'N/A' }}
                         </span>
                     </td>
@@ -134,7 +134,7 @@
 
     {{-- grade 12 first sem --}}
     <div class="col-lg-6 col-md-6 col-sm-12">
-        <table class="table table-bordered ">
+        <table class="table table-bordered mt-3 shadow">
             <thead>
                 <tr>
                     <td colspan="1">
@@ -147,11 +147,11 @@
                 <tr>
                     <td>
                         Section:
-                        <span class="badge badge-info">{{  $recordTwelveFirst[0]->section_name ??'N/A' }}</span>
+                        <span class="badge bg-info">{{  $recordTwelveFirst[0]->section_name ??'N/A' }}</span>
                     </td>
                     <td colspan="4" class="text-center">
                         Class Adviser:
-                        <span class="badge badge-info pt-1 pb-1">
+                        <span class="badge bg-info pt-1 pb-1">
                             {{  $recordTwelveFirst[0]->fullname ?? 'N/A' }}
                         </span>
                     </td>
@@ -201,7 +201,7 @@
     {{-- grade 12 second sem --}}
     
     <div class="col-lg-6 col-md-6 col-sm-12">
-        <table class="table table-bordered ">
+        <table class="table table-bordered mt-3 shadow">
             <thead>
                 <tr>
                     <td colspan="1">
@@ -214,11 +214,11 @@
                 <tr>
                     <td>
                         Section:
-                        <span class="badge badge-info">{{  $recordTwelveSecond[0]->section_name ??'N/A' }}</span>
+                        <span class="badge bg-info">{{  $recordTwelveSecond[0]->section_name ??'N/A' }}</span>
                     </td>
                     <td colspan="4" class="text-center">
                         Class Adviser:
-                        <span class="badge badge-info pt-1 pb-1">
+                        <span class="badge bg-info pt-1 pb-1">
                             {{  $recordTwelveSecond[0]->fullname ?? 'N/A' }}
                         </span>
                     </td>

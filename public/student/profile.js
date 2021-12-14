@@ -16,7 +16,7 @@ $("#studentForm").submit(function (e) {
                     </div>`
                 )
                 .attr("disabled", true);
-            getToast("info", "Save", "Successfully saved!");
+            getToast("success", "Successfully", "saved!");
         },
     })
         .done(function (data) {
@@ -24,7 +24,7 @@ $("#studentForm").submit(function (e) {
             document.getElementById("studentForm").reset();
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
             $(".btnSave").html("Save").attr("disabled", false);
         });
 });
@@ -56,7 +56,7 @@ $("#uploadImage").submit(function (e) {
             document.getElementById("uploadImage").reset();
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
             $(".btnImageSave").html("Upload").attr("disabled", false);
         });
 });

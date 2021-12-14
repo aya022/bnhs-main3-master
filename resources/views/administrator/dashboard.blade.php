@@ -32,7 +32,7 @@
                         </div>
                         <div class="callout-wrap">
                             <div class="callout-header">
-                                <p style="font-size: 20px;">No. of Student</p>
+                                <p style="font-size: 20px;">No. of Enrolled Student</p>
                             </div>
                             <div class="callout-body">
                                 <b>{{ $studentTotal }}</b>
@@ -142,7 +142,7 @@
                                 <li class="media mb-3">
                                         <!-- <img class=" width=" 50" src="{{ asset('image/avatar-1.png') }}" alt="product">
                                         -->
-                                    <i class="mr-3 rounded text-info fas fa-users" style="font-size: 20px"></i>
+                                    <i class="mr-3 rounded text-info fas fa-users" style="font-size: 30px"></i>
                                     <div class="media-body">
                                         <div class="media-right my-2" style="font-size: 20px"><b>{{ $njhs }}</b></div>
                                         <div class="media-title">Number of Junior High</div>
@@ -151,7 +151,7 @@
                                     </div>
                                 </li><hr class="text-dark">
                                 <li class="media">
-                                    <i class="mr-3 rounded text-info fas fa-user-shield" style="font-size: 20px"></i>
+                                    <i class="mr-3 rounded text-info fas fa-user-shield" style="font-size: 30px"></i>
                                     <div class="media-body">
                                         <div class="media-right my-2" style="font-size: 20px"><b>{{ $nshs }}</b></div>
                                         <div class="media-title">Number of Senior High</div>

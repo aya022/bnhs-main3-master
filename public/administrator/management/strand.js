@@ -70,7 +70,7 @@ $("#strandForm").submit(function (e) {
             $(".btnSaveStrand")
                 .html(`Saving <div class="spinner-border spinner-border-sm" role="status">
             <span class="sr-only">Loading...</span>
-          </div>`);
+        </div>`);
         },
     })
         .done(function (data) {
@@ -79,11 +79,11 @@ $("#strandForm").submit(function (e) {
             } else {
                 $(".btnSaveStrand").html("Submit");
                 $(".btnSaveStrand").attr("disabled", false);
+                cancelStrand.hide();
                 getToast("success","Successfully", "Added new Record");
                 strandTable();
                 $("#idForStrand").val("");
                 $("#strandForm")[0].reset();
-                cancelStrand.hide();
             }
             // document.getElementById("strandForm").reset();
         })

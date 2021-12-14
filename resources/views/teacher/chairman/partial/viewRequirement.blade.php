@@ -4,9 +4,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="viewRequirementTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body pb-0 pl-1 pr-1">
             <p class="pl-4"><i class="fas fa-fingerprint"></i> To see a larger version of the image, click on it.</p>

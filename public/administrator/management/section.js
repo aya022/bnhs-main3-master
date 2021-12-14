@@ -146,7 +146,6 @@ $(document).on("click", ".deleteSection", function () {
     let id = $(this).attr("id");
     $('.deleteYes').val(id)
     $("#teacherDeleteModal").modal("show");
-   
 });
 
 $(".deleteYes").on('click', function () {

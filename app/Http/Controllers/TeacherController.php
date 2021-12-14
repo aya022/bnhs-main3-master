@@ -60,6 +60,7 @@ class TeacherController extends Controller
                 ->get()
         );
     }
+    
     public function loadMyStudent($section, $subject)
     {
         // insert and protect data duplication
@@ -281,16 +282,23 @@ class TeacherController extends Controller
     public function printTeacher()
     {
         $dataNow = Teacher::select(
+            "*",
             "roll_no",
             "teacher_gender",
             "created_at",
-            DB::raw("CONCAT(teacher_lastname,', ',teacher_firstname,' ', teacher_middlename) AS fullname"))
-            ->orderBy('teacher_gender', 'desc')
+            "teacher_lastname",
+            "teacher_firstname",
+            "teacher_middlename",
+            // DB::raw("CONCAT(teacher_lastname,', ', teacher_firstname,' ', teacher_middlename) AS fullname")
+            // DB::raw("CONCAT(teachers.teacher_lastname,', ',teachers.teacher_firstname,' ',teachers.teacher_middlename) as fullname")
+            )
+            ->orderBy('teacher_lastname', 'asc')
             ->get();
         $total = Teacher::select('teacher_gender', DB::raw('COUNT(if(teacher_gender="Female",1,NULL)) as ftotal'), DB::raw('COUNT(if(teacher_gender="Male",1,NULL)) as mtotal'))
             ->groupBy('teacher_gender')->first();
         // $Male = Teacher::select(DB::raw("COUNT(if (teacher_gender='Male',1,NULL)) as Male"), DB::raw("COUNT(if (teacher_gender='Female',1,NULL)) as Female"))->groupBy('teacher_gender')->first();
         // $Female = Teacher::select(DB::raw("COUNT(if (teacher_gender='Female',1,NULL)) as Female"))->pluck('Female');
+        // dd($dataNow);
         return view('administrator/masterlist/partial/teacherPrint', compact('dataNow', 'total'));
     }
 }

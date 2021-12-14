@@ -5,7 +5,7 @@ let backsubjectTable = $("#backsubjectTable").DataTable({
         processing: `
             <div class="spinner-border spinner-border-sm" role="status">
             <span class="sr-only">Loading...</span>
-          </div>`,
+        </div>`,
     },
     ajax: `backrecord/list`,
     columns: [
@@ -15,7 +15,7 @@ let backsubjectTable = $("#backsubjectTable").DataTable({
             data: null,
             render: function (data) {
                 return `
-                    <button class="btn btn-info btn-sm btnView btnView_${data.student_id}" id="${data.student_id}">
+                    <button class="btn btn-info text-white btn-sm btnView btnView_${data.student_id}" id="${data.student_id}">
                     <i class="fa fa-eye"></i> View Record
                     </button>
                 `;
@@ -46,13 +46,9 @@ let loadTableNow = (id) => {
             $("#staticBackdrop").modal("show");
             data.forEach((val) => {
                 viewHTML += `
-                   ${
-
-                    val.remarks != 'Repeated'
-                    ?
-                    `
-                        <tr>
-                        <td>${val.descriptive_title}- ${val.grade_level}</td>
+                    ${val.remarks != 'Repeated'?
+                    `<tr>
+                        <td>${val.descriptive_title} - ${val.grade_level}</td>
                         
                         <td>${val.avg!=0?val.avg:''}</td>
                         <td>
@@ -92,7 +88,7 @@ let loadTableNow = (id) => {
                         ${
                             val.remarks == "Passed"
                                 ? `--Clear--`
-                                : ` <button class="btn btn-sm btn-info btnUpdate" id="${val.id}" data-student="${val.student_id}">
+                                : ` <button class="btn btn-sm btn-info text-white btnUpdate" id="${val.id}" data-student="${val.student_id}">
                                 <i class="fa fa-pen-nib"></i> Update
                             </button>`
                         }
@@ -101,7 +97,7 @@ let loadTableNow = (id) => {
                     `
                     :''
 
-                   }
+                    }
                 `;
             });
             $("#viewTable").html(viewHTML);
@@ -111,9 +107,10 @@ let loadTableNow = (id) => {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 };
+
 $(document).on("click", ".btnView", function () {
     loadTableNow($(this).attr("id"));
 });
@@ -147,6 +144,6 @@ $(document).on("click", ".btnUpdate", function () {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });

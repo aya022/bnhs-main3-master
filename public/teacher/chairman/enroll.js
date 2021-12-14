@@ -12,18 +12,17 @@ let filterBarangay = () => {
         .done(function (data) {
             barangayHTML = `<option>All</option>`;
             data.forEach((val) => {
-                barangayHTML += `<option value="${val.barangay}">${
-                    ucwords(val.city.toLowerCase()) + ` - ` + val.barangay
-                }</option>`;
+                barangayHTML += `<option value="${val.barangay}">${val.city + ` - ` + val.barangay}</option>`;
             });
             $("select[name='selectBarangay']").html(barangayHTML);
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
             $(".btnSaveSectionNow").html("Save").attr("disabled", false);
         });
 };
 filterBarangay();
+
 let monitorSection = (curriculum) => {
     let monitorHMTL = "";
     $.ajax({
@@ -34,21 +33,23 @@ let monitorSection = (curriculum) => {
         .done(function (data) {
             data.forEach((val) => {
                 monitorHMTL += `
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-info btn-icon icon-left listenrolledBtn ml-3 p-2" value='${val.section_name}'>
-                        <i class="far fa-user"></i> ${val.section_name}
-                        <span class="btnSection_${val.section_name}">
-                        <span class="badge badge-transparent ">${val.total}</span>
-                        </span>
-                    </button>
-                    <button type="button" class="btn btn-info border-left p-2 pl-3 pr-3 printBtn" value='${val.section_name}'><i class="fa fa-print" style="font-size:15px"></i></button>
+                <div class="col-md-2">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-info text-white btn-icon icon-left listenrolledBtn p-2" value='${val.section_name}'>
+                            <i class="far fa-user"></i> ${val.section_name}
+                            <span class="btnSection_${val.section_name}">
+                            <span class="badge bg-transparent ">${val.total}</span>
+                            </span>
+                        </button>
+                        <button type="button" class="btn btn-info text-white border-left p-2 pl-3 pr-3 printBtn" value='${val.section_name}'><i class="fa fa-print" style="font-size:15px"></i></button>
+                    </div>
                 </div>
-               `;
+                `;
             });
             $(".sectionListAvailable").html(monitorHMTL);
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
             $(".btnSaveSectionNow").html("Save").attr("disabled", false);
         });
 };
@@ -189,7 +190,7 @@ $("input[name='roll_no']").on("blur", function () {
                 }
             })
             .fail(function (jqxHR, textStatus, errorThrown) {
-                getToast("error", "Eror", errorThrown);
+                getToast("error", "Error", errorThrown);
             });
     }
 });
@@ -264,7 +265,7 @@ $("#forUpper").hide();
 //             alert(data);
 //         })
 //         .fail(function (jqxHR, textStatus, errorThrown) {
-//             getToast("error", "Eror", errorThrown);
+//             getToast("error", "Error", errorThrown);
 //             $(".btnSaveSection").html("Submit").attr("disabled", false);
 //         });
 // };
@@ -285,7 +286,7 @@ let searchSecionByLevel = (curriculum) => {
                 $("select[name='section_id']").html(htmlHold);
             })
             .fail(function (jqxHR, textStatus, errorThrown) {
-                getToast("error", "Eror", errorThrown);
+                getToast("error", "Error", errorThrown);
                 $(".btnSaveSection").html("Submit").attr("disabled", false);
             });
     }
@@ -331,19 +332,15 @@ $("#enrollForm").submit(function (e) {
                 setTimeout(() => {
                     monitorSection(current_curriculum);
                     findTableToRefresh(current_curriculum);
-                    filterBarangay();
+                    // filterBarangay();
                 }, 1500);
             })
             .fail(function (jqxHR, textStatus, errorThrown) {
-                getToast("error", "Eror", errorThrown);
+                getToast("error", "Error", errorThrown);
                 $(".btnSaveEnroll").html("Enroll").attr("disabled", false);
             });
     } else {
-        getToast(
-            "warning",
-            "Warning",
-            "You must select student Status for verification"
-        );
+        getToast("warning","Warning","You must select student Status for verification");
     }
 });
 
@@ -377,7 +374,7 @@ let filterSection = (curriculum) => {
                 $("#sectionFilter").html(htmlHold);
             })
             .fail(function (jqxHR, textStatus, errorThrown) {
-                getToast("error", "Eror", errorThrown);
+                getToast("error", "Error", errorThrown);
                 $(".btnSaveSection").html("Submit").attr("disabled", false);
             });
     }
@@ -389,9 +386,58 @@ $("#sectionFilter").on("change", function () {
 });
 
 /**
+ * SET SECTION manual select
+ */
+// $("#setSectionForm").submit(function (e) {
+//     e.preventDefault();
+//     $.ajax({
+//         url: "section/set",
+//         type: "POST",
+//         data: new FormData(this),
+//         processData: false,
+//         contentType: false,
+//         cache: false,
+//         beforeSend: function () {
+//             $(".btnSaveSectionNow")
+//                 .html(
+//                     `Saving ...
+//                     <div class="spinner-border spinner-border-sm" role="status">
+//                         <span class="sr-only">Loading...</span>
+//                     </div>`
+//                 )
+//                 .attr("disabled", true);
+//         },
+//     })
+//     .done(function (data) {
+//         if (data.warning) {
+//             $(".alert-warning").show().text(data.warning);
+//             $(".btnSaveSectionNow").attr("disabled", false);
+//             $("input[name='status_now']").val("force");
+//             $(".btnSaveSectionNow")
+//                 .html("Force to Enroll")
+//                 .attr("disabled", false);
+//         } else {
+//             $(".alert-warning").hide();
+//             $("input[name='status_now']").val("");
+//             $(".btnSaveSectionNow").html("Save").attr("disabled", false);
+//             $("input[name='roll_no']").removeClass("is-valid");
+//             getToast("success", "Successfully", " Assign Section");
+//             document.getElementById("setSectionForm").reset();
+//             findTableToRefresh(current_curriculum);
+//             filterBarangay();
+//         }
+//         monitorSection(current_curriculum);
+//     })
+//     .fail(function (jqxHR, textStatus, errorThrown) {
+//         getToast("error", "Error", errorThrown);
+//         $(".btnSaveSectionNow").html("Save").attr("disabled", false);
+//     });
+// });
+
+/**
  * SET SECTION
  */
-$("#setSectionForm").submit(function (e) {
+$("#enrollAssignForm").submit(function (e) {
     e.preventDefault();
     $.ajax({
         url: "section/set",
@@ -412,30 +458,68 @@ $("#setSectionForm").submit(function (e) {
         },
     })
         .done(function (data) {
-            if (data.warning) {
-                $(".alert-warning").show().text(data.warning);
-                $(".btnSaveSectionNow").attr("disabled", false);
-                $("input[name='status_now']").val("force");
-                $(".btnSaveSectionNow")
-                    .html("Force to Enroll")
-                    .attr("disabled", false);
-            } else {
-                $(".alert-warning").hide();
-                $("input[name='status_now']").val("");
-                $(".btnSaveSectionNow").html("Save").attr("disabled", false);
-                $("input[name='roll_no']").removeClass("is-valid");
-                getToast("success", "Ok", "Successfully assign section");
-                document.getElementById("setSectionForm").reset();
-                findTableToRefresh(current_curriculum);
-                filterBarangay();
-            }
+            $("input[name='status_now']").val("");
+            $(".btnSaveSectionNow").html("Save").attr("disabled", false);
+            $("input[name='roll_no']").removeClass("is-valid");
+            getToast("success", "Ok", "Successfully assign section");
+            document.getElementById("setSectionForm").reset();
+            findTableToRefresh(current_curriculum);
+            filterBarangay();
             monitorSection(current_curriculum);
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
             $(".btnSaveSectionNow").html("Save").attr("disabled", false);
         });
 });
+
+// $("#enrollAssignForm").submit(function (e) {
+//     // $("#setSectionForm").submit(function (e) {
+//     e.preventDefault();
+//     $.ajax({
+//         url: "section/set",
+//         type: "POST",
+//         data: new FormData(this),
+//         processData: false,
+//         contentType: false,
+//         cache: false,
+//         beforeSend: function () {
+//             $(".btnSaveSectionNow")
+//                 .html(
+//                     `Saving ...
+//                     <div class="spinner-border spinner-border-sm" role="status">
+//                         <span class="sr-only">Loading...</span>
+//                     </div>`
+//                 )
+//                 .attr("disabled", true);
+//         },
+//     })
+//         .done(function (data) {
+//             if (data.warning) {
+//                 $(".alert-warning").show().text(data.warning);
+//                 $(".btnSaveSectionNow").attr("disabled", false);
+//                 $("input[name='status_now']").val("force");
+//                 $(".btnSaveSectionNow")
+//                     .html("Force to Enroll")
+//                     .attr("disabled", false);
+//             } else {
+//                 $(".alert-warning").hide();
+//                 $("input[name='status_now']").val("");
+//                 $(".btnSaveSectionNow").html("Save").attr("disabled", false);
+//                 $("input[name='roll_no']").removeClass("is-valid");
+//                 getToast("success", "Ok", "Successfully assign section");
+//                 document.getElementById("setSectionForm").reset();
+//                 findTableToRefresh(current_curriculum);
+//                 filterBarangay();
+//             }
+//             monitorSection(current_curriculum);
+//         })
+//         .fail(function (jqxHR, textStatus, errorThrown) {
+//             getToast("error", "Error", errorThrown);
+//             $(".btnSaveSectionNow").html("Save").attr("disabled", false);
+//         });
+// });
+
 
 $(".btnCancelSectionNow").on("click", function () {
     document.getElementById("setSectionForm").reset();
@@ -480,7 +564,7 @@ $(document).on("click", ".cDelete", function () {
     //         })
     //         .fail(function (jqxHR, textStatus, errorThrown) {
     //             console.log(jqxHR, textStatus, errorThrown);
-    //             getToast("error", "Eror", errorThrown);
+    //             getToast("error", "Error", errorThrown);
     //         });
     // } else {
     //     return false;
@@ -502,7 +586,7 @@ $(".deleteYes").on('click', function () {
     })
         .done(function (response) {
             $(".deleteYes").html("Delete");
-            getToast("success", "Success", "deleted one record");
+            getToast("success", "Successfully", "Deleted one record");
             monitorSection(current_curriculum);
             findTableToRefresh(current_curriculum);
             filterBarangay();
@@ -511,7 +595,7 @@ $(".deleteYes").on('click', function () {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 })
 
@@ -551,7 +635,7 @@ $(document).on("click", ".cEdit", function () {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });
 
@@ -592,7 +676,7 @@ $(document).on("click", ".listenrolledBtn", function () {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });
 
@@ -622,10 +706,7 @@ $(".btnGenerate").on("click", function (e) {
     let myFormat = $("#myFormat").val();
     let mystatus = $("#mystatus").val();
     console.log(mystatus);
-    window.open(
-        `export/excel/${myFormat}/${mystatus}/${current_curriculum}/${current_glc}`,
-        "_blank"
-    );
+    window.open(`export/excel/${myFormat}/${mystatus}/${current_curriculum}/${current_glc}`,"_blank");
 });
 
 /**
@@ -641,6 +722,7 @@ $("#tableCurriculum").on("click", 'input[type="checkbox"]', function () {
         $("#sectionGrouping").fadeOut(1000);
     }
 });
+
 $("#massSectioningForm").on("submit", function (e) {
     e.preventDefault();
     let array_selected = [];
@@ -656,6 +738,7 @@ $("#massSectioningForm").on("submit", function (e) {
                 _token: $('input[name="_token"]').val(),
                 enroll_id: array_selected,
                 section: $('select[name="sectioningNow"]').val(),
+                curriculum:current_curriculum //added only for new method
             },
             beforeSend: function () {
                 $(".btnmassSectioning")
@@ -687,7 +770,7 @@ $("#massSectioningForm").on("submit", function (e) {
             })
             .fail(function (jqxHR, textStatus, errorThrown) {
                 $(".btnmassSectioning").html("Save").attr("disabled", false);
-                getToast("error", "Eror", errorThrown);
+                getToast("error", "Error", errorThrown);
                 $(".btnSaveSection").html("Submit").attr("disabled", false);
             });
     } else {

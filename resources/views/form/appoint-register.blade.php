@@ -80,7 +80,6 @@
                                         <option value="Parent">Parent</option>
                                         <option value="Student">Student</option>
                                         <option value="Guest">Guest</option>
-                                        {{-- <option value="Others">Others</option> --}}
                                     </select>
                                 </div>
                                 <button class="btn btn-info custom">Submit</button>

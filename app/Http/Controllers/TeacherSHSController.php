@@ -21,19 +21,25 @@ class TeacherSHSController extends Controller
     {
         // return Auth::user()->section->strand_id;
         $activeTerm = $this->activeTerm();
-       
         $teachers = Teacher::select('id', DB::raw("CONCAT(teachers.teacher_lastname,', ',teachers.teacher_firstname,' ',teachers.teacher_middlename) as teacher_name"))->get();
         return view('teacher/assign-shs', compact('teachers'));
     }
 
     public function subjectListInNewAssign($term){
         return response()->json(
-            Newassign::select('subjects.subject_code','subjects.descriptive_title','subjects.id')
-            ->join('sections','newassigns.section_id','sections.id')
-            ->join('subjects','newassigns.subject_id','subjects.id')
-            ->where('newassigns.term',$term)
-            ->where('sections.id',Auth::user()->section->id)
-            ->groupBy('subjects.subject_code','subjects.descriptive_title','subjects.id')
+            // Newassign::select('subjects.subject_code','subjects.descriptive_title','subjects.id')
+            // ->join('sections','newassigns.section_id','sections.id')
+            // ->join('subjects','newassigns.subject_id','subjects.id')
+            // ->where('newassigns.term',$term)
+            // ->where('sections.id',Auth::user()->section->id)
+            // ->groupBy('subjects.subject_code','subjects.descriptive_title','subjects.id')
+            // ->get()
+
+            Subject::select('subject_code','descriptive_title','id')
+            // ->join('sections')
+            ->where('term',$term)
+            // ->where('sections.id',Auth::user()->section->id)
+            ->groupBy('subject_code','descriptive_title','id')
             ->get()
         );
     }
@@ -142,17 +148,17 @@ class TeacherSHSController extends Controller
 
     public function saveAssignSubject(Request $request)
     {
-       return  Newassign::join('sections','newassigns.section_id','sections.id')
-       ->where('newassigns.section_id', Auth::user()->section->id)
-        ->where('newassigns.term', $request->term_assign)
-        ->where('newassigns.subject_id', $request->subject_id)
-        ->where('sections.school_year_id',Helper::activeAY()->id)
-        ->update([
+        return  Newassign::join('sections','newassigns.section_id','sections.id')
+            ->where('newassigns.section_id', Auth::user()->section->id)
+            ->where('newassigns.term', $request->term_assign)
+            ->where('newassigns.subject_id', $request->subject_id)
+            ->where('sections.school_year_id',Helper::activeAY()->id)
+            ->update([
             'newassigns.teacher_id'=>$request->teacher_id
         ]);
         
 
-       /* if (isset($request->id)) {
+        /* if (isset($request->id)) {
             $isSubjectisExist =  Assign::whereNotIn('id', [$request->id])->where([['section_id', Auth::user()->section->id], ['subject_id', $request->subject_id], ['school_year_id', Helper::activeAY()->id]])->exists();
             if (!$isSubjectisExist) {
                 return Assign::where('id', $request->id)->update([

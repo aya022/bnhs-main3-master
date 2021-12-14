@@ -7,7 +7,7 @@
     <title>eBNHS . Portal</title>
 
     <link rel="shortcut icon" href="{{ asset('image/logo/bn.jpg') }}">
-    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-1"></script>
+    {{-- <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-1"></script> --}}
     <link rel="stylesheet" href="{{ asset('css/coreuistyle/coreui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/coreuistyle/prism.css') }}">
     <link rel="stylesheet" href="{{ asset('css/coreuistyle/free.css') }}">
@@ -86,6 +86,7 @@
     <script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations.js"></script>
     <script src="{{ asset('js/global.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('js/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
     @yield('moreJs')
 
     {{-- <script>

@@ -155,27 +155,66 @@ class ChairmanSHSController extends Controller
 
     public function printReport($section, $term)
     {
+        // $dataNow = Enrollment::select(
+        //     "enrollments.id",
+        //     "students.student_firstname",
+        //     "students.student_middlename",
+        //     "students.student_lastname",
+        //     "students.gender",
+        //     "students.date_of_birth",
+        //     "students.student_contact",
+        //     "students.region",
+        //     "students.province",
+        //     "students.city",
+        //     "students.barangay",
+        //     // DB::raw("CONCAT(student_lastname,', ',student_firstname,' ', student_middlename) AS fullname")
+        // )
+        //     ->join('students', 'enrollments.student_id', 'students.id')
+        //     ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
+        //     ->where('sections.id', $section)
+        //     ->where('enrollments.grade_level', auth()->user()->chairman_info->grade_level)
+        //     ->where('enrollments.school_year_id', Helper::activeAY()->id)
+        //     ->orderBy('students.student_lastname', 'asc')
+        //     ->where('enrollments.term', $term)
+        //     ->get();
+        //     $total = Enrollment::select('sections.section_name', DB::raw('count(if(gender="Female",1,NULL)) as ftotal'), DB::raw('count(if(gender="Male",1,NULL)) as mtotal'))
+        //     ->join('students', 'enrollments.student_id', 'students.id')
+        //     ->join('sections', 'enrollments.section_id', 'sections.id')
+        //     ->where('sections.id', $section)
+        //     ->where('enrollments.term', $term)
+        //     ->where('enrollments.school_year_id', Helper::activeAY()->id)
+        //     ->groupBy('sections.section_name')->first();
+
         $dataNow = Enrollment::select(
             "enrollments.id",
+            "students.student_firstname",
+            "students.student_middlename",
+            "students.student_lastname",
             "students.gender",
-            DB::raw("CONCAT(student_lastname,', ',student_firstname,' ', student_middlename) AS fullname")
+            "students.date_of_birth",
+            "students.student_contact",
+            "students.region",
+            "students.province",
+            "students.city",
+            "students.barangay",
         )
             ->join('students', 'enrollments.student_id', 'students.id')
             ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
-            ->where('sections.id', $section)
+            ->where('sections.section_name', $section)
             ->where('enrollments.grade_level', auth()->user()->chairman_info->grade_level)
             ->where('enrollments.school_year_id', Helper::activeAY()->id)
-            ->orderBy('students.gender', 'desc')
+            ->orderBy('students.student_lastname', 'asc')
             ->where('enrollments.term', $term)
             ->get();
-        $total = Enrollment::select('sections.section_name', DB::raw('count(if(gender="Female",1,NULL)) as ftotal'), DB::raw('count(if(gender="Male",1,NULL)) as mtotal'))
+            $total = Enrollment::select('sections.section_name', DB::raw('count(if(gender="Female",1,NULL)) as ftotal'), DB::raw('count(if(gender="Male",1,NULL)) as mtotal'))
             ->join('students', 'enrollments.student_id', 'students.id')
             ->join('sections', 'enrollments.section_id', 'sections.id')
-            ->where('sections.id', $section)
+            ->where('sections.section_name', $section)
+            ->where('enrollments.grade_level', )
             ->where('enrollments.term', $term)
             ->where('enrollments.school_year_id', Helper::activeAY()->id)
             ->groupBy('sections.section_name')->first();
-        return view('teacher/chairman/partial/print', compact('dataNow', 'section', 'total'));
+        return view('teacher/chairman/partial/print', compact('dataNow', 'section', 'total', 'term'));
     }
 
     public function dashMonitor()
@@ -283,54 +322,49 @@ class ChairmanSHSController extends Controller
         );
     }
 
-
-
-
     protected function partialCode($request,$grade_id=null){
-
-            Grade::create([
-                'section_id'=>$request->section_id,
-                'subject_id'=>$request->subject_id,
-                'student_id'=>$request->student_id,
-                'term'=>Helper::activeTerm(),
-            ]);
-            Newassign::create([
-            'student_id'=>$request->student_id,
-            'subject_id'=>$request->subject_id,
+        Grade::create([
             'section_id'=>$request->section_id,
+            'subject_id'=>$request->subject_id,
+            'student_id'=>$request->student_id,
             'term'=>Helper::activeTerm(),
+        ]);
+        Newassign::create([
+        'student_id'=>$request->student_id,
+        'subject_id'=>$request->subject_id,
+        'section_id'=>$request->section_id,
+        'term'=>Helper::activeTerm(),
+        ]);
+
+        if (!empty($grade_id)) {
+            Grade::whereId($grade_id)
+            ->update([
+                'remarks'=>'Repeated'
             ]);
 
-            if (!empty($grade_id)) {
-                Grade::whereId($grade_id)
-                ->update([
-                    'remarks'=>'Repeated'
+
+            // subject info if have prerquisite
+            $gradeData=Grade::whereId($grade_id)->first();
+            $getData=Subject::where('prerequisite',$gradeData->subject_id)->first();
+            if ($getData) {
+                Grade::create([
+                    'section_id'=>$request->section_id,
+                    'subject_id'=>$getData->id,
+                    'student_id'=>$request->student_id,
+                    // 'term'=>Helper::activeTerm(),
+                    'avg'=>0
                 ]);
-
-
-                // subject info if have prerquisite
-                $gradeData=Grade::whereId($grade_id)->first();
-                $getData=Subject::where('prerequisite',$gradeData->subject_id)->first();
-                if ($getData) {
-                    Grade::create([
-                        'section_id'=>$request->section_id,
-                        'subject_id'=>$getData->id,
-                        'student_id'=>$request->student_id,
-                        // 'term'=>Helper::activeTerm(),
-                        'avg'=>0
-                    ]);
-                }
-                
             }
-
+            
+        }
     }
     public function enrolledSubjectSave(Request $request){
         //->where('term',Helper::activeTerm())
-       $have = Grade::where('subject_id',$request->subject_id)->where('student_id',$request->student_id)->exists();
+        $have = Grade::where('subject_id',$request->subject_id)->where('student_id',$request->student_id)->exists();
        //check if exist na tong subject sa student
         if($have){
             //if exist check natin kung ang student ay fail or pass
-          $haveLowerGrade=Grade::where('subject_id',$request->subject_id)->where('student_id',$request->student_id)->where('avg','<',75)->whereNull('remarks')->first();
+            $haveLowerGrade=Grade::where('subject_id',$request->subject_id)->where('student_id',$request->student_id)->where('avg','<',75)->whereNull('remarks')->first();
             
             if ($haveLowerGrade) {
                 // $isPassed=  Grade::join('subjects','grades.subject_id','subjects.id')
@@ -350,7 +384,6 @@ class ChairmanSHSController extends Controller
         }else{
             $this->partialCode($request);    
         }
-       
     }
 
     //for future use nalang to
@@ -371,7 +404,7 @@ class ChairmanSHSController extends Controller
 
     public function removeEnrolledSubject(Request $request){
         // return $request->all();
-         $confirm = Grade::where('student_id',$request->student_id)
+        $confirm = Grade::where('student_id',$request->student_id)
         ->where('subject_id',$request->subject_id)
         ->where('term',$request->term)
         ->whereNull('avg')
@@ -392,7 +425,6 @@ class ChairmanSHSController extends Controller
         }else{
             return 'not';
         }
-        
     }
 
 
@@ -407,15 +439,14 @@ class ChairmanSHSController extends Controller
                 'subjects.grade_level',
                 DB::raw("CONCAT(teachers.teacher_lastname,', ',teachers.teacher_firstname,' ',teachers.teacher_middlename) as fullname")
             )
-                ->join("students", "grades.student_id", "students.id")
-                ->join('subjects', 'grades.subject_id', 'subjects.id')
-                ->join('sections', 'grades.section_id', 'sections.id')
-                ->join('teachers', 'sections.teacher_id', 'teachers.id')
-                ->where('students.id', $student)
-                ->where('subjects.grade_level', $grade_level)
-                ->where('grades.term', $term)
-                ->get()
-            );
-        
+            ->join("students", "grades.student_id", "students.id")
+            ->join('subjects', 'grades.subject_id', 'subjects.id')
+            ->join('sections', 'grades.section_id', 'sections.id')
+            ->join('teachers', 'sections.teacher_id', 'teachers.id')
+            ->where('students.id', $student)
+            ->where('subjects.grade_level', $grade_level)
+            ->where('grades.term', $term)
+            ->get()
+        );
     }
 }

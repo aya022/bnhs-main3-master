@@ -17,35 +17,35 @@
             </div>
         </div>
         <div class="row">
-           <div class="col-12 col-lg-12">
-            <div class="card card-info">
-                <div class="card-body pb-0">
-                    <div class="form-group">
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="certificateTable">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            LRN
-                                        </th>
-                                        <th>
-                                            Fullname
-                                        </th>
-                                        <th>
-                                            Section
-                                        </th>
-                                        <th>
-                                            Report
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+            <div class="col-12 col-lg-12">
+                <div class="card card-info">
+                    <div class="card-body pb-0">
+                        <div class="form-group">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="certificateTable">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                LRN
+                                            </th>
+                                            <th>
+                                                Fullname
+                                            </th>
+                                            <th>
+                                                Section
+                                            </th>
+                                            <th>
+                                                Report
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-           </div>
         </div><!-- row -->
     </div><!-- section-body -->
 </section>

@@ -20,7 +20,7 @@ let studentInfo = (id) => {
         showMySubject(data.strId, data.grade_level,data.student_id,data.term);
     })
     .fail(function (jqxHR, textStatus, errorThrown) {
-        getToast("error", "Eror", errorThrown);
+        getToast("error", "Error", errorThrown);
     });
 }
 
@@ -69,7 +69,7 @@ let showMySubject = (strand, grade_level,student,term) => {
             } else {
                 data.origSubject.forEach(val => {
                     hold += `
-                       <tr>
+                        <tr>
                             <td>
                                 <input type="checkbox"  ${checkSubject(arr, val.id)}  class="text-center checkMe deleteSec_${val.id}" value="${val.id}">
                             </td>
@@ -79,7 +79,6 @@ let showMySubject = (strand, grade_level,student,term) => {
                         `;
                 })
             }
-           
             $("#studentSubjectList").html(hold);
 
 
@@ -118,7 +117,7 @@ let showMySubject = (strand, grade_level,student,term) => {
 
     })
     .fail(function (jqxHR, textStatus, errorThrown) {
-        getToast("error", "Eror", errorThrown);
+        getToast("error", "Error", errorThrown);
     });
 }
 
@@ -143,16 +142,15 @@ $(document).on('change', '.checkMe', function () {
                     // term: $("select[name='term']").val(),
                     subject_id: $(this).val()
                 },
-              
             }).done(function (data) {
                 if (data.msg) {
                     getToast("warning", "Warning",data.msg);
                 } else {
-                    getToast("success", "Success", "Add new subject");
+                    getToast("success", "Successfully", "Added new subject");
                 }
                 
             }).fail(function (jqxHR, textStatus, errorThrown) {
-                getToast("error", "Eror", errorThrown);
+                getToast("error", "Error", errorThrown);
             });
     } else {
         var index = mySelectedSubject.indexOf($(this).val());
@@ -167,18 +165,17 @@ $(document).on('change', '.checkMe', function () {
                 term: $("input[name='term']").val(),
                 subject_id: $(this).val(),
             },
-          
         })
             .done(function (response) {
-               if (response=='not') {
-                   getToast("warning", "Warning", "it is forbidden to remove");
-               } else {
-                getToast("success", "Success", "deleted one record");
-               }
+                if (response=='not') {
+                    getToast("warning", "Warning", "it is forbidden to remove");
+                } else {
+                    getToast("success", "Successfully", "deleted one record");
+                }
             })
             .fail(function (jqxHR, textStatus, errorThrown) {
                 console.log(jqxHR, textStatus, errorThrown);
-                getToast("error", "Eror", errorThrown);
+                getToast("error", "Error", errorThrown);
             });
     }
 });
@@ -238,7 +235,7 @@ let retriveGrade = (grade_level,term) => {
         $("#retriveGrade").html(holdGrade);
     })
     .fail(function (jqxHR, textStatus, errorThrown) {
-        getToast("error", "Eror", errorThrown);
+        getToast("error", "Error", errorThrown);
     });
 }
 

@@ -26,16 +26,16 @@
                     <div class="card">
                         <div class="card-body mt-2 pb-0 pt-1 mb-3">
                             <div class="table-responsive">
-                            <table class="table table-striped" id="backsubjectTable">
-                                <thead>
-                                    <tr>
-                                        <th>LRN</th>
-                                        <th>Fullname</th>
-                                        <th width="15%">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+                                <table class="table table-striped" id="backsubjectTable">
+                                    <thead>
+                                        <tr>
+                                            <th>LRN</th>
+                                            <th>Fullname</th>
+                                            <th width="15%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

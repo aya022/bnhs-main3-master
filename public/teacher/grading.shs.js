@@ -29,7 +29,7 @@ let myClassTable = (section_id, subject_id,term) => {
             processing: `
                     <div class="spinner-border spinner-border-sm" role="status">
                     <span class="sr-only">Loading...</span>
-                  </div>`,
+                </div>`,
         },
 
         ajax: `shs/load/student/${section_id}/${subject_id}/${term}`,
@@ -133,21 +133,21 @@ $("select[name='filterMyLoadSection']").on("change", function () {
 
 $("#btnImport").on('click', function () {
     $("#exampleModalCenter").modal("show") 
- });
- 
- $(".clickCancel").on('click', function () {
-     $('input[name="file"]').val("")
- });
- 
- $(".btnDownload").on('click', function () {
-     let containID = $("select[name='filterMyLoadSection']").val().split("_");
-     let section_id = containID[0];
-     let subject_id = containID[1];
-     window.open(`/teacher/my/export/grade/${section_id}/${subject_id}/shs`,
-         '_target')
- });
+});
 
- $("#importForm").submit(function (e) {
+$(".clickCancel").on('click', function () {
+    $('input[name="file"]').val("")
+});
+
+$(".btnDownload").on('click', function () {
+    let containID = $("select[name='filterMyLoadSection']").val().split("_");
+    let section_id = containID[0];
+    let subject_id = containID[1];
+    window.open(`/teacher/my/export/grade/${section_id}/${subject_id}/shs`,
+        '_target')
+});
+
+$("#importForm").submit(function (e) {
     e.preventDefault()
     let containID = $("select[name='filterMyLoadSection']").val().split("_");
     let section_id = containID[0];
@@ -173,10 +173,10 @@ $("#btnImport").on('click', function () {
         $(".btnImportNow").html('Import Now')
         myClassTable(section_id, subject_id,term);
     }).fail(function (jqxHR, textStatus, errorThrown) {
-         $(".btnImportNow").html('Import Now')
+        $(".btnImportNow").html('Import Now')
         console.log(jqxHR, textStatus, errorThrown);
     });
- })
+})
 
 /////////////////////////////////////////////////////
 
@@ -209,10 +209,10 @@ $(document).on("blur", "input[name='inGrade']", function () {
                 let avg =
                     $("#2nd_" + student_id).val() != ""
                         ? Math.round(
-                              (parseInt($("#1st_" + student_id).val()) +
-                                  parseInt($("#2nd_" + student_id).val())) /
-                                  2
-                          )
+                            (parseInt($("#1st_" + student_id).val()) +
+                                parseInt($("#2nd_" + student_id).val())) /
+                                2
+                        )
                         : "";
                 $.ajax({
                     url: "shs/student/now",
@@ -233,16 +233,16 @@ $(document).on("blur", "input[name='inGrade']", function () {
                     .done(function (data) {
                         $("#2nd_" + student_id).val() != ""
                             ? myClassTable(
-                                  $("select[name='filterMyLoadSection']")
-                                      .val()
-                                      .split("_")[0],
-                                  $("select[name='filterMyLoadSection']")
-                                      .val()
+                                $("select[name='filterMyLoadSection']")
+                                    .val()
+                                    .split("_")[0],
+                                $("select[name='filterMyLoadSection']")
+                                    .val()
                                     .split("_")[1],
                                     $("select[name='filterMyLoadSection']")
                                     .val()
                                     .split("_")[2]
-                              )
+                            )
                             : "";
                         console.log(data);
                     })

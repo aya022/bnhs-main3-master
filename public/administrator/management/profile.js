@@ -29,11 +29,11 @@ $("#schooProfileForm").submit(function (e) {
     })
         .done(function (response) {
             $("#btnSaveSP").html("Save Changes").attr("disabled", false);
-            getToast("success", "Success", "Successfully added new teacher");
+            getToast("success", "Successfully", "Added new School Profile");
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });
 
@@ -91,7 +91,7 @@ $("select[name='statusEnrollment']").on("change", function () {
         }
     } else {
         $("#endModalOnlineENrollment").modal("show");
-        $(".showText").text("Please fill up the school profile first!");
+        $(".showText").text("Please fill up the School Frofile first!");
         $(".btnYes").hide();
     }
 });

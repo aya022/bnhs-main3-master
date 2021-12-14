@@ -23,10 +23,11 @@ $("#userForm").submit(function (e) {
             cancelUser.hide();
             document.getElementById("userForm").reset();
             $("input[name='id']").val("");
+            getToast("success", "Successfully", "added new user");
             userTable();
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
             $(".btnSaveUser").html("Submit").attr("disabled", false);
         });
 });
@@ -74,10 +75,10 @@ const userTable = (level) => {
                             </td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" style="font-size:9px" class="btn btn-sm btn-info pl-3 pr-3 editUser edit_${
+                                    <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editUser edit_${
                                         val.id
-                                    }" id="${val.id}">Edit</button>
-                                    <button type="button" style="font-size:9px" class="btn btn-sm btn-danger deleteUser delete_${
+                                    }" id="${val.id}">Update</button>
+                                    <button type="button" style="font-size:13px" class="btn btn-sm btn-danger text-white deleteUser delete_${
                                         val.id
                                     }" id="${val.id}">Delete</button>
                                 </div>
@@ -94,7 +95,7 @@ const userTable = (level) => {
             $("#userTable").html(htmlHold);
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 };
 
@@ -125,11 +126,11 @@ $(document).on("click", ".deleteUser", function () {
         .done(function (response) {
             $(".delete_" + id).html("Delete");
             userTable();
-            getToast("success", "Success", "deleted one record");
+            getToast("success", "Successfully", "Deleted one record");
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });
 
@@ -148,7 +149,7 @@ $(document).on("click", ".editUser", function () {
     })
         .done(function (data) {
             cancelUser.show();
-            $(".edit_" + id).html("Edit");
+            $(".edit_" + id).html("Update");
             $(".btnSaveUser").html("Update");
             $("input[name='id']").val(data.id);
             $("input[name='name']").val(data.name);
@@ -156,6 +157,6 @@ $(document).on("click", ".editUser", function () {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });

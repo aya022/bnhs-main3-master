@@ -26,17 +26,10 @@ let tableAssign = (section) => {
                 <td>${val.descriptive_title}</td>
                     <td>${val.teacher_name}</td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-warning sdelete deleteAssign btnDelete_${
-                            val.id
-                        }  pt-0 pb-0 pl-2 pr-2" id="${val.id}">
-                        <i class="fas fa-user-times"></i>
-                        </button>
-                        &nbsp;&nbsp;
-                        <button type="button" class="btn btn-sm btn-info editAssign  editA_${
-                            val.id
-                        } pt-0 pb-0 pl-2 pr-2" id="${val.id}">
-                        <i class="fas fa-edit"></i>
-                        </button>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" style="font-size:13px" class="text-white btn btn-sm btn-info pl-3 pr-3 editAssign  editA_${val.id}" id="${val.id}">Update</button>
+                        <button type="button" style="font-size:13px" class="text-white btn btn-sm btn-danger sdelete deleteAssign btnDelete_${val.id}" id="${val.id}">Delete</button>
+                    </div>
                     </td>
                 </tr>
             `;
@@ -45,7 +38,7 @@ let tableAssign = (section) => {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 };
 
@@ -81,45 +74,78 @@ $("#assignForm").submit(function (e) {
                 $('select[name="subject_id"]').val("");
                 $("select[name='teacher_id']").val(data.currentTeacherID); // Select the option with a value of '1'
                 $("select[name='teacher_id']").trigger("change"); // Notify any JS components that the value changed
+                getToast("success", "Successfully", "Added new record.");
             }
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             $(".assignBtn").html("Save");
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });
 
 let cancelNow = $(".cancelNow").hide();
 
+// $(document).on("click", ".deleteAssign", function () {
+//     let id = $(this).attr("id");
+//     if (confirm("Are you sure you want to delete this?")) {
+//         $.ajax({
+//             url: "assign/delete/" + id,
+//             type: "DELETE",
+//             data: { _token: $('input[name="_token"]').val() },
+//             beforeSend: function () {
+//                 $(".btnDelete_" + id).html(`
+//             <div class="spinner-border spinner-border-sm" role="status">
+//                 <span class="sr-only">Loading...</span>
+//             </div>`);
+//             },
+//         })
+//             .done(function (response) {
+//                 tableAssign($('input[name="section_id"]').val());
+//                 getToast("info", "Successfully", "deleted one record");
+//                 subjectTable($("#selectedGL").val());
+//             })
+//             .fail(function (jqxHR, textStatus, errorThrown) {
+//                 console.log(jqxHR, textStatus, errorThrown);
+//                 getToast("error", "Error", errorThrown);
+//             });
+//     } else {
+//         return false;
+//     }
+// });
+// delete Modal
 $(document).on("click", ".deleteAssign", function () {
     let id = $(this).attr("id");
-    if (confirm("Are you sure you want to delete this?")) {
-        $.ajax({
-            url: "assign/delete/" + id,
-            type: "DELETE",
-            data: { _token: $('input[name="_token"]').val() },
-            beforeSend: function () {
-                $(".btnDelete_" + id).html(`
+    $('.deleteAssignko').val(id)
+    $("#assignDeleteModal").modal("show");
+});
+
+$(".deleteAssignko").on('click', function () {
+    $.ajax({
+        url: "assign/delete/" + $(this).val(),
+        type: "DELETE",
+        data: { _token: $('input[name="_token"]').val() },
+        beforeSend: function () {
+            $(".deleteAssignko").html(`
             <div class="spinner-border spinner-border-sm" role="status">
                 <span class="sr-only">Loading...</span>
             </div>`);
-            },
-        })
-            .done(function (response) {
-                tableAssign($('input[name="section_id"]').val());
-                getToast("success", "Success", "deleted one record");
-                subjectTable($("#selectedGL").val());
-            })
-            .fail(function (jqxHR, textStatus, errorThrown) {
-                console.log(jqxHR, textStatus, errorThrown);
-                getToast("error", "Eror", errorThrown);
-            });
-    } else {
-        return false;
-    }
-});
+        },
+    })
+    .done(function (response) {
+        $(".deleteAssignko").html("Yes");
+        getToast("info", "Successfully", "deleted one record");
+        tableAssign($('input[name="section_id"]').val());
+        $("#assignDeleteModal").modal("hide");
+    })
+    .fail(function (jqxHR, textStatus, errorThrown) {
+        console.log(jqxHR, textStatus, errorThrown);
+        getToast("error", "Error", errorThrown);
+        $(".deleteAssignko").html("Yes");
+    });
+})
 
+// update
 $(document).on("click", ".editAssign", function () {
     let id = $(this).attr("id");
     $.ajax({
@@ -140,7 +166,7 @@ $(document).on("click", ".editAssign", function () {
         .done(function (data) {
             cancelNow.show();
             $(".editA_" + id)
-                .html(` <i class="fas fa-edit"></i>`)
+                .html(`Update`)
                 .attr("disabled", false);
             $(".btnSaveAssign").html("Update");
             $("input[name='id']").val(data.id);
@@ -154,7 +180,7 @@ $(document).on("click", ".editAssign", function () {
             $(".editA_" + id)
                 .html(` <i class="fas fa-edit"></i>`)
                 .attr("disabled", false);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });
 

@@ -40,14 +40,8 @@ const sectionTable = () => {
                             </td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" style="font-size:9px" class="btn btn-sm btn-info pl-3 pr-3 editSection editSec_${
-                                        val.id
-                                    }" id="${val.id}"> <i class="fas fa-edit"></i></button>
-                                    <button type="button" style="font-size:9px" class="btn btn-sm btn-danger pl-3 pr-3 deleteSection deleteSec_${
-                                        val.id
-                                    }" id="${
-                        val.id
-                    }"><i class="fas fa-times"></i></button>
+                                    <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editSection editSec_${val.id}" id="${val.id}"> Update</button>
+                                    <button type="button" style="font-size:13px" class="btn btn-sm btn-danger text-white pl-3 pr-3 deleteSection deleteSec_${val.id}" id="${val.id}">Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -62,7 +56,7 @@ const sectionTable = () => {
             $("#sectionTable").html(htmlHold);
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 };
 sectionTable();
@@ -96,6 +90,7 @@ $("#sectionForm").submit(function (e) {
                 $("select[name='teacher_id']").trigger("change"); // Notify any JS components that the value changed
             } else {
                 sectionTable();
+                // getToast("success", "Successfully", "Added new record");
                 $(".cancelSection").hide();
                 document.getElementById("sectionForm").reset();
                 $("input[name='id']").val("");
@@ -103,7 +98,7 @@ $("#sectionForm").submit(function (e) {
             }
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
             $(".btnSaveSection").html("Submit").attr("disabled", false);
         });
 });
@@ -113,34 +108,67 @@ $("#sectionForm").submit(function (e) {
  * DELETE
  *
  */
+
 $(document).on("click", ".deleteSection", function () {
-    if (confirm("Are you sure you want delete this?")) {
-        let id = $(this).attr("id");
-        $.ajax({
-            url: "section/delete/" + id,
-            type: "DELETE",
-            data: { _token: $('input[name="_token"]').val() },
-            beforeSend: function () {
-                $(".deleteSec_" + id).html(`
+    let id = $(this).attr("id");
+    $('.deleteSection').val(id)
+    $("#shsSectionDeleteModal").modal("show");
+});
+
+$(".deleteSection").on('click', function () {
+    $.ajax({
+        url: "section/delete/" + $(this).val(),
+        type: "DELETE",
+        data: { _token: $('input[name="_token"]').val() },
+        beforeSend: function () {
+            $(".deleteSection").html(`
             <div class="spinner-border spinner-border-sm" role="status">
                 <span class="sr-only">Loading...</span>
             </div>`);
-            },
+        },
+    })
+        .done(function (response) {
+            $(".deleteSection").html("Yes");
+            getToast("success", "Success", "deleted one record");
+            sectionTable($("#selectedGL").val());
+            $(this).val('')
+            $("#shsSectionDeleteModal").modal("hide");
         })
-            .done(function (response) {
-                $(".deleteSec_" + id).text("Delete");
-                getToast("success", "Success", "deleted one record");
-                sectionTable($("#selectedGL").val());
-            })
-            .fail(function (jqxHR, textStatus, errorThrown) {
-                console.log(jqxHR, textStatus, errorThrown);
-                getToast("error", "Eror", errorThrown);
-                $(".deleteSec_" + id).text("Delete");
-            });
-    } else {
-        return false;
-    }
-});
+        .fail(function (jqxHR, textStatus, errorThrown) {
+            console.log(jqxHR, textStatus, errorThrown);
+            getToast("error", "Error", errorThrown);
+            $(".deleteSection").html("Yes");
+        });
+})
+
+// $(document).on("click", ".deleteSection", function () {
+//     if (confirm("Are you sure you want delete this?")) {
+//         let id = $(this).attr("id");
+//         $.ajax({
+//             url: "section/delete/" + id,
+//             type: "DELETE",
+//             data: { _token: $('input[name="_token"]').val() },
+//             beforeSend: function () {
+//                 $(".deleteSec_" + id).html(`
+//             <div class="spinner-border spinner-border-sm" role="status">
+//                 <span class="sr-only">Loading...</span>
+//             </div>`);
+//             },
+//         })
+//             .done(function (response) {
+//                 $(".deleteSec_" + id).text("Delete");
+//                 getToast("success", "Success", "deleted one record");
+//                 sectionTable($("#selectedGL").val());
+//             })
+//             .fail(function (jqxHR, textStatus, errorThrown) {
+//                 console.log(jqxHR, textStatus, errorThrown);
+//                 getToast("error", "Error", errorThrown);
+//                 $(".deleteSec_" + id).text("Delete");
+//             });
+//     } else {
+//         return false;
+//     }
+// });
 
 $(document).on("click", ".editSection", function () {
     let id = $(this).attr("id");
@@ -168,6 +196,6 @@ $(document).on("click", ".editSection", function () {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });

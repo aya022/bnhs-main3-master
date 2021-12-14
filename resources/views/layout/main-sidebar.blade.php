@@ -23,21 +23,20 @@
 
 <!-- Navbar -->
     <div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent">
-    <header class="header header-sticky mb-4">
-    <div class="container-fluid">
-    <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
-        <i class="fas fa-bars"></i>
-    </button>
+        <header class="header header-sticky mb-4">
+        <div class="container-fluid">
+        <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
+            <i class="fas fa-bars"></i>
+        </button>
     <a class="header-brand d-md-none" href="#">
-    <svg width="118" height="46" alt="CoreUI Logo">
-    <use xlink:href="assets/brand/coreui.svg#full"></use>
-    </svg></a>
+        <img src="{{ asset('image/logo/bn.jpg') }}" alt="" class="sidebar-brand-narrow img-fluid rounded-circle" width="46" height="46">
+    </a>
     {{-- <ul class="header-nav d-none d-md-flex">
         <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Users</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
     </ul> --}}
-    <nav class="header-nav ms-auto me-4">
+    {{-- <nav class="header-nav ms-auto me-4">
         <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
             <input class="btn-check" id="btn-light-theme" type="radio" name="theme-switch" autocomplete="off" value="light" onchange="handleThemeChange(this)">
             <label class="btn btn-info text-white" for="btn-light-theme">
@@ -48,8 +47,8 @@
                 <i class="icon fas fa-moon"></i>
             </label>
         </div>
-    </nav>
-    <ul class="header-nav me-4">
+    </nav> --}}
+    <ul class="header-nav me-4 ms-auto">
         <li class="nav-item dropdown d-flex align-items-center">
             @if (Auth::guard('web')->check())
             <a href="#" data-coreui-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user py-0">
@@ -205,11 +204,11 @@
 
         @endif --}}
     </ul>
-    <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#aside')).show()">
+    {{-- <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#aside')).show()">
         <svg class="icon icon-lg">
         <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-applications-settings"></use>
         </svg>
-    </button>
+    </button> --}}
 </div>
 {{-- <div class="header-divider"></div> --}}
             {{-- <div class="container-fluid">

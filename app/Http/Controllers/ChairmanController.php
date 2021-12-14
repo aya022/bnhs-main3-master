@@ -381,15 +381,23 @@ class ChairmanController extends Controller
 
         $dataNow = Enrollment::select(
             "enrollments.id",
+            "students.student_firstname",
+            "students.student_middlename",
+            "students.student_lastname",
             "students.gender",
-            DB::raw("CONCAT(student_lastname,', ',student_firstname,' ', student_middlename) AS fullname")
+            "students.date_of_birth",
+            "students.student_contact",
+            "students.region",
+            "students.province",
+            "students.city",
+            "students.barangay",
         )
             ->join('students', 'enrollments.student_id', 'students.id')
             ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
             ->where('sections.section_name', $section)
             ->where('enrollments.grade_level', auth()->user()->chairman_info->grade_level)
             ->where('enrollments.school_year_id', Helper::activeAY()->id)
-            ->orderBy('students.gender', 'desc')
+            ->orderBy('students.student_lastname', 'asc')
             ->get();
         $total = Enrollment::select('sections.section_name', DB::raw('count(if(gender="Female",1,NULL)) as ftotal'), DB::raw('count(if(gender="Male",1,NULL)) as mtotal'))
             ->join('students', 'enrollments.student_id', 'students.id')
@@ -397,6 +405,6 @@ class ChairmanController extends Controller
             ->where('sections.section_name', $section)
             ->where('enrollments.school_year_id', Helper::activeAY()->id)
             ->groupBy('sections.section_name')->first();
-        return view('teacher/chairman/partial/print', compact('dataNow', 'section', 'total'));
+        return view('teacher/chairman/partial/printjs', compact('dataNow', 'section', 'total'));
     }
 }

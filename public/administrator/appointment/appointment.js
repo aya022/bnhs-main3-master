@@ -113,7 +113,7 @@ let tableHoliday = $("#tableHoliday").DataTable({
             render: function (data) {
                 return `
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" style="font-size:14px" class="btn btn-sm btn-info text-white pl-3 pr-3 btnEdit btnload_${data.id}" id="${data.id}">Update</button>
+                        <button type="button" style="font-size:14px" class="btn btn-sm btn-info text-white pl-3 pr-3 btnEdit btnload_${data.id}" value="${data.id}">Update</button>
                         <button type="button" style="font-size:14px" class="btn btn-sm btn-danger text-white pl-3 pr-3 btnDelete btnDLoad_${data.id}" id="${data.id}">Delete</button>
                     </div>
                 `;
@@ -159,7 +159,7 @@ $(document).on("click", ".btnEdit", function () {
             $('input[name="holi_date_from"]').val(response.holi_date_from);
             $('input[name="holi_date_to"]').val(response.holi_date_to);
             $('textarea[name="description"]').val(response.description);
-            $('select[name="status"]').val(response.status);
+            $('input[name="status"]').val(response.status);
             $("#holidayModal").modal("show");
             $("#myEvent").fullCalendar("refetchResources");
         })
@@ -194,7 +194,7 @@ $(document).on("click", ".deleteAppoint", function () {
         $(".deleteAppoint").html("Yes");
         $(this).val('')
         $("#appointDeleteModal").modal("hide");
-        getToast("info", "Success", "Deleted one record");
+        getToast("info", "Successfully", "Deleted one record");
         tableHoliday.ajax.reload();
     })
     .fail(function (jqxHR, textStatus, errorThrown) {
@@ -243,7 +243,7 @@ $(document).on("click", ".deleteAppoint", function () {
  *
  *
  */
- let listAppoint =  $("#appointedTable").DataTable({
+let listAppoint =  $("#appointedTable").DataTable({
     columnDefs: [
         {
             orderable: false,
@@ -390,12 +390,12 @@ let myEvent = () => {
 
 
 $("#printAppointed").on("click", function () {
-        popupCenter({
-            url: "appointment/print/report",
-            title: "report",
-            w: 1400,
-            h: 800,
-        });
+    popupCenter({
+        url: "appointment/print/report/" + $(this).val(),
+        title: "report",
+        w: 1400,
+        h: 800,
+    });
 });
 
 $("#sendEmailForm").hide();

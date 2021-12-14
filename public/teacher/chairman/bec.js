@@ -33,7 +33,7 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
         processing: `
                 <div class="spinner-border spinner-border-sm" role="status">
                 <span class="sr-only">Loading...</span>
-              </div>`,
+            </div>`,
     },
 
     ajax: "table/list/" + current_curriculum,
@@ -67,13 +67,13 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
             render: function (data) {
                 switch (data.enroll_status) {
                     case "Pending":
-                        return `<span class="badge badge-warning">${data.enroll_status}</span>`;
+                        return `<span class="badge bg-warning">${data.enroll_status}</span>`;
                         break;
                     case "Enrolled":
-                        return `<span class="badge badge-success">${data.enroll_status}</span>`;
+                        return `<span class="badge bg-success">${data.enroll_status}</span>`;
                         break;
                     case "Dropped":
-                        return `<span class="badge badge-danger">${data.enroll_status}</span>`;
+                        return `<span class="badge bg-danger">${data.enroll_status}</span>`;
                         break;
                     default:
                         return false;
@@ -116,15 +116,15 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
                     }  pt-0 pb-0 pl-2 pr-2" id="${data.id}">
                     Delete
                     </button>&nbsp;
-                   ${
-                       data.enroll_status == "Enrolled"
-                           ? ` <button type="button" class="btn btn-sm btn-primary cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
+                    ${
+                        data.enroll_status == "Enrolled"
+                            ? ` <button type="button" class="btn btn-sm btn-primary cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
                     Change
-               </button>`
-                           : ` <button type="button" class="btn btn-sm btn-info cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
+                </button>`
+                            : ` <button type="button" class="btn btn-sm btn-info cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
                 Section
-               </button>`
-                   }
+                </button>`
+                    }
                     `;
                 }
             },
@@ -138,13 +138,13 @@ tableCurriculum.ajax
 $('select[name="selectBarangay"]').on("change", function () {
     $(this).val() != ""
         ? tableCurriculum.ajax
-              .url(
-                  "table/list/filtered/" +
-                      current_curriculum +
-                      "/" +
-                      $(this).val()
-              )
-              .load()
+            .url(
+                "table/list/filtered/" +
+                    current_curriculum +
+                    "/" +
+                    $(this).val()
+            )
+            .load()
         : "";
 });
 

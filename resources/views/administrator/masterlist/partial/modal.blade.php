@@ -37,7 +37,32 @@
                                             <option value="Yes">Yes</option>
                                         </select>
                                     </div>
+                                    {{-- <div class="form-group col-md-4 mb-3">
+                                        <label class="mb-2">Status</label>
+                                        <select name="status" id="status" class="form-select">
+                                            <option value="">Choose...</option>
+                                            <option value="">Junior High</option>
+                                            <option value="">Senior High</option>
+                                        </select>
+                                    </div>
                                     <div class="form-group col-md-4 mb-3">
+                                        <label class="mb-2">Grade Level</label>
+                                        <select name="status" id="status" class="form-select">
+                                            <option value="">Choose...</option>
+                                            <option value="">Grade 7</option>
+                                            <option value="">Grade 8</option>
+                                            <option value="">Grade 9</option>
+                                            <option value="">Grade 10</option>
+                                        </select>
+                                    </div> --}}
+                                    <div class="form-group col-md-4 mb-3">
+                                        <label class="mb-2">Curriculum</label>
+                                        <select name="status" id="status" class="form-select">
+                                            <option value="">Choose...</option>
+                                            <option value="BEC">Basic Education Curriculum</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12 mb-3">
                                         <label class="mb-2">Last school year attended</label>
                                         <input type="text" class="form-control" name="last_schoolyear_attended" autocomplete="off">
                                     </div>

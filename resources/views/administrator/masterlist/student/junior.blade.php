@@ -1,16 +1,16 @@
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12">
-        <table class="table table-bordered ">
+        <table class="table table-bordered mt-3 shadow">
             <thead>
                 <tr>
                     <td>
 
                         Section:
-                        <span class="badge badge-info">{{  $recordSeven[0]->section_name ??'N/A' }}</span>
+                        <span class="badge bg-info">{{  $recordSeven[0]->section_name ??'N/A' }}</span>
                     </td>
                     <td colspan="6" class="text-center">
                         Class Adviser:
-                        <span class="badge badge-info pt-1 pb-1">
+                        <span class="badge bg-info pt-1 pb-1">
                             {{  $recordSeven[0]->fullname ?? 'N/A' }}
                         </span> &nbsp;&nbsp;
                         Grade Level: <b>7</b>
@@ -63,18 +63,18 @@
     </div>
     {{-- EIGHT --}}
     <div class="col-lg-6 col-md-6 col-sm-12">
-        <table class="table table-bordered ">
+        <table class="table table-bordered mt-3 shadow">
             <thead>
                 <tr>
                     <td>
 
                         Section:
                         <span
-                            class="badge badge-info">{{  $recordEight[0]->section_name?? 'N/A' }}</span>
+                            class="badge bg-info">{{  $recordEight[0]->section_name?? 'N/A' }}</span>
                     </td>
                     <td colspan="6" class="text-center">
                         Class Adviser:
-                        <span class="badge badge-info pt-1 pb-1">
+                        <span class="badge bg-info pt-1 pb-1">
                             {{  $recordEight[0]->fullname?? 'N/A' }}
                         </span> &nbsp;&nbsp;
                         Grade Level: <b>8</b>
@@ -129,18 +129,18 @@
     </div>
     {{-- NINE --}}
     <div class="col-lg-6 col-md-6 col-sm-12">
-        <table class="table table-bordered ">
+        <table class="table table-bordered mt-3 shadow">
             <thead>
                 <tr>
                     <td>
 
                         Section:
                         <span
-                            class="badge badge-info">{{  $recordNine[0]->section_name?? 'N/A' }}</span>
+                            class="badge bg-info">{{  $recordNine[0]->section_name?? 'N/A' }}</span>
                     </td>
                     <td colspan="6" class="text-center">
                         Class Adviser:
-                        <span class="badge badge-info pt-1 pb-1">
+                        <span class="badge bg-info pt-1 pb-1">
                             {{  $recordNine[0]->fullname?? 'N/A' }}
                         </span> &nbsp;&nbsp;
                         Grade Level: <b>9</b>
@@ -195,17 +195,17 @@
     </div>
     {{-- TEN --}}
     <div class="col-lg-6 col-md-6 col-sm-12">
-        <table class="table table-bordered ">
+        <table class="table table-bordered mt-3 shadow">
             <thead>
                 <tr>
                     <td>
                         Section:
                         <span
-                            class="badge badge-info">{{  $recordTen[0]->section_name?? 'N/A' }}</span>
+                            class="badge bg-info">{{  $recordTen[0]->section_name?? 'N/A' }}</span>
                     </td>
                     <td colspan="6" class="text-center">
                         Class Adviser:
-                        <span class="badge badge-info pt-1 pb-1">
+                        <span class="badge bg-info pt-1 pb-1">
                             {{  $recordTen[0]->fullname?? 'N/A' }}
                         </span> &nbsp;&nbsp;
                         Grade Level: <b>10</b>

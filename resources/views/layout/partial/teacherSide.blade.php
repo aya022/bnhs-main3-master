@@ -3,6 +3,73 @@
     <li class="nav-item {{ request()->is('teacher/my/dashboard')?'active':'' }}"><a class="nav-link" href="{{ route('teacher.dashboard') }}">
         <i class="fas fa-tachometer-alt nav-icon"></i> Dashboard</a>
     </li>
+    @if (Auth::user()->section()->where('school_year_id', $activeAY->id)->exists())
+        @if (Auth::user()->section()->where('school_year_id', $activeAY->id)->first()->grade_level<=10) 
+            <li class="nav-title">Adviser Setting</li>
+            <li class="nav-item {{ request()->is('teacher/my/class/monitor')?'active':'' }}"><a class="nav-link" href="{{ route('teacher.class.monitor') }}">
+                <i class="fas fa-puzzle-piece nav-icon"></i> Class Monitor</a>
+            </li><!-- -->
+            <li class="nav-item {{ request()->is('teacher/my/assign')?'active':'' }}"><a class="nav-link" href="{{ route('teacher.class.assign') }}">
+                <i class="fas fa-handshake nav-icon"></i>Assign Subject</a>
+            </li><!-- -->
+            @else
+            <li class="nav-title">Adviser Setting</li>
+            <li class="nav-item {{ request()->is('teacher/my/senior/class/monitor')?'active':'' }}"><a class="nav-link" href="{{ route('teacher.class.senior.monitor') }}">
+                <i class="fas fa-puzzle-piece nav-icon"></i> Class Monitor</a>
+            </li><!-- -->
+            <li class="nav-item {{ request()->is('teacher/my/senior/assign')?'active':'' }}"><a class="nav-link" href="{{ route('teacher.class.senior.assign') }}">
+                <i class="fas fa-handshake nav-icon"></i>Assign Subject</a>
+            </li><!-- -->
+        @endif
+    @endif
+
+    @if (Auth::user()->assign->count()>0 || Auth::user()->newassign->count()>0)
+
+    <?php
+        $countjhs=0;
+        $countshs=0;
+        ?>
+    @foreach (Auth::user()->assign_info as $item)
+    <?php ($item->grade_level<11)? $countjhs+=1: $countshs+=1; ?>
+    @endforeach
+    <li class="nav-title">Grading Section</li>
+    <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
+        <i class="far fa-edit nav-icon"></i>Grading</a>
+        @if (Auth::user()->assign()->where('school_year_id',$activeAY->id)->exists())
+        <ul class="nav-group-items">
+            @if ($countjhs!=0)
+            <li class="nav-item {{ request()->is('teacher/my/grading')?'active':'' }}">
+                <a class="nav-link" href="{{ route('teacher.grading') }}"><i class="nav-icon fas fa-user-friends"></i>Junior High</a>
+            </li>
+            @endif
+        </ul>
+        @endif
+
+        @php
+            $countss= DB::table('newassigns')
+            ->join('sections','newassigns.section_id','sections.id')
+            ->where('newassigns.teacher_id',auth()->user()->id)
+            ->where('sections.school_year_id',$activeAY->id)
+            ->count();
+        @endphp
+
+        @if ($countss>0)
+        <ul class="dropdown-menu">
+            <li class="{{ request()->is('teacher/my/grading/shs')?'active':'' }}">
+                <a class="nav-link" href="{{ route('teacher.grading.shs') }}">
+                    <i class="fas fa-user-clock"></i><span>Senior High</span>
+                </a>
+            </li>
+        </ul>
+        @endif
+    </li>
+    {{-- <li class="{{ request()->is('teacher/my/grading')?'active':'' }}"><a class="nav-link"
+        href="{{ route('teacher.grading') }}"><i class="fas fa-cube"></i><span>Grading</span></a>
+    </li> --}}
+    @endif
+
+    <!-- End here -->
+
     @if (Auth::user()->assign->count()>0)
         <?php
             $countjhs=0;

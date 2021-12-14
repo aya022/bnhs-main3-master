@@ -1,19 +1,74 @@
 @extends('../layout/app')
 @section('content')
-<section class="section">
+
+<div class="container-fluid">
+    <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
+        <p style="font-size: 25px;"><i class="fas fa-tachometer-alt"></i>&nbsp;&nbsp; Dashboard</p>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="col-lg-12 mt-3 mb-0">
+                <div class="row">
+                    <div class="col-lg-2 col-md-12 col-sm-12 mb-2">
+                        <button type="button" class="btn btn-info shadow" disabled>
+                            <b>Enrollment:</b>@if (empty($enrolledData->enroll_status))
+                            <span class="badge bg-warning">Ongoing</span>
+                            @else
+                            <span class="badge 
+                            @if ($enrolledData->enroll_status=='Pending')
+                            bg-warning
+                            @else
+                            bg-info    
+                            @endif">{{ $enrolledData->enroll_status }}</span>
+                            @endif
+                        </button>
+    
+                    </div>
+                    <div class="col-lg-2 col-md-12 col-sm-12 mb-2">
+                        <button type="button" class="btn btn-info shadow" disabled>
+                            &nbsp;&nbsp;&nbsp;<b>Section:</b> @if (empty($enrolledData->enroll_status) ||
+                            $enrolledData->enroll_status=='Pending')
+                            <span class="badge bg-warning">N/A</span>
+                            @else
+                            <span class="badge bg-info">{{ $enrolledData->section_name }}</span>
+                            @endif
+                            &nbsp;&nbsp;&nbsp;
+                        </button>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card ">
+            <div class="card-body">
+                <h2 class="card-text">Welcome, {{ Auth::user()->fullname }}!</h2>
+                <p class="lead">You almost arrived, complete the information about your account.</p>
+                <div class="mt-4">
+                    <a href="{{ route('student.profile') }}"
+                        class="btn btn-outline-white btn-lg btn-icon icon-left">
+                        <i class="far fa-user text-info"></i>&nbsp;&nbsp;Setup Profile</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{{-- <section class="section">
     <div class="section-body">
         <div class="col-lg-12 mt-3 mb-0">
             <div class="row">
                 <div class="col-lg-2 col-md-12 col-sm-12 mb-2">
                     <button type="button" class="btn btn-info" disabled>
                         Enrollment:@if (empty($enrolledData->enroll_status))
-                        <span class="badge badge-warning">Ongoing</span>
+                        <span class="badge bg-warning">Ongoing</span>
                         @else
                         <span class="badge 
                         @if ($enrolledData->enroll_status=='Pending')
-                        badge-warning
+                        bg-warning
                         @else
-                         badge-info    
+                        bg-info    
                         @endif">{{ $enrolledData->enroll_status }}</span>
                         @endif
                     </button>
@@ -23,9 +78,9 @@
                     <button type="button" class="btn btn-info" disabled>
                         &nbsp;&nbsp;&nbsp; Section: @if (empty($enrolledData->enroll_status) ||
                         $enrolledData->enroll_status=='Pending')
-                        <span class="badge badge-warning">N/A</span>
+                        <span class="badge bg-warning">N/A</span>
                         @else
-                        <span class="badge badge-info">{{ $enrolledData->section_name }}</span>
+                        <span class="badge bg-info">{{ $enrolledData->section_name }}</span>
                         @endif
                         &nbsp;&nbsp;&nbsp;
                     </button>
@@ -217,7 +272,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-</section>
+</section> --}}
+
 @endsection

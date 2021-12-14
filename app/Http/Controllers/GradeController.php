@@ -72,9 +72,9 @@ class GradeController extends Controller
                     break;
                 case '4th':
                     // return $request->avg;
-                    Grade::where('id', $request->grade_id)->update([
+                    return Grade::where('id', $request->grade_id)->update([
                         'fourth' => $request->value,
-                        'avg' => $request->avg,
+                        'avg' => $request->avg
                     ]);
 
 

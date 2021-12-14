@@ -25,10 +25,16 @@ class EnrollmentSHSController extends Controller
             Section::join('school_years', 'sections.school_year_id', 'school_years.id')
             ->select('sections.section_name', 'sections.id')
             ->where('school_years.status', 1)
-            ->where('strand_id', $strand)
+            // ->where('strand_id', $strand)
             ->where('grade_level',  Auth::user()->chairman_info->grade_level)
             ->get()
         );
+        // return response()->json(
+        //     Section::select('sections.section_name', 'sections.id')
+        //     ->where('strand_id', $strand)
+        //     ->where('grade_level', Auth::user()->chairman->grade_level)
+        //     ->get()
+        // );
     }
 
     public function walkinEnrollee(Request $request)
@@ -78,8 +84,8 @@ class EnrollmentSHSController extends Controller
             'guardian_name' => $request->guardian_name,
             'guardian_contact_no' => $request->guardian_contact_no,
             'username' => Helper::create_username($request->student_firstname, $request->student_lastname),
-            'orig_password' => Crypt::encrypt("pnhs"),
-            'password' => Hash::make("pnhs"),
+            'orig_password' => Crypt::encrypt("bnhs"),
+            'password' => Hash::make("bnhs"),
             'student_status' => null,
             'completer' => 'Yes',
         ]);
@@ -88,7 +94,7 @@ class EnrollmentSHSController extends Controller
 
     public function updateUserAccount($student)
     {
-        return Student::whereId($student)->update(['orig_password' => Crypt::encrypt("pnhs"), 'password' => Hash::make("pnhs")]);
+        return Student::whereId($student)->update(['orig_password' => Crypt::encrypt("bnhs"), 'password' => Hash::make("bnhs")]);
     }
 
     public function checkIfAlreadyEnrolled($id, $term, $grade_level)
@@ -156,7 +162,7 @@ class EnrollmentSHSController extends Controller
                     'enroll_status' => 'Enrolled',
                 ]);
         } else {
-            Newassign::where('section_id',$stud_data->section_id)
+            Enrollment::where('section_id',$stud_data->section_id)
             ->where('student_id',$stud_data->student_id)
             ->update([
                 'section_id'=>$request->section
@@ -165,7 +171,7 @@ class EnrollmentSHSController extends Controller
                 ->where('school_year_id', Helper::activeAY()->id)
                 ->update([
                     'section_id' => $request->section
-                ]);
+            ]);
         }
     }
 
@@ -178,4 +184,10 @@ class EnrollmentSHSController extends Controller
     //             'enroll_status' => 'Enrolled',
     //         ]);
     // }
+    public function dropped(Enrollment $enrollment)
+    {
+        $enrollment->enroll_status = ($enrollment->enroll_status == 'Dropped') ? 'Enrolled' : 'Dropped';
+        $enrollment->date_of_enroll = date("d/m/Y");
+        return $enrollment->save();
+    }
 }

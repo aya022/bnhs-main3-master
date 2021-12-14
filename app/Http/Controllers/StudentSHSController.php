@@ -44,9 +44,11 @@ class StudentSHSController extends Controller
                 "grades.second",
                 "grades.avg",
                 "subjects.descriptive_title",
+                DB::raw("CONCAT(teachers.teacher_lastname,', ',teachers.teacher_firstname,' ',teachers.teacher_middlename) as fullname")
             )
                 ->join("students", "grades.student_id", "students.id")
                 ->join('subjects', 'grades.subject_id', 'subjects.id')
+                ->leftjoin('teachers', 'assigns.teacher_id', 'teachers.id')
                 ->where('students.id', auth()->user()->id)
                 ->where('subjects.grade_level', $level)
                 ->where('grades.term', $activeTerm)

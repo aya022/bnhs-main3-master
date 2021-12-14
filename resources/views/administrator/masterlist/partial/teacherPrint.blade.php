@@ -39,7 +39,7 @@
                     <th>ID</th>
                     <th>Teacher's Name</th>
                     <th>Gender</th>
-                    <th>Date & Time Created</th>
+                    {{-- <th>Date & Time Created</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -47,9 +47,9 @@
                 <tr>
                     <td>{{  ++$key }}</td>
                     <td>{{  $teacher->roll_no }}</td>
-                    <td>{{  $teacher->fullname }}</td>
+                    <td>{{  $teacher->teacher_lastname }}, {{  $teacher->teacher_firstname }} {{  $teacher->teacher_middlename[0] }}.</td>
                     <td>{{  $teacher->teacher_gender }}</td>
-                    <td>{{  $teacher->created_at }}</td>
+                    {{-- <td>{{  $teacher->created_at }}</td> --}}
                 </tr>
                 @endforeach
             </tbody>

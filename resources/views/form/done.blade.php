@@ -31,10 +31,10 @@
                         <i class="fas fa-pen"></i>
                       </div>
                       <img src="{{ asset('image/logo/deped.png') }}" class="img-fluid mb-3" style="height: 50px;">
-                      <img src="{{ asset('image/logo/bn.jpg') }}" class="img-fluid rounded-circle mb-3" style="height: 50px;">
                       <img src="{{ asset('image/logo/dept.png') }}" class="img-fluid mb-3" style="height: 50px;">
-                      <h4>{{ $data }}</h4>
-                      <div class="card-description">ENROLLMENT NO.</div>
+                      <img src="{{ asset('image/logo/bn.jpg') }}" class="img-fluid rounded-circle mb-3" style="height: 50px;">
+                      {{-- <h4>{{ $data }}</h4> --}}
+                      {{-- <div class="card-description">ENROLLMENT NO.</div> --}}
                   </div>
     
                   <div class="card-body">
@@ -45,10 +45,10 @@
                             <div class="login-brand">
                                 <h5 class="mt-3">Pre-Enrollment was successful</h5>
                                 <small>{{ date("Y-m-d") }}</small>
-                              </div>
+                            </div>
                           </div>
                         </div>
-                        <ul class="list-unstyled list-unstyled-border p-4">
+                        <ul class="list-unstyled list-unstyled-border p-2">
                           <li class="media">
                               <i class="mr-3 rounded fas fa-pen mr-4 my-2 iconColor" style="font-size: 30px"></i>
                               <div class="media-body">
@@ -86,7 +86,7 @@
                           </li>
                           <li class="media">
                               <div class="media-body">
-                                  <div class="text-small">
+                                  <div class="text-small" style="font-size: 15px;">
                                       <b class="note text-danger">* Note:</b> Your data and requirements are being process, please wait for the further notice until the validation is complete.<br> 
                                       Please download this enrollment for your inquries<br> 
                                       Thank you!

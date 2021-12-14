@@ -37,9 +37,9 @@ let school_year_Table = $("#school_year_Table").DataTable({
             render: function (data) {
                 return `<label class="custom-switch">
                             <input type="radio" name="semester" class="custom-switch-input clickSemester"
-                             value="1st" ${
-                                 data.first_term == "Yes" ? "checked" : ""
-                             }
+                            value="1st" ${
+                                data.first_term == "Yes" ? "checked" : ""
+                            }
                 ${data.status != "1" ? "disabled" : ""}>
                             <span class="custom-switch-indicator"></span>
                         </label>
@@ -51,9 +51,9 @@ let school_year_Table = $("#school_year_Table").DataTable({
             render: function (data) {
                 return `<label class="custom-switch">
                             <input type="radio" name="semester" class="custom-switch-input clickSemester"
-                             value="2nd" ${
-                                 data.second_term == "Yes" ? "checked" : ""
-                             }  ${data.status != "1" ? "disabled" : ""}>
+                            value="2nd" ${
+                                data.second_term == "Yes" ? "checked" : ""
+                            }  ${data.status != "1" ? "disabled" : ""}>
                             <span class="custom-switch-indicator"></span>
                         </label>
                         `;
@@ -64,12 +64,12 @@ let school_year_Table = $("#school_year_Table").DataTable({
             render: function (data) {
                 if (data.status == 1) {
                     return `
-                    <button type="button" class="btn btn-sm btn-info editAY edit_${data.id}  pl-5 pr-5" id="${data.id}">Edit</button>`;
+                    <button type="button" class="btn btn-sm btn-info text-white editAY edit_${data.id}  pl-5 pr-5" id="${data.id}">Update</button>`;
                 } else {
                     return `
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-sm btn-info pl-3 pr-3 editAY edit_${data.id}" id="${data.id}">Edit</button>
-                                <button type="button" class="btn btn-sm btn-danger deleteAY delete_${data.id}" id="${data.id}">Delete</button>
+                                <button type="button" class="btn btn-sm btn-info text-white pl-3 pr-3 editAY edit_${data.id}" id="${data.id}">Update</button>
+                                <button type="button" class="btn btn-sm btn-danger text-white deleteAY delete_${data.id}" id="${data.id}">Delete</button>
                             </div>
                         `;
                 }

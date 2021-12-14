@@ -40,7 +40,10 @@ class AdminController extends Controller
         $enrollTotal = Enrollment::join('school_years', 'enrollments.school_year_id', 'school_years.id')
             ->where('school_years.status', 1)
             ->whereIn('enroll_status', ['Pending', 'Enrolled'])->get()->count();
-        $studentTotal = Student::get()->count();
+        $studentTotal = Enrollment::join('school_years', 'enrollments.school_year_id', 'school_years.id')
+            ->where('school_years.status', 1)
+            ->whereIn('enroll_status', ['Enrolled'])->get()->count();
+        // $studentTotal = Student::get()->count();
         $teacherTotal = Teacher::get()->count();
         $ectionTotal = Section::join('school_years', 'sections.school_year_id', 'school_years.id')
             ->where('school_years.status', 1)
@@ -125,7 +128,7 @@ class AdminController extends Controller
         $value= str_replace("'","",$directory);
         unlink($value);
     //    return   Storage::deleteDirectory(storage_path('laravel/'.$file_name));
-            return redirect()->back();
+        return redirect()->back();
     }
 
     public function strandAndTrack()

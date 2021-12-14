@@ -82,13 +82,13 @@ let gradeTable = (level, section) => {
                             ${
                                 val.avg != 0
                                     ? val.first == null ||
-                                      val.second == null ||
-                                      val.third == null ||
-                                      val.fourth == null
+                                    val.second == null ||
+                                    val.third == null ||
+                                    val.fourth == null
                                         ? ""
                                         : val.avg >= 75
-                                        ? `<span class="ml-3 badge badge-success">Passed</span>`
-                                        : `<span class="ml-3 badge badge-danger ">Failed</span>`
+                                        ? `<span class="ml-3 badge bg-success">Passed</span>`
+                                        : `<span class="ml-3 badge bg-danger ">Failed</span>`
                                     : ""
                             }
                             </td>
@@ -106,13 +106,11 @@ let gradeTable = (level, section) => {
             }
             $("#gradeTable").html(htmlHold);
             $("#overallGrade").text(Math.round(overallGrade / 8));
-            $("#overallRemark").text(
-                Math.round(overallGrade / 8) > 75 ? "Passed" : "Failed"
-            );
+            $("#overallRemark").text(Math.round(overallGrade / 8) > 75 ? "Passed" : "Failed" );
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 };
 
@@ -138,7 +136,7 @@ let filterGradeLevel = () => {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 };
 

@@ -33,9 +33,9 @@ let gradeTable = (level, section,term) => {
                         <tr style="background-color:${
                             val.avg < 75 && val.avg != null ? "#ffe6e6" : ""
                         }">
-                            
-
-
+                            <td class="">
+                            ${val.fullname == null ? "---" : val.fullname}
+                            </td>
                             <td class="">
                             ${val.descriptive_title}
                             </td>
@@ -72,8 +72,8 @@ let gradeTable = (level, section,term) => {
                                     ? val.first == null || val.second == null
                                         ? ""
                                         : val.avg >= 75
-                                        ? `<span class="ml-3 badge badge-success">Passed</span>`
-                                        : `<span class="ml-3 badge badge-danger ">Failed</span>`
+                                        ? `<span class="ml-3 badge bg-success">Passed</span>`
+                                        : `<span class="ml-3 badge bg-danger ">Failed</span>`
                                     : ""
                             }
                             </td>
@@ -96,8 +96,8 @@ let gradeTable = (level, section,term) => {
                 $("#overallRemark").html(
                     (isNaN(Math.round(overallGrade / data.length)))?'':
                     Math.round(overallGrade / data.length) > 75
-                        ? `<span class="ml-3 badge badge-success ">Passed</span>`
-                        : `<span class="ml-3 badge badge-danger ">Failed</span>`
+                        ? `<span class="ml-3 badge bg-success ">Passed</span>`
+                        : `<span class="ml-3 badge bg-danger ">Failed</span>`
                 );
             }, 2000);
         })

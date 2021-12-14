@@ -30,9 +30,9 @@
         <h5>STUDENT ENROLLMENT FORM</h5>
     </div> --}}
     <table class="table">
-        <tr style="border-top: 0px;">
+        {{-- <tr style="border-top: 0px;">
             <td colspan="4" align="left" height="35" valign="center" >&nbsp;&nbsp;&nbsp; SF: 12499</td>
-        </tr>
+        </tr> --}}
         <tr>
             {{-- <td><img src="{{ asset('image/logo/bn.jpg') }}" class="img-fluid " style="height: 100px;"></td> --}}
             <td colspan="4" align="center" height="35" valign="center">
