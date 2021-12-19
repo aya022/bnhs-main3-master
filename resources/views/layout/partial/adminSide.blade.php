@@ -3,7 +3,7 @@
     <li class="nav-item {{ request()->is('admin/my/dashboard')?'active':'' }}"><a class="nav-link" href="{{ route('admin.dashboard') }}">
         <i class="fas fa-tachometer-alt nav-icon"></i> Dashboard</a>
     </li>
-    <li class="nav-title">TRANSACTION</li>
+    {{-- <li class="nav-title">TRANSACTION</li> --}}
     {{-- <li class="nav-item"><a class="nav-link" href="#">
         <i class="fas fa-bullhorn nav-icon"></i> Blog</a>
     </li>
@@ -13,7 +13,7 @@
     <li class="nav-item {{ request()->is('admin/my/appointment')?'active':'' }}"><a class="nav-link" href="{{ route('admin.appointment') }}">
         <i class="far fa-calendar-check nav-icon"></i> Appointment</a>
     </li>
-    <li class="nav-title">LIST</li>
+    {{-- <li class="nav-title">LIST</li> --}}
     <li class="nav-item {{ request()->is('admin/my/enrollment')?'active':'' }}"><a class="nav-link" href="{{ route('admin.enrollment') }}">
         <i class="far fa-address-card nav-icon"></i> Enrollee</a>
     </li>
@@ -81,7 +81,7 @@
             <a class="nav-link" href="{{ route('admin.academicYear') }}"><span class="nav-icon far fa-calendar-alt"></span> Academic Year</a>
         </li>
         <li class="nav-item {{ request()->is('admin/my/user')?'active':'' }}">
-            <a class="nav-link" href="{{ route('admin.user') }}"><span class="nav-icon fas fa-users-cog"></span> Manage Users</a>
+            <a class="nav-link" href="{{ route('admin.user') }}"><span class="nav-icon fas fa-users-cog"></span> Manage Profile</a>
         </li>
         </ul>
     </li>

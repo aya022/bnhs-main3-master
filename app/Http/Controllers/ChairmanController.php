@@ -267,6 +267,7 @@ class ChairmanController extends Controller
             ]
         );
     }
+
     public function tableListFiltred($curriculum, $barangay)
     {
         if ($barangay === 'All') {
@@ -275,10 +276,10 @@ class ChairmanController extends Controller
                 "student_firstname",
                 "student_middlename",
                 "student_lastname",
+                "isbalik_aral",
                 "req_psa",
                 "req_grade",
                 "req_goodmoral",
-                "isbalik_aral",
                 "last_schoolyear_attended",
                 "roll_no",
                 "student_contact",
@@ -297,10 +298,10 @@ class ChairmanController extends Controller
                 "student_firstname",
                 "student_middlename",
                 "student_lastname",
+                "isbalik_aral",
                 "req_psa",
                 "req_grade",
                 "req_goodmoral",
-                "isbalik_aral",
                 "last_schoolyear_attended",
                 "roll_no",
                 "student_contact",

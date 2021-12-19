@@ -27,19 +27,13 @@ class TeacherSHSController extends Controller
 
     public function subjectListInNewAssign($term){
         return response()->json(
-            // Newassign::select('subjects.subject_code','subjects.descriptive_title','subjects.id')
-            // ->join('sections','newassigns.section_id','sections.id')
-            // ->join('subjects','newassigns.subject_id','subjects.id')
-            // ->where('newassigns.term',$term)
-            // ->where('sections.id',Auth::user()->section->id)
-            // ->groupBy('subjects.subject_code','subjects.descriptive_title','subjects.id')
-            // ->get()
-
-            Subject::select('subject_code','descriptive_title','id')
-            // ->join('sections')
-            ->where('term',$term)
-            // ->where('sections.id',Auth::user()->section->id)
-            ->groupBy('subject_code','descriptive_title','id')
+            Newassign::select('subjects.subject_code','subjects.descriptive_title','subjects.id')
+            ->join('sections','newassigns.section_id','sections.id')
+            ->join('subjects','newassigns.subject_id','subjects.id')
+            ->join('teachers', 'newassigns.teacher_id', 'teachers.id')
+            ->where('newassigns.term',$term)
+            ->where('sections.id',Auth::user()->section->id)
+            ->groupBy('subjects.subject_code','subjects.descriptive_title','subjects.id')
             ->get()
         );
     }
@@ -231,7 +225,7 @@ class TeacherSHSController extends Controller
             ->groupBy('sections.section_name', 'sections.id', 'subjects.descriptive_title', 'newassigns.subject_id', 'newassigns.term')
             ->get()
         );
-       
+    
         // return response()->json(
         //     Assign::select('sections.section_name', 'sections.id', 'subjects.descriptive_title', 'assigns.subject_id', 'assigns.term')
         //         ->join('teachers', 'assigns.teacher_id', 'teachers.id')

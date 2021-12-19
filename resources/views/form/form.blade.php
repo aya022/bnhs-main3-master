@@ -75,12 +75,19 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <p style="font-size: 13px;" class="alert alert-warning shadow">
+                                    <b><i>- Please put N/A if not Applicable</i><br>
+                                    * Please fill out the all the required field and provide an accurate and complete information to avoid inconvinience.</b>
+                                </p>
+                            </div>
+                        </div>
                         <!-- -->
-                        <div class="card card-primary shadow mt-3">
+                        <div class="card card-primary shadow mt-2">
                             <div class="card-body">
-                                    <h3>Enrollment Form</h3>
-                            <p><i>* Please put N/A if not Applicable</i></p>
-                            <p class="mb-4"><i><b style="color: #ff0000">* Required</b></i></p><hr>
+                                <h3>Enrollment Form</h3>
                             <form id="enrollForm" autocomplete="off">@csrf
                                 <div class="row">
                                     <div class="col-md-6 col-lg-4">
@@ -276,24 +283,26 @@
                                             <div class="tab-pane fade" id="uploadReq" role="tabpanel" aria-labelledby="contact-tab2">
                                                 <!-- tab 3 -->
                                                 <div class="mt-3">
-                                                    <small>* <b>Note:</b> Upload requirements are optional. Once you have pre-enrolled and they will double-check your information and requirements before the student assign to a section, the office will notify you that you must submit all hard copies of your requirements as follow up requirements.</small><br>   
+                                                    <div class="alert alert-warning">
+                                                        <small>* <b>Note:</b> Upload requirements are optional. Once you have pre-enrolled and they will double-check your information and requirements before the student assign to a section, the office will notify you that you must submit all hard copies of your requirements as follow up requirements.</small><br>   
                                                         <small><b>File format: ( png,jpeg,jpg )</b></small>
+                                                    </div>
                                                         <div class="form-group mt-2">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="customFile">Latest Copy of Grades</label>
-                                                                <input type="file" class="form-control" name="req_grade" id="chk" accept=".png,.jpg,.jpeg" onchange="validate_fileupload(this.value);">
+                                                                <input type="file" class="form-control" name="req_grade" accept=".png,.jpg,.jpeg" onchange="validate_fileupload(this.value);">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="customFile">Good Moral Certificate</label>
-                                                                <input type="file" class="form-control" name="req_goodmoral" id="chk"  onchange="validate_fileupload(this.value);">
+                                                                <input type="file" class="form-control" name="req_goodmoral" accept=".png,.jpg,.jpeg"  onchange="validate_fileupload(this.value);">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="customFile">PSA Birth Certificate</label>
-                                                                <input type="file" class="form-control" name="req_psa" id="chk"  onchange="validate_fileupload(this.value);">
+                                                                <input type="file" class="form-control" name="req_psa" accept=".png,.jpg,.jpeg"  onchange="validate_fileupload(this.value);">
                                                             </div>
                                                         </div>
                                                 </div>
@@ -353,6 +362,7 @@
     }
     getToast("warning", "Warning", 'File not accepted');
     $(this).val(null);
+    
 }
 </script>
 

@@ -40,8 +40,8 @@
                                                         <option value="{{ $item->id }}">{{ $item->teacher_name }}</option>
                                                         @endforeach
                                                     </select>
-                                                    <button class="btn btn-primary pl-4 pr-4 assignBtn rounded" type="submit">Save</button>
-                                                    <button class="btn btn-warning pl-4 pr-4 cancelNow rounded" type="submit">Cancel</button>
+                                                    <button class="btn btn-info text-white pl-4 pr-4 assignBtn rounded" type="submit">Save</button>
+                                                    <button class="btn btn-warning text-white pl-4 pr-4 cancelNow rounded" type="submit">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>

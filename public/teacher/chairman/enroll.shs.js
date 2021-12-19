@@ -24,6 +24,7 @@ $("select[name='strand_id']").on("change", function () {
 });
 
 let gradeElevenTable = $("#gradeElevenTable").DataTable({
+    pageLenth: 50,
     processing: true,
     language: {
         processing: `
@@ -38,17 +39,17 @@ let gradeElevenTable = $("#gradeElevenTable").DataTable({
         "/" +
         $("select[name='term']").val(),
     columns: [
-        { data: "tracking_no" },
+        // { data: "tracking_no" },
         { data: "roll_no" },
         {
             data: null,
             render: function (data) {
                 return (
-                    data.student_lastname +
-                    ", " +
                     data.student_firstname +
+                    ", " +
+                    data.student_middlename +
                     " " +
-                    data.student_middlename
+                    data.student_lastname
                 );
             },
         },
@@ -124,19 +125,19 @@ let gradeElevenTable = $("#gradeElevenTable").DataTable({
                     `;
                 } else {
                     return `
-                   ${
-                       data.enroll_status == "Enrolled"
-                           ? `<button type="button" class="btn btn-sm btn-primary text-white  cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">Update</button>&nbsp;
-                            <button type="button" class="btn btn-sm btn-info text-white btnMain btnMain_${data.id} pt-0 pb-0 pl-3 pr-3 " value="${data.id}">
-                                Subjects
+                    ${
+                        data.enroll_status == "Enrolled"
+                            ? `<button type="button" class="btn btn-sm btn-primary text-white  cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">Update</button>&nbsp;
+                                <button type="button" class="btn btn-sm btn-info text-white btnMain btnMain_${data.id} pt-0 pb-0 pl-3 pr-3 " value="${data.id}">
+                                    Subjects
+                                </button>`
+                            :
+                            `<button type="button" class="btn btn-sm btn-danger text-white cDelete btnDelete_${data.id}  pt-0 pb-0 pl-4 pr-4" id="${data.id}">Delete</button>&nbsp;
+                            <button type="button" class="btn btn-sm btn-info text-white cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
+                                Enroll
                             </button>`
-                        :
-                        `<button type="button" class="btn btn-sm btn-danger text-white cDelete btnDelete_${data.id}  pt-0 pb-0 pl-4 pr-4" id="${data.id}">Delete</button>&nbsp;
-                        <button type="button" class="btn btn-sm btn-info text-white cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
-                            Enroll
-                        </button>`
-                   }
-                    `;
+                    }
+                        `;
                 }
             },
         },

@@ -27,12 +27,15 @@ let myClassTable = $("#myClassTable").DataTable({
             data: null,
             render: function (data) {
                 if (data.enroll_status != "Dropped") {
-                    return `<button type="button" class="btn btn-sm btn-warning text-white dropped btnDropped_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}">
+                    return `<button type="button" class="btn btn-sm btn-warning text-white dropped btnDropped_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}" data-student="${data.enroll_status}">
                     <i class="fas fa-user-times"></i> Drop
+                    </button>&nbsp;
+                    <button type="button" class="btn btn-sm btn-info text-white reportCard pt-0 pb-0 pl-2 pr-2" value="${data.student_id}">
+                    <i class="far fa-id-card"></i> Report Card
                     </button>
                     `;
                 } else {
-                    return `<button type="button" class="btn btn-sm btn-info text-white dropped btnDropped_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}">
+                    return `<button type="button" class="btn btn-sm btn-info dropped btnDropped_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}" data-student="${data.enroll_status}">
                     <i class="fas fa-user-times"></i> Undrop
                     </button>
                     `;
@@ -41,6 +44,9 @@ let myClassTable = $("#myClassTable").DataTable({
         },
     ],
 });
+
+// card/grades
+
 
 $(document).on("click", ".deleteSection", function () {
     let id = $(this).attr("id");
@@ -133,4 +139,13 @@ $(".deleteClass").on('click', function () {
             getToast("error", "Error", errorThrown);
             $(".deleteClass").html("Yes");
         });
+})
+
+$(document).on('click','.reportCard', function () {
+    popupCenter({
+        url: "report/card/" + $(this).val(),
+        title: "Report Card",
+        w: 1400,
+        h: 800,
+    });
 })

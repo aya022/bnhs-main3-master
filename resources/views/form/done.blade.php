@@ -33,8 +33,8 @@
                       <img src="{{ asset('image/logo/deped.png') }}" class="img-fluid mb-3" style="height: 50px;">
                       <img src="{{ asset('image/logo/dept.png') }}" class="img-fluid mb-3" style="height: 50px;">
                       <img src="{{ asset('image/logo/bn.jpg') }}" class="img-fluid rounded-circle mb-3" style="height: 50px;">
-                      {{-- <h4>{{ $data }}</h4> --}}
-                      {{-- <div class="card-description">ENROLLMENT NO.</div> --}}
+                      <h4>{{ $data }}</h4>
+                      <div class="card-description">ENROLLMENT NO.</div>
                   </div>
     
                   <div class="card-body">

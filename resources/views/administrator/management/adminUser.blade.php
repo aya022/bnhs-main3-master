@@ -1,12 +1,13 @@
 @extends('../layout/app')
 @section('content')
+@include('administrator/management/partial/userDeleteModal')
+
 <section class="section">
     <div class="section-body">
         <div class="container-fluid">
             <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
                 <p style="font-size: 25px;"><i class="fas fa-user-shield"></i>&nbsp;&nbsp;Manage Profile</p>
             </div>
-            
         </div>
 
         <div class="container">

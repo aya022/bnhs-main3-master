@@ -36,12 +36,30 @@ const strandTable = () => {
                             </td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editStrand editStrand_${val.id}" id="${val.id}">Update</button>
-                                    <button type="button" style="font-size:13px" class="btn btn-sm btn-danger text-white deleteStrand deleteStrand_${val.id}" id="${val.id}">Delete</button>
+                                    <button type="button" style="font-size:13px" class="btn btn-sm btn-primary text-white pl-3 pr-3 editStrand editStrand_${val.id}" id="${val.id}">Update</button>
                                 </div>
                             </td>
                         </tr>
                     `;
+                    // htmlHold += `
+                    //     <tr>
+                    //         <td>
+                    //             ${i++}
+                    //         </td>
+                    //         <td>
+                    //             ${val.strand}
+                    //         </td>
+                    //         <td>
+                    //             ${val.description}
+                    //         </td>
+                    //         <td>
+                    //             <div class="btn-group" role="group" aria-label="Basic example">
+                    //                 <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editStrand editStrand_${val.id}" id="${val.id}">Update</button>
+                    //                 <button type="button" style="font-size:13px" class="btn btn-sm btn-danger text-white deleteStrand deleteStrand_${val.id}" id="${val.id}">Delete</button>
+                    //             </div>
+                    //         </td>
+                    //     </tr>
+                    // `;
                 });
             } else {
                 htmlHold = `

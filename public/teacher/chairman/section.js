@@ -23,6 +23,34 @@ const sectionTable = () => {
         .done(function (data) {
             if (data.length > 0) {
                 data.forEach((val) => {
+                    // htmlHold += `
+                    //     <tr>
+                    //         <td>
+                    //             ${i++}
+                    //         </td>
+                    //         <td>
+                    //             ${val.section_name}
+                    //         </td>
+                    //         <td>
+                    //             ${val.class_type}
+                    //         </td>
+                    //         <td>
+                    //             ${val.teacher.teacher_lastname},
+                    //             ${val.teacher.teacher_firstname}
+                    //             ${val.teacher.teacher_middlename}
+                    //         </td>
+                    //         <td>
+                    //             <div class="btn-group" role="group" aria-label="Basic example">
+                    //                 <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editSection editSec_${
+                    //                     val.id
+                    //                 }" id="${val.id}">Update</button>
+                    //                 <button type="button" style="font-size:13px" class="btn btn-sm btn-danger text-white pl-3 pr-3 deleteSection deleteSec_${
+                    //                     val.id
+                    //                 }" value="${val.id}">Delete</button>
+                    //             </div>
+                    //         </td>
+                    //     </tr>
+                    // `;
                     htmlHold += `
                         <tr>
                             <td>
@@ -41,16 +69,9 @@ const sectionTable = () => {
                             </td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" style="font-size:9px" class="btn btn-sm btn-info pl-3 pr-3 editSection editSec_${
+                                    <button type="button" style="font-size:13px" class="btn btn-sm btn-primary text-white pl-3 pr-3 editSection editSec_${
                                         val.id
-                                    }" id="${val.id}">
-                                    <i class="fas fa-edit"></i>
-                                     </button>
-                                    <button type="button" style="font-size:9px" class="btn btn-sm btn-danger pl-3 pr-3 deleteSection deleteSec_${
-                                        val.id
-                                    }" value="${val.id}">
-                                    <i class="fas fa-user-times"></i>
-                                    </button>
+                                    }" id="${val.id}">Update</button>
                                 </div>
                             </td>
                         </tr>

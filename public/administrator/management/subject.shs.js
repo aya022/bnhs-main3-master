@@ -27,11 +27,20 @@ let shsTable = $("#shsTable").DataTable({
             render: function (data) {
                 return `
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-sm btn-info text-white editSHS editSHS_${data.id} pt-2 pb-2  pl-4 pr-4" id="${data.id}">Update</button>
-                    <button type="button" class="btn btn-sm btn-danger text-white deleteSHS deleteSHS_${data.id}  pt-2 pb-2 pl-4 pr-4" id="${data.id}">Delete</button>
+                    <button type="button" class="btn btn-sm btn-primary text-white editSHS editSHS_${data.id} pt-2 pb-2  pl-4 pr-4" id="${data.id}">Update</button>
                 </div>`;
             },
         },
+        // {
+        //     data: null,
+        //     render: function (data) {
+        //         return `
+        //         <div class="btn-group" role="group" aria-label="Basic example">
+        //             <button type="button" class="btn btn-sm btn-info text-white editSHS editSHS_${data.id} pt-2 pb-2  pl-4 pr-4" id="${data.id}">Update</button>
+        //             <button type="button" class="btn btn-sm btn-danger text-white deleteSHS deleteSHS_${data.id}  pt-2 pb-2 pl-4 pr-4" id="${data.id}">Delete</button>
+        //         </div>`;
+        //     },
+        // },
     ],
 });
 // setTimeout(() => {
@@ -73,28 +82,29 @@ $("#shsForm").submit(function (e) {
         });
 });
 
-$('input[name="shs_subject_code"]').on("blur", function () {
-    if ($(this).val() != "") {
-        $.ajax({
-            url: `shssubject/check/${$(this).val()}/${$(
-                'select[name="shs_grade_level"]'
-            ).val()}`,
-            type: "GET",
-        })
-            .done(function (data) {
-                if (data) {
-                    getToast("warning","Warning","This subject code is already added");
-                    $('input[name="shs_subject_code"]').addClass("is-invalid");
-                } else {
-                    $('input[name="shs_subject_code"]').removeClass("is-invalid");
-                }
-            })
-            .fail(function (jqxHR, textStatus, errorThrown) {
-                getToast("error", "Error", errorThrown);
-                $(".btnSHSsave").html("Submit").attr("disabled", false);
-            });
-    }
-});
+// $('input[name="shs_subject_code"]').on("blur", function () {
+//     if ($(this).val() != "") {
+//         $.ajax({
+//             url: `shssubject/check/${$(this).val()}/${$(
+//                 'select[name="shs_grade_level"]'
+//             ).val()}`,
+//             type: "GET",
+//         })
+//             .done(function (data) {
+//                 if (data) {
+//                     getToast("warning","Warning","This subject code is already added");
+//                     $('input[name="shs_subject_code"]').addClass("is-invalid");
+//                 } else {
+//                     $('input[name="shs_subject_code"]').removeClass("is-invalid");
+//                 }
+//             })
+//             .fail(function (jqxHR, textStatus, errorThrown) {
+//                 getToast("error", "Error", errorThrown);
+//                 $(".btnSHSsave").html("Submit").attr("disabled", false);
+//             });
+//     }
+// });
+
 // $('select[name="shs_grade_level"]').val("").attr("disabled", true);
 // $('select[name="shs_strand_id"]').val("").attr("disabled", true);
 // $("select[name='shs_indicate_type']").on("change", function () {
@@ -178,6 +188,12 @@ $(".deleteSubjectYes").on('click', function () {
 cancelSHS = $(".cancelSHS");
 
 $(".btnCloseshs").on("click", function () {
+    document.getElementById("shsForm").reset();
+    $("#shsModal").modal("hide");
+    $('input[name="shs_id"]').val("");
+});
+
+$(".btnClose").on("click", function () {
     document.getElementById("shsForm").reset();
     $("#shsModal").modal("hide");
     $('input[name="shs_id"]').val("");

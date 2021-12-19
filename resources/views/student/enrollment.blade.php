@@ -111,7 +111,7 @@
                                             Waiting for Sectioning
                                         </button>
                                         <p class="mt-3">Enrollment No. <span class="badge badge-warning badge-pill">{{ $dataArr['tracking_no'] }}</span></p>
-                                        <p class="mt-3"><b>Note: </b>If your enrollment is taking too long and the enrollment date has passed, you can contact the grade level chairman for your grade level to process your enrollment.</p>
+                                        <p class="mt-3 alert alert-warning"><b>Note: </b>If your enrollment is taking too long and the enrollment date has passed, you can contact the grade level chairman for your grade level to process your enrollment.</p>
                                         @elseif($dataArr['status']=='Enrolled')
                                         <div class="row">
                                             <div class="form-group col-6 mb-3">
@@ -127,13 +127,13 @@
                                         </div>
                                         <button class="btn btn-primary" disabled>FINALIZED <small>(Enrolled)</small></button>
                                         @else
-                                        <span class="badge bg-warning badge-pill noteTxt mb-3"></span>
+                                        <span class="badge bg-warning bg-pill noteTxt mb-3"></span>
                                         @csrf
-                                        <div class="form-row">
-                                            <div class="form-group col-6">
+                                        <div class="row">
+                                            <div class="form-group mb-3p col-6">
                                                 <input id="my-input" readonly class="form-control" type="text" name="" value="{{ $dataArr['curriculum']??'None' }}">
                                             </div>
-                                            <div class="form-group col-6">
+                                            <div class="form-group mb-3 col-6">
                                                 <select name="" class="form-control" required>
                                                     <option value="">Grade Level to Enroll</option>
                                                     <option value="7">Grade 7</option>
@@ -143,7 +143,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group mb-3">
                                             <input id="my-input" readonly class="form-control" type="text" name="" value="@if($dataArr['curriculum']=='STEM')Science, Technology, Engineering and Mathematics @elseif($dataArr['curriculum']=='BEC')Basic Education for Art @elseif($dataArr['curriculum']=='SPJ')Special Program for Journalis @else None @endif
                                             ">
                                         </div>

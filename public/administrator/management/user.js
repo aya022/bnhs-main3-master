@@ -78,13 +78,33 @@ const userTable = (level) => {
                                     <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editUser edit_${
                                         val.id
                                     }" id="${val.id}">Update</button>
-                                    <button type="button" style="font-size:13px" class="btn btn-sm btn-danger text-white deleteUser delete_${
-                                        val.id
-                                    }" id="${val.id}">Delete</button>
                                 </div>
                             </td>
                         </tr>
                     `;
+                    // htmlHold += `
+                    //     <tr>
+                    //         <td>
+                    //             ${i++}
+                    //         </td>
+                    //         <td>
+                    //             ${val.name}
+                    //         </td>
+                    //         <td>
+                    //             ${val.username}
+                    //         </td>
+                    //         <td>
+                    //             <div class="btn-group" role="group" aria-label="Basic example">
+                    //                 <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editUser edit_${
+                    //                     val.id
+                    //                 }" id="${val.id}">Update</button>
+                    //                 <button type="button" style="font-size:13px" class="btn btn-sm btn-danger text-white deleteUser delete_${
+                    //                     val.id
+                    //                 }" id="${val.id}">Delete</button>
+                    //             </div>
+                    //         </td>
+                    //     </tr>
+                    // `;
                 });
             } else {
                 htmlHold = `
@@ -110,29 +130,62 @@ $("input[name='confirmPassword']").on("blur", function () {
     }
 });
 
+// delete Modal
 $(document).on("click", ".deleteUser", function () {
     let id = $(this).attr("id");
+    $('.userDeletetYes').val(id)
+    $("#userDeleteModal").modal("show");
+});
+
+$(document).on("click", ".userDeletetYes", function () {
     $.ajax({
-        url: "user/delete/" + id,
+        url: "user/delete/" + $(this).val(),
         type: "DELETE",
         data: { _token: $('input[name="_token"]').val() },
         beforeSend: function () {
-            $(".delete_" + id).html(`
+            $(".userDeletetYes").html(`
             <div class="spinner-border spinner-border-sm" role="status">
                 <span class="sr-only">Loading...</span>
             </div>`);
         },
     })
-        .done(function (response) {
-            $(".delete_" + id).html("Delete");
-            userTable();
-            getToast("success", "Successfully", "Deleted one record");
-        })
-        .fail(function (jqxHR, textStatus, errorThrown) {
-            console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Error", errorThrown);
-        });
+    .done(function (response) {
+        $(".userDeletetYes").html("Yes");
+        $(this).val('')
+        $("#userDeleteModal").modal("hide");
+        userTable();
+        getToast("success", "Successfully", "Deleted one record");
+    })
+    .fail(function (jqxHR, textStatus, errorThrown) {
+        console.log(jqxHR, textStatus, errorThrown);
+        getToast("error", "Error", errorThrown);
+        $(".userDeletetYes").html("Yes");
+    });
 });
+
+// $(document).on("click", ".deleteUser", function () {
+//     let id = $(this).attr("id");
+//     $.ajax({
+//         url: "user/delete/" + id,
+//         type: "DELETE",
+//         data: { _token: $('input[name="_token"]').val() },
+//         beforeSend: function () {
+//             $(".delete_" + id).html(`
+//             <div class="spinner-border spinner-border-sm" role="status">
+//                 <span class="sr-only">Loading...</span>
+//             </div>`);
+//         },
+//     })
+//         .done(function (response) {
+//             $(".delete_" + id).html("Delete");
+//             userTable();
+//             getToast("success", "Successfully", "Deleted one record");
+//         })
+//         .fail(function (jqxHR, textStatus, errorThrown) {
+//             console.log(jqxHR, textStatus, errorThrown);
+//             getToast("error", "Error", errorThrown);
+//         });
+// });
 
 $(document).on("click", ".editUser", function () {
     let id = $(this).attr("id");

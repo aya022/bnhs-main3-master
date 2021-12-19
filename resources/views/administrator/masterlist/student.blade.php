@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 <!-- Modal -->
-@include('administrator/masterlist/partial/modal')
+{{-- @include('administrator/masterlist/partial/modal') --}}
 @include('administrator/masterlist/partial/studentDeleteModal')
 {{-- Modal end --}}
 
@@ -17,14 +17,14 @@
                     <div class="col-lg-5 col-md-8">
                         <p style="font-size: 25px;"><i class="fas fa-id-badge text-dark"></i>&nbsp;&nbsp;Student Masterlist</p>
                     </div>
-                    <div class="col-lg-2 col-md-2 col-12" style="text-align: right">
+                    {{-- <div class="col-lg-2 col-md-2 col-12" style="text-align: right">
                         <!-- Button trigger modal -->
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button class="btn float-right btn-primary my-4"  id="btnStudentModal" data-coreui-toggle="modal" data-coreui-target="#staticBackdrop">
                                 <i class="fas fa-plus-circle"></i>&nbsp;Add Student
                             </button>
                         </div>
-                    </div>
+                    </div> --}}
 
                         {{-- <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">Filter</label>

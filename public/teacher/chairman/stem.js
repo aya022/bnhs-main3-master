@@ -33,7 +33,7 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
         processing: `
                 <div class="spinner-border spinner-border-sm" role="status">
                 <span class="sr-only">Loading...</span>
-              </div>`,
+            </div>`,
     },
 
     ajax: "table/list/" + current_curriculum,
@@ -67,13 +67,13 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
             render: function (data) {
                 switch (data.enroll_status) {
                     case "Pending":
-                        return `<span class="badge badge-warning">${data.enroll_status}</span>`;
+                        return `<span class="badge bg-warning">${data.enroll_status}</span>`;
                         break;
                     case "Enrolled":
-                        return `<span class="badge badge-success">${data.enroll_status}</span>`;
+                        return `<span class="badge bg-success">${data.enroll_status}</span>`;
                         break;
                     case "Dropped":
-                        return `<span class="badge badge-danger">${data.enroll_status}</span>`;
+                        return `<span class="badge bg-danger">${data.enroll_status}</span>`;
                         break;
                     default:
                         return false;
@@ -108,8 +108,8 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
                 if (data.req_grade != null || data.req_goodmoral != null || data.req_psa != null) {
                     
                     return `
-                        <button type="button" class="btn btn-warning btn-sm pt-0 pb-0 pl-3 pr-3 btnRequirement" value="${data.fullname + "^" + data.req_grade + '^' + data.req_goodmoral + '^' + data.req_psa}"><i class="fas fa-file-import"></i> view</button>
-                      `;
+                        <button type="button" class="btn btn-dark text-white btn-sm pt-0 pb-0 pl-3 pr-3 btnRequirement" value="${data.fullname + "^" + data.req_grade + '^' + data.req_goodmoral + '^' + data.req_psa}"><i class="fas fa-eye"></i> View</button>
+                    `;
                     } else {
                     return '--- None ---';
                 }
@@ -119,26 +119,25 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
             data: null,
             render: function (data) {
                 if (data.enroll_status == "Dropped") {
-                    return `<button type="button" class="btn btn-sm btn-danger cDelete btnDelete_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}">
+                    return `<button type="button" class="btn btn-sm btn-danger text-white cDelete btnDelete_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}">
                     Delete
                     </button>
                     `;
                 } else {
-                    return `<button type="button" class="btn btn-sm btn-danger cDelete btnDelete_${
+                    return `<button type="button" class="btn btn-sm btn-danger text-white cDelete btnDelete_${
                         data.id
                     }  pt-0 pb-0 pl-2 pr-2" id="${data.id}">
                     Delete
                     </button>&nbsp;
-                   ${
-                       data.enroll_status == "Enrolled"
-                           ? ` <button type="button" class="btn btn-sm btn-primary cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
-                    Change
-               </button>`
-                           : ` <button type="button" class="btn btn-sm btn-info cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
-                Section
-               </button>`
-                   }
-                    `;
+                    ${
+                        data.enroll_status == "Enrolled"
+                            ? ` <button type="button" class="btn btn-sm btn-primary cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
+                        Update
+                </button>`
+                            : ` <button type="button" class="btn btn-sm btn-info cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
+                    Section
+                </button>`
+                    }`;
                 }
             },
         },

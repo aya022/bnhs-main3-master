@@ -56,52 +56,52 @@ let monitorSection = (curriculum) => {
 monitorSection(current_curriculum);
 let findTableToRefresh = (current_curriculum) => {
     switch (current_curriculum) {
-        case "STEM":
+        case "BEC":
             tableCurriculum.ajax.reload();
             break;
-        case "BEC":
-            setTimeout(() => {
-                tableCurriculum.ajax
-                    .url(
-                        "table/list/filtered/" +
-                            current_curriculum +
-                            "/" +
-                            $('select[name="selectBarangay"]')
-                                .prop("selectedIndex", 0)
-                                .val()
-                    )
-                    .load();
-            }, 1000);
-            break;
+        // case "BEC":
+        //     setTimeout(() => {
+        //         tableCurriculum.ajax
+        //             .url(
+        //                 "table/list/filtered/" +
+        //                     current_curriculum +
+        //                     "/" +
+        //                     $('select[name="selectBarangay"]')
+        //                         .prop("selectedIndex", 0)
+        //                         .val()
+        //             )
+        //             .load();
+        //     }, 1000);
+        //     break;
 
-        case "SPA":
-            setTimeout(() => {
-                tableCurriculum.ajax
-                    .url(
-                        "table/list/filtered/" +
-                            current_curriculum +
-                            "/" +
-                            $('select[name="selectBarangay"]')
-                                .prop("selectedIndex", 0)
-                                .val()
-                    )
-                    .load();
-            }, 1000);
-            break;
-        case "SPJ":
-            setTimeout(() => {
-                tableCurriculum.ajax
-                    .url(
-                        "table/list/filtered/" +
-                            current_curriculum +
-                            "/" +
-                            $('select[name="selectBarangay"]')
-                                .prop("selectedIndex", 0)
-                                .val()
-                    )
-                    .load();
-            }, 1000);
-            break;
+        // case "SPA":
+        //     setTimeout(() => {
+        //         tableCurriculum.ajax
+        //             .url(
+        //                 "table/list/filtered/" +
+        //                     current_curriculum +
+        //                     "/" +
+        //                     $('select[name="selectBarangay"]')
+        //                         .prop("selectedIndex", 0)
+        //                         .val()
+        //             )
+        //             .load();
+        //     }, 1000);
+        //     break;
+        // case "SPJ":
+        //     setTimeout(() => {
+        //         tableCurriculum.ajax
+        //             .url(
+        //                 "table/list/filtered/" +
+        //                     current_curriculum +
+        //                     "/" +
+        //                     $('select[name="selectBarangay"]')
+        //                         .prop("selectedIndex", 0)
+        //                         .val()
+        //             )
+        //             .load();
+        //     }, 1000);
+        //     break;
         default:
             break;
     }
@@ -255,6 +255,7 @@ $("select[name='status']").on("change", function () {
         .attr("readonly", true);
 });
 $("#forUpper").hide();
+
 // let autoFillForm = (roll_no) => {
 //     $.ajax({
 //         url: "autofill/lrn/" + roll_no,
@@ -356,7 +357,7 @@ $(".modalClose").on("click", function () {
  *
  */
 
-//
+// 
 $(".alert-warning").hide();
 let filterSection = (curriculum) => {
     if (curriculum != "") {
@@ -437,7 +438,11 @@ $("#sectionFilter").on("change", function () {
 /**
  * SET SECTION
  */
+
+// alert(current_curriculum)
+
 $("#enrollAssignForm").submit(function (e) {
+    // $("#setSectionForm").submit(function (e) {
     e.preventDefault();
     $.ajax({
         url: "section/set",
@@ -457,75 +462,85 @@ $("#enrollAssignForm").submit(function (e) {
                 .attr("disabled", true);
         },
     })
-        .done(function (data) {
+    .done(function (data) {
+        if (data.warning) {
+            $(".alert-warning").show().text(data.warning);
+            $(".btnSaveSectionNow").attr("disabled", false);
+            $("input[name='status_now']").val("force");
+            $(".btnSaveSectionNow")
+                .html("Force to Enroll")
+                .attr("disabled", false);
+        } else {
+            $(".alert-warning").hide();
             $("input[name='status_now']").val("");
             $(".btnSaveSectionNow").html("Save").attr("disabled", false);
             $("input[name='roll_no']").removeClass("is-valid");
-            getToast("success", "Ok", "Successfully assign section");
-            document.getElementById("setSectionForm").reset();
+            getToast("success", "Successfully", "Assign section");
+            document.getElementById("enrollAssignForm").reset();
             findTableToRefresh(current_curriculum);
             filterBarangay();
-            monitorSection(current_curriculum);
-        })
-        .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Error", errorThrown);
-            $(".btnSaveSectionNow").html("Save").attr("disabled", false);
-        });
+        }
+        monitorSection(current_curriculum);
+    })
+    .fail(function (jqxHR, textStatus, errorThrown) {
+        getToast("error", "Error", errorThrown);
+        $(".btnSaveSectionNow").html("Save").attr("disabled", false);
+    });
 });
 
 // $("#enrollAssignForm").submit(function (e) {
-//     // $("#setSectionForm").submit(function (e) {
-//     e.preventDefault();
-//     $.ajax({
-//         url: "section/set",
-//         type: "POST",
-//         data: new FormData(this),
-//         processData: false,
-//         contentType: false,
-//         cache: false,
-//         beforeSend: function () {
-//             $(".btnSaveSectionNow")
-//                 .html(
-//                     `Saving ...
-//                     <div class="spinner-border spinner-border-sm" role="status">
-//                         <span class="sr-only">Loading...</span>
-//                     </div>`
-//                 )
-//                 .attr("disabled", true);
-//         },
-//     })
-//         .done(function (data) {
-//             if (data.warning) {
-//                 $(".alert-warning").show().text(data.warning);
-//                 $(".btnSaveSectionNow").attr("disabled", false);
-//                 $("input[name='status_now']").val("force");
-//                 $(".btnSaveSectionNow")
-//                     .html("Force to Enroll")
-//                     .attr("disabled", false);
-//             } else {
-//                 $(".alert-warning").hide();
-//                 $("input[name='status_now']").val("");
-//                 $(".btnSaveSectionNow").html("Save").attr("disabled", false);
-//                 $("input[name='roll_no']").removeClass("is-valid");
-//                 getToast("success", "Ok", "Successfully assign section");
-//                 document.getElementById("setSectionForm").reset();
-//                 findTableToRefresh(current_curriculum);
-//                 filterBarangay();
-//             }
-//             monitorSection(current_curriculum);
-//         })
-//         .fail(function (jqxHR, textStatus, errorThrown) {
-//             getToast("error", "Error", errorThrown);
-//             $(".btnSaveSectionNow").html("Save").attr("disabled", false);
-//         });
+    //     // $("#setSectionForm").submit(function (e) {
+    //     e.preventDefault();
+    //     $.ajax({
+    //         url: "section/set",
+    //         type: "POST",
+    //         data: new FormData(this),
+    //         processData: false,
+    //         contentType: false,
+    //         cache: false,
+    //         beforeSend: function () {
+    //             $(".btnSaveSectionNow")
+    //                 .html(
+    //                     `Saving ...
+    //                     <div class="spinner-border spinner-border-sm" role="status">
+    //                         <span class="sr-only">Loading...</span>
+    //                     </div>`
+    //                 )
+    //                 .attr("disabled", true);
+    //         },
+    //     })
+    //         .done(function (data) {
+    //             if (data.warning) {
+    //                 $(".alert-warning").show().text(data.warning);
+    //                 $(".btnSaveSectionNow").attr("disabled", false);
+    //                 $("input[name='status_now']").val("force");
+    //                 $(".btnSaveSectionNow")
+    //                     .html("Force to Enroll")
+    //                     .attr("disabled", false);
+    //             } else {
+    //                 $(".alert-warning").hide();
+    //                 $("input[name='status_now']").val("");
+    //                 $(".btnSaveSectionNow").html("Save").attr("disabled", false);
+    //                 $("input[name='roll_no']").removeClass("is-valid");
+    //                 getToast("success", "Ok", "Successfully assign section");
+    //                 document.getElementById("setSectionForm").reset();
+    //                 findTableToRefresh(current_curriculum);
+    //                 filterBarangay();
+    //             }
+    //             monitorSection(current_curriculum);
+    //         })
+    //         .fail(function (jqxHR, textStatus, errorThrown) {
+    //             getToast("error", "Error", errorThrown);
+    //             $(".btnSaveSectionNow").html("Save").attr("disabled", false);
+    //         });
 // });
 
 
 $(".btnCancelSectionNow").on("click", function () {
-    document.getElementById("setSectionForm").reset();
+    document.getElementById("enrollAssignForm").reset();
     $("input[name='enroll_id']").val("");
     $(".nameOfStudent").val("Please Select Student");
-    $("#setSectionModal").modal("hide");
+    $("#enrollStudentModal").modal("hide");
     $(".alert-warning").hide();
     $(".btnSaveSectionNow").html("Save").attr("disabled", false);
     $("input[name='status_now']").val("");
@@ -619,25 +634,72 @@ $(document).on("click", ".cEdit", function () {
         },
     })
         .done(function (response) {
-            $(".nameOfStudent").val(
-                response.student_lastname +
-                    " " +
-                    response.student_firstname +
-                    " " +
-                    response.student_middlename
-            );
-            $('select[name="section"]').val(response.section_id);
-            $("input[name='enroll_id']").val(response.id);
-            $(".btnEdit_" + id).html(
-                response.section_id != "" ? "Change" : "Section"
-            );
-            $("#setSectionModal").modal("show");
+            // $(".nameOfStudent").val(
+            //     response.student_lastname +
+            //         " " +
+            //         response.student_firstname +
+            //         " " +
+            //         response.student_middlename
+            // );
+            // $('select[name="section"]').val(response.section_id);
+            // $("input[name='enroll_id']").val(response.id);
+            // $(".btnEdit_" + id).html(response.section_id != "" ? "Change" : "Section");
+            // $("#setSectionModal").modal("show");
+
+            // new method here
+            // setTimeout(() => {
+                $("input[name='enroll_id']").val(response.id);
+                $("input[name='fullname_again']").val(response.fullname)
+                $("input[name='lrn_again']").val(response.roll_no)
+                $("select[name='grade_level_again']").val(response.grade_level)
+                $("select[name='curriculum_again']").val(response.curriculum)
+                $("select[name='section_again']").val(response.section_id)
+                $(".action_taken_again").text(response.action_taken ?? 'N/A')
+                $(".enroll_status_again").text(response.enroll_status)
+                response.enroll_status=='Enrolled'?$(".enroll_status_again").addClass('bg-success'):$(".enroll_status_again").addClass('bg-warning')
+                $("#enrollStudentModal").modal("show")
+                $(".btnEdit_" + id).html(response.section_id != "" ? "Section" : "Update");
+            // }, 2000);
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
             getToast("error", "Error", errorThrown);
         });
 });
+
+// $(document).on("click", ".cEdit", function () {
+//     let id = $(this).attr("id");
+//     filterSection(current_curriculum);
+//     $.ajax({
+//         url: "edit/" + id,
+//         type: "GET",
+//         beforeSend: function () {
+//             $(".btnEdit_" + id).html(`
+//             <div class="spinner-border spinner-border-sm" role="status">
+//                 <span class="sr-only">Loading...</span>
+//             </div>`);
+//         },
+//     })
+//         .done(function (response) {
+//             $(".nameOfStudent").val(
+//                 response.student_lastname +
+//                     " " +
+//                     response.student_firstname +
+//                     " " +
+//                     response.student_middlename
+//             );
+//             $('select[name="section"]').val(response.section_id);
+//             $("input[name='enroll_id']").val(response.id);
+//             $(".btnEdit_" + id).html(
+//                 response.section_id != "" ? "Change" : "Section"
+//             );
+//             $("#setSectionModal").modal("show");
+//         })
+//         .fail(function (jqxHR, textStatus, errorThrown) {
+//             console.log(jqxHR, textStatus, errorThrown);
+//             getToast("error", "Error", errorThrown);
+//         });
+// });
 
 $(document).on("click", ".listenrolledBtn", function () {
     let tableListHTML;

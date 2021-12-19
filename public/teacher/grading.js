@@ -40,7 +40,6 @@ let myClassTable = (section_id, subject_id) => {
                 orderable: false,
                 render: function (data) {
                     return `<input type="text" pattern="^[0-9]{3}$" onkeypress="return numberOnly(event)" maxlength="3"  name="inGrade" class="noborder text-center"
-                    ${data.first!=null ? 'disabled' : ''}
                         value="${
                             data.first == null
                                 ? ""
@@ -58,7 +57,7 @@ let myClassTable = (section_id, subject_id) => {
                 data: null,
                 orderable: false,
                 render: function (data) {
-                    return `<input type="text" pattern="^[0-9]{3}$" onkeypress="return numberOnly(event)" maxlength="3"  name="inGrade" class="noborder text-center"  value="${
+                    return `<input type="text" pattern="^[0-9]{3}$" onkeypress="return numberOnly(event)" maxlength="3"  name="inGrade" class="noborder text-center" value="${
                         data.second == null
                             ? ""
                             : data.second == 0
@@ -110,9 +109,9 @@ let myClassTable = (section_id, subject_id) => {
                     return `${
                         myAverage != 0
                             ? data.first == null ||
-                              data.second == null ||
-                              data.third == null ||
-                              data.fourth == null
+                                data.second == null ||
+                                data.third == null ||
+                                data.fourth == null
                                 ? ""
                                 : `<span class="ml-4">${myAverage}</span>`
                             : ""
@@ -131,9 +130,9 @@ let myClassTable = (section_id, subject_id) => {
                     return `${
                         myAverage != 0
                             ? data.first == null ||
-                              data.second == null ||
-                              data.third == null ||
-                              data.fourth == null
+                                data.second == null ||
+                                data.third == null ||
+                                data.fourth == null
                                 ? ""
                                 : myAverage >= 75
                                 ? `<span class="ml-3 badge bg-success">Passed</span>`
@@ -175,7 +174,7 @@ $("select[name='filterMyLoadSection']").on("change", function () {
 });
 
 $("#btnImport").on('click', function () {
-   $("#exampleModalCenter").modal("show") 
+    $("#exampleModalCenter").modal("show") 
 });
 
 $(".clickCancel").on('click', function () {
@@ -194,6 +193,9 @@ let selectedValue;
 $(document).on("mouseup", "input[name='inGrade']", function () {
     selectedValue = $(this).val();
 });
+
+// close
+
 
 $(document).on("blur", "input[name='inGrade']", function () {
     if ($(this).val() < 70 || $(this).val() > 99) {
@@ -230,12 +232,12 @@ $(document).on("blur", "input[name='inGrade']", function () {
                 let avg =
                     $("#4th_" + student_id).val() != ""
                         ? Math.round(
-                              (parseInt($("#1st_" + student_id).val()) +
-                                  parseInt($("#2nd_" + student_id).val()) +
-                                  parseInt($("#3rd_" + student_id).val()) +
-                                  parseInt($("#4th_" + student_id).val())) /
-                                  4
-                          )
+                            (parseInt($("#1st_" + student_id).val()) +
+                            parseInt($("#2nd_" + student_id).val()) +
+                            parseInt($("#3rd_" + student_id).val()) +
+                            parseInt($("#4th_" + student_id).val())) /
+                            4
+                        )
                         : "";
                 $.ajax({
                     url: "grade/student/now",
@@ -256,19 +258,19 @@ $(document).on("blur", "input[name='inGrade']", function () {
                     .done(function (data) {
                         $("#4th_" + student_id).val() != ""
                             ? myClassTable(
-                                  $("select[name='filterMyLoadSection']")
-                                      .val()
-                                      .split("_")[0],
-                                  $("select[name='filterMyLoadSection']")
-                                      .val()
-                                      .split("_")[1]
-                              )
+                                $("select[name='filterMyLoadSection']")
+                                    .val()
+                                    .split("_")[0],
+                                $("select[name='filterMyLoadSection']")
+                                    .val()
+                                    .split("_")[1]
+                            )
                             : "";
                         console.log(data);
                     })
                     .fail(function (jqxHR, textStatus, errorThrown) {
                         console.log(jqxHR, textStatus, errorThrown);
-                        getToast("error", "Eror", errorThrown);
+                        getToast("error", "Error", errorThrown);
                     });
             } else {
                 $("#fillGradeInPrevious").modal("show");
@@ -395,7 +397,7 @@ let loadMyStudent = (section_id, subject_id) => {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 };
 

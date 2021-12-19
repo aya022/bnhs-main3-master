@@ -33,7 +33,7 @@
                             restricted only to Balaogan National High School. We assure your information provided is protected. This form is for school-related businesses appointment purposes only.</p>
                         <p style="font-size: 20px;line-height: 2.3;" class="mt-4">This online services of the school aim to avoid the
                             crowd at the school premises observing the COVID-19 health protocols.</p>
-                        <p style="font-size: 20px;line-height: 2.3;" class="mt-4">Thank you</p>
+                        <p style="font-size: 20px;line-height: 2.3;" class="mt-4">Thank you.</p>
                         <br><br>
                 </div>
                 <div class="col-md-6">
@@ -41,7 +41,7 @@
                         <div class="card-body p-4">
                             <h1>Appointment Form</h1>
                             <p class="text-medium-emphasis">Create your Appointment</p>
-                            <p class="text-medium-emphasis"><b class="text-danger">* Required</b></p>
+                            <p class="text-medium-emphasis alert alert-warning"><b>* Make sure that the information input is correct specially the email to send you an massage notification for the update of the appointment.</b></p>
                             <form action="{{ route('appoint.save') }}" method="POST" autocomplete="off">
                                 @csrf
                                 <div class="form-group mb-3">

@@ -13,6 +13,7 @@
 @include('teacher/chairman/partial/listEnrolled')
 @include('teacher/chairman/partial/viewRequirement')
 @include('teacher/chairman/partial/deleteModal')
+@include('teacher/chairman/partial/enrollAssignSection')
 {{-- Modal end --}}
 
 <div class="container-fluid">
@@ -45,9 +46,9 @@
                     <div class="table-responsive">
                     <form id="massSectioningForm">
                         @include('teacher/chairman/partial/massSection')
-                        <div class="col-lg-2 float-left mb-3 mt-2">
+                        {{-- <div class="col-lg-2 float-left mb-3 mt-2">
                             <select class="form-select mr-sm-2" name="selectBarangay"></select>
-                        </div>
+                        </div> --}}
                         <table class="table table-striped" style="font-size: 13px;" id="tableCurriculum">
                             <thead>
                                 <tr>
@@ -85,5 +86,6 @@
 <script src="{{ asset('js/datatable/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/select2/select2.full.min.js') }}"></script>
 <script src="{{ asset('teacher/chairman/enroll.js') }}"></script>
-<script src="{{ asset('teacher/chairman/threeCurriculum.js') }}"></script>
+{{-- <script src="{{ asset('teacher/chairman/threeCurriculum.js') }}"></script> --}}
+<script src="{{ asset('teacher/chairman/stem.js') }}"></script>
 @endsection

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\SchoolYear;
+use App\Models\SchoolProfile;
 use App\Models\Announcement;
 use App\Models\Student;
 use App\Models\Assign;
@@ -42,7 +44,10 @@ class TeacherController extends Controller
     }
     public function grading()
     {
-        return view('teacher/grading/grading');
+        return view('teacher/grading/grading',[
+            'data'=>SchoolProfile::find(1)
+        ]);
+        // return view('teacher/grading/grading');
     }
 
 
@@ -227,6 +232,37 @@ class TeacherController extends Controller
     public function assignEdit(Assign $assign)
     {
         return response()->json($assign);
+    }
+
+    public function reportCard($id){
+
+        $getData = Enrollment::where('student_id',$id)
+                ->where('school_year_id',  Helper::activeAY()->id)
+                ->where('grade_level',Auth::user()->section->grade_level)
+                ->where('enroll_status','Enrolled')
+                ->first();
+            $sy=SchoolYear::where('status',1)->first();
+            $data =  Grade::select(
+                "first",
+                'second',
+                'third',
+                'fourth',
+                'avg',
+                'students.roll_no',
+                'sections.section_name',
+                'subjects.descriptive_title',
+                'subjects.grade_level',
+                'gender',
+                DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname"))
+                ->join("students", "grades.student_id", "students.id")
+                ->join('subjects', 'grades.subject_id', 'subjects.id')
+                ->join('sections', 'grades.section_id', 'sections.id')
+                ->join('teachers', 'sections.teacher_id', 'teachers.id')
+                ->where('students.id', $getData->student_id)
+                ->where('subjects.grade_level', $getData->grade_level)
+                ->where('sections.id', $getData->section_id)
+                ->get();
+        return view('teacher/partial/reportCard',compact('data','sy'));
     }
 
     public function profile()

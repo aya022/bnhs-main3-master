@@ -20,6 +20,7 @@
                             <div class="form-group">
                                 <input type="hidden" name="id">
                                 <div class="input-group">
+                                    <label class="input-group-text" for="inputGroupSelect01">Add School Year:</label>
                                     <input type="text" class="form-control" required pattern="^[0-9]{4}$" maxlength="4"
                                         name="from" placeholder="Year from (eg. 2019)">
                                     <input type="text" readonly class="form-control" required pattern="^[0-9]{4}$"

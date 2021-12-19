@@ -61,7 +61,7 @@
                                     <img src="{{ asset('image/logo/deped.png') }}" class="img-fluid " style="height: 50px;">
                                     <img src="{{ asset('image/logo/bn.jpg') }}" class="img-fluid rounded-circle" style="height: 50px;">
                                     <img src="{{ asset('image/logo/dept.png') }}" class="img-fluid " style="height: 50px;">
-                                    {{-- <h4><small style="font-size: 15px">No.</small> {{$appointment->appoint_no }}</h4> --}}
+                                    <h4><small style="font-size: 15px">No.</small> {{$appointment->appoint_no }}</h4>
                                     <div class="card-description mt-3"><h3>Appointment Slip</h3></div>
                                 </div>
 

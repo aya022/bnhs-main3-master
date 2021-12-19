@@ -1,4 +1,18 @@
 @extends('../layout/app')
+<style>
+    .failGrade {
+        color: red;
+    }
+
+    .noborder {
+        width: 95%;
+        border: none;
+        border-color: transparent;
+        background: transparent;
+        outline: none;
+    }
+</style>
+
 @section('content')
 <div class="modal fade" id="endModalOnlineENrollment" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="fillGradeInPreviousLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-top">
@@ -22,7 +36,7 @@
     </div>
     <div class="row">
         <div class="col-md-8 mb-3">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">
                     <p style="font-size: 20px;">School Profile</p>
                 </div>
@@ -73,7 +87,10 @@
                 @if (isset($data))
                 {{-- {{empty($data->school_enrollment_url)}} --}}
                 <div class="col-md-12 col-12">
-                    <div class="card mb-3">
+                    <div class="card mb-3 shadow">
+                        <div class="card-header">
+                            <p style="font-size: 20px;">Manage Enrollment Status</p>
+                        </div>
                         <div class="card-body pb-0">
                             <form id="enrollStatusForm">@csrf
                                 <div class="input-group mb-3">
@@ -116,6 +133,39 @@
                                     </div>
                                 </div> --}}
                             </form>
+                        </div>
+                    </div>
+
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <p style="font-size: 20px;">Grade Input Status</p>
+                            <div class="card-header-action">
+                            
+                                @if ($data->grade_status)
+                                <span class="badge bg-warning badgeText">
+                                Disabled
+                                </span>      
+                                @else
+                                <span class="badge bg-success badgeText">
+                                    Enabled
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-lg-9 col-md-9 col-sm-12">
+                                    <p class="alert alert-warning">
+                                        To protect the data from new changes, disable the teacher's grading sheet.
+                                    </p>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-3 col-sm-12">
+                                    <label class="custom-switch my-3 mx-0">
+                                        <input type="checkbox" name="grade_status" class="form-control-lg shadow switchMe" {{ $data->grade_status?'checked':'' }}>
+                                        <span class="custom-switch-indicator"></span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

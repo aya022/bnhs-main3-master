@@ -161,7 +161,7 @@ Route::middleware(['auth:web', 'preventBackHistory'])->name('admin.')->prefix('a
     Route::post('subject/save', [SubjectController::class, 'store']);
     Route::get('subject/edit/{subject}', [SubjectController::class, 'edit']);
     Route::delete('subject/delete/{subject}', [SubjectController::class, 'destroy']);
-    Route::get('subject/check/{subject_code}/{grade_level}', [SubjectController::class, 'checkSubject']);
+    Route::get('subjects/check/{subject_code}/{shs_term}', [SubjectController::class, 'checkSubjects']);
 
     //subject shs route
     Route::post('subject/shs/save', [SubjectSHSController::class, 'store']);
@@ -213,6 +213,7 @@ Route::middleware(['auth:web', 'preventBackHistory'])->name('admin.')->prefix('a
     Route::get('user/list', [UserController::class, 'list']);
     Route::delete('user/delete/{user}', [UserController::class, 'destroy']);
     Route::get('user/edit/{user}', [UserController::class, 'edit']);
+    Route::put('grade/update/status', [AdminController::class, 'gradeStatus']);
 
     Route::get('backup/run', function () {
         
@@ -289,6 +290,7 @@ Route::middleware(['auth:teacher', 'preventBackHistory'])->name('teacher.')->pre
     Route::get('class/monitor/list', [EnrollmentController::class, 'myClass']);
     Route::post('class/monitor/dropped/{enrollment}', [EnrollmentController::class, 'dropped']);
     Route::get('grading', [TeacherController::class, 'grading'])->name('grading');
+    Route::get('class/report/card/{id}', [TeacherController::class, 'reportCard']);
 
     // subject Teacher
     Route::get('grading', [TeacherController::class, 'grading'])->name('grading');
@@ -318,7 +320,7 @@ Route::middleware(['auth:teacher', 'preventBackHistory'])->name('teacher.')->pre
     // export file
     Route::get('senior/export/excel/{format}/{status}/{curriculum}/{grade_level}', [ExportController::class, 'exportNewEnrollee']);
 
-    //senior high--------------
+    // senior high
     Route::get('senior/enrollee', [ChairmanSHSController::class, 'seniorEnrollee'])->name('senior.enrollee.page');
     Route::get('senior/student/enrolle/{strand}/{term}', [ChairmanSHSController::class, 'enrolleeSort']);
     Route::get('senior/enrollee/filter/section/senior/{strand}', [EnrollmentSHSController::class, 'filterSection']); //shs filter
@@ -326,7 +328,8 @@ Route::middleware(['auth:teacher', 'preventBackHistory'])->name('teacher.')->pre
     Route::delete('senior/enrollee/delete/{enrollment}', [EnrollmentSHSController::class, 'destroy']); //shs delete
     Route::get('senior/enrollee/edit/{enrollment}', [EnrollmentSHSController::class, 'editEnrollee']); //shs delete
     Route::post('senior/enrollee/section/set', [EnrollmentSHSController::class, 'setSection']);
-    Route::post('senior/shsmonitor/dropped/{enrollment}', [EnrollmentSHSController::class, 'dropped']);//shsClass monitor Drop
+    Route::post('senior/class/shsmonitor/dropped/{enrollment}', [EnrollmentSHSController::class, 'dropped']);//shsClass monitor Drop
+
     Route::get('senior/enrollee/monitor/section/{strand}/{term}', [ChairmanSHSController::class, 'monitorSection']);
     Route::get('senior/enrollee/print/report/{section}/{term}', [ChairmanSHSController::class, 'printReport']);
 

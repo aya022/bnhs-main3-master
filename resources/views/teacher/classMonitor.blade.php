@@ -24,7 +24,7 @@
                             <th>Gender</th>
                             <th>Contact No.</th>
                             <th>Status</th>
-                            <th width="8%">Action</th>
+                            <th width="20%">Action</th>
                         </tr>
                     </thead>
                     <tbody>

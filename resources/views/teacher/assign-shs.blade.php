@@ -15,18 +15,18 @@
             </div>
             <div class="col-lg-2 col-md-2 my-4">
                 @if (empty($activeAY))
-                <p>No active academic year</p>
+                    <p>No active academic year</p>
                 @else
-                <div class="float-right ">
-                    <select class="form-select my-1 mr-sm-2" name="term">
-                        @if ($activeAY->first_term=="Yes")
-                        <option value="1st">1st Term</option>
-                        @endif
-                        @if ($activeAY->second_term=="Yes")
-                        <option value="2nd">2nd Term</option>
-                        @endif
-                    </select>
-                </div>
+                    <div class="float-right ">
+                        <select class="form-select my-1 mr-sm-2" name="term">
+                            @if ($activeAY->first_term=="Yes")
+                                <option value="1st">1st Term</option>
+                            @endif
+                            @if ($activeAY->second_term=="Yes")
+                                <option value="2nd">2nd Term</option>
+                            @endif
+                        </select>
+                    </div>
                 @endif
             </div>
         </div>
@@ -40,7 +40,7 @@
                         @csrf
                         <div class="input-group mb-3">
                             <div class="input-group-text" id="btnGroupAddon">Add new Subject Teacher</div>
-                            <select class="form-select  mr-sm-2" name="subject_id" required>
+                            <select class="form-select  mr-sm-2" name="subject_id">
                                 {{-- @foreach ($subjects as $item)
                                 <option value="{{ $item->id }}">
                                     {{ $item->subject_code.' > '.$item->descriptive_title }}</option>

@@ -7,20 +7,16 @@
 @endsection
 @section('content')
 
-<section class="section">
-    <div class="section-body">
-        <div class="col-12">
-            <div class="row justify-content-between">
-                <div class="col-lg-5 col-md-8">
-                    <h2 class="section-title">Certifications</h2>
-                </div>
-            </div>
+{{-- <section class="section"> --}}
+    <div class="container-fluid">
+        <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
+            <p style="font-size: 25px;"><i class="fas fa-award"></i>&nbsp;&nbsp;Certifications</p>
         </div>
         <div class="row">
             <div class="col-12 col-lg-12">
                 <div class="card card-info">
                     <div class="card-body pb-0">
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <div class="table-responsive">
                                 <table class="table table-striped" id="certificateTable">
                                     <thead>
@@ -34,7 +30,7 @@
                                             <th>
                                                 Section
                                             </th>
-                                            <th>
+                                            <th width="10%">
                                                 Report
                                             </th>
                                         </tr>
@@ -48,7 +44,7 @@
             </div>
         </div><!-- row -->
     </div><!-- section-body -->
-</section>
+{{-- </section> --}}
 @endsection
 
 @section('moreJs')

@@ -22,14 +22,18 @@ class EnrollmentExport implements FromCollection, ShouldAutoSize, WithMapping, W
     public function collection()
     {
         if ($this->status == 'All') {
-            $data = Enrollment::select('students.roll_no', 'enrollments.curriculum', 'enrollments.state', 'enrollments.enroll_status', 'students.student_contact', 'students.mother_contact_no', 'students.father_contact_no', 'students.guardian_contact_no', DB::raw("CONCAT(student_lastname,', ',student_firstname,' ', student_middlename) AS fullname"))
+            $data = Enrollment::select('students.roll_no', 'students.gender', 'students.date_of_birth', 'enrollments.curriculum', 'enrollments.state', 'students.student_contact', 'enrollments.enroll_status', 'students.mother_contact_no', 'students.mother_name', 'students.father_contact_no', 'students.father_name', 'students.guardian_name', 'students.guardian_contact_no', 
+            DB::raw("CONCAT(student_lastname,', ',student_firstname,' ', student_middlename) AS fullname"),
+            DB::raw("CONCAT(barangay,', ',city,' ', province) AS address"))
                 ->join('students', 'enrollments.student_id', 'students.id')
                 ->where('enrollments.grade_level', $this->grade_level)
                 ->where('enrollments.school_year_id', Config::get('activeAY')->id)
                 ->where('enrollments.curriculum', strtoupper($this->curriculum))
                 ->get();
         } else {
-            $data = Enrollment::select('students.roll_no', 'enrollments.curriculum', 'enrollments.state', 'students.student_contact', 'enrollments.enroll_status', 'students.mother_contact_no', 'students.father_contact_no', 'students.guardian_contact_no', DB::raw("CONCAT(student_lastname,', ',student_firstname,' ', student_middlename) AS fullname"))
+            $data = Enrollment::select('students.roll_no', 'students.gender', 'students.date_of_birth', 'enrollments.curriculum', 'enrollments.state', 'students.student_contact', 'enrollments.enroll_status', 'students.mother_contact_no', 'students.mother_name', 'students.father_contact_no', 'students.father_name', 'students.guardian_name', 'students.guardian_contact_no', 
+            DB::raw("CONCAT(student_lastname,', ',student_firstname,' ', student_middlename) AS fullname"),
+            DB::raw("CONCAT(barangay,', ',city,' ', province) AS address"))
                 ->join('students', 'enrollments.student_id', 'students.id')
                 ->where('enrollments.enroll_status', $this->status)
                 ->where('enrollments.grade_level', $this->grade_level)
@@ -61,10 +65,17 @@ class EnrollmentExport implements FromCollection, ShouldAutoSize, WithMapping, W
     public function map($data): array
     {
         return [
+            $data->roll_no,
             $data->fullname,
+            $data->gender,
+            $data->date_of_birth,
             $data->student_contact,
+            $data->address,
+            $data->mother_name,
             $data->mother_contact_no,
+            $data->father_name,
             $data->father_contact_no,
+            $data->guardian_name,
             $data->guardian_contact_no
         ];
     }
@@ -72,10 +83,17 @@ class EnrollmentExport implements FromCollection, ShouldAutoSize, WithMapping, W
     public function headings(): array
     {
         return [
+            'LRN',
             'STUDENT NAME',
+            'GENDER',
+            'DATE OF BIRTH',
             'STUDENT CONTACT NO',
+            'ADDRESS',
+            'MOTHER NAME',
             'MOTHER CONTACT NO',
+            'FATHER NAME',
             'FATHER CONTACT NO',
+            'GUARDIAN NAME',
             'GUARDIAN CONTACT NO'
         ];
     }

@@ -131,7 +131,7 @@ class GradingExport extends DefaultValueBinder implements  FromView,ShouldAutoSi
 
         // Apply Style Arrays
         $active_sheet->getParent()->getDefaultStyle()->applyFromArray($default_font_style);
-      
+    
         $currentType=GradingExport::$var1;
 
         if ($currentType=="jhs") {
@@ -169,7 +169,7 @@ class GradingExport extends DefaultValueBinder implements  FromView,ShouldAutoSi
         
         $event->sheet->getDelegate()->getStyle('C4')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
 
-      
+    
 
         // $event->sheet->getStyle('A1:D1')->getStartColor()->setARGB('ffff15');
         

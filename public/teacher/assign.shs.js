@@ -67,7 +67,7 @@ let tableAssign = (term) => {
                     <td>${val.descriptive_title}</td>
                         <td>${val.teacher_name==null?'':val.teacher_name}</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-info editAssign  editA_${
+                            <button type="button" class="btn btn-sm btn-info text-white editAssign  editA_${
                                 val.id
                             } pt-1 pb-1 pl-2 pr-2" id="${val.id}" value="${val.term}">Update</button>
                         </td>
@@ -112,6 +112,7 @@ $("#assignForm").submit(function (e) {
                 $("select[name='subject_id']").trigger("change"); // Notify any JS components that the value changed
                 $("select[name='teacher_id']").val(""); // Select the option with a value of '1'
                 $("select[name='teacher_id']").trigger("change"); // Notify any JS components that the value changed
+                getToast("success", "Succesfully", "added new subject Teacher");
                 tableAssign($('select[name="term"]').val());
             }
         })
@@ -142,9 +143,8 @@ $(document).on("click", ".editAssign", function () {
     })
         .done(function (data) {
             $(".editA_" + id)
-                .html(` <i class="fas fa-edit"></i>`)
+                .html(`Update`)
                 .attr("disabled", false);
-            
             $(".btnSaveAssign").html("Update");
             $("input[name='id']").val(data.id);
             $("input[name='grade_level']").val(data.grade_level);
@@ -212,9 +212,9 @@ let filterSubjectsAssign = (term) => {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             $(".editA_" + id)
-                .html(`<i class="fas fa-edit"></i>`)
+                .html(`Update`)
                 .attr("disabled", false);
             getToast("error", "Error", errorThrown);
         });
 }
-filterSubjectsAssign($('select[name="term"]').val())
+filterSubjectsAssign($('select[name="term"]').val());

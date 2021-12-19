@@ -4,8 +4,8 @@
 @endsection
 @section('content')
 @include('administrator/management/partial/deleteModal')
-<section class="section">
-    <div class="section-body">
+{{-- <section class="section"> --}}
+    {{-- <div class="section-body"> --}}
         <div class="container-fluid">
             <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
                 <p style="font-size: 25px;"><i class="fas fa-user-shield"></i>&nbsp;&nbsp;Manage Grade Level Chairman</p>
@@ -14,6 +14,9 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
+                        <div class="card-header">
+                            <p style="font-size: 20px;">Manage Chairman</p>
+                        </div>
                         <div class="card-body">
                             <form id="chairmanForm">@csrf
                                 <input type="hidden" name="id">
@@ -21,7 +24,8 @@
                                     <div class="col-md-5 col-12 mb-2">
                                         <div class="input-group mb-3">
                                             <label class="input-group-text" for="inputGroupSelect01">Add Chairman</label>
-                                            <select class="form-select" id="inputGroupSelect01"  name="grade_level">
+                                            <select class="form-select" id="inputGroupSelect01"  name="grade_level" required>
+                                                <option value="">Choose Grade Level</option>
                                                 <option value="7">Grade 7</option>
                                                 <option value="8">Grade 8</option>
                                                 <option value="9">Grade 9</option>
@@ -66,8 +70,8 @@
                 </div><!-- col-lg-8 -->
             </div><!-- row -->
         </div>
-    </div><!-- section-body -->
-</section>
+    {{-- </div><!-- section-body --> --}}
+{{-- </section> --}}
 @endsection
 
 @section('moreJs')

@@ -39,7 +39,7 @@ class AdminController extends Controller
         );
         $enrollTotal = Enrollment::join('school_years', 'enrollments.school_year_id', 'school_years.id')
             ->where('school_years.status', 1)
-            ->whereIn('enroll_status', ['Pending', 'Enrolled'])->get()->count();
+            ->whereIn('enroll_status', ['Pending'])->get()->count();
         $studentTotal = Enrollment::join('school_years', 'enrollments.school_year_id', 'school_years.id')
             ->where('school_years.status', 1)
             ->whereIn('enroll_status', ['Enrolled'])->get()->count();
@@ -317,5 +317,15 @@ class AdminController extends Controller
                 return false;
                 break;
         }
+    }
+
+    public function gradeStatus(Request $request)
+    {
+        $data=SchoolProfile::find(1);
+        $data->update([
+            'grade_status'=>$request->active
+        ]);
+
+        return response($request->active);
     }
 }

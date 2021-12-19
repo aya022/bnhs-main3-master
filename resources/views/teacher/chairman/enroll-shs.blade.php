@@ -83,23 +83,22 @@
                                     <option value="2nd" {{ $activeAY->second_term=='Yes'?'selected':'' }}>Second Semester</option>
                                 </select>
                             </div> --}}
-                            <table class="table table-striped" style="font-size: 11px;" id="gradeElevenTable">
+                            <table class="table table-striped" style="font-size: 14px;"  id="gradeElevenTable">
                                 <thead>
                                     <tr>
-                                        <th width="10%">Enrollment No</th>
+                                        <th>Enrollment No</th>
                                         <th>LRN</th>
                                         <th>Fullname</th>
-                                        <th width="10%">Section</th>
-                                        <th width="8%">Status</th>
-                                        <th width="10%">Balik Aral</th>
-                                        <th width="10%">Action Taken</th>
-                                        <th width="8%">State</th>
-                                        <th width="10%">Requirements</th>
-                                        <th width="13%">Action</th>
+                                        <th>Section</th>
+                                        <th>Status</th>
+                                        <th>Balik Aral</th>
+                                        <th>Action Taken</th>
+                                        <th>State</th>
+                                        <th>Requirements</th>
+                                        {{-- <th width="13%">Action</th> --}}
                                     </tr>
                                 </thead>
-                                <tbody>
-                                </tbody>
+                                <tbody ></tbody>
                             </table>
                         </form>
                     </div>
@@ -115,7 +114,7 @@
 <script src="{{ asset('js/datatable/dataTables.min.js') }}"></script>
 <script src="{{ asset('js/datatable/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/select2/select2.full.min.js') }}"></script>
-
+{{-- specific js --}}
 <script src="{{ asset('teacher/chairman/enroll.shs.js') }}"></script>
 <script src="{{ asset('teacher/chairman/enroll.student.shs.js') }}"></script>
 <script src="{{ asset('teacher/chairman/enrollMain.js') }}"></script>

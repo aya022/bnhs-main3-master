@@ -22,10 +22,11 @@ class SubjectController extends Controller
         ]);
     }
 
-    public function checkSubject($subject_code, $grade_level)
+    public function checkSubjects($subject_code, $term)
     {
-        return Subject::where([['subject_code', $subject_code], ['grade_level', $grade_level]])->exists();
+        return Subject::where([['subject_code', $subject_code], ['term', $term]])->exists();
     }
+
     public function edit(Subject $subject)
     {
         return response()->json($subject);

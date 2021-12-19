@@ -35,10 +35,10 @@
         <li class="nav-item {{ request()->is('student/my/profile')?'active':'' }}"><a class="nav-link" href="{{ route('student.profile') }}">
                 <i class="far fa-user nav-icon"></i> Profile</a>
         </li>
-        <li class="nav-title">Report</li>
+        {{-- <li class="nav-title">Report</li>
         <li class="nav-item {{ request()->is('student/my/report')?'active':'' }}"><a class="nav-link" href="{{ route('student.report') }}">
                 <i class="fas fa-bug nav-icon"></i>Report Problem</a>
-        </li>
+        </li> --}}
         <li class="nav-item">
                 <a class="nav-link" href="{{ route('auth.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt text-danger nav-icon"></i>Logout

@@ -8,7 +8,7 @@ let school_year_Table = $("#school_year_Table").DataTable({
         processing: `
             <div class="spinner-border spinner-border-sm" role="status">
             <span class="sr-only">Loading...</span>
-          </div>`,
+        </div>`,
     },
 
     ajax: `academic-year/list`,

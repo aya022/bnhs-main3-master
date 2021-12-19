@@ -48,37 +48,53 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 my-4">
-                <div class="input-group">
-                    <div class="input-group-text" id="btnGroupAddon">Filter:</div>
-                    <select name="filterMyLoadSection" class="form-select" id="filterLabel">
-                    </select>
-                    <div class="input-group-append"></div>
+            @if (!$data->grade_status)
+                <div class="col-lg-3 col-md-3 my-4">
+                    <div class="input-group">
+                        <div class="input-group-text" id="btnGroupAddon">Filter:</div>
+                        <select name="filterMyLoadSection" class="form-select" id="filterLabel">
+                        </select>
+                        <div class="input-group-append"></div>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 
-    <div class="card card-info">
-        <div class="card-body pb-1">
-            <div class="table responsive">
-                <table class="table  table-bordered table-hover" id="myClassTable" style="font-size: 14px">
-                    <thead class="bg-dark ">
-                        <tr>
-                            <th class="text-white">Student name</th>
-                            <th class="text-center text-white" width="7%">1st</th>
-                            <th class="text-center text-white" width="7%">2nd</th>
-                            <th class="text-center text-white" width="7%">3rd</th>
-                            <th class="text-center text-white" width="7%">4th</th>
-                            <th class="text-center text-white" width="7%">Avg</th>
-                            <th class="text-center text-white" width="8%">Remarks</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+    @if ($data->grade_status)
+        <div class="card">
+            <div class="card-body">
+            <div class="empty-state text-center mt-5" data-height="200">
+                <h2><i class="fas fa-exclamation-circle text-warning" style="font-size: 30px"></i>&nbsp;&nbsp;Grading system is now ended</h2>
+                <p class="lead">
+                Warning you will no longer be allowed to edit or add a grade
+                </p>
+                
+            </div>
             </div>
         </div>
-    </div>
+    @else
+        <div class="card mb-3">
+            <div class="card-body pb-1">
+                <div class="table responsive">
+                    <table class="table  table-bordered table-hover" id="myClassTable" style="font-size: 14px">
+                        <thead class="bg-dark ">
+                            <tr>
+                                <th class="text-white">Student name</th>
+                                <th class="text-center text-white" width="7%">1st</th>
+                                <th class="text-center text-white" width="7%">2nd</th>
+                                <th class="text-center text-white" width="7%">3rd</th>
+                                <th class="text-center text-white" width="7%">4th</th>
+                                <th class="text-center text-white" width="7%">Avg</th>
+                                <th class="text-center text-white" width="8%">Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
 @endsection
 @section('moreJs')

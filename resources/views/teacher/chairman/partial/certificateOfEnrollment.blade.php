@@ -10,21 +10,19 @@
 </head>
 <body style="background: white">
     <div class="container">
-       
         </div>
-
         <table style="width: 100%">
             <tr>
-                <td class="text-right"> <img src="{{ asset('image/logo/logo.png') }}" alt="" width="130px"></td>
+                <td class="text-right"> <img src="{{ asset('image/logo/bn.jpg') }}" alt="" width="130px"></td>
                 <td class="text-center">
                     <p style="line-height: 0.5;font-size: 23px;font-family:'times new roman'" class="mt-3">Republic of the Philippines</p>
                     <p style="line-height: 0.5;font-size: 23px;font-family:'times new roman'">Department of Education</p>
                     <p style="line-height: 0.5;font-size: 23px;font-family:'times new roman'">Region V</p>
                     <p style="line-height: 0.1;font-size: 23px;font-family:'times new roman'">Division of Camarines Sur</p>
-                    <h4 style="font-family:'times new roman'">PILI NATIONAL HIGH SCHOOL</h4>
-                    <p style="line-height: 0.5;font-size: 23px;font-family:'times new roman'">Lapaz Pawili, Pili Camarines Sur</p>
+                    <h4 style="font-family:'times new roman'">BALAOGAN NATIONAL HIGH SCHOOL</h4>
+                    <p style="line-height: 0.5;font-size: 23px;font-family:'times new roman'">Balaogan, Bula, Camarines Sur</p>
                 </td>
-                <td class="text-left"> <img src="{{ asset('image/logo/deped.png') }}" alt="" width="190px"></td>
+                <td class="text-left"> <img src="{{ asset('image/logo/deped.png') }}" alt="" width="190px">&nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ asset('image/logo/dept.png') }}" alt="" width="100px"></td>
             </tr>
             <tr>
                 <td colspan="3" style="padding-left:15%;padding-right:15%">
@@ -37,8 +35,8 @@
                         for whatever legal purposes that mau serve him/her under the law.
                     </p><br>
                     <p style="line-height:2;font-family:'times new roman';font-size:25px">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given this {{ date("j") }} <sup>{{ date("S") }}</sup> day of {{ date("F, Y") }} at Pili National High School,
-                        Pawili, Pili Camarines Sur.
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given this {{ date("j") }} <sup>{{ date("S") }}</sup> day of {{ date("F, Y") }} at Balaogan National High School,
+                        Balaogan, Bula, Camarines Sur.
                     </p>
                 </td>
             </tr>

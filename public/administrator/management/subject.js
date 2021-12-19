@@ -38,12 +38,34 @@ const subjectTable = (level) => {
                         </td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" style="font-size:12px" class="btn btn-sm btn-info text-white pb-2 pt-2 pl-3 pr-3 editSubject editSub_${val.id}" id="${val.id}">Update</button>
-                                <button type="button" style="font-size:12px" class="btn btn-sm btn-danger text-white pb-2 pt-2 pl-3 pr-3 deleteSubject deleteSub_${val.id}" id="${val.id}">Delete</button>
+                                <button type="button" style="font-size:12px" class="btn btn-sm btn-primary text-white pb-2 pt-2 pl-3 pr-3 editSubject editSub_${val.id}" id="${val.id}">Update</button>
                             </div>
                         </td>
                     </tr>`;
                 });
+                // data.forEach((val) => {
+                //     htmlHold += `
+                //     <tr>
+                //         <td>
+                //             ${i++}
+                //         </td>
+                //         <td>
+                //             ${val.subject_code}
+                //         </td>
+                //         <td>
+                //             ${val.descriptive_title}
+                //         </td>
+                //         <td>
+                //             ${val.subject_for}
+                //         </td>
+                //         <td>
+                //             <div class="btn-group" role="group" aria-label="Basic example">
+                //                 <button type="button" style="font-size:12px" class="btn btn-sm btn-info text-white pb-2 pt-2 pl-3 pr-3 editSubject editSub_${val.id}" id="${val.id}">Update</button>
+                //                 <button type="button" style="font-size:12px" class="btn btn-sm btn-danger text-white pb-2 pt-2 pl-3 pr-3 deleteSubject deleteSub_${val.id}" id="${val.id}">Delete</button>
+                //             </div>
+                //         </td>
+                //     </tr>`;
+                // });
             } else {
                 htmlHold = `
                     <tr>
@@ -115,14 +137,33 @@ $('input[name="subject_code"]').on("blur", function () {
         })
             .done(function (data) {
                 if (data) {
-                    getToast(
-                        "warning",
-                        "Warning",
-                        "This subject code is already added"
-                    );
+                    getToast("warning", "This subject", "is already added" );
                     $('input[name="subject_code"]').addClass("is-invalid");
                 } else {
                     $('input[name="subject_code"]').removeClass("is-invalid");
+                }
+            })
+            .fail(function (jqxHR, textStatus, errorThrown) {
+                getToast("error", "Error", errorThrown);
+                $(".btnSaveSubject").html("Submit").attr("disabled", false);
+            });
+    }
+});
+// shs
+$('input[name="shs_subject_code"]').on("blur", function () {
+    if ($(this).val() != "") {
+        $.ajax({
+            url: `subjects/check/${$(this).val()}/${$(
+                'select[name="shs_term"]'
+            ).val()}`,
+            type: "GET",
+        })
+            .done(function (data) {
+                if (data) {
+                    getToast("warning", "This subject", "is already added" );
+                    $('input[name="shs_subject_code"]').addClass("is-invalid");
+                } else {
+                    $('input[name="shs_subject_code"]').removeClass("is-invalid");
                 }
             })
             .fail(function (jqxHR, textStatus, errorThrown) {

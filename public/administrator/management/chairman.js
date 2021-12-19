@@ -45,11 +45,31 @@ const chairmanTable = () => {
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="button" style="font-size:14px" class="btn btn-sm btn-info text-white pl-3 pr-3 editchairman editCha_${val.id}" id="${val.id}">Update</button>
-                                        <button type="button" style="font-size:14px" class="btn btn-sm btn-danger text-white pl-3 pr-3 deletechairman deleteCha_${val.id}" id="${val.id}">Delete</button>
                                     </div>
                                 </td>
                             </tr>
                         `;
+                        // htmlHold += `
+                        //     <tr>
+                        //         <td>
+                        //             ${i++}
+                        //         </td>
+                        //         <td>
+                        //             ${val.grade_level}
+                        //         </td>
+                        //         <td>
+                        //             ${val.teacher_lastname},
+                        //             ${val.teacher_firstname}
+                        //             ${val.teacher_middlename}
+                        //         </td>
+                        //         <td>
+                        //             <div class="btn-group" role="group" aria-label="Basic example">
+                        //                 <button type="button" style="font-size:14px" class="btn btn-sm btn-info text-white pl-3 pr-3 editchairman editCha_${val.id}" id="${val.id}">Update</button>
+                        //                 <button type="button" style="font-size:14px" class="btn btn-sm btn-danger text-white pl-3 pr-3 deletechairman deleteCha_${val.id}" id="${val.id}">Delete</button>
+                        //             </div>
+                        //         </td>
+                        //     </tr>
+                        // `;
                     });
                 } else {
                     htmlHold = `

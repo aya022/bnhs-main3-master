@@ -46,11 +46,42 @@ $("select[name='term']").on("change", function () {
     myClassTable.ajax.url("monitor/list/" + $(this).val()).load();
 });
 
+// $(document).on("click", ".dropped", function () {
+//     let id = $(this).attr("id");
+//     $('.dropClass').val(id)
+//     $("#classDrop").modal("show");
+// });
+// $(document).on("click", ".dropClass", function () {
+//     $.ajax({
+//         url: "shsmonitor/dropped/" +  $(this).attr("id"),
+//         type: "POST",
+//         data: { _token: $('input[name="_token"]').val() },
+//         beforeSend: function () {
+//             $(".dropClass").html(`
+//             <div class="spinner-border spinner-border-sm" role="status">
+//                 <span class="sr-only">Loading...</span>
+//             </div>`);
+//         },
+//     })
+//         .done(function (response) {
+//             $(".dropClass").html("Yes");
+//             getToast("info", "Successfully", "Change one record");
+//             myClassTable.ajax.reload();
+//             $(this).val('')
+//             $("#classDrop").modal("hide");
+//         })
+//         .fail(function (jqxHR, textStatus, errorThrown) {
+//             console.log(jqxHR, textStatus, errorThrown);
+//             getToast("error", "Error", errorThrown);
+//             $(".dropClass").html("Yes");
+//         });
+// })
+
 $(document).on("click", ".dropped", function () {
     if (confirm("Are you sure you want drop this student?")) {
     let id = $(this).attr("id");
     $.ajax({
-        url: "shsmonitor/dropped/" + id,
+        url: "shsmonitor/dropped/" +  $(this).attr("id"),
         type: "POST",
         data: { _token: $('input[name="_token"]').val() },
         beforeSend: function () {
@@ -62,7 +93,7 @@ $(document).on("click", ".dropped", function () {
     })
         .done(function (response) {
             $(".btnDropped_" + id).html("loading...");
-
+            $(this).val('')
             getToast("success", "Successfully", "Change one record");
             myClassTable.ajax.reload();
         })

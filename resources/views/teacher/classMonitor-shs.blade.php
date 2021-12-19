@@ -6,7 +6,7 @@
 {{-- <link rel="stylesheet" href="{{ asset('css/datatable/responsive.bootstrap.min.css') }}"> --}}
 @endsection
 @section('content')
-
+@include('teacher/partial/classMonitorSHS')
 <div class="container-fluid">
     <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
         <div class="row justify-content-between">

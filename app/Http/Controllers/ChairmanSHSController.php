@@ -27,19 +27,21 @@ class ChairmanSHSController extends Controller
             'school_years' => SchoolYear::all()
         ]);
     }
+
     public function enrolleeSort($strand, $term)
     {
         return response()->json([
             'data' => Enrollment::select(
                 "enrollments.*",
+                
                 "student_firstname",
                 "student_middlename",
                 "student_lastname",
                 "req_psa",
                 "req_grade",
                 "req_goodmoral",
-                "isbalik_aral",
-                "last_schoolyear_attended",
+                // "isbalik_aral",
+                // "last_schoolyear_attended",
                 "roll_no",
                 "student_contact",
                 "section_name",

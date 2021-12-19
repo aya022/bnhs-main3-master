@@ -33,8 +33,8 @@ class EnrollmentController extends Controller
                 "enrollments.*",
                 "roll_no",
                 "enrollments.curriculum",
-                "students.isbalik_aral",
-                "students.last_schoolyear_attended",
+                "enrollments.isbalik_aral",
+                "enrollments.last_schoolyear_attended",
                 "sections.section_name",
                 "strands.strand",
                 DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname")
@@ -48,13 +48,13 @@ class EnrollmentController extends Controller
                 ->get();
         } else {
             $explodeMe = explode("_",$level);
-            if (count($explodeMe)<2) {
-                $data = Enrollment::select(
+        if (count($explodeMe)<2) {
+            $data = Enrollment::select(
                 "enrollments.*",
                 "roll_no",
                 "enrollments.curriculum",
-                "students.isbalik_aral",
-                "students.last_schoolyear_attended",
+                "enrollments.isbalik_aral",
+                "enrollments.last_schoolyear_attended",
                 "sections.section_name",
                 "strands.strand",
                 DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname")
@@ -67,13 +67,13 @@ class EnrollmentController extends Controller
                 ->where('school_years.id', $year)
                 ->where('enrollments.grade_level', $explodeMe[0])
                 ->get();
-            } else {
-                $data = Enrollment::select(
+        } else {
+            $data = Enrollment::select(
                 "enrollments.*",
                 "roll_no",
                 "enrollments.curriculum",
-                "students.isbalik_aral",
-                "students.last_schoolyear_attended",
+                "enrollments.isbalik_aral",
+                "enrollments.last_schoolyear_attended",
                 "sections.section_name",
                 "strands.strand",
                 DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname")
@@ -87,7 +87,8 @@ class EnrollmentController extends Controller
                 ->where('enrollments.grade_level', $explodeMe[0])
                 ->where('enrollments.term', $explodeMe[1])
                 ->get();
-            }
+        }
+        
         }
         return response()->json(['data' => $data]);
     }
@@ -96,6 +97,7 @@ class EnrollmentController extends Controller
     public function enrolledSubject($enrolled)
     {
         $enrolledSubject = Enrollment::select('enrollments.student_id', 'enrollments.section_id', 'enrollments.grade_level', 'enrollments.curriculum')
+            ->join('students', 'enrollments.student_id', 'students.id')
             ->where('enrollments.id', $enrolled)
             ->where('school_year_id', Helper::activeAY()->id)->first();
         $subjects = Subject::where('grade_level', $enrolledSubject->grade_level)->whereIn('subject_for', [$enrolledSubject->curriculum, 'GENERAL'])->get();
@@ -108,11 +110,11 @@ class EnrollmentController extends Controller
         }
 
         $checkIfExistStudentGrade = Grade::where('student_id', $enrolledSubject->student_id)
-            ->whereIn('subject_id', [
+            ->whereIn('subject_id', 
                 Subject::select('id')->where('grade_level', $enrolledSubject->grade_level)
                     ->whereIn('subject_for', [$enrolledSubject->curriculum, 'GENERAL'])
                     ->pluck('id')
-            ])
+            )->where('is_retained','No')
             ->exists();
 
         if ($checkIfExistStudentGrade) { //if student enrolled change section here
@@ -125,6 +127,7 @@ class EnrollmentController extends Controller
                     Grade::select('id')
                         ->where('subject_id', $value)
                         ->where('student_id', $enrolledSubject->student_id)
+                        ->where('is_retained','No')
                         ->pluck('id')
                 )->update([
                     'section_id' => $enrolledSubject->section_id
@@ -140,6 +143,7 @@ class EnrollmentController extends Controller
             }
         }
     }
+
     public function store(Request $request)
     {
 
@@ -224,16 +228,16 @@ class EnrollmentController extends Controller
     {
         return response()->json(
             Enrollment::select(
-                'enrollments.*',
-                'enrollments.section_id',
-                "students.roll_no",
-                "students.student_firstname",
-                "students.student_middlename",
-                "students.student_lastname",
-                DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname")
-            )->join('students', 'enrollments.student_id', 'students.id')
-                ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
-                ->where('enrollments.id', $enrollment)->first()
+            'enrollments.*',
+            'enrollments.section_id',
+            "students.roll_no",
+            "students.student_firstname",
+            "students.student_middlename",
+            "students.student_lastname",
+            DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname"))
+            ->join('students', 'enrollments.student_id', 'students.id')
+            ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
+            ->where('enrollments.id', $enrollment)->first()
         );
     }
 
@@ -338,25 +342,28 @@ class EnrollmentController extends Controller
         return Enrollment::where("section_id", $section)->where('school_year_id', Helper::activeAY()->id)->count();
     }
 
-    public function enrolled($enroll_id, $section)
+    public function enrolled($enroll_id, $request)
     {
+        // return $request->all();
         Enrollment::where('id', $enroll_id)
-            ->where('school_year_id', Helper::activeAY()->id)
-            ->update([
-                'section_id' => $section,
-                'enroll_status' => 'Enrolled',
-            ]);
+        ->where('school_year_id', Helper::activeAY()->id)
+        ->update([
+            'section_id' => $request->section_again ?? $request->section,
+            'curriculum' => $request->curriculum_again ?? $request->curriculum,
+            'grade_level' => $request->grade_level_again ?? Auth::user()->chairman_info->grade_level,
+            'enroll_status' => ($request->section_again ?? $request->section)?'Enrolled':'Pending',
+        ]);
     }
 
     public function updateSection($request)
     {
         if (is_array($request->enroll_id)) {
             foreach ($request->enroll_id as  $value) {
-                $this->enrolled($value, $request->section);
+                $this->enrolled($value, $request);
                 $this->enrolledSubject($value);
             }
         } else {
-            $this->enrolled($request->enroll_id, $request->section);
+            $this->enrolled($request->enroll_id, $request);
             $this->enrolledSubject($request->enroll_id);
         }
     }
@@ -377,42 +384,45 @@ class EnrollmentController extends Controller
     //         }
     //     }
     // }
+    
     public function setSection(Request $request)
     {
-        // if ($request->status_now == 'force') {
-        //     if ($this->totalStudentInSection($request->section_again) >= 45) {
-        //         return response()->json(['warning' => 'This section reach the maximum number of student']);
-        //     } else {
-        //         $this->updateSection($request);
-        //     }
-        // } else {
-        //     if ($this->totalStudentInSection($request->section_again) > 40) {
-        //         return response()->json(['warning' => 'Section is full']);
-        //     } else {
-        //         $this->updateSection($request);
-        //     }
-        // }
-        $stud_data = Enrollment::select('student_id', 'enroll_status', 'section_id')->whereId($request->enroll_id)->first();
-        if ($stud_data->enroll_status == 'Pending') {
-            $this->updateUserAccount($stud_data->student_id);
-            return  Enrollment::whereId($request->enroll_id)
-                ->where('school_year_id', Helper::activeAY()->id)
-                ->update([
-                    'section_id' => $request->section,
-                    'enroll_status' => 'Enrolled',
-                ]);
+        if ($request->status_now == 'force') {
+            if ($this->totalStudentInSection($request->section_again) >= 45) {
+                return response()->json(['warning' => 'This section reach the maximum number of student']);
+            } else {
+                $this->updateSection($request);
+            }
         } else {
-            Enrollment::where('section_id',$stud_data->section_id)
-            ->where('student_id',$stud_data->student_id)
-            ->update([
-                'section_id'=>$request->section
-            ]);
-            return  Enrollment::whereId($request->enroll_id)
-                ->where('school_year_id', Helper::activeAY()->id)
-                ->update([
-                    'section_id' => $request->section
-            ]);
+            if ($this->totalStudentInSection($request->section_again) > 40) {
+                return response()->json(['warning' => 'Section is full']);
+            } else {
+                $this->updateSection($request);
+            }
         }
+
+        // $stud_data = Enrollment::select('student_id', 'enroll_status', 'section_id')->whereId($request->enroll_id)->first();
+        // if ($stud_data->enroll_status == 'Pending') {
+        //     $this->updateUserAccount($stud_data->student_id);
+        //     return  Enrollment::whereId($request->enroll_id)
+        //         ->where('school_year_id', Helper::activeAY()->id)
+        //         ->update([
+        //             'section_id' => $request->section,
+        //             'enroll_status' => 'Enrolled',
+        //         ]);
+        // } else {
+        //     Enrollment::where('section_id',$stud_data->section_id)
+        //     ->where('student_id',$stud_data->student_id)
+        //     ->update([
+        //         'section_id'=>$request->section
+        //     ]);
+        //     return  Enrollment::whereId($request->enroll_id)
+        //         ->where('school_year_id', Helper::activeAY()->id)
+        //         ->update([
+        //             'section_id' => $request->section
+        //     ]);
+        // }
+    
     }
 
     // mass section
@@ -431,6 +441,7 @@ class EnrollmentController extends Controller
         return response()->json([
             'data' => Enrollment::select(
                 "enrollments.id",
+                "enrollments.student_id",
                 "enrollments.enroll_status",
                 "students.roll_no",
                 "students.student_contact",
@@ -443,7 +454,7 @@ class EnrollmentController extends Controller
                 ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
                 ->where('sections.teacher_id', Auth::user()->id)
                 ->where('school_years.status', 1)
-                ->where('enrollments.grade_level', Auth::user()->section_info->grade_level)
+                ->where('enrollments.grade_level', Auth::user()->section->grade_level)
                 ->whereIn('enrollments.enroll_status', ['Enrolled', 'Dropped'])
                 ->orderBy('students.student_lastname')
                 ->get()

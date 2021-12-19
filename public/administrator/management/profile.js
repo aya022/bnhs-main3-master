@@ -7,6 +7,7 @@ $.uploadPreview({
     no_label: false, // Default: false
     success_callback: null, // Default: null
 });
+
 $("#schooProfileForm").submit(function (e) {
     e.preventDefault();
     $.ajax({
@@ -95,3 +96,39 @@ $("select[name='statusEnrollment']").on("change", function () {
         $(".btnYes").hide();
     }
 });
+
+// delete Modal
+$(document).on("click", ".deleteAssign", function () {
+    let id = $(this).attr("id");
+    $('.deleteAssignYes').val(id)
+    $("#AssignDeleteModal").modal("show");
+});
+
+$('input[name="grade_status"]').on('click', function () {
+    // $(".badgeText").text(this.checked ? 'Disabled' : 'Enabled')
+    if (this.checked) {
+        $(".badgeText").addClass('bg-warning').removeClass('bg-success').text('Disabled')
+    } else {
+        $(".badgeText").addClass('bg-success').removeClass('bg-warning').text('Enabled')
+        
+    }
+    $.ajax({
+        url: `grade/update/status`,
+        type: "PUT",
+        data: {
+            active:this.checked?1:0,
+            _token: $('input[name="_token"]').val(),
+        },
+    })
+        .done(function (data) {
+            if (data) {
+                getToast("info", "Done", "Grading status has been Changed!");
+            } else {
+                getToast("success", "Active", "Grade has been activated!");
+            }
+        })
+        .fail(function (jqxHR, textStatus, errorThrown) {
+            console.log(jqxHR, textStatus, errorThrown);
+            getToast("error", "Error",  textStatus);
+        });
+})
