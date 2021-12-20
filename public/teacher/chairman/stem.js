@@ -134,7 +134,7 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
                             ? ` <button type="button" class="btn btn-sm btn-primary cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
                         Update
                 </button>`
-                            : ` <button type="button" class="btn btn-sm btn-info cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
+                            : ` <button type="button" class="btn btn-sm btn-info text-white cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
                     Section
                 </button>`
                     }`;

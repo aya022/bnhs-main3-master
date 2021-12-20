@@ -15,7 +15,7 @@ let filterMyLoadSection = () => {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 };
 filterMyLoadSection();
@@ -93,8 +93,8 @@ let myClassTable = (section_id, subject_id,term) => {
                             ? data.first == null || data.second == null
                                 ? ""
                                 : myAverage >= 75
-                                ? `<span class="ml-3 badge badge-success">Passed</span>`
-                                : `<span class="ml-3 badge badge-danger ">Failed</span>`
+                                ? `<span class="ml-3 badge bg-success">Passed</span>`
+                                : `<span class="ml-3 badge bg-danger ">Failed</span>`
                             : ""
                     }`;
                 },
@@ -248,7 +248,7 @@ $(document).on("blur", "input[name='inGrade']", function () {
                     })
                     .fail(function (jqxHR, textStatus, errorThrown) {
                         console.log(jqxHR, textStatus, errorThrown);
-                        getToast("error", "Eror", errorThrown);
+                        getToast("error", "Error", errorThrown);
                     });
             } else {
                 $("#fillGradeInPrevious").modal("show");
@@ -368,6 +368,6 @@ let loadMyStudent = (section_id, subject_id) => {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 };

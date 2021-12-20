@@ -104,8 +104,11 @@
                               <i class="fas fa-arrow-circle-left"></i>Back</a>
                       </div>
                       <div class="col-md-6">
-                          <a href="{{ route('done.download',$data) }}" class="ticket-item ticket-more btn btn-icon icon-left btn-primary" id="app">
-                            <i class="fas fa-download"></i>Download Form</a>
+                          {{-- <a href="{{ route('done.download',$data) }}" class="ticket-item ticket-more btn btn-icon icon-left btn-primary" id="app">
+                            <i class="fas fa-download"></i>Download Form</a> --}}
+                            <a href="{{ route('done.print',$data) }}" class="ticket-item ticket-more btn btn-icon icon-left btn-primary"  id="printForm">
+                                <i class="fas fa-print"></i>&nbsp;Print/Download
+                            </a>
                       </div>
                   </div>
                 </div>
@@ -124,6 +127,7 @@
     <script src="{{ asset('js/stisla.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    {{-- <script src="{{ asset('js/form.js') }}"></script> --}}
 </body>
 
 </html>

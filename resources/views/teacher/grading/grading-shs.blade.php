@@ -16,8 +16,8 @@
     }
 </style>
 @endsection
-@include('teacher/grading/partial/importModal')
 @section('content')
+@include('teacher/grading/partial/importModal')
 <div class="modal fade" id="fillGradeInPrevious" data-backdrop="static" data-keyboard="false" tabindex="-1"
     aria-labelledby="fillGradeInPreviousLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
@@ -29,9 +29,38 @@
         </div>
     </div>
 </div>
-<section class="section">
-    <div class="section-body">
-        <div class="col-12">
+{{-- <section class="section"> --}}
+    <div class="container-fluid">
+        <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
+            <div class="row justify-content-between">
+                <div class="col-lg-5 col-md-8">
+                    <p style="font-size: 25px;"><i class="fas fa-pen"></i>&nbsp;&nbsp;Grading [ <span style="font-size: 15px" class="txtSubjectName badge bg-warning pt-1 pb-1 mt-2"></span> ]</p>
+                    <div class="float-left">
+                        
+                    </div>
+                    <div class="col-lg-4 float-left">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="text-white btn btn-sm btn-info pl-3 pr-3" id="btnImport">
+                                <i class="fas fa-cloud-upload-alt"></i>&nbsp;Import
+                            </button>
+                            <button type="button" class="text-white btn btn-sm btn-dark btnDownload">
+                                <i class="fas fa-cloud-download-alt"></i>Template
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 my-4">
+                    <div class="input-group">
+                        <div class="input-group-text" id="btnGroupAddon">Filter:</div>
+                        <select name="filterMyLoadSection" class="form-select" id="filterLabel">
+                        </select>
+                        <div class="input-group-append"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- <div class="col-12">
             <div class="row justify-content-between">
                 <div class="col-lg-5 col-md-8">
                     <h2 class="section-title">Grading</h2>
@@ -47,22 +76,21 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
-        <div class="card card-info">
-            <div class="card-header">
+        <div class="card mb-3 pb-3 pt-3">
+            {{-- <div class="card-header">
                 <div class="btn-group mb-3" role="group" aria-label="Basic example">
                     <button class="btn btn-warning txtSubjectName"></button>&nbsp;&nbsp;
                     <button type="button" class="btn btn-secondary btn-icon" id="btnImport"><i class="fas fa-cloud-upload-alt"></i>Import</button>
                     &nbsp;&nbsp;
                     <button type="button" class="btn btn-secondary btn-icon btnDownload"><i class="fas fa-cloud-download-alt"></i>Template</button>
                 </div>
-            </div>
+            </div> --}}
             <div class="card-body pb-1">
                 <div class="table-responsive">
-                  
-                    <table class="table  table-bordered table-hover" id="myClassTable" style="font-size: 14px">
-                        <thead class="bg-info ">
+                    <table class="table table-bordered table-hover mb-3" id="myClassTable" style="font-size: 14px">
+                        <thead class="bg-dark">
                             <tr>
                                 <th class="text-white">Student name</th>
                                 <th class="text-center text-white" width="14%">1st</th>
@@ -82,7 +110,7 @@
             </div>
         </div>
     </div>
-</section>
+{{-- </section> --}}
 @endsection
 @section('moreJs')
 <script src="{{ asset('js/datatable/jquery.dataTables.min.js') }}"></script>

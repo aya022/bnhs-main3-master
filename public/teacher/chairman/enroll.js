@@ -730,7 +730,7 @@ $(document).on("click", ".listenrolledBtn", function () {
                 $(".titleSection").text(sectionOpen);
                 $("#listEnrolled").html(tableListHTML);
                 $(".btnSection_" + sectionOpen).html(
-                    `<span class="badge badge-transparent">${data.length}</span>`
+                    `<span class="badge bg-transparent">${data.length}</span>`
                 );
                 $(".eTotal").text(data.length);
                 $("#listEnrolledModal").modal("show");
@@ -823,6 +823,7 @@ $("#massSectioningForm").on("submit", function (e) {
                     $(".btnmassSectioning")
                         .html("Save")
                         .attr("disabled", false);
+                    getToast("success", "Successfully", "Assign section");
                     $('select[name="sectioningNow"]').val("");
                     $("#sectionGrouping").fadeOut(1000);
                     monitorSection(current_curriculum);

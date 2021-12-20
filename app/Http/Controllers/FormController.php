@@ -392,4 +392,62 @@ class FormController extends Controller
     {
         return Strand::select('id', 'description')->get();
     }
+
+    public function printForm($tracking_no)
+    {
+        $dataNow = Enrollment::select(
+            "tracking_no",
+            "grade_level",
+            "isbalik_aral",
+            "last_school_attended",
+            "state",
+            "students.roll_no",
+            "students.student_firstname",
+            "students.student_middlename",
+            "students.student_lastname",
+            "students.created_at",
+            "students.date_of_birth",
+            "students.student_contact",
+            "students.gender",
+            "students.region",
+            "students.province",
+            "students.city",
+            "students.barangay",
+            "students.mother_name",
+            "students.mother_contact_no",
+            "students.father_name",
+            "students.father_contact_no",
+            "students.guardian_name",
+            "students.guardian_contact_no",
+            )
+            ->join('students', 'enrollments.student_id', 'students.id')
+            ->where('school_year_id', Helper::activeAY()->id)
+            ->where('tracking_no', $tracking_no)
+            ->get();
+            // Enrollment::select(
+            //     "students.roll_no",
+            //     "students.student_firstname",
+            //     "students.student_middlename",
+            //     "students.student_lastname",
+            //     "students.created_at",
+            //     "students.student_lastname",
+            //     "students.student_contact",
+            //     "students.gender",
+            //     "students.region",
+            //     "students.province",
+            //     "students.city",
+            //     "students.barangay",
+            //     "students.mother_name",
+            //     "students.mother_contact_no",
+            //     "students.father_name",
+            //     "students.father_contact_no",
+            //     "students.guardian_name",
+            //     "students.guardian_contact_no",
+            //     )
+            //     ->join('students', 'enrollments.student_id', 'students.id')
+            //     ->where('school_year_id', Helper::activeAY()->id)
+            //     ->where('tracking_no')
+            //     ->get();
+        return view('form/partial/studentPrint', compact('tracking_no', 'dataNow'));
+    }
 }

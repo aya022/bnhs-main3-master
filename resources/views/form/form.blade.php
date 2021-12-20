@@ -267,7 +267,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-lg-8 mb-3">
-                                                        <label class="form-label">Guardian's Name <em><small>(Last Name, First Name Middle Name)</small></em></label>
+                                                        <label class="form-label">Guardian's Name <em><small>(Last Name, First Name Middle Name) <span class="text-warning">(* If not parent)</span></small></em></label>
                                                         <input type="text" class="form-control" name="guardian_name" style="text-transform: capitalize;">
                                                     </div>
                                                     <div class="form-group col-lg-4 mb-3">
@@ -276,7 +276,6 @@
                                                             name="guardian_contact_no"
                                                             onkeypress="return numberOnly(event)" maxlength="11">
                                                     </div>
-                        
                                                 </div>
                                                 <!-- tab 2 end-->
                                             </div>

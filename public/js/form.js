@@ -120,7 +120,7 @@ $("#enrollForm").submit(function (e) {
             $(".btnEnroll")
                 .html(` <div class="spinner-border spinner-border-sm" role="status">
             <span class="sr-only">Loading...</span>
-          </div>`);
+        </div>`);
         },
     })
         .done(function (data) {
@@ -145,4 +145,23 @@ $("#enrollForm").submit(function (e) {
             $(".btnEnroll").attr("disabled", false);
             getToast("error", "Eror", errorThrown);
         });
+});
+
+// show print
+// $("#printForm").on("click", function () {
+//     popupCenter({
+//         url: "print/report",
+//         title: "report",
+//         w: 1400,
+//         h: 800,
+//     });
+// });
+
+$(document).on("click", "#printForm", function () {
+    popupCenter({
+        url: "print/report/" + $(this).val(),
+        title: "report",
+        w: 1200,
+        h: 800,
+    });
 });

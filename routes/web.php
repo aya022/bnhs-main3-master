@@ -61,6 +61,7 @@ Route::post('form/save', [FormController::class, 'store']);
 Route::get('form/check/lrn/{lrn}', [FormController::class, 'checkLRN']);
 Route::get('form/strand', [FormController::class, 'strandListForm']);
 Route::get('done/download/form/{tracking_no}', [ExportController::class, 'exportEnrollmentForm'])->name('done.download');
+Route::get('print/report/{tracking_no}', [FormController::class, 'printForm'])->name('done.print');
 
 //appointment
 Route::get('appoint/register', [AppointmentController::class, 'appoint'])->name('appoint');

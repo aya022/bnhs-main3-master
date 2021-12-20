@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="form-group mb-3 col-md-6">
                         <label class="mb-2">Grade level</label>
-                        <select name="grade_level_again"  class="form-select">
+                        <select name="grade_level_again"  class="form-select" disabled>
                             <option value="7">Grade 7</option>
                             <option value="8">Grade 8</option>
                             <option value="9">Grade 9</option>
