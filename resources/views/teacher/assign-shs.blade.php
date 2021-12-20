@@ -38,6 +38,11 @@
                 <div class="col-md-8">
                     <form id="assignForm">
                         @csrf
+                        <input type="hidden" name="term_assign" value="@if ($activeAY->first_term=="Yes")
+                            1st
+                        @else
+                            2nd
+                        @endif">
                         <div class="input-group mb-3">
                             <div class="input-group-text" id="btnGroupAddon">Add new Subject Teacher</div>
                             <select class="form-select  mr-sm-2" name="subject_id">

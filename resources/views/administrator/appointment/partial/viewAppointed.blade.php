@@ -28,6 +28,8 @@
                                 <th>Address</th>
                                 <th>Purpose</th>
                                 <th>Appointee Type</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

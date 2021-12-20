@@ -30,7 +30,6 @@ class TeacherSHSController extends Controller
             Newassign::select('subjects.subject_code','subjects.descriptive_title','subjects.id')
             ->join('sections','newassigns.section_id','sections.id')
             ->join('subjects','newassigns.subject_id','subjects.id')
-            ->join('teachers', 'newassigns.teacher_id', 'teachers.id')
             ->where('newassigns.term',$term)
             ->where('sections.id',Auth::user()->section->id)
             ->groupBy('subjects.subject_code','subjects.descriptive_title','subjects.id')
@@ -142,14 +141,13 @@ class TeacherSHSController extends Controller
 
     public function saveAssignSubject(Request $request)
     {
+        // return $request->all();
         return  Newassign::join('sections','newassigns.section_id','sections.id')
             ->where('newassigns.section_id', Auth::user()->section->id)
             ->where('newassigns.term', $request->term_assign)
             ->where('newassigns.subject_id', $request->subject_id)
             ->where('sections.school_year_id',Helper::activeAY()->id)
-            ->update([
-            'newassigns.teacher_id'=>$request->teacher_id
-        ]);
+            ->update([ 'newassigns.teacher_id'=>$request->teacher_id ]);
         
 
         /* if (isset($request->id)) {
@@ -192,13 +190,14 @@ class TeacherSHSController extends Controller
             Newassign::select('newassigns.teacher_id','newassigns.subject_id','newassigns.term')
         ->join('subjects', 'newassigns.subject_id', 'subjects.id')
         ->leftJoin('teachers', 'newassigns.teacher_id', 'teachers.id')
-        ->where('newassigns.section_id', Auth::user()->section->id)
+        ->where('newassigns.section_id', Auth::user()->section_info->id)
         ->where('newassigns.term', $term)
         ->where('newassigns.subject_id', $subject)
         ->groupBy('newassigns.teacher_id','newassigns.subject_id','newassigns.term')
         ->first()
         );
     }
+
     public function assignDelete(Assign $assign)
     {
         return $assign->delete();

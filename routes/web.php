@@ -105,6 +105,7 @@ Route::middleware(['auth:web', 'preventBackHistory'])->name('admin.')->prefix('a
     Route::delete('holiday/delete/{holiday}', [AppointmentController::class, 'holidayDelete']);
     Route::get('appointment/list/{month}', [AppointmentController::class, 'getAvailAppoint']);
     Route::get('appointment/list/selected/{selectedDate}', [AppointmentController::class, 'selectedDate']);
+    Route::put('appointment/list/confirm/{appointment}', [AppointmentController::class, 'updateConfirm']);
     Route::get('appointment/print/report/{dateSelected}', [AppointmentController::class, 'printReport']);
     Route::post('appointment/send/email', [AppointmentController::class, 'sendEmailNotify']);
 
@@ -190,7 +191,6 @@ Route::middleware(['auth:web', 'preventBackHistory'])->name('admin.')->prefix('a
     Route::get('assign/list/{section}', [AssignController::class, 'list']);
     Route::delete('assign/delete/{assign}', [AssignController::class, 'destroy']);
     Route::get('assign/edit/{assign}', [AssignController::class, 'edit']);
-
     // chairman route
     Route::get('chairman', [AdminController::class, 'chairman'])->name('chairman');
     Route::get('chairman/list', [ChairmanController::class, 'list']);
@@ -321,6 +321,7 @@ Route::middleware(['auth:teacher', 'preventBackHistory'])->name('teacher.')->pre
     Route::get('senior/export/excel/{format}/{status}/{curriculum}/{grade_level}', [ExportController::class, 'exportNewEnrollee']);
 
     // senior high
+
     Route::get('senior/enrollee', [ChairmanSHSController::class, 'seniorEnrollee'])->name('senior.enrollee.page');
     Route::get('senior/student/enrolle/{strand}/{term}', [ChairmanSHSController::class, 'enrolleeSort']);
     Route::get('senior/enrollee/filter/section/senior/{strand}', [EnrollmentSHSController::class, 'filterSection']); //shs filter
@@ -355,6 +356,8 @@ Route::middleware(['auth:teacher', 'preventBackHistory'])->name('teacher.')->pre
     Route::get('senior/assign/list/subject/section/{term}', [TeacherSHSController::class, 'listAssignSubject']);
     Route::post('senior/assign/save', [TeacherSHSController::class, 'saveAssignSubject']);
     Route::get('senior/assign/edit/{subject}/{term}', [TeacherSHSController::class, 'assignEdit']);
+    // Route::get('senior/assignshs/edit/{assign}', [TeacherSHSController::class, 'saveAssignSubject']);
+
     Route::delete('senior/assign/delete/{assign}', [TeacherSHSController::class, 'assignDelete']);
     // Route::post('senior/assign/student', [TeacherSHSController::class, 'assignDelete']);
     Route::get('senior/assign/load/student/subject/{student}/{term}', [TeacherSHSController::class, 'showStudentEnrolledSUbject']);

@@ -101,6 +101,11 @@ class AssignController extends Controller
     {
         return response()->json($assign);
     }
+    
+    public function update(Assign $assign)
+    {
+        return response()->json($assign);
+    }
 
     public function destroy(Assign $assign)
     {

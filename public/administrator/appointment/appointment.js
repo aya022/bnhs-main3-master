@@ -286,7 +286,61 @@ let listAppoint =  $("#appointedTable").DataTable({
         { data: "address", orderable: false },
         { data: "purpose", orderable: false },
         { data: "appointee", orderable: false },
+        { data: null,
+            render:function (data){
+                if (data.status) {
+                    return `<span class="badge bg-success">Done</span>`;
+                } else {
+                    return `<span class="badge bg-warning">Pending</span>`;
+                }
+            }
+        },
+        { data: null,
+            render:function (data){
+                if (!data.status) {
+                    return `
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editAssign editA_${data.id}" value="${data.id}">Confirm</button>
+                </div>`;
+                }else{
+                    return '-- Done --';
+                }
+            }
+        },
     ],
+});
+
+// 
+$(document).on("click", ".editAssign", function () {
+    let id = $(this).val();
+    $.ajax({
+        url: "appointment/list/confirm/" + id,
+        type: "PUT",
+        data: { _token: $('input[name="_token"]').val() },
+        beforeSend: function () {
+            $(".editA_" + id)
+                .html(
+                    `
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>`
+                )
+                .attr("disabled", true);
+        },
+    })
+        .done(function (data) {
+            $(".editA_" + id)
+                .html("Confirm")
+                .attr("disabled", false);
+                listAppoint.ajax.reload();
+        })
+        .fail(function (jqxHR, textStatus, errorThrown) {
+            console.log(jqxHR, textStatus, errorThrown);
+            $(".editA_" + id)
+                .html("Confirm")
+                .attr("disabled", false);
+            getToast("error", "Error", errorThrown);
+        });
 });
 
 let showListOfAppointed = (selected) => {
