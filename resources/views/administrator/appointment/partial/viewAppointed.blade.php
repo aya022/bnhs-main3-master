@@ -17,6 +17,17 @@
                             <i class="fa fa-paper-plane"></i> Send Email for All
                         </button>
                     </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="alert alert-info">
+                                Reminders: <br>
+                                    * Click "Send Email for All" button to send to all appointee a message through email. <br>
+                                    * Click checkbox to select a specific person to send a message through email. <br>
+                                    * Click "confirm" button to change the status from pending appointment to done. It will indicate that those person with a "done" status is done with their appointment.
+                                </p>
+                            </p>
+                        </div>
+                    </div>
                     <table class="table table-striped" id="appointedTable" style="font-size: 12px;width:100%">
                         <thead>
                             <tr>
@@ -40,7 +51,17 @@
                     <div class="mb-3">
                         <h6>Compose email message</h6>
                         <input type="hidden" name="selectedDateNow">
-                        <textarea name="bodyEmail" class="summernote"  data-height="50" placeholder="Compose message here" required></textarea>
+                        <textarea name="bodyEmail" class="summernote"  data-height="50" placeholder="Compose message here" required>
+                            Subject: Your Appointment Is Confirmed <br><br>
+
+                            Hi [name],<br><br>
+
+                            Your [type of appointment] appointment is confirmed for [day of week], [month] [date]], [year]. <br><br>
+
+                            Need to change your appointment?<br><br>
+
+                            To make changes to your appointment, click here, call 000-0000-000, or respond to this email.
+                        </textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning text-white sendCancel">Close</button>

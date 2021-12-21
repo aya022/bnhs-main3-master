@@ -66,10 +66,15 @@ let school_year_Table = $("#school_year_Table").DataTable({
                     return `
                     <button type="button" class="btn btn-sm btn-info text-white editAY edit_${data.id}  pl-5 pr-5" id="${data.id}">Update</button>`;
                 } else {
+                    // return `
+                    //         <div class="btn-group" role="group" aria-label="Basic example">
+                    //             <button type="button" class="btn btn-sm btn-info text-white pl-3 pr-3 editAY edit_${data.id}" id="${data.id}">Update</button>
+                    //             <button type="button" class="btn btn-sm btn-danger text-white deleteAY delete_${data.id}" id="${data.id}">Delete</button>
+                    //         </div>
+                    //     `;
                     return `
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button type="button" class="btn btn-sm btn-info text-white pl-3 pr-3 editAY edit_${data.id}" id="${data.id}">Update</button>
-                                <button type="button" class="btn btn-sm btn-danger text-white deleteAY delete_${data.id}" id="${data.id}">Delete</button>
                             </div>
                         `;
                 }

@@ -67,7 +67,7 @@
                 </tr>
                 <tr>
                     <td style="padding: 10px;">Name:</td>
-                    <td style="padding: 10px;">{{ $student->student_firstname }} {{ $student->student_middlename }} {{ $student->student_lastname }}</td>
+                    <td style="padding: 10px;">{{ $student->student_firstname }} {{ $student->student_middlename }} {{ $student->student_lastname }} {{ $student->student_extension }}</td>
                     <td style="padding: 10px;">Date of Birth</td>
                     <td style="padding: 10px;">{{ $student->date_of_birth }}</td>
                 </tr>

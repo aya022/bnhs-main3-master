@@ -47,6 +47,7 @@ Route::get('/', function(){
 
 // Auth route
 Route::middleware(['guest:web', 'guest:teacher', 'guest:student', 'preventBackHistory'])->name('auth.')->group(function () {
+    // Route::get('/', [AuthController::class, 'login'])->name('login');
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('login/post', [AuthController::class, 'login_post'])->name('login_post');
 });
@@ -239,7 +240,10 @@ Route::middleware(['auth:web', 'preventBackHistory'])->name('admin.')->prefix('a
 Route::middleware(['auth:teacher', 'preventBackHistory'])->name('teacher.')->prefix('teacher/my/')->group(function () {
     Route::get('dashboard', [TeacherController::class, 'dashboard'])->name('dashboard');
 
+    // profile 
     Route::get('profile', [TeacherController::class, 'profile'])->name('profile');
+    Route::post('profile/update', [TeacherController::class, 'profileUpdate'])->name('profile.update');
+    Route::post('profile/account', [TeacherController::class, 'profileAccount'])->name('profile.account');
 
     Route::get('assign', [TeacherController::class, 'assign'])->name('assign');
 

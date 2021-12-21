@@ -19,25 +19,25 @@
                                     <div class="col-6 form-group mb-3">
                                         <label for="exampleInputEmail1" class="mb-2">Employee ID</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1"
-                                            value="{{ auth()->user()->roll_no }}">
+                                            value="{{ auth()->user()->roll_no }}" readonly>
                                     </div>
                                     <div class="col-6 form-group mb-3">
                                         <label for="exampleInputEmail1" class="mb-2">First name</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1"
-                                            value="{{ auth()->user()->teacher_firstname }}">
+                                            value="{{ auth()->user()->teacher_firstname }}" readonly>
                                     </div>
                                     <div class="col-6 form-group mb-3">
                                         <label for="exampleInputEmail1" class="mb-2">Middle name</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1"
-                                            value="{{ auth()->user()->teacher_middlename }}">
+                                            value="{{ auth()->user()->teacher_middlename }}" readonly>
                                     </div>
                                     <div class="col-6 form-group mb-3">
                                         <label for="exampleInputEmail1" class="mb-2">Last name</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1"
-                                            value="{{ auth()->user()->teacher_lastname }}">
+                                            value="{{ auth()->user()->teacher_lastname }}" readonly>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary" disabled>Update Profile</button>
+                                {{-- <button type="submit" class="btn btn-primary" disabled>Update Profile</button> --}}
                             </div>
                         </form>
                     </div>
@@ -48,21 +48,26 @@
                             <p style="font-size: 20px;">Username and Password</p>
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form action="{{ route('teacher.profile.account') }}" method="POST">@csrf
+                                {{-- <div class="form-group mb-3">
+                                    <span class="alert alert-success" name="mess">{{ $message }}</span>
+                                </div> --}}
                                 <div class="form-group mb-3">
                                     <label class="mb-2">Username</label>
-                                    <input type="text" class="form-control" value="{{ auth()->user()->username }}">
+                                    <input type="text" class="form-control" value="{{ auth()->user()->username }}" name="username">
+                                    @error('username') <span class="text-danger"><b>{{ $message }}</b></span> @enderror
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="mb-2">Password</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" class="form-control" name="password">
+                                    @error('password') <span class="text-danger"><b>{{ $message }}</b></span> @enderror
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="mb-2">Confirm Password</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" class="form-control" name="confirm_password">
+                                    @error('confirm_password') <span class="text-danger"><b>{{ $message }}</b></span> @enderror
                                 </div>
-
-                                <button type="submit" class="btn btn-primary btn-block" disabled>Submit</button>
+                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -74,5 +79,5 @@
 </section>
 @endsection
 @section('moreJs')
-<script src="{{ asset('student/profile.js') }}"></script>
+{{-- <script src="{{ asset('student/profile.js') }}"></script> --}}
 @endsection

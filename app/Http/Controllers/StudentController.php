@@ -91,13 +91,13 @@ class StudentController extends Controller
             'date_of_birth' => $request->date_of_birth,
             'student_contact' => $request->student_contact,
             'gender' => $request->gender,
-            'region' =>  $request->region_update,
-            'province' =>  $request->province_update,
-            'city' =>  $request->city_update,
-            'barangay' =>  $request->barangay_update,
-            'last_school_attended' => $request->last_school_attended,
+            'region' =>  $request->region,
+            'province' =>  $request->province,
+            'city' =>  $request->city,
+            'barangay' =>  $request->barangay,
+            // 'last_school_attended' => $request->last_school_attended,
             // 'last_schoolyear_attended' => $request->last_schoolyear_attended,
-            'isbalik_aral' => !empty($request->last_schoolyear_attended) ? 'Yes' : 'No',
+            // 'isbalik_aral' => !empty($request->last_schoolyear_attended) ? 'Yes' : 'No',
             'mother_name' => $request->mother_name,
             'mother_contact_no' => $request->mother_contact_no,
             'father_name' => $request->father_name,
@@ -105,8 +105,8 @@ class StudentController extends Controller
             'guardian_name' => $request->guardian_name,
             'guardian_contact_no' => $request->guardian_contact_no,
             'username' => empty($dataret->username) ? Helper::create_username($request->student_firstname, $request->student_lastname) : $dataret->username,
-            'orig_password' => empty($dataret->orig_password) ? Crypt::encrypt("pnhs") : $dataret->orig_password,
-            'password' => empty($dataret->password) ? Hash::make("pnhs") : $dataret->password,
+            'orig_password' => empty($dataret->orig_password) ? Crypt::encrypt("bnhs") : $dataret->orig_password,
+            'password' => empty($dataret->password) ? Hash::make("bnhs") : $dataret->password,
             'student_status' => null,
         ]);
     }
@@ -116,6 +116,26 @@ class StudentController extends Controller
         return response()->json($student);
     }
 
+    // public function list()
+    // {
+    //     $data = array();
+    //     $sqlData = Student::select("*")->whereNotNull('orig_password')->get();
+    //     foreach ($sqlData as $key => $value) {
+    //         $arr = array();
+    //         $arr['id'] = $value->id;
+    //         $arr['roll_no'] = $value->roll_no;
+    //         $arr['student_firstname'] = $value->student_firstname;
+    //         $arr['student_middlename'] = $value->student_middlename;
+    //         $arr['student_lastname'] = $value->student_lastname;
+    //         $arr['student_contact'] = $value->student_contact;
+    //         $arr['gender'] = $value->gender;
+    //         $arr['username'] = $value->username;
+    //         // $arr['orig_password'] = Crypt::decrypt($value->orig_password);
+    //         $data[] = $arr;
+    //     }
+    //     // return $data;
+    //     return response()->json(['data' => $data]);
+    // }
     public function list()
     {
         $data = array();
@@ -129,6 +149,7 @@ class StudentController extends Controller
             $arr['student_lastname'] = $value->student_lastname;
             $arr['student_contact'] = $value->student_contact;
             $arr['gender'] = $value->gender;
+            $arr['completer'] = $value->completer;
             $arr['username'] = $value->username;
             // $arr['orig_password'] = Crypt::decrypt($value->orig_password);
             $data[] = $arr;

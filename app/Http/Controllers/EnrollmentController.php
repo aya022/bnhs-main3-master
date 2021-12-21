@@ -175,6 +175,18 @@ class EnrollmentController extends Controller
             } else {
                 return false;
             }
+            if ($request->status == "upperclass") {
+                $student = Student::where('roll_no', $request->roll_no)->first();
+                $countfail =  Grade::whereId($student->id)
+                ->where('avg','<','75')->whereNull('remarks')
+                ->where('is_retained','No')->get()->count();
+                return $this->enrollSave($request, $student, $countfail);
+            } elseif ($request->status = "transferee") {
+                $student = $this->storeStudenRequest($request);
+                return $this->enrollSave($request, $student,0);
+            } else {
+                return false;
+            }
         }
     }
 
@@ -196,12 +208,38 @@ class EnrollmentController extends Controller
 
     public function storeStudenRequest($request)
     {
+        // return  Student::create([
+        //     'roll_no' => $request->roll_no,
+        //     // 'curriculum' => $request->curriculum,
+        //     'student_firstname' => Str::title($request->student_firstname),
+        //     'student_middlename' => Str::title($request->student_middlename),
+        //     'student_lastname' => Str::title($request->student_lastname),
+        //     'date_of_birth' => $request->date_of_birth,
+        //     'student_contact' => $request->student_contact,
+        //     'gender' => $request->gender,
+        //     'region' => $request->region,
+        //     'province' => $request->province,
+        //     'city' => $request->city,
+        //     'barangay' => $request->barangay,
+        //     // 'last_school_attended' => $request->last_school_attended,
+        //     'last_schoolyear_attended' => $request->last_schoolyear_attended,
+        //     'isbalik_aral' => !empty($request->last_schoolyear_attended) ? 'yes' : 'no',
+        //     'mother_name' => Str::title($request->mother_name),
+        //     'mother_contact_no' => $request->mother_contact_no,
+        //     'father_name' => Str::title($request->father_name),
+        //     'father_contact_no' => $request->father_contact_no,
+        //     'guardian_name' => Str::title($request->guardian_name),
+        //     'guardian_contact_no' => $request->guardian_contact_no,
+        //     'username' => Helper::create_username($request->student_firstname, $request->student_lastname),
+        //     'orig_password' => Crypt::encrypt("bnhs"),
+        //     'password' => Hash::make("bnhs"),
+        // ]);
         return  Student::create([
             'roll_no' => $request->roll_no,
-            // 'curriculum' => $request->curriculum,
             'student_firstname' => Str::title($request->student_firstname),
             'student_middlename' => Str::title($request->student_middlename),
             'student_lastname' => Str::title($request->student_lastname),
+            'student_extension' => Str::title($request->student_extension),
             'date_of_birth' => $request->date_of_birth,
             'student_contact' => $request->student_contact,
             'gender' => $request->gender,
@@ -209,9 +247,6 @@ class EnrollmentController extends Controller
             'province' => $request->province,
             'city' => $request->city,
             'barangay' => $request->barangay,
-            // 'last_school_attended' => $request->last_school_attended,
-            'last_schoolyear_attended' => $request->last_schoolyear_attended,
-            'isbalik_aral' => !empty($request->last_schoolyear_attended) ? 'yes' : 'no',
             'mother_name' => Str::title($request->mother_name),
             'mother_contact_no' => $request->mother_contact_no,
             'father_name' => Str::title($request->father_name),

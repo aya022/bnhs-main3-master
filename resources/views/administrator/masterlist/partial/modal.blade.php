@@ -25,43 +25,44 @@
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active mt-3" id="nav-home">
                                 {{-- start student details here --}}
-                                    <div class="form-group">
-                                        <label>Learning Reference Number</label>
+                                    <div class="form-group mb-3">
+                                        <label class="mb-2">Learning Reference Number</label>
                                         <input type="text" name="roll_no" required class="form-control"
                                             pattern="^[0-9]{12}$" onkeypress="return numberOnly(event)" maxlength="12">
                                     </div>
                                 <div class="row">
                                     <div class="form-group mb-3 col-md-4">
-                                        <label>First name</label>
+                                        <label class="mb-2">First name</label>
                                         <input type="text" class="form-control" name="student_firstname" required>
                                     </div>
                                     <div class="form-group mb-3 col-md-4">
-                                        <label>Middle name</label>
+                                        <label class="mb-2">Middle name</label>
                                         <input type="text" class="form-control" name="student_middlename">
                                     </div>
                                     <div class=" form-group mb-3 col-md-4">
-                                        <label>Last name</label>
+                                        <label class="mb-2">Last name</label>
                                         <input type="text" class="form-control" name="student_lastname" required>
                                     </div>
                                 </div>
+
                                 <div class="row" id="forNew">
-                                    <div class="form-group mb-3 col-md-3">
+                                    <div class="form-group col-md-3">
                                         <label>Region</label>
                                         <select name="region_text" id="region" class="form-select" required></select>
                                         <input type="hidden" name="region">
                                     </div>
-                                    <div class="form-group mb-3 col-md-3">
+                                    <div class="form-group col-md-3">
                                         <label>Province</label>
                                         <select name="province_text" id="province" class="form-select"
                                             required></select>
                                         <input type="hidden" name="province">
                                     </div>
-                                    <div class="form-group mb-3 col-md-3">
+                                    <div class="form-group col-md-3">
                                         <label>Town</label>
                                         <select name="city_text" id="city" class="form-select" required></select>
                                         <input type="hidden" name="city">
                                     </div>
-                                    <div class="form-group mb-3 col-md-3">
+                                    <div class="form-group col-md-3">
                                         <label>Barangay</label>
                                         <select name="barangay_text" id="barangay" class="form-select"
                                             required></select>
@@ -70,39 +71,39 @@
                                 </div>
 
                                 <div class="row" id="forUpdate">
-                                    <div class="form-group mb-3 col-md-3">
-                                        <label>Region</label>
+                                    <div class="form-group col-md-3 mb-3">
+                                        <label class="mb-2">Region</label>
                                         <input type="text" name="region" required class="form-control">
                                     </div>
-                                    <div class="form-group mb-3 col-md-3">
-                                        <label>Province</label>
+                                    <div class="form-group col-md-3 mb-3">
+                                        <label class="mb-2">Province</label>
                                         <input type="text" name="province" required class="form-control">
                                     </div>
-                                    <div class="form-group mb-3 col-md-3">
-                                        <label>Town</label>
+                                    <div class="form-group col-md-3 mb-3">
+                                        <label class="mb-2">Town</label>
                                         <input type="text" name="city" required class="form-control">
                                     </div>
-                                    <div class="form-group mb-3 col-md-3">
-                                        <label>Barangay</label>
+                                    <div class="form-group col-md-3 mb-3">
+                                        <label class="mb-2">Barangay</label>
                                         <input type="text" name="barangay" required class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group mb-3 col-md-4">
-                                        <label>Date of Birth</label>
+                                        <label class="mb-2">Date of Birth</label>
                                         <input type="date" class="form-control" placeholder="DD/MM/YYYY"
                                             name="date_of_birth">
                                     </div>
                                     <div class="form-group mb-3 col-md-4">
-                                        <label>Gender</label>
+                                        <label class="mb-2">Gender</label>
                                         <select class="form-select" name="gender" required>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </select>
                                     </div>
                                     <div class="form-group mb-3 col-md-4">
-                                        <label>Contact No.</label>
+                                        <label class="mb-2">Contact No.</label>
                                         <input type="text" class="form-control" name="student_contact"
                                             pattern="^[0-9]{12}$" onkeypress="return numberOnly(event)" maxlength="12">
                                     </div>
@@ -130,33 +131,33 @@
                                 {{-- start parent details here --}}
                                 <div class="row">
                                     <div class="form-group mb-3 col-md-8">
-                                        <label>Father's name</label>
+                                        <label class="mb-2">Father's name</label>
                                         <input type="text" class="form-control" name="father_name">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label>Contact No.</label>
+                                        <label class="mb-2">Contact No.</label>
                                         <input type="text" class="form-control" name="father_contact_no"
                                             pattern="^[0-9]{12}$" onkeypress="return numberOnly(event)" maxlength="12">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group mb-3 col-md-8">
-                                        <label>Mother's name</label>
+                                        <label class="mb-2">Mother's name</label>
                                         <input type="text" class="form-control" name="mother_name">
                                     </div>
                                     <div class="form-group mb-3 col-md-4">
-                                        <label>Contact No.</label>
+                                        <label class="mb-2">Contact No.</label>
                                         <input type="text" class="form-control" name="mother_contact_no"
                                             pattern="^[0-9]{12}$" onkeypress="return numberOnly(event)" maxlength="12">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group mb-3 col-md-8">
-                                        <label>Guardian's name</label>
+                                        <label class="mb-2">Guardian's name</label>
                                         <input type="text" class="form-control" name="guardian_name">
                                     </div>
                                     <div class="form-group mb-3 col-md-4">
-                                        <label>Contact No.</label>
+                                        <label class="mb-2">Contact No.</label>
                                         <input type="text" class="form-control" name="guardian_contact_no"
                                             pattern="^[0-9]{12}$" onkeypress="return numberOnly(event)" maxlength="12">
                                     </div>

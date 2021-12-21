@@ -20,6 +20,7 @@ class CreateStudentsTable extends Migration
             $table->string('student_firstname')->nullable();
             $table->string('student_middlename')->nullable();
             $table->string('student_lastname')->nullable();
+            $table->string('student_extension')->nullable();
             $table->string('date_of_birth', 45)->nullable();
             $table->string('student_contact', 45)->nullable();
             $table->string('gender', 45)->nullable();

@@ -326,7 +326,7 @@ $("#enrollForm").submit(function (e) {
         })
             .done(function (data) {
                 $("input[name='roll_no']").removeClass("is-valid");
-                getToast("success", "Ok", "Successfully added new enrolled");
+                getToast("success", "Successfully", "added new enrolled student");
                 $(".btnSaveEnroll").html("Enroll").attr("disabled", false);
                 document.getElementById("enrollForm").reset();
                 $("#last_school").hide();

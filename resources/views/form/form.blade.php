@@ -185,7 +185,7 @@
                                                     </div>
                                                     <div class="form-group col-6 mb-3">
                                                         <label class="form-label">Extension Name <i>(Optional)</i> </label>
-                                                        <input type="text" class="form-control" placeholder="example (Jr, Sr, etc.)" style="text-transform: capitalize;">
+                                                        <input type="text" class="form-control" placeholder="example (Jr, Sr, etc.)" style="text-transform: capitalize;" name="student_extension">
                                                         </div>
                                                     <div class="form-group col-lg-4 mb-3">
                                                         <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Date of Birth</label>

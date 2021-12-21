@@ -26,6 +26,12 @@ const studentTable = $("#studentTable").DataTable({
         },
         { data: "gender" },
         { data: "student_contact" },
+        {
+            data: null,
+            render: function (data) {
+                return data.completer=='No'? `<span class="badge bg-info pt-1 pb-1">No</span>`: `<span class="badge bg-success pt-1 pb-1">Completer</span>`;
+            }
+        },
         { data: "username" },
         // { data: "orig_password" },
         {
@@ -217,24 +223,21 @@ $(document).on("click", ".sedit", function () {
             $("#staticBackdrop").modal("show");
             $('input[name="id"]').val(data.id);
             $('input[name="roll_no"]').val(data.roll_no);
-            // $('select[name="curriculum"]').val(data.curriculum);
+            $('select[name="curriculum"]').val(data.curriculum);
             $('input[name="student_firstname"]').val(data.student_firstname);
             $('input[name="student_middlename"]').val(data.student_middlename);
             $('input[name="student_lastname"]').val(data.student_lastname);
-            $('input[name="region_update"]').val(data.region);
-            $('input[name="province_update"]').val(data.province);
-            $('input[name="city_update"]').val(data.city);
-            $('input[name="barangay_update"]').val(data.barangay);
+            $('input[name="region"]').val(data.region);
+            $('input[name="province"]').val(data.province);
+            $('input[name="city"]').val(data.city);
+            $('input[name="barangay"]').val(data.barangay);
             $('input[name="date_of_birth"]').val(data.date_of_birth);
             $('select[name="gender"]').val(data.gender);
             $('input[name="student_contact"]').val(data.student_contact);
-            $('input[name="last_school_attended"]').val(
-                data.last_school_attended
-            );
-            $("input[name='last_schoolyear_attended']")
-                .attr("disabled", data.isbalik_aral == "Yes" ? false : true)
-                .val(data.last_schoolyear_attended);
-            $('select[name="isbalik_aral"]').val(data.isbalik_aral);
+            // $('input[name="last_school_attended"]').val(
+            //     data.last_school_attended
+            // );
+            $('select[name="completer"]').val(data.completer);
             $('input[name="father_name"]').val(data.father_name);
             $('input[name="father_contact_no"]').val(data.father_contact_no);
             $('input[name="mother_name"]').val(data.mother_name);
