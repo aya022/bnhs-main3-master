@@ -29,19 +29,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if($this->app->environment('production')) {
-            URL::forceScheme('https');
-        }
-        $aydb = SchoolYear::where('status', 1)->first();
-        $sprofile = SchoolProfile::find(1);
-        Config::set('activeAY', $aydb);
-        View::share('activeAY', $aydb);
-        View::share('sprofile', $sprofile);
         // if($this->app->environment('production')) {
         //     URL::forceScheme('https');
         // }
         // $aydb = SchoolYear::where('status', 1)->first();
+        // $sprofile = SchoolProfile::find(1);
         // Config::set('activeAY', $aydb);
         // View::share('activeAY', $aydb);
+        // View::share('sprofile', $sprofile);
+        if($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
+        $aydb = SchoolYear::where('status', 1)->first();
+        Config::set('activeAY', $aydb);
+        View::share('activeAY', $aydb);
     }
 }

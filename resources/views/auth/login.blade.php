@@ -50,8 +50,7 @@
                                     </div>
                                     <div class="input-group mb-4"><span class="input-group-text">
                                         <i class="fas fa-lock"></i></span>
-                                        <input id="password" type="password" class="form-control" name="password"
-                                        tabindex="2" required placeholder="Password"  required autofocus>
+                                        <input id="password" type="password" class="form-control" name="password" tabindex="2" required placeholder="Password"  required autofocus>
                                         <div class="invalid-feedback">
                                             Please fill in your password
                                         </div>
