@@ -50,11 +50,11 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="mb-2">Password</label>
-                                    <input type="password" name="password" class="form-control">
+                                    <input type="password" name="password" class="form-control" required>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="mb-2">Confirm Password</label>
-                                    <input type="password" name="confirmPassword" class="form-control">
+                                    <input type="password" name="confirmPassword" class="form-control" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary btnSaveUser">Submit</button>
                                 <button type="button" class="btn btn-warning cancelUser">Cancel</button>

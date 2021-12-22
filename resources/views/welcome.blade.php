@@ -65,7 +65,7 @@
   <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
-        <div class="col-xl-7 col-lg-9 text-center">
+        <div class="col-xl-7 col-lg-9 col-md-6 col-sm-12 col-12 text-center">
           <div class="row">
             <div class="col-md-4 col-12 mb-3">
               <img src="{{ asset('image/logo/deped.png') }}" class="img-fluid rounded " style="height: 100px;">
@@ -78,13 +78,19 @@
             </div>
           </div>
           <h1>Balaogan National High School</h1>
-          <h2><em>&ldquo;Education's purpose is to replace an empty mind with an open one.&rdquo;</em></h2>
+          <h2><em>&ldquo;Education's purpose is to replace an empty mind with an open one.&rdquo; — <b>Malcolm S. Forbes</b></em></h2>
+          <div class="text-center">
+            <a href="{{ route('auth.login') }}" class="btn-get-started scrollto"><i class="ri-login-box-line" style="font-size: 14px;"></i>&nbsp;&nbsp;Login</a>
+            <a href="{{ route('form') }}" class="btn-get-started scrollto"><i class="ri-file-list-3-fill" style="font-size: 14px;"></i>&nbsp;&nbsp;Pre-enrollment</a>
+            <a href="{{ route('appoint') }}" class="btn-get-started scrollto"><i class="ri-calendar-check-fill" style="font-size: 14px;"></i>&nbsp;&nbsp;Appointment</a>
+          </div>
         </div>
-      </div>
-      <div class="text-center">
-        <a href="{{ route('auth.login') }}" class="btn-get-started scrollto"><i class="ri-login-box-line" style="font-size: 14px;"></i>&nbsp;&nbsp;Login</a>
-        <a href="{{ route('form') }}" class="btn-get-started scrollto"><i class="ri-file-list-3-fill" style="font-size: 14px;"></i>&nbsp;&nbsp;Pre-enrollment</a>
-        <a href="{{ route('appoint') }}" class="btn-get-started scrollto"><i class="ri-calendar-check-fill" style="font-size: 14px;"></i>&nbsp;&nbsp;Appointment</a>
+        <div class="col-xl-5 col-lg-3 col-md-6 col-sm-12 col-12">
+          {{-- <img src="{{ asset('image/logo/undraw_team_collaboration_re_ow29.svg') }}" class="img-fluid rounded " style="height: 400px;"> --}}
+          {{-- <img src="{{ asset('image/logo/undraw_collaborating_re_l43g.svg') }}" class="img-fluid rounded " style="height: 350px;"> --}}
+          {{-- <img src="{{ asset('image/logo/undraw_connection_re_lcud.svg') }}" class="img-fluid rounded " style="height: 350px;"> --}}
+          <img src="{{ asset('image/logo/undraw_typewriter_re_u9i2.svg') }}" class="img-fluid rounded " style="height: 350px;">
+        </div>
       </div>
     </div>
   </section><!-- End Hero -->
