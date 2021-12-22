@@ -7,7 +7,8 @@
           <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body pb-0 pl-1 pr-1">
-            <p class="pl-4"><i class="fas fa-fingerprint"></i> To see a larger version of the image, click on it.</p>
+            <p class="pl-4 alert alert-info"><i class="fas fa-fingerprint"></i> To see a larger version of the image, click on it.</p>
+            <p id="dateSub"></p>
             <input type="hidden" name="dirNow" value="{{ asset('') }}">
             <ul class="nav nav-tabs" id="myTab2" role="tablist">
                 <li class="nav-item">

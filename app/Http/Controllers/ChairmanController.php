@@ -11,6 +11,7 @@ use App\Models\Teacher;
 use App\Models\Strand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -238,6 +239,10 @@ class ChairmanController extends Controller
 
     // table list per curriculum
 
+    public function date() {
+        return $this->created_at->format('d.m.Y');
+    }
+
     public function tableList($class)
     {
         return response()->json(
@@ -256,8 +261,12 @@ class ChairmanController extends Controller
                     "roll_no",
                     "student_contact",
                     "section_name",
+                    // "students.created_at"->format('d.m.Y'),
+                    // "students.created_at",
+                    // "DATE(students.created_at)",
                     DB::raw("CONCAT(student_lastname,', ',student_firstname,' ', student_middlename) AS fullname")
                 )
+                    ->selectRaw("DATE(students.created_at) AS date")
                     ->join('students', 'enrollments.student_id', 'students.id')
                     ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
                     ->where('enrollments.curriculum', $class)

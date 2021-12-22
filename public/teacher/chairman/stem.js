@@ -102,6 +102,17 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
             },
         },
         { data: "state" },
+        // { data: "date"},
+        {
+            data:null,
+            render: function (data) {
+                if (data.req_psa == "" || data.req_psa == null || data.req_grade == "" || data.req_grade == null || data.req_goodmoral == "" || data.req_goodmoral == null) {
+                    return `--- No uploaded ---`;
+                } else {
+                    return data.date;
+                }
+            },
+        },
         {
             data: null,
             render: function (data) {
@@ -110,7 +121,7 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
                     return `
                         <button type="button" class="btn btn-dark text-white btn-sm pt-0 pb-0 pl-3 pr-3 btnRequirement" value="${data.fullname + "^" + data.req_grade + '^' + data.req_goodmoral + '^' + data.req_psa}"><i class="fas fa-eye"></i> View</button>
                     `;
-                    } else {
+                } else {
                     return '--- None ---';
                 }
             }
@@ -153,7 +164,8 @@ $(document).on('click', ".btnRequirement", function () {
     req_psa.setAttribute('src', dirNow + $(this).val().split("^")[3]);
     let req_goodmoral = document.getElementById("req_goodmoral");
     req_goodmoral.setAttribute('src', dirNow + $(this).val().split("^")[2]);
-    $("#viewRequirementTitle").text($(this).val().split("^")[0])
+    let datecreate = document.getElementById("dateSub");
+    $("#viewRequirementTitle").text($(this).val().split("^")[0]);
     $("#viewRequirementModal").modal("show")
 });
 
