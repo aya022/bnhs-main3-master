@@ -39,7 +39,7 @@ const studentTable = $("#studentTable").DataTable({
             render: function (data) {
                 return `
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-sm btn-danger text-white sdelete btnDelete_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}">Delete</button>
+                    <button type="button" class="btn btn-sm btn-danger text-white sdelete btnDelete_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}">Remove</button>
                     <button type="button" class="btn btn-sm btn-info  text-white sedit btnEdit_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}">Update</button>
                     ${active.filter(val => (val == data.id)) != '' ? `
                     <a href="student/view/record/${data.id}" class="btn btn-sm btn-secondary text-white vstudent btnView_${data.id} pt-0 pb-0 " id="${data.id}">View</a>

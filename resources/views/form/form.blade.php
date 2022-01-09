@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="{{ asset('css/coreuistyle/simplebar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/coreuistyle/style.css') }}">
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/selectric.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/toast/iziToast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/selectric.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/toast/iziToast.min.css') }}">
+  
 </head>
 
 <body>
@@ -79,8 +80,8 @@
                         <div class="row">
                             <div class="col-12 mt-3">
                                 <p style="font-size: 13px;" class="alert alert-warning shadow">
-                                    <b><i>- Please put N/A if not Applicable</i><br>
-                                    * Please fill out the all the required field and provide an accurate and complete information to avoid inconvinience.</b>
+                                    <b><i><i class="fas fa-exclamation-triangle"></i> Please put N/A if not Applicable.</i><br>
+                                    <i class="fas fa-exclamation-triangle"></i> Please fill out the all the required field and provide an accurate and complete information to avoid inconvinience.</b>
                                 </p>
                             </div>
                         </div>
@@ -267,7 +268,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-lg-8 mb-3">
-                                                        <label class="form-label">Guardian's Name <em><small>(Last Name, First Name Middle Name) <span class="text-warning">(* If not parent)</span></small></em></label>
+                                                        <label class="form-label">Guardian's Name <em><small>(Last Name, First Name Middle Name) <b>(* If not parent) </b></small></em></label>
                                                         <input type="text" class="form-control" name="guardian_name" style="text-transform: capitalize;">
                                                     </div>
                                                     <div class="form-group col-lg-4 mb-3">
@@ -282,8 +283,9 @@
                                             <div class="tab-pane fade" id="uploadReq" role="tabpanel" aria-labelledby="contact-tab2">
                                                 <!-- tab 3 -->
                                                 <div class="mt-3">
-                                                    <div class="alert alert-warning">
-                                                        <small>* <b>Note:</b> Upload requirements are optional. Once you have pre-enrolled and they will double-check your information and requirements before the student assign to a section, the office will notify you that you must submit all hard copies of your requirements as follow up requirements.</small><br>   
+                                                    <div class="alert alert-danger">
+                                                        {{-- <small>* <b>Note:</b> Upload requirements are optional. Once you have pre-enrolled and they will double-check your information and requirements before the student assign to a section, the office will notify you that you must submit all hard copies of your requirements as follow up requirements.</small><br>    --}}
+                                                        <small><i class="fas fa-exclamation-triangle"></i> <b>Note:</b> Upload requirements are optional. Once you have pre-enrolled and they will double-check your information and requirements before the student assign to a section.</small><br>   
                                                         <small><b>File format: ( png,jpeg,jpg )</b></small>
                                                     </div>
                                                         <div class="form-group mt-2">
@@ -345,6 +347,7 @@
 <script src="{{ asset('js/global.js') }}"></script>
 <script src="{{ asset('js/form.js') }}"></script>
 <script src="{{ asset('js/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
 <script>
     let  validate_fileupload =(fileName)=>

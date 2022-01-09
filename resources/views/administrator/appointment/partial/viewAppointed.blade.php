@@ -19,12 +19,12 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <p class="alert alert-info">
+                            {{-- <p class="alert alert-info">
                                 Reminders: <br>
                                     * Click "Send Email for All" button to send to all appointee a message through email. <br>
                                     * Click checkbox to select a specific person to send a message through email. <br>
                                     * Click "confirm" button to change the status from pending appointment to done. It will indicate that those person with a "done" status is done with their appointment.
-                                </p>
+                                </p> --}}
                             </p>
                         </div>
                     </div>
@@ -54,13 +54,13 @@
                         <textarea name="bodyEmail" class="summernote"  data-height="50" placeholder="Compose message here" required>
                             Subject: Your Appointment Is Confirmed <br><br>
 
-                            Hi [name],<br><br>
+                            Hi Appointee,<br><br>
 
                             Your [type of appointment] appointment is confirmed for [day of week], [month] [date]], [year]. <br><br>
 
                             Need to change your appointment?<br><br>
 
-                            To make changes to your appointment, click here, call 000-0000-000, or respond to this email.
+                            To make changes to your appointment, click here, call 09777924723, or respond to this email.
                         </textarea>
                     </div>
                     <div class="modal-footer">

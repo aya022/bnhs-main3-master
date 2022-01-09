@@ -38,6 +38,37 @@ $("#schooProfileForm").submit(function (e) {
         });
 });
 
+// deadline
+$("#dealineform").submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: "grade/deadline",
+        type: "POST",
+        data: new FormData(this),
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function () {
+            $("#btnSaveSP")
+                .html(
+                    `Saving ...
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>`
+                )
+                .attr("disabled", true);
+        },
+    })
+        .done(function (response) {
+            $("#btnSaveSP").html("Save Changes").attr("disabled", false);
+            getToast("success", "Successfully", "Added new Deadline");
+        })
+        .fail(function (jqxHR, textStatus, errorThrown) {
+            console.log(jqxHR, textStatus, errorThrown);
+            getToast("error", "Error", errorThrown);
+        });
+});
+
 let eStatus = (value, id) => {
     console.log(value, id);
     $.ajax({
@@ -132,3 +163,7 @@ $('input[name="grade_status"]').on('click', function () {
             getToast("error", "Error",  textStatus);
         });
 })
+
+
+let today = new Date().toISOString().slice(0, 16);
+$("input[name='from']").attr('min', today);

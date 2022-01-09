@@ -328,4 +328,11 @@ class AdminController extends Controller
 
         return response($request->active);
     }
+
+    public function deadline(Request $request) {
+        $data=SchoolProfile::find(1);
+       return $data->update([
+            'grade_deadline'=>$request->from
+        ]);
+    }
 }

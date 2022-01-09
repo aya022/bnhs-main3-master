@@ -38,7 +38,7 @@ const subjectTable = (level) => {
                         </td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" style="font-size:12px" class="btn btn-sm btn-primary text-white pb-2 pt-2 pl-3 pr-3 editSubject editSub_${val.id}" id="${val.id}">Update</button>
+                                <button type="button" style="font-size:12px" class="btn btn-sm btn-info text-white pb-2 pt-2 pl-3 pr-3 editSubject editSub_${val.id}" id="${val.id}">Update</button>
                             </div>
                         </td>
                     </tr>`;

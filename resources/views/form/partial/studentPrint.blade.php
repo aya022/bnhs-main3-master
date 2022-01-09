@@ -16,7 +16,7 @@
     </style>
 </head>
 
-<body style="background: white">
+<body style="background: white" onload="window.print()">
     <div class="container">
         <div class="row">
             <div class="col-2 text-center">

@@ -122,10 +122,7 @@ let myClassTable = (section_id, subject_id) => {
                 data: null,
                 orderable: false,
                 render: function (data) {
-                    myAverage = Math.round(
-                        (data.first + data.second + data.third + data.fourth) /
-                            4
-                    );
+                    myAverage = Math.round((data.first + data.second + data.third + data.fourth)/4);
                     $(".txtSubjectName").text(data.descriptive_title);
                     return `${
                         myAverage != 0

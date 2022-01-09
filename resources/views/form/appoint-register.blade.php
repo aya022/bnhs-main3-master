@@ -41,7 +41,7 @@
                         <div class="card-body p-4">
                             <h1>Appointment Form</h1>
                             <p class="text-medium-emphasis">Create your Appointment</p>
-                            <p class="text-medium-emphasis alert alert-warning"><b>* Make sure that the information input is correct specially the email to send you an massage notification for the update of the appointment.</b></p>
+                            <p class="text-medium-emphasis alert alert-warning"><b><i class="fas fa-exclamation-triangle"></i>  Make sure that the information input is correct specially the email to send you an massage notification for the update of the appointment.</b></p>
                             <form action="{{ route('appoint.save') }}" method="POST" autocomplete="off">
                                 @csrf
                                 <div class="form-group mb-3">

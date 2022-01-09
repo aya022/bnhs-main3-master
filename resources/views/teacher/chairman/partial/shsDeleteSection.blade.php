@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want delete this student pernamently?
+                Are you sure you want delete this pernamently?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger text-white pl-3 pr-3 deleteSection">Yes</button>

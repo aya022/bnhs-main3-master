@@ -61,7 +61,7 @@
         </div>
     </div>
 
-    @if ($data->grade_status)
+    @if (new DateTime() > new DateTime(date('Y-m-d h:i:s', strtotime($data->grade_deadline))))
         <div class="card">
             <div class="card-body">
             <div class="empty-state text-center mt-5" data-height="200">

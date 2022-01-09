@@ -24,16 +24,18 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div class="float-right">
-                                    <div class="form-row align-items-center mt-3 ml-4 pb-0">
-                                        <div class="col-2 my-1">
-                                            <select class="form-control mr-sm-2" id="selectedGL">
-                                                <option value="7">Grade 7</option>
-                                                <option value="8">Grade 8</option>
-                                                <option value="9">Grade 9</option>
-                                                <option value="10">Grade 10</option>
-                                            </select>
+                                    <div class="row">
+                                        <div class="col-3 my-1">
+                                            <div class="input-group mb-3">
+                                                <label class="input-group-text" for="inputGroupSelect01">Filter:</label>
+                                                <select class="form-select" id="selectedGL">
+                                                    <option value="7">Grade 7</option>
+                                                    <option value="8">Grade 8</option>
+                                                    <option value="9">Grade 9</option>
+                                                    <option value="10">Grade 10</option>
+                                                </select>
+                                            </div>
                                         </div>
-    
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -67,7 +69,7 @@
                                 <input type="hidden" name="id">
                                 <div class="form-group mb-3">
                                     <label>Grade Level</label>
-                                    <select name="grade_level" class="form-control" required>
+                                    <select name="grade_level" class="form-select" required>
                                         <option value="7">Grade 7</option>
                                         <option value="8">Grade 8</option>
                                         <option value="9">Grade 9</option>
@@ -84,7 +86,7 @@
                                 </div>
                                 <div class="form-group mb-3" id="forJHS">
                                     <label>Type</label>
-                                    <select name="subject_for" class="form-control">
+                                    <select name="subject_for" class="form-select">
                                         <option value="GENERAL">General</option>
                                         <option value="STEM">STEM - Science Technology Engineering and Mathematics</option>
                                         <option value="BEC">BEC - Basic Education Curriculum</option>
@@ -92,8 +94,8 @@
                                         <option value="SPJ">SPJ - Special Program Journalism</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-info btnSaveSubject text-white"><i class="fas fa-check icon"></i> Submit</button>
-                                <button type="submit" class="btn btn-warning cancelSubject text-white"><i class="fas fa-times icon"></i> Cancel</button>
+                                <button type="submit" class="btn btn-primary btnSaveSubject text-white">Submit</button>
+                                <button type="submit" class="btn btn-warning cancelSubject text-white">Cancel</button>
                             </form>
                         </div>
                     </div>

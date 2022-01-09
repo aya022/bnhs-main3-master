@@ -1,4 +1,4 @@
-{{-- <form id="enrollAssignForm">@csrf
+<form id="enrollAssignForm">@csrf
     <div class="modal fade" id="setSectionModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog  modal-dialog-top modal-md">
@@ -57,4 +57,4 @@
             </div>
         </div>
     </div>
-</form> --}}
+</form>

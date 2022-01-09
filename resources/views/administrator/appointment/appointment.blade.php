@@ -74,6 +74,7 @@
                         <p style="font-size: 20px;">Manage Event</p>
                     </div>
                     <div class="card-body">
+                        {{-- <h5 class="card-title">Manage Event</h5><hr> --}}
                         <div class="table-responsive">
                             <table class="table table-striped" id="tableHoliday" width="100%">
                                 <thead>

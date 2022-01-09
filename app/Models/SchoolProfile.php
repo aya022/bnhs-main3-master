@@ -16,7 +16,8 @@ class SchoolProfile extends Model
         'school_address',
         'school_logo',
         'school_enrollment_url',
-        'grade_status'
+        'grade_deadline',
+        'grade_status',
     ];
 
     protected $casts=[

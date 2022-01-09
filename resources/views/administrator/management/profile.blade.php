@@ -13,6 +13,68 @@
     }
 </style>
 
+<style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+    
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+    
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;
+    }
+</style>
+
 @section('content')
 <div class="modal fade" id="endModalOnlineENrollment" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="fillGradeInPreviousLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-top">
@@ -89,6 +151,56 @@
                 <div class="col-md-12 col-12">
                     <div class="card mb-3 shadow">
                         <div class="card-header">
+                            <p style="font-size: 20px;">Grade Input Deadline</p>
+                            <div class="card-header-action">
+                            
+                                @if ($data->grade_status)
+                                <span class="badge bg-warning badgeText">
+                                Disabled
+                                </span>      
+                                @else
+                                <span class="badge bg-success badgeText">
+                                    Enabled
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <p class="alert alert-warning">
+                                        <i class="fas fa-exclamation-triangle"></i> To protect the data from new changes, disable the teacher's grading sheet. <br> 
+                                        Set time and date for the deadline.
+                                    </p>
+                                    <form method="POST" id="dealineform">@csrf
+                                        <div class="form-group">
+                                            <label>Deadline</label>
+                                            <input type="datetime-local" name="from" class="form-control" required><br>
+                                        </div>
+                                        {{-- <div class="form-group">
+                                            <label>To</label>   
+                                            <input type="datetime-local" name="to" class="form-control" required><br>
+                                        </div> --}}
+                                        <input type="submit" name="btngrade" class="btn btn-primary">
+                                    </form>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-3 col-sm-12">
+                                    {{-- <label class="custom-switch my-3 mx-0">
+                                        <input type="checkbox" name="grade_status" class="form-control-lg switchMe" {{ $data->grade_status?'checked':'' }}>
+                                        <span class="custom-switch-indicator"></span>
+                                    </label> --}}
+
+                                    {{-- <label class="switch">
+                                        <input type="checkbox" name="grade_status" {{ $data->grade_status?'checked':'' }}>
+                                        <span class="slider round"></span>
+                                    </label> --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3 shadow">
+                        <div class="card-header">
                             <p style="font-size: 20px;">Manage Enrollment Status</p>
                         </div>
                         <div class="card-body pb-0">
@@ -133,39 +245,6 @@
                                     </div>
                                 </div> --}}
                             </form>
-                        </div>
-                    </div>
-
-                    <div class="card shadow">
-                        <div class="card-header">
-                            <p style="font-size: 20px;">Grade Input Status</p>
-                            <div class="card-header-action">
-                            
-                                @if ($data->grade_status)
-                                <span class="badge bg-warning badgeText">
-                                Disabled
-                                </span>      
-                                @else
-                                <span class="badge bg-success badgeText">
-                                    Enabled
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="form-group col-lg-9 col-md-9 col-sm-12">
-                                    <p class="alert alert-warning">
-                                        To protect the data from new changes, disable the teacher's grading sheet.
-                                    </p>
-                                </div>
-                                <div class="form-group col-lg-3 col-md-3 col-sm-12">
-                                    <label class="custom-switch my-3 mx-0">
-                                        <input type="checkbox" name="grade_status" class="form-control-lg shadow switchMe" {{ $data->grade_status?'checked':'' }}>
-                                        <span class="custom-switch-indicator"></span>
-                                    </label>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

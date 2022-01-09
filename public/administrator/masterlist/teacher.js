@@ -33,7 +33,7 @@ const table_teacher = $("#teacherTable").DataTable({
                 return `
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" style="font-size:13px" class="btn btn-sm text-white btn-info tedit btnEdit_${data.id}" id="${data.id}">Update</button>
-                        <button type="button" style="font-size:13px" class="btn btn-sm text-white btn-danger pl-3 pr-3 tdelete btnDelete_${data.id}" id="${data.id}">Delete</button>
+                        <button type="button" style="font-size:13px" class="btn btn-sm text-white btn-danger pl-3 pr-3 tdelete btnDelete_${data.id}" id="${data.id}">Remove</button>
                     </div>
                     `;
             },

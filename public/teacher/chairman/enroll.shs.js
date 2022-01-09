@@ -246,7 +246,7 @@ $(document).on("click", ".cEdit", function () {
             $("input[name='enroll_id']").val(response.id);
             $(".btnEdit_" + id).html(
                 response.section_id != ""
-                    ? `<i class="fas fa-edit"></i>`
+                    ? `Update`
                     : "Section"
             );
                 $("#setSectionModal").modal("show");

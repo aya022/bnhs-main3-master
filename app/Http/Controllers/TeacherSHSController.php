@@ -223,6 +223,16 @@ class TeacherSHSController extends Controller
             ->where('sections.school_year_id', Helper::activeAY()->id)
             ->groupBy('sections.section_name', 'sections.id', 'subjects.descriptive_title', 'newassigns.subject_id', 'newassigns.term')
             ->get()
+
+            // Assign::select('sections.section_name', 'sections.id', 'subjects.descriptive_title', 'assigns.subject_id', 'assigns.term')
+            //     ->join('teachers', 'assigns.teacher_id', 'teachers.id')
+            //     ->join('sections', 'assigns.section_id', 'sections.id')
+            //     ->join('subjects', 'assigns.subject_id', 'subjects.id')
+            //     ->join('school_years', 'assigns.school_year_id', 'school_years.id')
+            //     ->where('school_years.status', 1)
+            //     ->whereBetween('assigns.grade_level', [7, 10])
+            //     ->where('teachers.id', Auth::user()->id)
+            //     ->get()
         );
     
         // return response()->json(

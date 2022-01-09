@@ -10,7 +10,7 @@
     <div class="section-body">
         <div class="container-fluid">
             <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
-                <p style="font-size: 25px;"><i class="fas fa-tasks  color-font"></i>&nbsp;&nbsp;Manage Section and Subject</p>
+                <p style="font-size: 25px;"><i class="fas fa-tasks  color-font"></i>&nbsp;&nbsp;Manage Subject Teacher</p>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-12">

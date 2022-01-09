@@ -13,7 +13,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark">
                         <div class="callout-icon  ">
-                            <i class="fas fa-user-edit icon-color text-warning" style="font-size: 30px"></i>
+                            <i class="fas fa-user-edit icon-color text-info" style="font-size: 30px"></i>
                         </div>
                         <div class="callout-wrap">
                             <div class="callout-header">
@@ -28,7 +28,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark">
                         <div class="callout-icon">
-                            <i class="fas fa-user icon-color text-danger" style="font-size: 30px"></i>
+                            <i class="fas fa-user icon-color text-info" style="font-size: 30px"></i>
                         </div>
                         <div class="callout-wrap">
                             <div class="callout-header">
@@ -58,7 +58,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark">
                         <div class="callout-icon">
-                            <i class="fas fa-copy icon-color text-primary" style="font-size: 30px;"></i>
+                            <i class="fas fa-copy icon-color text-info" style="font-size: 30px;"></i>
                         </div>
                         <div class="callout-wrap">
                             <div class="callout-header">
@@ -142,7 +142,7 @@
                                 <li class="media mb-3">
                                         <!-- <img class=" width=" 50" src="{{ asset('image/avatar-1.png') }}" alt="product">
                                         -->
-                                    <i class="mr-3 rounded text-info fas fa-users text-warning" style="font-size: 30px"></i>
+                                    <i class="mr-3 rounded text-info fas fa-users text-info" style="font-size: 30px"></i>
                                     <div class="media-body">
                                         <div class="media-right my-2" style="font-size: 20px"><b>{{ $njhs }}</b></div>
                                         <div class="media-title">Number of Junior High</div>
@@ -151,7 +151,7 @@
                                     </div>
                                 </li><hr class="text-dark">
                                 <li class="media">
-                                    <i class="mr-3 rounded text-info fas fa-user-shield  text-danger" style="font-size: 30px"></i>
+                                    <i class="mr-3 rounded text-info fas fa-user-shield  text-info" style="font-size: 30px"></i>
                                     <div class="media-body">
                                         <div class="media-right my-2" style="font-size: 20px"><b>{{ $nshs }}</b></div>
                                         <div class="media-title">Number of Senior High</div>
