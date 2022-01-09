@@ -80,8 +80,8 @@
                         <div class="row">
                             <div class="col-12 mt-3">
                                 <p style="font-size: 13px;" class="alert alert-warning shadow">
-                                    <b><i><i class="fas fa-exclamation-triangle"></i> Please put N/A if not Applicable.</i><br>
-                                    <i class="fas fa-exclamation-triangle"></i> Please fill out the all the required field and provide an accurate and complete information to avoid inconvinience.</b>
+                                    <b><i class="fas fa-exclamation-triangle"></i> Please put N/A if not Applicable.<br>
+                                    <i class="fas fa-exclamation-triangle"></i> Please fill out all the required field and provide an accurate and complete information to avoid inconvenience.</b>
                                 </p>
                             </div>
                         </div>
