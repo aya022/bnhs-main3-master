@@ -70,7 +70,7 @@
                               <i class="mr-3 rounded fas fa-at mr-4 my-2 iconColor" style="font-size: 30px"></i>
                               <div class="media-body">
                                   <div class="media-right my-2" style="font-size: 25px"></div>
-                                  <div class="media-title">302016@deped.gov.ph</div>
+                                  <div class="media-title">raymartruiz14@gmail.com</div>
                                   <div class="text-muted text-small">Email
                                   </div>
                               </div>
@@ -87,9 +87,8 @@
                           <li class="media">
                               <div class="media-body">
                                   <div class="text-small" style="font-size: 15px;">
-                                      <b class="note text-danger">* Note:</b> Your data and requirements are being process, please wait for the further notice until the validation is complete.<br> 
-                                      Please download this enrollment for your inquries<br> 
-                                      Thank you!
+                                      <b class="note text-warning"><i class="fas fa-exclamation-triangle"></i></b> Your information and requirements are being process, please wait for the further notice until the validation is complete.<br> 
+                                      <b class="note text-warning"><i class="fas fa-exclamation-triangle"></i></b> Please download this enrollment as a proof of your admission. Thank you!
                                   </div>
                               </div>
                           </li>

@@ -268,7 +268,7 @@ $(".btnCancelSectionNow").on("click", function () {
     $("input[name='status_now']").val("");
 });
 
-$("#setSectionForm").submit(function (e) {
+$("#enrollAssignForm").submit(function (e) {
     e.preventDefault();
     $.ajax({
         url: "enrollee/section/set",

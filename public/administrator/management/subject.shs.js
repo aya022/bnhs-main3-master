@@ -22,25 +22,25 @@ let shsTable = $("#shsTable").DataTable({
                 return ''
             }
         },
-        {
-            data: null,
-            render: function (data) {
-                return `
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-sm btn-info text-white editSHS editSHS_${data.id} pt-2 pb-2  pl-4 pr-4" id="${data.id}">Update</button>
-                </div>`;
-            },
-        },
         // {
         //     data: null,
         //     render: function (data) {
         //         return `
         //         <div class="btn-group" role="group" aria-label="Basic example">
         //             <button type="button" class="btn btn-sm btn-info text-white editSHS editSHS_${data.id} pt-2 pb-2  pl-4 pr-4" id="${data.id}">Update</button>
-        //             <button type="button" class="btn btn-sm btn-danger text-white deleteSHS deleteSHS_${data.id}  pt-2 pb-2 pl-4 pr-4" id="${data.id}">Delete</button>
         //         </div>`;
         //     },
         // },
+        {
+            data: null,
+            render: function (data) {
+                return `
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-sm btn-info text-white editSHS editSHS_${data.id} pt-2 pb-2  pl-4 pr-4" id="${data.id}">Update</button>
+                    <button type="button" class="btn btn-sm btn-danger text-white deleteSHS deleteSHS_${data.id}  pt-2 pb-2 pl-4 pr-4" id="${data.id}">Delete</button>
+                </div>`;
+            },
+        },
     ],
 });
 // setTimeout(() => {

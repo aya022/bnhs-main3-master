@@ -80,7 +80,7 @@
           <h1>Balaogan National High School</h1>
           <h2><em>&ldquo;Education's purpose is to replace an empty mind with an open one.&rdquo; — <b>Malcolm S. Forbes</b></em></h2>
           <div class="text-center">
-            <a href="{{ route('auth.login') }}" class="btn-get-started scrollto"><i class="ri-login-box-line" style="font-size: 14px;"></i>&nbsp;&nbsp;Login</a>
+            {{-- <a href="{{ route('auth.login') }}" class="btn-get-started scrollto"><i class="ri-login-box-line" style="font-size: 14px;"></i>&nbsp;&nbsp;Login</a> --}}
             <a href="{{ route('form') }}" class="btn-get-started scrollto"><i class="ri-file-list-3-fill" style="font-size: 14px;"></i>&nbsp;&nbsp;Pre-enrollment</a>
             <a href="{{ route('appoint') }}" class="btn-get-started scrollto"><i class="ri-calendar-check-fill" style="font-size: 14px;"></i>&nbsp;&nbsp;Appointment</a>
           </div>

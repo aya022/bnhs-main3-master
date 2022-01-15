@@ -69,23 +69,38 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="card">
-                    <div class="card-header">
-                        <p style="font-size: 20px;">Manage Event</p>
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">Manage Event</h5><hr>
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="tableHoliday" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Description</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        {{-- <h5 class="card-title">Manage Event</h5><hr> --}}
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="tableHoliday" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+                    <div class="col-12 mb-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">Legend</h5><hr>
+                                <ul>
+                                    <li style="background-color: #db5a44" class="text-center text-white">Full Appointment</li>
+                                    <li></li>
+                                    <li style="background-color: #9999ff" class="text-center text-white">Event</li>
+                                    <li></li>
+                                    <li style="background-color: #66cc66" class="text-center text-white">Vacant Appointment</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

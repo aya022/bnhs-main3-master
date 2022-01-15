@@ -49,36 +49,58 @@ class StudentController extends Controller
     {
         if (isset($request->id)) {
             $dataret = Student::findOrFail($request->id);
-            return $this->update($request, $dataret);
-        } else {
-            return Student::Create([
-                'roll_no' => $request->roll_no,
-                // 'curriculum' => empty($dataret->curriculum) ? $request->curriculum : $dataret->curriculum,
-                'student_firstname' => $request->student_firstname,
-                'student_middlename' => $request->student_middlename,
-                'student_lastname' => $request->student_lastname,
-                'date_of_birth' => $request->date_of_birth,
-                'student_contact' => $request->student_contact,
-                'gender' => $request->gender,
-                'region' =>  $request->region,
-                'province' =>  $request->province,
-                'city' =>  $request->city,
-                'barangay' =>  $request->barangay,
-                // 'last_school_attended' => $request->last_school_attended,
-                // 'last_schoolyear_attended' => $request->last_schoolyear_attended,
-                // 'isbalik_aral' => !empty($request->last_schoolyear_attended) ? 'Yes' : 'No',
-                'mother_name' => $request->mother_name,
-                'mother_contact_no' => $request->mother_contact_no,
-                'father_name' => $request->father_name,
-                'father_contact_no' => $request->father_contact_no,
-                'guardian_name' => $request->guardian_name,
-                'guardian_contact_no' => $request->guardian_contact_no,
-                'username' => Helper::create_username($request->student_firstname, $request->student_lastname),
-                'orig_password' => Crypt::encrypt("bnhs"),
-                'password' => Hash::make("bnhs"),
-                'student_status' => null,
-            ]);
         }
+        Helper::myLog((empty($request->id)?'create':'update'),'student',$request->student_firstname);
+        return Student::updateOrCreate(['id' => $request->id], [
+            'roll_no' => $request->roll_no,
+            'student_firstname' => $request->student_firstname,
+            'student_middlename' => $request->student_middlename,
+            'student_lastname' => $request->student_lastname,
+            'date_of_birth' => $request->date_of_birth,
+            'student_contact' => $request->student_contact,
+            'gender' => $request->gender,
+            'region' => $request->region ?? $dataret->region,
+            'province' => $request->province ?? $dataret->province,
+            'city' => $request->city ?? $dataret->city,
+            'barangay' => $request->barangay ?? $dataret->barangay,
+            'mother_name' => $request->mother_name,
+            'mother_contact_no' => $request->mother_contact_no,
+            'father_name' => $request->father_name,
+            'father_contact_no' => $request->father_contact_no,
+            'guardian_name' => $request->guardian_name,
+            'guardian_contact_no' => $request->guardian_contact_no,
+            'username' => empty($dataret->username) ? Helper::create_username($request->student_firstname, $request->student_lastname) : $dataret->username,
+            'orig_password' => empty($dataret->orig_password) ? Crypt::encrypt("bnhs") : $dataret->orig_password,
+            'password' => empty($dataret->password) ? Hash::make("bnhs") : $dataret->password,
+            'student_status' => null,
+            'completer' => $request->completer,
+        ]);
+    }
+
+    public function profileUpdate(Request $request){
+        Student::whereId(auth()->user()->id)->update([
+            'student_firstname'=>$request->teacher_firstname,
+            'student_middlename'=>$request->teacher_middlename,
+            'student_lastname'=>$request->teacher_lastname,
+        ]);
+        return redirect()->back();
+    }
+
+    public function profileAccount(Request $request){
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required|required_with:confirm_password|same:confirm_password',
+            'confirm_password' => 'required'
+        ]);
+        
+        Student::whereId(auth()->user()->id)
+            ->update([
+                'username'=>$request->username,
+                'orig_password'=>Crypt::encrypt($request->password),
+                'password'=>Hash::make($request->password)
+            ]);
+
+        return redirect()->back();
     }
 
     public function update($request, $dataret)
@@ -139,7 +161,10 @@ class StudentController extends Controller
     public function list()
     {
         $data = array();
-        $sqlData = Student::select("*")->whereNotNull('orig_password')->get();
+        $sqlData = Student::select("*")
+        ->whereNotNull('orig_password')
+        ->where('completer', 'No')
+        ->get();
         foreach ($sqlData as $key => $value) {
             $arr = array();
             $arr['id'] = $value->id;
@@ -214,6 +239,36 @@ class StudentController extends Controller
 
     public function enrollment()
     {
+        // $dataArr = array();
+        // $ifexist = Enrollment::select('enrollments.enroll_status', 'enrollments.action_taken', 'section_name', 'enrollments.grade_level','enrollments.curriculum','enrollments.tracking_no')
+        //     ->join('students', 'enrollments.student_id', 'students.id')
+        //     ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
+        //     ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
+        //     ->where('school_years.status', 1)
+        //     ->where('students.id', Auth::user()->id)
+        //     ->first();
+        // if ($ifexist) {
+        //     $dataArr['status'] = $ifexist->enroll_status;
+        //     $dataArr['action_taken'] = $ifexist->action_taken;
+        //     $dataArr['section'] = $ifexist->section_name;
+        //     $dataArr['curriculum'] = $ifexist->curriculum;
+        //     $dataArr['tracking_no'] = $ifexist->tracking_no;
+        //     $dataArr['grade_level'] = 'Grade ' . $ifexist->grade_level;
+        // } else {
+        //     $putDataForPreviuosLevel=Enrollment::select('enrollments.created_at','enrollments.enroll_status', 'enrollments.action_taken', 'section_name', 'enrollments.grade_level','enrollments.curriculum')
+        //         ->join('students', 'enrollments.student_id', 'students.id')
+        //         ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
+        //         ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
+        //         // ->where('school_years.status', 1)
+        //         ->where('students.id', Auth::user()->id)
+        //         ->latest()->first();
+        //         $dataArr['curriculum'] = $putDataForPreviuosLevel->curriculum;
+        //         $dataArr['grade_level'] = 'Grade ' . $putDataForPreviuosLevel->grade_level;
+        //         $dataArr['status'] = 'Ongoing';
+        //         $dataArr['action_taken'] = 'None';
+        // }
+        // $eStatus = $this->enrollStatus();
+        // return view('student/enrollment', compact('eStatus', 'dataArr'));
         $dataArr = array();
         $ifexist = Enrollment::select('enrollments.enroll_status', 'enrollments.action_taken', 'section_name', 'enrollments.grade_level','enrollments.curriculum','enrollments.tracking_no')
             ->join('students', 'enrollments.student_id', 'students.id')
@@ -231,19 +286,21 @@ class StudentController extends Controller
             $dataArr['grade_level'] = 'Grade ' . $ifexist->grade_level;
         } else {
             $putDataForPreviuosLevel=Enrollment::select('enrollments.created_at','enrollments.enroll_status', 'enrollments.action_taken', 'section_name', 'enrollments.grade_level','enrollments.curriculum')
-                ->join('students', 'enrollments.student_id', 'students.id')
-                ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
-                ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
-                // ->where('school_years.status', 1)
-                ->where('students.id', Auth::user()->id)
-                ->latest()->first();
-                $dataArr['curriculum'] = $putDataForPreviuosLevel->curriculum;
-                $dataArr['grade_level'] = 'Grade ' . $putDataForPreviuosLevel->grade_level;
-                $dataArr['status'] = 'Ongoing';
-                $dataArr['action_taken'] = 'None';
+            ->join('students', 'enrollments.student_id', 'students.id')
+            ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
+            ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
+            // ->where('school_years.status', 1)
+            ->where('students.id', Auth::user()->id)
+            ->latest()->first();
+            $dataArr['curriculum'] = $putDataForPreviuosLevel->curriculum;
+            $dataArr['grade_level'] = 'Grade ' . $putDataForPreviuosLevel->grade_level;
+            // $dataArr['status'] = $putDataForPreviuosLevel->enroll_status;
+            $dataArr['status'] = 'Ongoing';
+            $dataArr['action_taken'] = 'None';
         }
         $eStatus = $this->enrollStatus();
-        return view('student/enrollment', compact('eStatus', 'dataArr'));
+        $enrollmentStatus = SchoolProfile::select('school_enrollment_url')->first();
+        return view('student/enrollment', compact('eStatus', 'dataArr','enrollmentStatus'));
     }
 
     public function checkSubjectBalance(Student $student)

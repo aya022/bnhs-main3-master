@@ -31,40 +31,38 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-6">
                                 <div class="card shadow">
-                                    <div class="card-header">
-                                        <p style="font-size: 20px;">INFORMATION</p>
-                                    </div>
                                     <div class="card-body">
+                                        <h5 class="card-title">INFORMATION</h5><hr>
                                         <ul class="list-group">
                                             <li
                                                 class="list-group-item d-flex justify-content-between align-items-center">
                                                 Enrollment Status:
                                                 <span class="badge @if ($dataArr['status']=='Enrolled')
-                                                bg-primary
+                                                bg-info text-white
                                                 @else
                                                 bg-warning
-                                                @endif  badge-pill">
+                                                @endif  bg-pill">
                                                     {{ $dataArr['status'] }}
                                                 </span>
                                             </li>
                                             <li
                                                 class="list-group-item d-flex justify-content-between align-items-center">
                                                 Section:
-                                                <span class="badge bg-primary badge-pill">
+                                                <span class="badge bg-info text-white bg-pill">
                                                     {{ $dataArr['section']??'None' }}
                                                 </span>
                                             </li>
                                             <li
                                                 class="list-group-item d-flex justify-content-between align-items-center">
                                                 Grade Level:
-                                                <span class="badge bg-primary badge-pill">
+                                                <span class="badge bg-info text-white bg-pill">
                                                     {{ $dataArr['grade_level']??'None' }}
                                                 </span>
                                             </li>
                                             <li
                                                 class="list-group-item d-flex justify-content-between align-items-center">
                                                 Action taken:
-                                                <span class="badge bg-primary badge-pill">
+                                                <span class="badge bg-info text-white bg-pill">
                                                     {{ $dataArr['action_taken']??'None' }}
                                                 </span>
                                             </li>
@@ -76,21 +74,18 @@
                             @if(Auth::user()->grade()->where('avg','<','75')->whereNull('remarks')->get()->count()!=0)
                             <div class="col-md-6 col-lg-6">
                                 <div class="card shadow">
-                                    <div class="card-header">
-                                        <p style="font-size: 20px;">OTHERS</p>
-                                    </div>
                                     <div class="card-body">
-
+                                        <h5 class="card-title">OTHERS</h5><hr>
                                         <p>
                                             Back Subject:
-                                            <span class="badge badge-danger">
+                                            <span class="badge bg-danger">
                                                 {{ Auth::user()->grade()->where('avg','<','75')->where('remarks')->get()->count() }}
                                             </span><br>
-                                            <small>* Note
-                                                <em> Must enroll in remedial classes for learning areas with
-                                                    failing mark
-                                                    and obtain at least 75 or higher</em>
-                                            </small>
+                                        </p>
+                                        <p class="alert alert-warning mb-3"><i class="fas fa-exclamation-triangle"></i> Note
+                                            <em> Must enroll in remedial classes for learning areas with
+                                                failing mark
+                                                and obtain at least 75 or higher</em>
                                         </p>
 
                                     </div>
@@ -100,17 +95,15 @@
 
                             <div class="col-md-6 col-lg-6">
                                 <div class="card shadow mt-3">
-                                    <div class="card-header">
-                                        <p style="font-size: 20px;">Enrollment</p>
-                                    </div>
                                     <div class="card-body">
+                                        <h5 class="card-title">Enrollment</h5><hr>
                                         <input type="hidden" name="student_id" value="{{ Auth::user()->id }}">
 
                                         @if ($dataArr['status']=='Pending')
                                         <button class="btn btn-primary" disabled>
                                             Waiting for Sectioning
                                         </button>
-                                        <p class="mt-3">Enrollment No. <span class="badge badge-warning badge-pill">{{ $dataArr['tracking_no'] }}</span></p>
+                                        <p class="mt-3">Enrollment No. <span class="badge bg-warning bg-pill">{{ $dataArr['tracking_no'] }}</span></p>
                                         <p class="mt-3 alert alert-warning"><b>Note: </b>If your enrollment is taking too long and the enrollment date has passed, you can contact the grade level chairman for your grade level to process your enrollment.</p>
                                         @elseif($dataArr['status']=='Enrolled')
                                         <div class="row">
@@ -157,10 +150,8 @@
                     </div>
                 </div>
                 <div class="card mb-5 shadow">
-                    <div class="card-header">
-                        <h5> <i class="fa fa-bell"></i>&nbsp;&nbsp;&nbsp;Reminders</h5>
-                    </div>
                     <div class="card-body">
+                        <h5 class="card-title"><i class="fa fa-bell"></i>&nbsp;&nbsp;&nbsp;Reminders</h5><hr>
                         <h6>Learner Promotion and Retention for Grades 7 to 10</h6>
                         <table class="table table-hover table-bordered">
                             <thead>

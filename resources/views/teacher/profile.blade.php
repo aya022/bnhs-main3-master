@@ -10,7 +10,7 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
-                            <p style="font-size: 20px;">Manage Profile</p>
+                            <p style="font-size: 20px;">Information</p>
                         </div>
                         <form id="studentForm">@csrf
                             <input type="hidden" name="id" value="{{ auth()->user()->id }}">
@@ -45,7 +45,7 @@
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
-                            <p style="font-size: 20px;">Username and Password</p>
+                            <p style="font-size: 20px;">Update Username and Password</p>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('teacher.profile.account') }}" method="POST">@csrf
@@ -67,7 +67,7 @@
                                     <input type="password" class="form-control" name="confirm_password">
                                     @error('confirm_password') <span class="text-danger"><b>{{ $message }}</b></span> @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                <button type="submit" class="btn btn-primary btn-block">Update</button>
                             </form>
                         </div>
                     </div>

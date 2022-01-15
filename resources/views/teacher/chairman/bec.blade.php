@@ -61,7 +61,7 @@
                                     <th width="10%">Balik Aral</th>
                                     <th width="10%">Action Taken</th>
                                     <th width="8%">State</th>
-                                    <th>Requirement date uploaded</th>
+                                    <th>Date uploaded</th>
                                     <th width="10%">Requirements</th>
                                     <th width="13%">Action</th>
                                 </tr>

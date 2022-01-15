@@ -97,8 +97,8 @@ class ChartController extends Controller
                 ->where('enroll_status', 'Enrolled')
                 ->where('school_year_id', Config::get('activeAY')->id)
                 ->pluck('grdT');
-            // array_push($array, ['stem' => $stem[0], 'bec' => $bec[0], 'spa' => $spa[0], 'spj' => $spj[0]]);
-            array_push($array, ['stem' => $stem[0], 'bec' => $bec[0], 'spa' => $spa[0], 'spj' => $spj[0], 'grdE' => $grdE[0], 'grdT' => $grdT[0]]);
+            array_push($array, ['stem' => $stem[0], 'bec' => $bec[0], 'spa' => $spa[0], 'spj' => $spj[0]]);
+            // array_push($array, ['stem' => $stem[0], 'bec' => $bec[0], 'spa' => $spa[0], 'spj' => $spj[0], 'grdE' => $grdE[0], 'grdT' => $grdT[0]]);
             return response()->json($array);
         } else {
             return false;

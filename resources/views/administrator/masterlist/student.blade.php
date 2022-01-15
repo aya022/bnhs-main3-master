@@ -7,6 +7,7 @@
 <!-- Modal -->
 @include('administrator/masterlist/partial/modal')
 @include('administrator/masterlist/partial/studentDeleteModal')
+@include('administrator/masterlist/partial/resetTeacherPass')
 {{-- Modal end --}}
 
 <div class="container-fluid">
@@ -49,7 +50,7 @@
         <div class="card">
             <div class="card-body mt-2">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="studentTable">
+                    <table class="table table-striped" id="studentTable" style="font-size: 13px;">
                         <thead>
                             <tr>
                                 <th>LRN</th>
@@ -59,7 +60,7 @@
                                 <th>Completer</th>
                                 <th>Username</th>
                                 {{-- <th>Passwsord</th> --}}
-                                <th width="10%">Action</th>
+                                <th width="15%">Action</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

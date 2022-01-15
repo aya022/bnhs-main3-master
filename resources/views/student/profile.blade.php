@@ -6,7 +6,7 @@
             <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
                 <p style="font-size: 25px;">
                     @if (!empty(auth()->user()->profile_image))
-                    <img class="img-fluid rounded-circle" src="{{ asset('image/profile/'.auth()->user()->profile_image) }}" alt="avatar" style="height: 110px; width: 100px;"> 
+                    <img class="img-fluid rounded-circle shadow" src="{{ asset('image/profile/'.auth()->user()->profile_image) }}" alt="avatar" style="height: 100px; width: 100px;"> 
                     @else
                     <img alt="image" src="{{ asset('image/avatar-1.png') }}" class="avatar-img rounded-circle" style="height: 100px; width: 100px;">
                     @endif
@@ -16,10 +16,8 @@
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-sm-12">
                     <div class="card mb-5">
-                        <div class="card-header">
-                            <p style="font-size: 20px;">My Info</p>
-                        </div>  
                         <div class="card-body">
+                            <h5 class="card-title">Information</h5><hr>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><b>LRN</b></span>
                                 <input type="text" class="form-control" placeholder="Username" value="{{ auth()->user()->roll_no }}" aria-label="Username" aria-describedby="basic-addon1" readonly>
@@ -140,30 +138,33 @@
 
                 <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
                     <div class="card mb-3">
-                        <div class="card-header">
-                            <p style="font-size: 20px;">Manage Account</p>
-                        </div>
                         {{-- @if (!empty(auth()->user()->profile_image))
                             <img alt="Profile pictur of {{ auth()->user()->student_firstname }}" src="{{ asset('image/profile/'.auth()->user()->profile_image) }}" class="img- card-img-top">
                             @else
                             <img alt="image" src="{{ asset('image/avatar-1.png') }}" class="rounded-circle profile-widget-picture">
                             @endif --}}
                         <div class="card-body">
-                            <form>
+                            <h5 class="card-title">Update Username and Password</h5><hr>
+                            <form action="{{ route('student.profile.account') }}" method="POST">@csrf
+                                {{-- <div class="form-group mb-3">
+                                    <span class="alert alert-success" name="mess">{{ $message }}</span>
+                                </div> --}}
                                 <div class="form-group mb-3">
                                     <label class="mb-2">Username</label>
-                                    <input type="text" class="form-control" value="{{ auth()->user()->username }}">
+                                    <input type="text" class="form-control" value="{{ auth()->user()->username }}" name="username">
+                                    @error('username') <span class="text-danger"><b>{{ $message }}</b></span> @enderror
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="mb-2">Password</label>
-                                    <input type="password" class="form-control" required>
+                                    <input type="password" class="form-control" name="password">
+                                    @error('password') <span class="text-danger"><b>{{ $message }}</b></span> @enderror
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="mb-2">Confirm Password</label>
-                                    <input type="password" class="form-control" required>
+                                    <input type="password" class="form-control" name="confirm_password">
+                                    @error('confirm_password') <span class="text-danger"><b>{{ $message }}</b></span> @enderror
                                 </div>
-
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                <button type="submit" class="btn btn-primary btn-block">Update</button>
                             </form>
                         </div>
                     </div>
@@ -171,15 +172,13 @@
                     {{-- upload picture --}}
 
                     <div class="card mb-3">
-                        <div class="card-header">
-                            <p style="font-size: 20px;">Upload Picture</p>
-                        </div>
                         <div class="card-body">
-                            <small class="text-danger">* make sure 1x1 picture</small>
+                            <h5 class="card-title">Upload Picture</h5><hr>
+                            <p class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> make sure 1x1 picture</p>
                             <form id="uploadImage">@csrf
                                 <div class="input-group mb-3">
                                     <div class="custom-file mb-3">
-                                        <input type="file" name="file" class="form-control" onchange="validate_fileupload(this.value);" required>
+                                        <input type="file" name="file" class="form-control" onchange="validate_fileupload(this.value);" accept="image/*" required>
                                         {{-- <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label> --}}
                                     </div>
                                     <div class="input-group-append mb-3">

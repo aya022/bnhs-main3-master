@@ -19,7 +19,7 @@
             </div> --}}
             <div class="input-group mb-3">
               <div class="input-group-text" id="btnGroupAddon">CSV Format: </div>
-              <input type="file" name="file" class="form-control" id="inputGroupFile02"  onchange="validate_fileupload(this.value);">
+              <input type="file" name="file" class="form-control" id="inputGroupFile02"  onchange="validate_fileupload(this.value);" accept=".csv,.xls,.xlsx" >
             </div>
             {{-- <p>
                 Download excel file format <a href="">here</a>

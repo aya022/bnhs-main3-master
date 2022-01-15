@@ -27,21 +27,20 @@
                                 {{-- start student details here --}}
                                     <div class="form-group mb-3">
                                         <label class="mb-2">Learning Reference Number</label>
-                                        <input type="text" name="roll_no" required class="form-control"
-                                            pattern="^[0-9]{12}$" onkeypress="return numberOnly(event)" maxlength="12">
+                                        <input type="text" name="roll_no" required class="form-control" onkeypress="return numberOnly(event)" maxlength="12">
                                     </div>
                                 <div class="row">
                                     <div class="form-group mb-3 col-md-4">
                                         <label class="mb-2">First name</label>
-                                        <input type="text" class="form-control" name="student_firstname" required>
+                                        <input type="text" class="form-control" name="student_firstname"  style="text-transform: capitalize;" required>
                                     </div>
                                     <div class="form-group mb-3 col-md-4">
                                         <label class="mb-2">Middle name</label>
-                                        <input type="text" class="form-control" name="student_middlename">
+                                        <input type="text" class="form-control" name="student_middlename"  style="text-transform: capitalize;">
                                     </div>
                                     <div class=" form-group mb-3 col-md-4">
                                         <label class="mb-2">Last name</label>
-                                        <input type="text" class="form-control" name="student_lastname" required>
+                                        <input type="text" class="form-control" name="student_lastname"  style="text-transform: capitalize;" required>
                                     </div>
                                 </div>
 
@@ -73,19 +72,19 @@
                                 <div class="row" id="forUpdate">
                                     <div class="form-group col-md-3 mb-3">
                                         <label class="mb-2">Region</label>
-                                        <input type="text" name="region" required class="form-control">
+                                        <input type="text" name="region"  style="text-transform: capitalize;" required class="form-control">
                                     </div>
                                     <div class="form-group col-md-3 mb-3">
                                         <label class="mb-2">Province</label>
-                                        <input type="text" name="province" required class="form-control">
+                                        <input type="text" name="province"  style="text-transform: capitalize;" required class="form-control">
                                     </div>
                                     <div class="form-group col-md-3 mb-3">
                                         <label class="mb-2">Town</label>
-                                        <input type="text" name="city" required class="form-control">
+                                        <input type="text" name="city"  style="text-transform: capitalize;" required class="form-control">
                                     </div>
                                     <div class="form-group col-md-3 mb-3">
                                         <label class="mb-2">Barangay</label>
-                                        <input type="text" name="barangay" required class="form-control">
+                                        <input type="text" name="barangay"  style="text-transform: capitalize;" required class="form-control">
                                     </div>
                                 </div>
 
@@ -105,7 +104,7 @@
                                     <div class="form-group mb-3 col-md-4">
                                         <label class="mb-2">Contact No.</label>
                                         <input type="text" class="form-control" name="student_contact"
-                                            pattern="^[0-9]{12}$" onkeypress="return numberOnly(event)" maxlength="12">
+                                            pattern="^[0-9]{11}$" onkeypress="return numberOnly(event)" maxlength="11">
                                     </div>
                                 </div>
 
@@ -132,34 +131,34 @@
                                 <div class="row">
                                     <div class="form-group mb-3 col-md-8">
                                         <label class="mb-2">Father's name</label>
-                                        <input type="text" class="form-control" name="father_name">
+                                        <input type="text" class="form-control" name="father_name"  style="text-transform: capitalize;">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="mb-2">Contact No.</label>
                                         <input type="text" class="form-control" name="father_contact_no"
-                                            pattern="^[0-9]{12}$" onkeypress="return numberOnly(event)" maxlength="12">
+                                            pattern="^[0-9]{11}$" onkeypress="return numberOnly(event)" maxlength="11">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group mb-3 col-md-8">
                                         <label class="mb-2">Mother's name</label>
-                                        <input type="text" class="form-control" name="mother_name">
+                                        <input type="text" class="form-control" name="mother_name"  style="text-transform: capitalize;">
                                     </div>
                                     <div class="form-group mb-3 col-md-4">
                                         <label class="mb-2">Contact No.</label>
                                         <input type="text" class="form-control" name="mother_contact_no"
-                                            pattern="^[0-9]{12}$" onkeypress="return numberOnly(event)" maxlength="12">
+                                            pattern="^[0-9]{11}$" onkeypress="return numberOnly(event)" maxlength="11">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group mb-3 col-md-8">
                                         <label class="mb-2">Guardian's name</label>
-                                        <input type="text" class="form-control" name="guardian_name">
+                                        <input type="text" class="form-control" name="guardian_name"  style="text-transform: capitalize;">
                                     </div>
                                     <div class="form-group mb-3 col-md-4">
                                         <label class="mb-2">Contact No.</label>
                                         <input type="text" class="form-control" name="guardian_contact_no"
-                                            pattern="^[0-9]{12}$" onkeypress="return numberOnly(event)" maxlength="12">
+                                            pattern="^[0-9]{11}$" onkeypress="return numberOnly(event)" maxlength="11">
                                     </div>
                                 </div>
                                 {{-- end parent details here --}}

@@ -15,8 +15,9 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-12">
                     <div class="card">
-                        <div class="card-header"><p style="font-size: 20px;">Manage Subject Teacher</p></div>
+                        {{-- <div class="card-header"><p style="font-size: 20px;">Manage Subject Teacher</p></div> --}}
                         <div class="card-body">
+                            <h5 class="card-title">Manage Subject Teacher</h5><hr>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="input-group mb-3">
@@ -58,8 +59,9 @@
                 </div><!-- col-lg-8 -->
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="card">
-                        <div class="card-header"><p style="font-size: 20px;">Add Subject Teacher</p></div>
-                        <div class="card-body m-1">
+                        {{-- <div class="card-header"><p style="font-size: 20px;">Add Subject Teacher</p></div> --}}
+                        <div class="card-body">
+                            <h5 class="card-title">Add Subject Teacher</h5><hr>
                             <form id="AssignForm">@csrf
                                 <input type="hidden" name="id">
                                 <div class="form-group mb-3">

@@ -23,34 +23,6 @@ const sectionTable = () => {
         .done(function (data) {
             if (data.length > 0) {
                 data.forEach((val) => {
-                    // htmlHold += `
-                    //     <tr>
-                    //         <td>
-                    //             ${i++}
-                    //         </td>
-                    //         <td>
-                    //             ${val.section_name}
-                    //         </td>
-                    //         <td>
-                    //             ${val.class_type}
-                    //         </td>
-                    //         <td>
-                    //             ${val.teacher.teacher_lastname},
-                    //             ${val.teacher.teacher_firstname}
-                    //             ${val.teacher.teacher_middlename}
-                    //         </td>
-                    //         <td>
-                    //             <div class="btn-group" role="group" aria-label="Basic example">
-                    //                 <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editSection editSec_${
-                    //                     val.id
-                    //                 }" id="${val.id}">Update</button>
-                    //                 <button type="button" style="font-size:13px" class="btn btn-sm btn-danger text-white pl-3 pr-3 deleteSection deleteSec_${
-                    //                     val.id
-                    //                 }" value="${val.id}">Delete</button>
-                    //             </div>
-                    //         </td>
-                    //     </tr>
-                    // `;
                     htmlHold += `
                         <tr>
                             <td>
@@ -69,13 +41,41 @@ const sectionTable = () => {
                             </td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" style="font-size:13px" class="btn btn-sm btn-primary text-white pl-3 pr-3 editSection editSec_${
+                                    <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editSection editSec_${
                                         val.id
                                     }" id="${val.id}">Update</button>
+                                    <button type="button" style="font-size:13px" class="btn btn-sm btn-danger text-white pl-3 pr-3 deleteSection deleteSec_${
+                                        val.id
+                                    }" value="${val.id}">Delete</button>
                                 </div>
                             </td>
                         </tr>
                     `;
+                    // htmlHold += `
+                    //     <tr>
+                    //         <td>
+                    //             ${i++}
+                    //         </td>
+                    //         <td>
+                    //             ${val.section_name}
+                    //         </td>
+                    //         <td>
+                    //             ${val.class_type}
+                    //         </td>
+                    //         <td>
+                    //             ${val.teacher.teacher_lastname},
+                    //             ${val.teacher.teacher_firstname}
+                    //             ${val.teacher.teacher_middlename}
+                    //         </td>
+                    //         <td>
+                    //             <div class="btn-group" role="group" aria-label="Basic example">
+                    //                 <button type="button" style="font-size:13px" class="btn btn-sm btn-primary text-white pl-3 pr-3 editSection editSec_${
+                    //                     val.id
+                    //                 }" id="${val.id}">Update</button>
+                    //             </div>
+                    //         </td>
+                    //     </tr>
+                    // `;
                 });
             } else {
                 htmlHold = `
@@ -122,6 +122,7 @@ $("#sectionForm").submit(function (e) {
                 document.getElementById("sectionForm").reset();
                 $("input[name='id']").val("");
                 $("select[name='teacher_id']").val(null).trigger("change");
+                getToast("success", "Successfully", "added new section");
             }
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
@@ -190,7 +191,7 @@ $(".deleteYes").on('click', function () {
     })
         .done(function (response) {
             $(".deleteYes").text("Yes");
-            getToast("success", "Success", "deleted one record");
+            getToast("success", "Successfully", "deleted one record");
             sectionTable($("#selectedGL").val());
             $(this).val('')
             $("#teacherDeleteModal").modal("hide");

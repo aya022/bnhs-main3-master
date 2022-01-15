@@ -1,20 +1,26 @@
 @extends('../layout/app')
 @section('content')
-<section class="section">
-    <div class="section-body">
-        <h2 class="section-title">Back Subject&nbsp;&nbsp;&nbsp;<span style="font-size: 15px"
-                class="txtSectionName badge badge-warning pt-1 pb-1"></span></h2>
+{{-- <section class="section"> --}}
+    <div class="container-fluid">
+        {{-- <h2 class="section-title">Back Subject&nbsp;&nbsp;&nbsp;<span style="font-size: 15px"
+                class="txtSectionName badge bg-warning pt-1 pb-1"></span></h2> --}}
+        <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
+            <p style="font-size: 25px;"><span class="fas fa-undo"></span>&nbsp;&nbsp; Back Subject
+                &nbsp;&nbsp;&nbsp;<span style="font-size: 15px"
+                class="txtSectionName badge bg-warning pt-1 pb-1"></span>
+            </p>
+        </div>
         <div class="col-lg-12">
-            <div class="card card-info">
+            <div class="card">
                 <div class="card-body pb-1">
                     <div class="">
                         <div class="float-left">
                             <span style="font-size: 15px"
-                                class="txtSubjectName badge badge-warning pt-1 pb-1 mt-2"></span>
+                                class="txtSubjectName badge bg-warning pt-1 pb-1 mt-2"></span>
                         </div>
                         {{-- table-responsive--}}
-                        <table class="table  table-bordered table-hover" id="myClassTable" style="font-size: 14px">
-                            <thead class="bg-info ">
+                        <table class="table  table-bordered table-hover" id="myClassTable" style="font-size: 15px">
+                            <thead class="bg-dark ">
                                 <tr>
                                     <th class="text-white">Subjects</th>
                                     <th class="text-center text-white">Final Rating</th>
@@ -36,7 +42,7 @@
             </div>
         </div>
     </div>
-</section>
+{{-- </section> --}}
 @endsection
 @section('moreJs')
 <script src="{{ asset('student/backsubject.js') }}"></script>

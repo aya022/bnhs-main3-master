@@ -76,20 +76,22 @@
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-3">
                             <div class="card">
-                                <div class="card-header">
+                                {{-- <div class="card-header">
                                     <h6>Population by Sex</h6>
-                                </div>
+                                </div> --}}
                                 <div class="card-body">
+                                    <h5 class="card-title">Population by Sex</h5><hr>
                                     <canvas id="myChart4"></canvas>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-12 col-sm-12 mb-3">
                             <div class="card">
-                                <div class="card-header">
+                                {{-- <div class="card-header">
                                     <h6>Population by Curriculum</h6>
-                                </div>
+                                </div> --}}
                                 <div class="card-body">
+                                    <h5 class="card-title">Population by Year Level</h5><hr>
                                     <canvas id="myChart3"></canvas>
                                 </div>
                             </div>
@@ -107,7 +109,7 @@
                     </div>
                 </div>
     
-                <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+                {{-- <div class="col-lg-4 col-md-12 col-12 col-sm-12"> --}}
                     {{-- <div class="card mb-3">
                         <div class="card-header">
                             <h4>Appointment Today</h4>
@@ -133,11 +135,9 @@
                         </div>
                     </div> --}}
                     <!--  -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h6>No. of Population by Category</h6>
-                        </div>
+                    {{-- <div class="card">
                         <div class="card-body pb-0">
+                            <h5 class="card-title">Population by Category</h5><hr>
                             <ul class="list-unstyled list-unstyled-border">
                                 <li class="media mb-3">
                                         <!-- <img class=" width=" 50" src="{{ asset('image/avatar-1.png') }}" alt="product">
@@ -160,6 +160,34 @@
                                     </div>
                                 </li>
                             </ul>
+                        </div>
+                    </div> --}}
+                {{-- </div> --}}
+                <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+                    <div class="card">
+                        {{-- <div class="card-header">
+                            <h4>Appointment Today</h4>
+                        </div> --}}
+                        <div class="card-body">
+                            <h5 class="card-title">Appointment Today</h5><hr>
+                            <ul class="list-unstyled list-unstyled-border">
+                                @forelse ($appointies as $item)
+                                <li class="media">
+                                    <div class="media-body">
+                                        <div class="float-right">{{  $item->created_at->diffForHumans() }}</div>
+                                        <div class="media-title">{{ $item->fullname }}</div>
+                                        <span class="text-small text-muted">{{ $item->address }}</span>
+                                    </div><hr>
+                                </li>
+                                @empty
+                                <div class="media-body text-center">No data available</div>
+                                @endforelse
+                            </ul>
+                            <div class="text-center pt-1 pb-1">
+                                <a href="{{ route('admin.appointment') }}" class="btn btn-primary btn-sm btn-round">
+                                    View All
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

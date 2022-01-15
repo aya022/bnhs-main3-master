@@ -7,6 +7,7 @@ use App\Models\SchoolYear;
 use App\Models\SchoolProfile;
 use App\Models\Announcement;
 use App\Models\Student;
+use App\Models\Section;
 use App\Models\Assign;
 use App\Models\Enrollment;
 use App\Models\Grade;
@@ -35,7 +36,17 @@ class TeacherController extends Controller
             ->where('teachers.id', Auth::user()->id)
             ->groupBy('sections.section_name')
             ->get();
-        return view('teacher/dashboard', compact('sectionAvail','post'));
+
+        $enrollTotal = Enrollment::join('school_years', 'enrollments.school_year_id', 'school_years.id')
+            ->where('school_years.status', 1)
+            ->whereIn('enroll_status', ['Pending', 'Enrolled'])->get()->count();
+        $studentTotal = Student::get()->count();
+        $teacherTotal = Teacher::get()->count();
+        $ectionTotal = Section::join('school_years', 'sections.school_year_id', 'school_years.id')
+            ->where('school_years.status', 1)
+            ->get()
+            ->count();
+        return view('teacher/dashboard', compact('sectionAvail','post', 'enrollTotal', 'studentTotal', 'teacherTotal', 'ectionTotal'));
     }
 
     public function classMonitor()
@@ -148,6 +159,7 @@ class TeacherController extends Controller
         if (isset($request->id)) {
             $dataret = Teacher::findOrFail($request->id);
         }
+        
         $dataPass = Helper::create_password(7);
         return Teacher::updateorcreate(['id' => $request->id], [
             'teacher_firstname' => Str::title($request->firstname),

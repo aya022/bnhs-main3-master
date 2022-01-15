@@ -22,6 +22,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('purpose');
             $table->string('set_date', 20);
             $table->string('appoint_no', 10);
+            $table->string('appointee', 20);
             $table->boolean('status');
             $table->timestamps();
         });

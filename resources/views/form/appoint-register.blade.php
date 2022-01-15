@@ -41,40 +41,40 @@
                         <div class="card-body p-4">
                             <h1>Appointment Form</h1>
                             <p class="text-medium-emphasis">Create your Appointment</p>
-                            <p class="text-medium-emphasis alert alert-warning"><b><i class="fas fa-exclamation-triangle"></i>  Make sure that the information input is correct specially the email to send you an massage notification for the update of the appointment.</b></p>
+                            <p class="text-medium-emphasis alert alert-warning"><i class="fas fa-exclamation-triangle"></i>  Make sure that the information input is correct specially the contact no. and email to send you an massage notification for the update of the appointment.</p>
                             <form action="{{ route('appoint.save') }}" method="POST" autocomplete="off">
                                 @csrf
                                 <div class="form-group mb-3">
-                                    <label class="mb-2"><b class="text-danger">*</b> Full name</label>
+                                    <label class="mb-2"> Full Name <b class="text-danger">*</b></label>
                                     <input type="text" class="form-control" name="fullname" style="text-transform: capitalize;" required autofocus>
                                 </div>
                                 <div class="row">
                                     <div class="form-group mb-3 col-md-6">
-                                        <label class="mb-2"><b class="text-danger">*</b>Contact no.</label>
+                                        <label class="mb-2"> Contact No. <b class="text-danger">*</b></label>
                                         <input type="text" class="form-control"
                                             name="contact_no" required onkeypress="return numberOnly(event)"
                                             maxlength="11">
                                     </div>
                                     <div class="form-group mb-3 col-md-6">
-                                        <label class="mb-2"><b class="text-danger">*</b> Email</label>
+                                        <label class="mb-2"> Email <b class="text-danger">*</b></label>
                                         <input type="email" class="form-control" name="email" required>
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label class="mb-2"><b class="text-danger">*</b> Address</label>
+                                    <label class="mb-2"> Address <b class="text-danger">*</b></label>
                                     <input type="text" class="form-control" name="address" style="text-transform: capitalize;" required>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label class="mb-2"><b class="text-danger">*</b>Select Date</label>
+                                    <label class="mb-2">Select Date <b class="text-danger">*</b></label>
                                     <input class="form-control datepicker" name="set_date" required>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label class="mb-2"><b class="text-danger">*</b>Purpose</label>
+                                    <label class="mb-2">Purpose <b class="text-danger">*</b></label>
                                     <textarea class="form-control" data-height="80" name="purpose"
                                     style="text-transform: capitalize;" required></textarea>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label class="mb-2"><b class="text-danger">*</b>Type of Appointee</label>
+                                    <label class="mb-2">Type of Appointee <b class="text-danger">*</b></label>
                                     <select name="appointee" class="form-select" required>
                                         <option value="">Choose...</option>
                                         <option value="Parent">Parent</option>

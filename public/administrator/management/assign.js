@@ -176,31 +176,6 @@ let loadTableSchedule = (section) => {
     })
         .done(function (data) {
             if (data.length > 0) {
-                data.forEach((val) => {
-                    loadTableHTML += `
-                    <tr>
-                        <td>
-                        ${i++}
-                        <td>
-                        ${val.subject_code}
-                        </td>
-                        <td>
-                        ${val.descriptive_title}
-                        </td>
-                        </td>
-                        <td>
-                        ${val.teacher_lastname},
-                        ${val.teacher_firstname} 
-                        ${val.teacher_middlename}
-                        </td>
-                        <td>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editAssign editA${val.id}" id="${val.id}">Update</button>
-                            </div>
-                        </td>
-                    </tr>
-                    `;
-                });
                 // data.forEach((val) => {
                 //     loadTableHTML += `
                 //     <tr>
@@ -221,12 +196,37 @@ let loadTableSchedule = (section) => {
                 //         <td>
                 //             <div class="btn-group" role="group" aria-label="Basic example">
                 //                 <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editAssign editA${val.id}" id="${val.id}">Update</button>
-                //                 <button type="button" style="font-size:13px" class="btn btn-sm btn-danger text-white pl-2 pr-2 deleteAssign deleteA${val.id}" id="${val.id}">Delete</button>
                 //             </div>
                 //         </td>
                 //     </tr>
                 //     `;
                 // });
+                data.forEach((val) => {
+                    loadTableHTML += `
+                    <tr>
+                        <td>
+                        ${i++}
+                        <td>
+                        ${val.subject_code}
+                        </td>
+                        <td>
+                        ${val.descriptive_title}
+                        </td>
+                        </td>
+                        <td>
+                        ${val.teacher_lastname},
+                        ${val.teacher_firstname} 
+                        ${val.teacher_middlename}
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white pl-3 pr-3 editAssign editA${val.id}" id="${val.id}">Update</button>
+                                <button type="button" style="font-size:13px" class="btn btn-sm btn-danger text-white pl-2 pr-2 deleteAssign deleteA${val.id}" id="${val.id}">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    `;
+                });
             } else {
                 loadTableHTML = `
                 <tr>

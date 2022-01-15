@@ -14,6 +14,9 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-12">
                     <div class="card">
+                        <div class="card-header">
+                            <p style="font-size: 20px;">Manage Account</p>
+                        </div>
                         <div class="card-body">
                             <div class="table responsive">
                                 <table class="table">
@@ -37,6 +40,9 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="card">
+                        <div class="card-header">
+                            <p style="font-size: 20px;">Add new admin</p>
+                        </div>
                         <div class="card-body">
                             <form class="mt-3" id="userForm">@csrf
                                 <input type="hidden" name="id">

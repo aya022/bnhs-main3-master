@@ -16,15 +16,15 @@ $("#studentForm").submit(function (e) {
                     </div>`
                 )
                 .attr("disabled", true);
-            getToast("success", "Successfully", "saved!");
-        },
-    })
+            },
+        })
         .done(function (data) {
+            getToast("success", "Successfully", "saved!");
             $(".btnSave").html("Save").attr("disabled", false);
-            document.getElementById("studentForm").reset();
+            // document.getElementById("studentForm").reset();
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
-            getToast("error", "Error", errorThrown);
+            getToast("error", "Eror", errorThrown);
             $(".btnSave").html("Save").attr("disabled", false);
         });
 });
@@ -54,6 +54,7 @@ $("#uploadImage").submit(function (e) {
             $(".btnImageSave").html("Upload").attr("disabled", false);
             location.reload();
             document.getElementById("uploadImage").reset();
+            getToast("success", "Successfully", "saved!");
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             getToast("error", "Error", errorThrown);

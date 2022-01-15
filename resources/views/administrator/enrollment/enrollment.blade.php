@@ -100,15 +100,15 @@
                                 @endforeach
                             </select>
                             <select class="form-select" name="selectedGL">
-                                {{-- <option value="all">All</option> --}}
+                                <option value="all">All</option>
                                 <option value="7">Grade 7</option>
                                 <option value="8">Grade 8</option>
                                 <option value="9">Grade 9</option>
                                 <option value="10">Grade 10</option>
-                                <option value="11_1st">Grade 11 First Sem</option>
+                                {{-- <option value="11_1st">Grade 11 First Sem</option>
                                 <option value="11_2nd">Grade 11 Second Sem</option>
                                 <option value="12_1st">Grade 12 First Sem</option>
-                                <option value="12_2nd">Grade 12 Second Sem</option>
+                                <option value="12_2nd">Grade 12 Second Sem</option> --}}
                             </select>
                             <button class="btn btn-primary" id="button-addon2" name="btnExport" type="button"><i class="fas fa-file-export"></i>&nbsp;&nbsp;Export Enrollee</button>
                         </div>
@@ -129,7 +129,7 @@
                                     <th>LRN</th>
                                     <th>Student name</th>
                                     <th>Curriculum | Strand</th>
-                                    <th>Semester</th>
+                                    {{-- <th>Semester</th> --}}
                                     <th>Section</th>
                                     <th>Status</th>
                                     <th>Balik Aral</th>

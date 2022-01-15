@@ -18,10 +18,11 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-12 mb-4">
                     <div class="card">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <p style="font-size: 20px;">Manage Subject for Junior High</p>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
+                            <h5 class="card-title">Manage Subject for Junior High</h5><hr>
                             <div class="table-responsive">
                                 <div class="float-right">
                                     <div class="row">
@@ -63,8 +64,9 @@
                 
                 <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
                     <div class="card">
-                        <div class="card-header"><p style="font-size: 20px;">Add Junior High School Subject</p></div>
-                        <div class="card-body m-1">
+                        {{-- <div class="card-header"><p style="font-size: 20px;">Add Junior High School Subject</p></div> --}}
+                        <div class="card-body">
+                            <h5 class="card-title">Add Junior High School Subject</h5><hr>
                             <form id="subjectForm" method="POST">@csrf
                                 <input type="hidden" name="id">
                                 <div class="form-group mb-3">
@@ -105,7 +107,7 @@
             <!-- SHS -->
             
             <div class="card mb-4">
-                <div class="card-header">
+                {{-- <div class="card-header">
                     <div class="row justify-content-between">
                         <div class="col-4">
                             <p style="font-size: 20px;">Manage Subject for Senior High</p>
@@ -114,8 +116,18 @@
                             <button class="btn btn-primary add_subject"><i class="fas fa-plus-circle icon"></i> Add SH Subject</button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="card-body">
+                    <h5 class="card-title">
+                        <div class="row justify-content-between">
+                            <div class="col-4">
+                                <p style="font-size: 20px;">Manage Subject for Senior High</p>
+                            </div>
+                            <div class="col-2 float-right">
+                                <button class="btn btn-primary add_subject"><i class="fas fa-plus-circle icon"></i> Add SH Subject</button>
+                            </div>
+                        </div>
+                    </h5><hr>
                     <div class="table-responsive">
                         <div class="col-4">
                             <div class="input-group mb-3 mt-3">
@@ -135,7 +147,7 @@
                                 </select>
                             </div>
                         </div>
-                        <table class="table table-striped" id="shsTable">
+                        <table class="table table-striped" id="shsTable"  style="font-size: 13px">
                             <thead>
                                 <tr>
                                     <th>Type</th>

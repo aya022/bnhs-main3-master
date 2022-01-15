@@ -32,33 +32,33 @@ let school_year_Table = $("#school_year_Table").DataTable({
                         `;
             },
         },
-        {
-            data: null,
-            render: function (data) {
-                return `<label class="custom-switch">
-                            <input type="radio" name="semester" class="custom-switch-input clickSemester"
-                            value="1st" ${
-                                data.first_term == "Yes" ? "checked" : ""
-                            }
-                ${data.status != "1" ? "disabled" : ""}>
-                            <span class="custom-switch-indicator"></span>
-                        </label>
-                        `;
-            },
-        },
-        {
-            data: null,
-            render: function (data) {
-                return `<label class="custom-switch">
-                            <input type="radio" name="semester" class="custom-switch-input clickSemester"
-                            value="2nd" ${
-                                data.second_term == "Yes" ? "checked" : ""
-                            }  ${data.status != "1" ? "disabled" : ""}>
-                            <span class="custom-switch-indicator"></span>
-                        </label>
-                        `;
-            },
-        },
+        // {
+        //     data: null,
+        //     render: function (data) {
+        //         return `<label class="custom-switch">
+        //                     <input type="radio" name="semester" class="custom-switch-input clickSemester"
+        //                     value="1st" ${
+        //                         data.first_term == "Yes" ? "checked" : ""
+        //                     }
+        //         ${data.status != "1" ? "disabled" : ""}>
+        //                     <span class="custom-switch-indicator"></span>
+        //                 </label>
+        //                 `;
+        //     },
+        // },
+        // {
+        //     data: null,
+        //     render: function (data) {
+        //         return `<label class="custom-switch">
+        //                     <input type="radio" name="semester" class="custom-switch-input clickSemester"
+        //                     value="2nd" ${
+        //                         data.second_term == "Yes" ? "checked" : ""
+        //                     }  ${data.status != "1" ? "disabled" : ""}>
+        //                     <span class="custom-switch-indicator"></span>
+        //                 </label>
+        //                 `;
+        //     },
+        // },
         {
             data: null,
             render: function (data) {
@@ -66,38 +66,64 @@ let school_year_Table = $("#school_year_Table").DataTable({
                     return `
                     <button type="button" class="btn btn-sm btn-info text-white editAY edit_${data.id}  pl-5 pr-5" id="${data.id}">Update</button>`;
                 } else {
-                    // return `
-                    //         <div class="btn-group" role="group" aria-label="Basic example">
-                    //             <button type="button" class="btn btn-sm btn-info text-white pl-3 pr-3 editAY edit_${data.id}" id="${data.id}">Update</button>
-                    //             <button type="button" class="btn btn-sm btn-danger text-white deleteAY delete_${data.id}" id="${data.id}">Delete</button>
-                    //         </div>
-                    //     `;
                     return `
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button type="button" class="btn btn-sm btn-info text-white pl-3 pr-3 editAY edit_${data.id}" id="${data.id}">Update</button>
+                                <button type="button" class="btn btn-sm btn-danger text-white deleteAY delete_${data.id}" id="${data.id}">Delete</button>
                             </div>
                         `;
+                    // return `
+                    //         <div class="btn-group" role="group" aria-label="Basic example">
+                    //             <button type="button" class="btn btn-sm btn-info text-white pl-3 pr-3 editAY edit_${data.id}" id="${data.id}">Update</button>
+                    //         </div>
+                    //     `;
                 }
             },
         },
     ],
 });
+
 $(document).on("click", ".switchMe", function () {
-    let data = $(this).attr("id");
-    $.ajax({
-        url: "academic-year/change/" + data,
+    let id = $(this).attr("id");
+    $("input:radio").each(function(){
+        $(this).prop('checked',$(this).val()==0?false:true)
+    });
+   $("#syModal").modal("show")
+   $(".confirmYes").val(id)
+});
+
+$(".confirmYes").on('click',function(){
+     $.ajax({
+        url: "academic-year/change/" + $(this).val(),
         type: "POST",
         data: { _token: $('input[name="_token"]').val() },
     })
-        .done(function (response) {
-            getToast("success", "Success", "Activated Academic Year </b>");
-            school_year_Table.ajax.reload();
-        })
-        .fail(function (jqxHR, textStatus, errorThrown) {
-            console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
-        });
-});
+    .done(function (response) {
+        getToast("success", "Success", "Activated Academic Year </b>");
+        school_year_Table.ajax.reload();
+         $("#syModal").modal("hide")
+    })
+    .fail(function (jqxHR, textStatus, errorThrown) {
+        console.log(jqxHR, textStatus, errorThrown);
+        getToast("error", "Eror", errorThrown);
+    });
+})
+// $(document).on("click", ".switchMe", function () {
+//     let data = $(this).attr("id");
+//     $.ajax({
+//         url: "academic-year/change/" + data,
+//         type: "POST",
+//         data: { _token: $('input[name="_token"]').val() },
+//     })
+//         .done(function (response) {
+//             getToast("success", "Successfully", "Activated Academic Year </b>");
+//             school_year_Table.ajax.reload();
+//         })
+//         .fail(function (jqxHR, textStatus, errorThrown) {
+//             console.log(jqxHR, textStatus, errorThrown);
+//             getToast("error", "Eror", errorThrown);
+//         });
+// });
 
 $(document).on("click", "input[name='semester']", function () {
     let data = $(this).val();
@@ -151,12 +177,17 @@ $(document).on("click", ".editAY", function () {
 
 $(document).on("click", ".deleteAY", function () {
     let id = $(this).attr("id");
+    $(".deleteYes").val(id)
+    $("#teacherDeleteModal").modal("show")
+});
+
+$(".deleteYes").on("click", function () {
     $.ajax({
-        url: "academic-year/delete/" + id,
+        url: "academic-year/delete/" + $(this).val(),
         type: "DELETE",
         data: { _token: $('input[name="_token"]').val() },
         beforeSend: function () {
-            $(".delete_" + id).html(`Deleting..
+            $(".deleteYes").html(`Deleting..
             <div class="spinner-border spinner-border-sm" role="status">
                 <span class="sr-only">Loading...</span>
             </div>`);
@@ -164,23 +195,51 @@ $(document).on("click", ".deleteAY", function () {
     })
         .done(function (response) {
             if (response) {
-                getToast("success", "Success", "deleted one record");
+                getToast("success", "Successfully", "deleted one record");
             }
             school_year_Table.ajax.reload();
 
-            $(".delete_" + id).html("Delete");
+            $(".deleteYes").html(`<i class="far fa-trash-alt"></i>`);
+            $("#teacherDeleteModal").modal("hide")
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            $(".delete_" + id).html("Delete");
-            // getToast("error", "Eror", errorThrown);
-            getToast(
-                "warning",
-                "Warning",
-                "Sorry this Academic Year can't be deleted"
-            );
+            $(".deleteYes").html(`<i class="far fa-trash-alt"></i>`);
+            getToast("error", "Eror", errorThrown);
         });
-});
+})
+// $(document).on("click", ".deleteAY", function () {
+//     let id = $(this).attr("id");
+//     $.ajax({
+//         url: "academic-year/delete/" + id,
+//         type: "DELETE",
+//         data: { _token: $('input[name="_token"]').val() },
+//         beforeSend: function () {
+//             $(".delete_" + id).html(`Deleting..
+//             <div class="spinner-border spinner-border-sm" role="status">
+//                 <span class="sr-only">Loading...</span>
+//             </div>`);
+//         },
+//     })
+//         .done(function (response) {
+//             if (response) {
+//                 getToast("success", "Success", "deleted one record");
+//             }
+//             school_year_Table.ajax.reload();
+
+//             $(".delete_" + id).html("Delete");
+//         })
+//         .fail(function (jqxHR, textStatus, errorThrown) {
+//             console.log(jqxHR, textStatus, errorThrown);
+//             $(".delete_" + id).html("Delete");
+//             // getToast("error", "Eror", errorThrown);
+//             getToast(
+//                 "warning",
+//                 "Warning",
+//                 "Sorry this Academic Year can't be deleted"
+//             );
+//         });
+// });
 
 $("#schoolYearForm").submit(function (e) {
     e.preventDefault();
@@ -205,11 +264,7 @@ $("#schoolYearForm").submit(function (e) {
         .done(function (response) {
             $("#btnSaveAY").html("Save").attr("disabled", false);
 
-            getToast(
-                "success",
-                "Success",
-                "Successfully added new academic year"
-            );
+            getToast("success", "Successfully", "added new academic year");
             school_year_Table.ajax.reload();
             $("input[name='from']").val("");
             $("input[name='to']").val("");
@@ -218,7 +273,7 @@ $("#schoolYearForm").submit(function (e) {
         .fail(function (jqxHR, textStatus, errorThrown) {
             4;
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });
 

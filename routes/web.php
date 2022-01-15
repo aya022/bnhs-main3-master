@@ -84,6 +84,9 @@ Route::middleware(['auth:web', 'preventBackHistory'])->name('admin.')->prefix('a
     // Route::get('announcement/edit/{announcement}', [AnnouncementController::class, 'edit']);
     // Route::delete('announcement/delete/{announcement}', [AnnouncementController::class, 'destroy']);
 
+    //reset password
+    Route::get('reset/password/{id}/{type}', [AdminController::class, 'resetPassword']);
+
     // chart
     Route::get('chart/population/by/level', [ChartController::class, 'populationByGradeLevel']);
     Route::get('chart/population/by/sex', [ChartController::class, 'populationBySex']);
@@ -115,6 +118,8 @@ Route::middleware(['auth:web', 'preventBackHistory'])->name('admin.')->prefix('a
     Route::get('teacher', [AdminController::class, 'teacher'])->name('teacher');
     Route::get('teacher/list', [TeacherController::class, 'list']);
     Route::post('teacher/store', [TeacherController::class, 'store']);
+    Route::post('teacher/import', [ImportController::class, 'importTeacher']);
+    Route::get('teacher/import/template', [ImportController::class, 'importTeacherTemplate'])->name('download.template.teacher');
     Route::get('teacher/edit/{teacher}', [TeacherController::class, 'edit']);
     Route::delete('teacher/delete/{id}', [TeacherController::class, 'delete']);
     Route::get('print/report', [TeacherController::class, 'printTeacher']);
@@ -175,14 +180,21 @@ Route::middleware(['auth:web', 'preventBackHistory'])->name('admin.')->prefix('a
 
 
     // schedule
-    Route::get('schedule', [AdminController::class, 'schedule'])->name('schedule');
-    Route::get('search/type/{type}', [ScheduleController::class, 'searchType']);
-    Route::get('search/section/{grade_level}', [ScheduleController::class, 'searchBySection']);
-    Route::get('search/subject/{section}', [ScheduleController::class, 'searchBySubject']);
-    Route::post('schedule/save', [ScheduleController::class, 'store']);
-    Route::get('schedule/list/{type}/{value}', [ScheduleController::class, 'list']);
-    Route::delete('schedule/delete/{schedule}', [ScheduleController::class, 'destroy']);
-    Route::get('schedule/edit/{schedule}', [ScheduleController::class, 'edit']);
+    // Route::get('schedule', [AdminController::class, 'schedule'])->name('schedule');
+    // Route::get('search/type/{type}', [ScheduleController::class, 'searchType']);
+    // Route::get('search/section/{grade_level}', [ScheduleController::class, 'searchBySection']);
+    // Route::get('search/subject/{section}', [ScheduleController::class, 'searchBySubject']);
+    // Route::post('schedule/save', [ScheduleController::class, 'store']);
+    // Route::get('schedule/list/{type}/{value}', [ScheduleController::class, 'list']);
+    // Route::delete('schedule/delete/{schedule}', [ScheduleController::class, 'destroy']);
+    // Route::get('schedule/edit/{schedule}', [ScheduleController::class, 'edit']);
+
+    //Grading
+    Route::get('grading', [AdminController::class, 'grading'])->name('grading');
+    Route::get('grading/search/section/{grade_level}', [GradeController::class, 'searchBySection']);
+    Route::get('grading/search/subject/{section}', [GradeController::class, 'searchBySubject']);
+    Route::get('grading/load/all/student/{section}/{subject}', [GradeController::class, 'loadMyStudent']);
+    Route::post('grading/student/now', [GradeController::class, 'gradeStudentNow']);
 
     // Assign
     Route::get('assign', [AdminController::class, 'assign'])->name('assign');
@@ -193,6 +205,7 @@ Route::middleware(['auth:web', 'preventBackHistory'])->name('admin.')->prefix('a
     Route::get('assign/list/{section}', [AssignController::class, 'list']);
     Route::delete('assign/delete/{assign}', [AssignController::class, 'destroy']);
     Route::get('assign/edit/{assign}', [AssignController::class, 'edit']);
+
     // chairman route
     Route::get('chairman', [AdminController::class, 'chairman'])->name('chairman');
     Route::get('chairman/list', [ChairmanController::class, 'list']);
@@ -390,7 +403,11 @@ Route::middleware(['auth:teacher', 'preventBackHistory'])->name('teacher.')->pre
 
 Route::middleware(['auth:student', 'preventBackHistory'])->name('student.')->prefix('student/my/')->group(function () {
     Route::get('dashboard', [StudentController::class, 'dashboard'])->name('dashboard');
+
     Route::get('profile', [StudentController::class, 'profile'])->name('profile');
+    Route::post('profile/update', [StudentController::class, 'profileUpdate'])->name('profile.update');
+    Route::post('profile/account', [StudentController::class, 'profileAccount'])->name('profile.account');
+
     Route::post('student/save', [StudentController::class, 'store']);
     Route::post('student/profile/save', [StudentController::class, 'storeProfileImage']);
     Route::get('grade', [StudentController::class, 'grade'])->name('grade');

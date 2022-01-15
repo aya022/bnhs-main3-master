@@ -49,7 +49,7 @@ $("#dealineform").submit(function (e) {
         contentType: false,
         cache: false,
         beforeSend: function () {
-            $("#btnSaveSP")
+            $("#btngrade")
                 .html(
                     `Saving ...
             <div class="spinner-border spinner-border-sm" role="status">
@@ -60,7 +60,7 @@ $("#dealineform").submit(function (e) {
         },
     })
         .done(function (response) {
-            $("#btnSaveSP").html("Save Changes").attr("disabled", false);
+            $("#btngrade").html("Save Changes").attr("disabled", false);
             getToast("success", "Successfully", "Added new Deadline");
         })
         .fail(function (jqxHR, textStatus, errorThrown) {

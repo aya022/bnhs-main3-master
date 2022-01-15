@@ -107,7 +107,7 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
             data:null,
             render: function (data) {
                 if (data.req_psa == "" || data.req_psa == null || data.req_grade == "" || data.req_grade == null || data.req_goodmoral == "" || data.req_goodmoral == null) {
-                    return `--- No uploaded ---`;
+                    return `--- No upload ---`;
                 } else {
                     return data.date;
                 }
@@ -135,20 +135,30 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
                     </button>
                     `;
                 } else {
-                    return `<button type="button" class="btn btn-sm btn-danger text-white cDelete btnDelete_${
-                        data.id
-                    }  pt-0 pb-0 pl-2 pr-2" id="${data.id}">
-                    Delete
-                    </button>&nbsp;
+                    return `
                     ${
                         data.enroll_status == "Enrolled"
-                            ? ` <button type="button" class="btn btn-sm btn-primary cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
-                        Update
-                </button>`
+                            ? ` <button type="button" class="btn btn-sm btn-info text-white cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
+                                Update
+                        </button>`
                             : ` <button type="button" class="btn btn-sm btn-info text-white cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
-                    Section
-                </button>`
+                            Section
+                        </button>`
                     }`;
+                    // return `<button type="button" class="btn btn-sm btn-danger text-white cDelete btnDelete_${
+                    //     data.id
+                    // }  pt-0 pb-0 pl-2 pr-2" id="${data.id}">
+                    // Delete
+                    // </button>&nbsp;
+                    // ${
+                    //     data.enroll_status == "Enrolled"
+                    //         ? ` <button type="button" class="btn btn-sm btn-info text-white cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
+                    //             Update
+                    //     </button>`
+                    //         : ` <button type="button" class="btn btn-sm btn-info text-white cEdit btnEdit_${data.id} pt-0 pb-0 pl-3 pr-3 " id="${data.id}">
+                    //         Section
+                    //     </button>`
+                    // }`;
                 }
             },
         },

@@ -10,10 +10,11 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-12">
                     <div class="card">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <p style="font-size: 20px;">Manage Track and Strand</p>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
+                            <h5 class="card-title">Manage Track and Strand</h5><hr>
                             <div class="table-responsive">
                                 <table class="table table-striped" style="font-size: 13px">
                                     <thead>
@@ -21,7 +22,7 @@
                                             <th>#</th>
                                             <th>Strand and Specialization</th>
                                             <th>Description</th>
-                                            <th width="20%">Action</th>
+                                            <th width="20%" class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="strandTable">
@@ -36,10 +37,11 @@
                 </div><!-- col-lg-8 -->
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="card">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <p style="font-size: 20px;">Add Track and Strand</p>
-                        </div>
-                        <div class="card-body m-1">
+                        </div> --}}
+                        <div class="card-body">
+                            <h5 class="card-title">Add Track and Strand</h5><hr>
                             <form id="strandForm">@csrf
                                 <input type="hidden" name="id" id="idForStrand">
                                 <div class="form-group mb-3">

@@ -30,16 +30,55 @@ const table_teacher = $("#teacherTable").DataTable({
         {
             data: null,
             render: function (data) {
+                let fullname =  data.teacher_lastname+", "+data.teacher_firstname+" "+data.teacher_middlename
                 return `
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" style="font-size:13px" class="btn btn-sm text-white btn-info tedit btnEdit_${data.id}" id="${data.id}">Update</button>
                         <button type="button" style="font-size:13px" class="btn btn-sm text-white btn-danger pl-3 pr-3 tdelete btnDelete_${data.id}" id="${data.id}">Remove</button>
+                        <button type="button" class="btn btn-sm btn-warning text-white treset btnReset_${data.id} pl-3 pr-3" value="${fullname}" id="${data.id}">Reset</button>
                     </div>
                     `;
             },
         },
     ],
 });
+
+// reset password
+$(document).on('click', '.treset', function (e) {
+    e.preventDefault();
+    $(".yesReset").show().text('Yes, reset password');
+    let fullname = $(this).val();
+    let id = $(this).attr("id");
+    $(".showName").text(fullname)
+    $(".textshow").text("Are you sure you want to reset password?")
+    $("#resetModal").modal("show")
+    $(".yesReset").val(id);
+})
+
+$(".yesReset").on('click', function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: `reset/password/${$(this).val()}/teacher`,
+        type: "GET",
+        beforeSend: function () {
+            $(".yesReset").html(`Restting... 
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>`);
+        },
+    })
+        .done(function (response) {
+            $(".yesReset").hide();
+            getToast("success", "Successfully", "Reset password");
+            $(".textshow").html(`New password: <b>${response}</b>`)
+        })
+        .fail(function (jqxHR, textStatus, errorThrown) {
+            $(".yesReset").show().text('Yes, reset password');
+            console.log(jqxHR, textStatus, errorThrown);
+            getToast("error", "Eror", errorThrown);
+        });
+})
+// end
 
 $("#teacherForm").submit(function (e) {
     e.preventDefault();
@@ -182,3 +221,36 @@ $("#printTeacher").on("click", function () {
         h: 800,
     });
 });
+
+// export
+$("#btnModalExport").on('click', function () {
+    $("#importModal").modal("show")
+})
+
+$("#importForm").submit(function (e) {
+    e.preventDefault()
+  
+    $.ajax({
+        url: "teacher/import",
+        type: "POST",
+        data: new FormData(this),
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function () {
+            $(".btnImportNow").html(
+                `Importing...  <div class="spinner-border spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+                    `
+            );
+        },
+    }).done(function (data) {
+        $('input[name="file"]').val("")
+        $(".btnImportNow").html('Import')
+        table_teacher.ajax.reload();
+    }).fail(function (jqxHR, textStatus, errorThrown) {
+         $(".btnImportNow").html('Import')
+        console.log(jqxHR, textStatus, errorThrown);
+    });
+})

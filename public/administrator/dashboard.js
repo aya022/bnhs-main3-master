@@ -121,20 +121,21 @@ let populationByCurriculum = (data) => {
         data: {
             datasets: [
                 {
-                    data: [data.stem, data.bec, data.spa, data.spj, data.grdE, data.grdT],
+                    // data: [data.stem, data.bec, data.spa, data.spj, data.grdE, data.grdT],
+                    data: [data.stem, data.bec, data.spa, data.spj],
                     backgroundColor: [
                         "#ff9933",
                         "#ff5050",
                         "#00e673",
                         "#6666ff",
-                        "#00ccff",
-                        "#cc33ff",
+                        // "#00ccff",
+                        // "#cc33ff",
                     ],
                     label: "Dataset 1",
                 },
             ],
-            // labels: ["GRADE-7", "GRADE-8", "GRADE-9", "GRADE-10"],
-            labels: ["GRADE 7", "GRADE 8", "GRADE 9", "GRADE 10", "GRADE 11", "GRADE 12"],
+            labels: ["GRADE-7", "GRADE-8", "GRADE-9", "GRADE-10"],
+            // labels: ["GRADE 7", "GRADE 8", "GRADE 9", "GRADE 10", "GRADE 11", "GRADE 12"],
         },
         options: {
             responsive: true,

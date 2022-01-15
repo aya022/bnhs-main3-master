@@ -11,7 +11,7 @@
                 <i class="far fa-edit nav-icon"></i> Grade</a>
         </li>
         @endif
-        @if (Auth::user()->backsubject()->exists())
+        {{-- @if (Auth::user()->backsubject()->exists())
         <li class="nav-item {{ request()->is('student/my/backsubject')?'active':'' }}"><a class="nav-link" href="{{ route('student.backsubject') }}">
                 <i class="far fa-bookmark nav-icon"></i>
                 <span>Back Subject
@@ -22,7 +22,21 @@
                 @endif
         </span></a>
         </li>
+        @endif --}}
+        @if (Auth::user()->grade()->where('avg','<','75')->orWhere('remarks','Passed')->whereNull('remarks')->where('is_retained','No')->exists())
+
+        <li class="nav-item {{ request()->is('student/my/backsubject')?'active':'' }}"><a class="nav-link" href="{{ route('student.backsubject') }}">
+                <span class="nav-icon fas fa-undo"></span> 
+                        Back Subject &nbsp;&nbsp;
+                        @if(Auth::user()->grade()->where('avg','<','75')->whereNull('remarks')->where('is_retained','No')->get()->count()!=0)
+                        <small class="badge bg-danger badge-sm" style="font-size: 10px">
+                                {{ Auth::user()->grade()->where('avg','<','75')->whereNull('remarks')->where('is_retained','No')->get()->count() }}
+                        </small>
+                        @endif
+                </a>
+        </li>
         @endif
+
         @if (Auth::user()->completer==="No") 
         <li class="nav-item {{ request()->is('student/my/enrollment')?'active':'' }}"><a class="nav-link" href="{{ route('student.enrollment') }}">
                 <i class="fas fa-newspaper nav-icon"></i> Enrollment Status</a>

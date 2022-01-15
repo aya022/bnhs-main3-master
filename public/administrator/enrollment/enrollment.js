@@ -23,22 +23,22 @@ let enrollmentTable = (level, year) => {
                         : data.strand;
                 },
             },
-            {
-                data: null,
-                render: function (data) {
-                    switch (data.term) {
-                        case "1st":
-                            return `<span class="badge bg-primary">Fist Sem</span>`;
-                            break;
-                        case "2nd":
-                            return `<span class="badge bg-info">Second Sem</span>`;
-                            break;
-                        default:
-                            return '-----------';
-                            break;
-                    }
-                },
-            },
+            // {
+            //     data: null,
+            //     render: function (data) {
+            //         switch (data.term) {
+            //             case "1st":
+            //                 return `<span class="badge bg-primary">Fist Sem</span>`;
+            //                 break;
+            //             case "2nd":
+            //                 return `<span class="badge bg-info">Second Sem</span>`;
+            //                 break;
+            //             default:
+            //                 return '-----------';
+            //                 break;
+            //         }
+            //     },
+            // },
             { data: "section_name" },
             {
                 data: null,
@@ -75,6 +75,7 @@ let enrollmentTable = (level, year) => {
 };
 
 enrollmentTable("all",$("select[name='school_year_id']").val());
+
 $("select[name='selectedGL']").on("change", function () {
     enrollmentTable($(this).val(),$("select[name='school_year_id']").val());
 });

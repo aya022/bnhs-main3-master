@@ -16,10 +16,11 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-12">
                     <div class="card">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <p style="font-size: 20px;">Manage Class</p>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
+                            <h5 class="card-title">Manage Section</h5><hr>
                             <div class="float-right">
                                 <div class="form-row align-items-center mt-3 ml-4 pb-0">
                                     <div class="col-3 ">
@@ -60,10 +61,11 @@
                 </div><!-- col-lg-8 -->
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="card">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <p style="font-size: 20px;">Add Class and Adviser</p>
-                        </div>
-                        <div class="card-body m-1">
+                        </div> --}}
+                        <div class="card-body">
+                            <h5 class="card-title">Add Section and Adviser</h5><hr>
                             <form id="sectionForm">@csrf
                                 <input type="hidden" name="id">
                                 <div class="form-group mb-3">

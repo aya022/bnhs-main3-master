@@ -58,9 +58,9 @@
                                     <div class="card-icon">
                                         <i class="fas fa-user"></i>
                                     </div>
-                                    <img src="{{ asset('image/logo/deped.png') }}" class="img-fluid " style="height: 50px;">
-                                    <img src="{{ asset('image/logo/bn.jpg') }}" class="img-fluid rounded-circle" style="height: 50px;">
-                                    <img src="{{ asset('image/logo/dept.png') }}" class="img-fluid " style="height: 50px;">
+                                    <img src="{{ asset('image/logo/deped.png') }}" class="img-fluid mb-3" style="height: 50px;">
+                                    <img src="{{ asset('image/logo/bn.jpg') }}" class="img-fluid rounded-circle mb-3" style="height: 50px;">
+                                    <img src="{{ asset('image/logo/dept.png') }}" class="img-fluid mb-3" style="height: 50px;">
                                     <h4><small style="font-size: 15px">No.</small> {{$appointment->appoint_no }}</h4>
                                     <div class="card-description mt-3"><h3>Appointment Slip</h3></div>
                                 </div>
@@ -72,14 +72,14 @@
                                             <div class="media-body">
                                                 <div class="media-right my-2" style="font-size: 25px"></div>
                                                 <div class="media-title">{{$appointment->fullname }}</div>
-                                                <div class="text-muted text-small">Fullname</div>
+                                                <div class="text-muted text-small"  style="text-transform: capitalize;">Fullname</div>
                                             </div>
                                         </li>
                                         <li class="media">
                                             <i class="mr-3 rounded fas fa-map-marked-alt mr-4 my-2" style="font-size: 23px"></i>
                                             <div class="media-body">
                                                 <div class="media-right my-2" style="font-size: 25px"></div>
-                                                <div class="media-title">{{$appointment->address }}</div>
+                                                <div class="media-title" style="text-transform: capitalize;">{{$appointment->address }}</div>
                                                 <div class="text-muted text-small">Address
                                                 </div>
                                             </div>

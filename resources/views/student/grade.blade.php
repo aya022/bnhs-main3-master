@@ -28,7 +28,7 @@
                     <span style="font-size: 15px" class="txtSubjectName badge bg-warning pt-1 pb-1 mt-2"></span>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover" id="myClassTable" style="font-size: 14px">
+                    <table class="table table-bordered table-hover" id="myClassTable" style="font-size: 16px">
                         <thead class="bg-dark ">
                             <tr>
                                 <th class="text-white">Teacher</th>

@@ -4,22 +4,23 @@
 @endsection
 @section('content')
 @include('teacher/partial/assignDeleteModal')
-<section class="section">
+{{-- <section class="section"> --}}
     <input type="hidden" name="current_curriculum" value="BEC">
-    <div class="section-body">
+    {{-- <div class="section-body"> --}}
         <div class="container-fluid">
             <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
                 <p style="font-size: 25px;"><i class="far fa-bookmark"></i>&nbsp;&nbsp;Assign Subject</p>
             </div>
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-lg-8 col-md-8 col-sm-12">
                     <div class="row sectionListAvailable mb-3"></div>
-                    <div class="card card-info">
-                        <div class="card-header">
-                            <p style=""></p>
-                        </div>
+                    <div class="card">
+                        {{-- <div class="card-header">
+                            <p style="font-size: 20px;">Manage Subject Teacher</p>
+                        </div> --}}
                         <div class="card-body">
-                            <div class="row">
+                            <h5 class="card-title">Manage Subject Teacher</h5><hr>
+                            {{-- <div class="row">
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <form id="assignForm">@csrf
                                         <input type="hidden" name="id">
@@ -50,7 +51,7 @@
                                             value="{{  Auth::user()->section_info->grade_level }}">
                                     </form>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
@@ -68,10 +69,51 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-4 col-12">
+                    <div class="card">
+                        {{-- <div class="card-header">
+                            <p style="font-size: 20px;">Add Subject Teacher</p>
+                        </div> --}}
+                        <div class="card-body">
+                            <h5 class="card-title">Add Subject Teacher</h5><hr>
+                            <form id="assignForm">@csrf
+                                <input type="hidden" name="id">
+                                <div class="row">
+                                    <div class="col-12 form-group mb-3">
+                                        <label class="mb-2">Subject</label>
+                                        <select class="form-select" aria-label="Default select example" name="subject_id">
+                                            <option value="">Choose subject</option>
+                                            @foreach ($subjects as $item)
+                                            <option value="{{ $item->id }}">[ {{ $item->subject_code }} ] -
+                                                {{ $item->descriptive_title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-12 form-group mb-3">
+                                        <label class="mb-2">Teacher</label>
+                                        <select class="form-select" aria-label="Default select example" name="teacher_id">
+                                            <option value="">Choose subject teacher</option>
+                                            @foreach ($teachers as $item)
+                                            <option value="{{ $item->id }}">{{ $item->teacher_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-12 form-group mb-3">
+                                        <button class="btn btn-primary text-white pl-4 pr-4 assignBtn rounded" type="submit">Save</button>
+                                        <button class="btn btn-warning text-white pl-4 pr-4 cancelNow rounded" type="submit">Cancel</button>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="section_id" value="{{  Auth::user()->section_info->id }}">
+                                <input type="hidden" name="grade_level" value="{{  Auth::user()->section_info->grade_level }}">
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div><!-- row -->
         </div><!-- container -->
-    </div><!-- section-body -->
-</section>
+    {{-- </div><!-- section-body --> --}}
+{{-- </section> --}}
 @endsection
 
 @section('moreJs')

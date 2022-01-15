@@ -398,7 +398,7 @@ let myEvent = () => {
 
             if (event.className == "full") {
                 $('td[data-date="' + dateString + '"]')
-                    .css("background", "#ffa366")
+                    .css("background", "#db5a44")
                     .css("color", "white")
                     .css("border-top", "1px solid white")
                     .css("border-right", "1px solid white");

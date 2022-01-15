@@ -18,17 +18,19 @@
 @endsection
 @section('content')
 @include('teacher/grading/partial/importModal')
+{{-- modal --}}
 <div class="modal fade" id="fillGradeInPrevious" data-backdrop="static" data-keyboard="false" tabindex="-1"
     aria-labelledby="fillGradeInPreviousLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body text-center">
-                <p class="mt-3">Please fill previous grading period</p>
+                <p class="mt-3"><i class="fas fa-exclamation-triangle text-warning"></i> Please fill previous grading period</p>
                 <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+
 <div class="container-fluid">
     <div class="callout callout-info border-top-0 border-bottom-0 border-end-0 elevation-2 bg-white dark:bg-dark" style="margin-top: -10px;">
         <div class="row justify-content-between">
@@ -65,9 +67,9 @@
         <div class="card">
             <div class="card-body">
             <div class="empty-state text-center mt-5" data-height="200">
-                <h2><i class="fas fa-exclamation-circle text-warning" style="font-size: 30px"></i>&nbsp;&nbsp;Grading system is now ended</h2>
+                <h2><i class="fas fa-exclamation-circle text-warning" style="font-size: 30px"></i>&nbsp;&nbsp;Grading system is not available</h2>
                 <p class="lead">
-                Warning you will no longer be allowed to edit or add a grade
+                Warning you will no longer be allowed to update or add a grade
                 </p>
                 
             </div>

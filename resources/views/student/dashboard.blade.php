@@ -9,7 +9,30 @@
     <div class="card">
         <div class="card-body">
             <div class="col-lg-12 mt-3 mb-0">
-                <div class="row">
+                <div class="btn-group shadow" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-info shadow" disabled>
+                        <b>Enrollment:</b>@if (empty($enrolledData->enroll_status))
+                        <span class="badge bg-warning">Ongoing</span>
+                        @else
+                        <span class="badge 
+                        @if ($enrolledData->enroll_status=='Pending')
+                        bg-warning
+                        @else
+                        bg-info    
+                        @endif">{{ $enrolledData->enroll_status }}</span>
+                        @endif
+                    </button>
+                    <button type="button" class="btn btn-info shadow" disabled>
+                        &nbsp;&nbsp;&nbsp;<b>Section:</b> @if (empty($enrolledData->enroll_status) ||
+                        $enrolledData->enroll_status=='Pending')
+                        <span class="badge bg-warning">N/A</span>
+                        @else
+                        <span class="badge bg-info">{{ $enrolledData->section_name }}</span>
+                        @endif
+                        &nbsp;&nbsp;&nbsp;
+                    </button>
+                </div>
+                {{-- <div class="row">
                     <div class="col-lg-2 col-md-12 col-sm-12 mb-2">
                         <button type="button" class="btn btn-info shadow" disabled>
                             <b>Enrollment:</b>@if (empty($enrolledData->enroll_status))
@@ -37,7 +60,7 @@
                         </button>
     
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="card ">

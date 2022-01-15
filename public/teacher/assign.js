@@ -20,18 +20,6 @@ let tableAssign = (section) => {
         .done(function (data) {
             let i = 1;
             data.forEach((val) => {
-                hold += `
-                <tr>
-                <td>${i++}</td>
-                <td>${val.descriptive_title}</td>
-                    <td>${val.teacher_name}</td>
-                    <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" style="font-size:13px" class="text-white btn btn-sm btn-primary pl-3 pr-3 editAssign  editA_${val.id}" id="${val.id}">Update</button>
-                    </div>
-                    </td>
-                </tr>
-            `;
             //     hold += `
             //     <tr>
             //     <td>${i++}</td>
@@ -39,12 +27,24 @@ let tableAssign = (section) => {
             //         <td>${val.teacher_name}</td>
             //         <td>
             //         <div class="btn-group" role="group" aria-label="Basic example">
-            //             <button type="button" style="font-size:13px" class="text-white btn btn-sm btn-info pl-3 pr-3 editAssign  editA_${val.id}" id="${val.id}">Update</button>
-            //             <button type="button" style="font-size:13px" class="text-white btn btn-sm btn-danger sdelete deleteAssign btnDelete_${val.id}" id="${val.id}">Delete</button>
+            //             <button type="button" style="font-size:13px" class="text-white btn btn-sm btn-primary pl-3 pr-3 editAssign  editA_${val.id}" id="${val.id}">Update</button>
             //         </div>
             //         </td>
             //     </tr>
             // `;
+                hold += `
+                <tr>
+                <td>${i++}</td>
+                <td>${val.descriptive_title}</td>
+                    <td>${val.teacher_name}</td>
+                    <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" style="font-size:13px" class="text-white btn btn-sm btn-info pl-3 pr-3 editAssign  editA_${val.id}" id="${val.id}">Update</button>
+                        <button type="button" style="font-size:13px" class="text-white btn btn-sm btn-danger sdelete deleteAssign btnDelete_${val.id}" id="${val.id}">Delete</button>
+                    </div>
+                    </td>
+                </tr>
+            `;
             });
             $("#tableAssign").html(hold);
         })

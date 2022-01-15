@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>eBNHS . Pre-Enrollment</title>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+<title>eBNHS . Pre-Enrollment</title>
 
     <link rel="shortcut icon" href="{{ asset('image/logo/bn.jpg') }}">
     <link rel="stylesheet" href="{{ asset('css/coreuistyle/coreui.min.css') }}">
@@ -14,14 +14,14 @@
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('css/selectric.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toast/iziToast.min.css') }}">
-  
+
 </head>
 
 <body>
-  <div id="app">
-      <!-- warning -->
-      <div class="modal modal-outline shadow-sm fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div id="app">
+    <!-- warning -->
+    <div class="modal modal-outline shadow-sm fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -102,7 +102,7 @@
                                                 <select name="status" class="form-select" id="">
                                                     <option value="">Select Status</option>
                                                     <option value="new">Incoming grade 7</option>
-                                                    <option value="new_eleven">Incoming grade 11</option>
+                                                    {{-- <option value="new_eleven">Incoming grade 11</option> --}}
                                                     <option value="transferee">Transferee</option>
                                                     <option value="balikAral">Balik Aral</option>
                                                 </select>
@@ -115,8 +115,8 @@
                                                     <option value="8">Grade 8</option>
                                                     <option value="9">Grade 9</option>
                                                     <option value="10">Grade 10</option>
-                                                    <option value="11">Grade 11</option>
-                                                    <option value="12">Grade 12</option>
+                                                    {{-- <option value="11">Grade 11</option>
+                                                    <option value="12">Grade 12</option> --}}
                                                 </select>
                                             </div>
                                         </div>
@@ -201,9 +201,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="form-group col-lg-4 mb-3">
-                                                        <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Student Contact No.</label>
+                                                        <label class="form-label">Student Contact No.</label>
                                                         <input type="text" class="form-control" name="student_contact"
-                                                            onkeypress="return numberOnly(event)" maxlength="11">
+                                                            onkeypress="return numberOnly(event)" maxlength="11" pattern="^[0-9]{11}$">
                                                     </div>
                                                 </div>
                                                 <!-- end -->
@@ -252,7 +252,7 @@
                                                     </div>
                                                     <div class="form-group col-lg-4 mb-3 mt-3">
                                                         <label class="form-label">Contact No.</label>
-                                                        <input type="text" class="form-control" name="father_contact_no" wire:onkeypress="return numberOnly(event)"  maxlength="11">
+                                                        <input type="text" class="form-control" name="father_contact_no" wire:onkeypress="return numberOnly(event)"  maxlength="11" pattern="^[0-9]{11}$">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -263,7 +263,7 @@
                                                     <div class="form-group col-lg-4 mb-3">
                                                         <label class="form-label">Contact No.</label>
                                                         <input type="text" class="form-control" name="mother_contact_no"
-                                                            onkeypress="return numberOnly(event)" maxlength="11">
+                                                            onkeypress="return numberOnly(event)" maxlength="11" pattern="^[0-9]{11}$">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -275,7 +275,7 @@
                                                         <label class="form-label">Contact No.</label>
                                                         <input type="text" class="form-control"
                                                             name="guardian_contact_no"
-                                                            onkeypress="return numberOnly(event)" maxlength="11">
+                                                            onkeypress="return numberOnly(event)" maxlength="11" pattern="^[0-9]{11}$">
                                                     </div>
                                                 </div>
                                                 <!-- tab 2 end-->
@@ -283,15 +283,15 @@
                                             <div class="tab-pane fade" id="uploadReq" role="tabpanel" aria-labelledby="contact-tab2">
                                                 <!-- tab 3 -->
                                                 <div class="mt-3">
-                                                    <div class="alert alert-danger">
+                                                    <div class="alert alert-warning">
                                                         {{-- <small>* <b>Note:</b> Upload requirements are optional. Once you have pre-enrolled and they will double-check your information and requirements before the student assign to a section, the office will notify you that you must submit all hard copies of your requirements as follow up requirements.</small><br>    --}}
-                                                        <small><i class="fas fa-exclamation-triangle"></i> <b>Note:</b> Upload requirements are optional. Once you have pre-enrolled and they will double-check your information and requirements before the student assign to a section.</small><br>   
-                                                        <small><b>File format: ( png,jpeg,jpg )</b></small>
+                                                        <small><i class="fas fa-exclamation-triangle"></i> <b>Note:</b> Upload requirements are optional. Once you have pre-enrolled and they will double-check your information and requirements before you assign to a section.</small><br>   
+                                                        <small><b>File format: (png, jpeg, jpg)</b></small>
                                                     </div>
                                                         <div class="form-group mt-2">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="customFile">Latest Copy of Grades</label>
-                                                                <input type="file" class="form-control" name="req_grade" accept=".png,.jpg,.jpeg" onchange="validate_fileupload(this.value);">
+                                                                <input type="file" class="form-control" name="req_grade" accept="image/*" onchange="validate_fileupload(this.value);">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">

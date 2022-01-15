@@ -292,73 +292,91 @@ class EnrollmentController extends Controller
 
     public function checkLRN($lrn, $curriculum, $status)
     {
-
-        if (Auth::user()->chairman_info->grade_level == 7) {
-            //grade 7 only
-            $isLRN = Student::where('roll_no', $lrn)->exists();
-            if ($isLRN) {
-                return response()->json(['warning' => 'This student are already Enrolled']);
-            }
-        } else {
-            //grade 8-10 only
-            $student = Enrollment::join('students', 'enrollments.student_id', 'students.id')
-                ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
-                ->where('school_years.status', 1)
-                ->where('roll_no', $lrn)->exists();
-            // determin where grade level inrolled
-            $findStudentGL = Enrollment::join('students', 'enrollments.student_id', 'students.id')
-                ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
-                ->where('school_years.status', 1)
-                ->where('roll_no', $lrn)
-                ->first();
-            if ($student) {
-                return response()->json(['warning' => 'You are already Enrolled in ' . $findStudentGL->curriculum . ' curriculum <br> grade ' . $findStudentGL->grade_level . ' student']);
+        $findStudent = Student::where('students.roll_no', $lrn)->first();
+        if($status=="upperclass"){
+            $findStud = Student::where('students.roll_no', $lrn)->first();
+            if ($findStud) {
+            $isAlreadyinMasterlist = Enrollment::where('school_year_id', Helper::activeAY()->id)->where('student_id',$findStud->id)->exists();
+               if ($isAlreadyinMasterlist) {
+                    return response()->json( ['warning' => 'This student is already enrolled' ] );
+               } else {
+                    return response()->json([ 'student' => $findStud ]);
+               }
             } else {
-                if ($status == "upperclass") {
-                    // $isAlreadyinMasterlist = Student::where('roll_no', $lrn)->where('curriculum', $curriculum)->exists();
-                    $isAlreadyinMasterlist = Enrollment::join('students', 'enrollments.student_id', 'students.id')
-                        ->where('students.roll_no', $lrn)
-                        ->where('enrollments.curriculum', $curriculum)
-                        ->exists();
-                    $findStudent = Student::where('students.roll_no', $lrn)->first();
-                    if ($isAlreadyinMasterlist) {
-                        //get all stundent information
-                        return response()->json([
-                            'student' => $findStudent
-                        ]);
-                    } else {
-                        //if curriculum is not belong to the chairman enrollment form!!!
-                        if ($findStudent) {
-                            return response()->json(['warning' => '
-                            This student is not enrolled in this program (curriculum), <br>and his or her curriculum is  included to <b>' . $findStudent->curriculum . '</b>']);
-                        } else {
-                            return response()->json(
-                                [
-                                    'warning' => 'This student is can\'t find'
-                                ]
-                            );
-                        }
-                    }
-                } else {
-                    $state = Enrollment::join('students', 'enrollments.student_id', 'students.id')
-                        ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
-                        ->where('school_years.status', 1)
-                        ->where('roll_no', $lrn)
-                        ->exists();
-                    if ($state) {
-                        return response()->json(
-                            [
-                                'warning' => 'This student is already enrolled'
-                            ]
-                        );
-                    } else {
-                        return false;
-                    }
-                }
+                      return response()->json( [ 'warning' => 'This student is can\'t find record' ] );
+            }
+        }else{
+            if ($findStudent) {
+                return response()->json( [ 'warning' => 'This student is have already record' ] );
             }
         }
-    }
 
+        // if (Auth::user()->chairman_info->grade_level == 7) {
+        //     //grade 7 only
+        //     $isLRN = Student::where('roll_no', $lrn)->exists();
+        //     if ($isLRN) {
+        //         return response()->json(['warning' => 'This student are already Enrolled']);
+        //     }
+        // } else {
+        //     //grade 8-10 only
+        //     $student = Enrollment::join('students', 'enrollments.student_id', 'students.id')
+        //         ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
+        //         ->where('school_years.status', 1)
+        //         ->where('roll_no', $lrn)->exists();
+        //     // determin where grade level inrolled
+        //     $findStudentGL = Enrollment::join('students', 'enrollments.student_id', 'students.id')
+        //         ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
+        //         ->where('school_years.status', 1)
+        //         ->where('roll_no', $lrn)
+        //         ->first();
+        //     if ($student) {
+        //         return response()->json(['warning' => 'You are already Enrolled in ' . $findStudentGL->curriculum . ' curriculum <br> grade ' . $findStudentGL->grade_level . ' student']);
+        //     } else {
+        //         if ($status == "upperclass") {
+        //             // $isAlreadyinMasterlist = Student::where('roll_no', $lrn)->where('curriculum', $curriculum)->exists();
+        //             $isAlreadyinMasterlist = Enrollment::join('students', 'enrollments.student_id', 'students.id')
+        //                 ->where('students.roll_no', $lrn)
+        //                 ->where('enrollments.curriculum', $curriculum)
+        //                 ->exists();
+        //             $findStudent = Student::where('students.roll_no', $lrn)->first();
+        //             if ($isAlreadyinMasterlist) {
+        //                 //get all stundent information
+        //                 return response()->json([
+        //                     'student' => $findStudent
+        //                 ]);
+        //             } else {
+        //                 //if curriculum is not belong to the chairman enrollment form!!!
+        //                 if ($findStudent) {
+        //                     return response()->json(['warning' => '
+        //                     This student is not enrolled in this program (curriculum), <br>and his or her curriculum is  included to <b>' . $findStudent->curriculum . '</b>']);
+        //                 } else {
+        //                     return response()->json(
+        //                         [
+        //                             'warning' => 'This student is can\'t find'
+        //                         ]
+        //                     );
+        //                 }
+        //             }
+        //         } else {
+        //             $state = Enrollment::join('students', 'enrollments.student_id', 'students.id')
+        //                 ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
+        //                 ->where('school_years.status', 1)
+        //                 ->where('roll_no', $lrn)
+        //                 ->exists();
+        //             if ($state) {
+        //                 return response()->json(
+        //                     [
+        //                         'warning' => 'This student is already enrolled'
+        //                     ]
+        //                 );
+        //             } else {
+        //                 return false;
+        //             }
+        //         }
+        //     }
+        // }
+    }
+// section filter
     public function filterSection($curriculum)
     {
         return response()->json(
@@ -371,7 +389,6 @@ class EnrollmentController extends Controller
         );
     }
 
-
     public function totalStudentInSection($section)
     {
         return Enrollment::where("section_id", $section)->where('school_year_id', Helper::activeAY()->id)->count();
@@ -381,13 +398,13 @@ class EnrollmentController extends Controller
     {
         // return $request->all();
         Enrollment::where('id', $enroll_id)
-        ->where('school_year_id', Helper::activeAY()->id)
-        ->update([
-            'section_id' => $request->section_again ?? $request->section,
-            'curriculum' => $request->curriculum_again ?? $request->curriculum,
-            'grade_level' => $request->grade_level_again ?? Auth::user()->chairman_info->grade_level,
-            'enroll_status' => ($request->section_again ?? $request->section)?'Enrolled':'Pending',
-        ]);
+            ->where('school_year_id', Helper::activeAY()->id)
+            ->update([  
+                'section_id' => $request->section_again ?? $request->section,
+                'curriculum' => $request->curriculum_again ?? $request->curriculum,
+                'grade_level' => $request->grade_level_again ?? Auth::user()->chairman_info->grade_level,
+                'enroll_status' => ($request->section_again ?? $request->section)?'Enrolled':'Pending',
+            ]);
     }
 
     public function updateSection($request)

@@ -37,10 +37,12 @@ const studentTable = $("#studentTable").DataTable({
         {
             data: null,
             render: function (data) {
+                let fullname =  data.student_lastname+", "+data.student_firstname+" "+data.student_middlename
                 return `
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-sm btn-danger text-white sdelete btnDelete_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}">Remove</button>
                     <button type="button" class="btn btn-sm btn-info  text-white sedit btnEdit_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}">Update</button>
+                    <button type="button" class="btn btn-sm btn-warning text-white sreset btnReset_${data.id} pl-3 pr-3" id="${data.id}" value="${fullname}">Reset</button>
                     ${active.filter(val => (val == data.id)) != '' ? `
                     <a href="student/view/record/${data.id}" class="btn btn-sm btn-secondary text-white vstudent btnView_${data.id} pt-0 pb-0 " id="${data.id}">View</a>
                     ` :""}
@@ -57,10 +59,44 @@ const studentTable = $("#studentTable").DataTable({
 });
 
 /**
- * view student record
+ * reset student password
  */
+ $(document).on('click', '.sreset', function (e) {
+    e.preventDefault();
+    $(".yesReset").show().text('Yes, reset password');
+    let fullname = $(this).val();
+    let id = $(this).attr("id");
+    $(".showName").text(fullname)
+    $(".textshow").text("Are you sure you want to reset password?")
+    $("#resetModal").modal("show")
+    $(".yesReset").val(id);
+})
+
+$(".yesReset").on('click', function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: `reset/password/${$(this).val()}/student`,
+        type: "GET",
+        beforeSend: function () {
+            $(".yesReset").html(`Restting... 
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>`);
+        },
+    })
+        .done(function (response) {
+            $(".yesReset").hide();
+            getToast("success", "Successfully", "Reset password");
+            $(".textshow").html(`New password: <b>${response}</b>`)
+        })
+        .fail(function (jqxHR, textStatus, errorThrown) {
+            $(".yesReset").show().text('Yes, reset password');
+            console.log(jqxHR, textStatus, errorThrown);
+            getToast("error", "Eror", errorThrown);
+        });
+})
 /**
- * end student record
+ * end
  */
 
 $("#btnStudentModal").on("click", function () {

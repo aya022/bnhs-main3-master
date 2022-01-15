@@ -375,7 +375,7 @@ let filterSection = (curriculum) => {
                 $("#sectionFilter").html(htmlHold);
             })
             .fail(function (jqxHR, textStatus, errorThrown) {
-                getToast("error", "Error", errorThrown);
+                getToast("error", "Eror", errorThrown);
                 $(".btnSaveSection").html("Submit").attr("disabled", false);
             });
     }
@@ -439,8 +439,6 @@ $("#sectionFilter").on("change", function () {
  * SET SECTION
  */
 
-// alert(current_curriculum)
-
 $("#enrollAssignForm").submit(function (e) {
     // $("#setSectionForm").submit(function (e) {
     e.preventDefault();
@@ -481,6 +479,7 @@ $("#enrollAssignForm").submit(function (e) {
             filterBarangay();
         }
         monitorSection(current_curriculum);
+        $("#enrollStudentModal").modal("hide");
     })
     .fail(function (jqxHR, textStatus, errorThrown) {
         getToast("error", "Error", errorThrown);
@@ -541,6 +540,16 @@ $(".btnCancelSectionNow").on("click", function () {
     $("input[name='enroll_id']").val("");
     $(".nameOfStudent").val("Please Select Student");
     $("#enrollStudentModal").modal("hide");
+    $(".alert-warning").hide();
+    $(".btnSaveSectionNow").html("Save").attr("disabled", false);
+    $("input[name='status_now']").val("");
+});
+
+$(".btnCancelSectionNow").on("click", function () {
+    document.getElementById("enrollAssignForm").reset();
+    $("input[name='enroll_id']").val("");
+    $(".nameOfStudent").val("Please Select Student");
+    $("#setSectionModal").modal("hide");
     $(".alert-warning").hide();
     $(".btnSaveSectionNow").html("Save").attr("disabled", false);
     $("input[name='status_now']").val("");
@@ -634,30 +643,18 @@ $(document).on("click", ".cEdit", function () {
         },
     })
         .done(function (response) {
-            // $(".nameOfStudent").val(
-            //     response.student_lastname +
-            //         " " +
-            //         response.student_firstname +
-            //         " " +
-            //         response.student_middlename
-            // );
-            // $('select[name="section"]').val(response.section_id);
-            // $("input[name='enroll_id']").val(response.id);
-            // $(".btnEdit_" + id).html(response.section_id != "" ? "Change" : "Section");
-            // $("#setSectionModal").modal("show");
-
             // new method here
             // setTimeout(() => {
                 $("input[name='enroll_id']").val(response.id);
-                $("input[name='fullname_again']").val(response.fullname)
-                $("input[name='lrn_again']").val(response.roll_no)
-                $("select[name='grade_level_again']").val(response.grade_level)
-                $("select[name='curriculum_again']").val(response.curriculum)
-                $("select[name='section_again']").val(response.section_id)
-                $(".action_taken_again").text(response.action_taken ?? 'N/A')
-                $(".enroll_status_again").text(response.enroll_status)
-                response.enroll_status=='Enrolled'?$(".enroll_status_again").addClass('bg-success'):$(".enroll_status_again").addClass('bg-warning')
-                $("#enrollStudentModal").modal("show")
+                $("input[name='fullname_again']").val(response.fullname);
+                $("input[name='lrn_again']").val(response.roll_no);
+                $("select[name='grade_level_again']").val(response.grade_level);
+                $("select[name='curriculum_again']").val(response.curriculum);
+                $("select[name='section_again']").val(response.section_id);
+                $(".action_taken_again").text(response.action_taken ?? 'N/A');
+                $(".enroll_status_again").text(response.enroll_status);
+                response.enroll_status=='Enrolled'?$(".enroll_status_again").addClass('bg-success'):$(".enroll_status_again").addClass('bg-warning');
+                $("#enrollStudentModal").modal("show");
                 $(".btnEdit_" + id).html(response.section_id != "" ? "Section" : "Update");
             // }, 2000);
         })

@@ -17,6 +17,10 @@
     <li class="nav-item {{ request()->is('admin/my/enrollment')?'active':'' }}"><a class="nav-link" href="{{ route('admin.enrollment') }}">
         <i class="far fa-address-card nav-icon"></i> Enrollee</a>
     </li>
+
+    <li class="nav-item {{ request()->is('admin/my/grading')?'active':'' }}"><a class="nav-link" href="{{ route('admin.grading') }}">
+        <i class="fas fa-pen nav-icon"></i> Grading Sheet</a>
+    </li>
     
     <!-- -->
     <li class="nav-title">Management Section</li>
@@ -38,9 +42,9 @@
             {{-- <li class="nav-item {{ request()->is('admin/my/schedule')?'active':'' }}">
                 <a class="nav-link" href="{{ route('admin.schedule') }}"><i class="nav-icon fas fa-calendar-alt"></i><span>Schedule</span></a>
             </li> --}}
-            <li class="nav-item {{ request()->is('admin/my/strand')?'active':'' }}">
+            {{-- <li class="nav-item {{ request()->is('admin/my/strand')?'active':'' }}">
                 <a class="nav-link" href="{{ route('admin.strand') }}"><span class="nav-icon fas fa-server"></span> SHS Track &amp; Strand</a>
-            </li>
+            </li> --}}
             
             {{-- <li class="{{ request()->is('admin/my/schedule')?'active':'' }}">
     <a class="nav-link" href="{{ route('admin.schedule') }}">

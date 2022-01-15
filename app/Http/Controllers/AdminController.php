@@ -15,7 +15,9 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
@@ -25,8 +27,9 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        $appointies = Appointment::select('fullname', 'address', 'purpose')
-            ->where('set_date', date('m/d/Y'))->limit(7)->orderBy('fullname')->get();
+    //   return date('m/d/Y');
+        $appointies = Appointment::select('fullname', 'address', 'purpose','created_at', 'appointee')
+            ->where('set_date', date('m/d/Y'))->limit(5)->orderBy('fullname')->get();
         $data = response()->json(
             Enrollment::select('enrollments.grade_level', DB::raw("COUNT(enrollments.grade_level) as total"))
                 ->join('sections', 'enrollments.section_id', 'sections.id')
@@ -39,23 +42,81 @@ class AdminController extends Controller
         );
         $enrollTotal = Enrollment::join('school_years', 'enrollments.school_year_id', 'school_years.id')
             ->where('school_years.status', 1)
-            ->whereIn('enroll_status', ['Pending'])->get()->count();
-        $studentTotal = Enrollment::join('school_years', 'enrollments.school_year_id', 'school_years.id')
-            ->where('school_years.status', 1)
-            ->whereIn('enroll_status', ['Enrolled'])->get()->count();
-        // $studentTotal = Student::get()->count();
+            ->whereIn('enroll_status', ['Pending', 'Enrolled'])->get()->count();
+        $studentTotal = Student::get()->count();
         $teacherTotal = Teacher::get()->count();
         $ectionTotal = Section::join('school_years', 'sections.school_year_id', 'school_years.id')
             ->where('school_years.status', 1)
             ->get()
             ->count();
-        $njhs = Enrollment::where('enroll_status', 'Enrolled')->where('student_type', 'JHS')
-            ->where('school_year_id', Config::get('activeAY')->id)
-            ->count();
-        $nshs = Enrollment::where('enroll_status', 'Enrolled')->where('student_type', 'SHS')
-            ->where('school_year_id', Config::get('activeAY')->id)
-            ->count();
-        return view('administrator/dashboard', compact('enrollTotal', 'studentTotal', 'teacherTotal', 'ectionTotal', 'data', 'appointies', 'njhs', 'nshs'));
+        return view('administrator/dashboard', compact('enrollTotal', 'studentTotal', 'teacherTotal', 'ectionTotal', 'data', 'appointies'));
+    }
+    // public function dashboard()
+    // {
+    //     $appointies = Appointment::select('fullname', 'address', 'purpose')
+    //         ->where('set_date', date('m/d/Y'))->limit(7)->orderBy('fullname')->get();
+    //     $data = response()->json(
+    //         Enrollment::select('enrollments.grade_level', DB::raw("COUNT(enrollments.grade_level) as total"))
+    //             ->join('sections', 'enrollments.section_id', 'sections.id')
+    //             ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
+    //             ->where('school_years.status', 1)
+    //             ->where('enrollments.enroll_status', 'Enrolled')
+    //             ->groupBy('enrollments.grade_level')
+    //             ->orderBy('enrollments.grade_level')
+    //             ->get()
+    //     );
+    //     $enrollTotal = Enrollment::join('school_years', 'enrollments.school_year_id', 'school_years.id')
+    //         ->where('school_years.status', 1)
+    //         ->whereIn('enroll_status', ['Pending'])->get()->count();
+    //     $studentTotal = Enrollment::join('school_years', 'enrollments.school_year_id', 'school_years.id')
+    //         ->where('school_years.status', 1)
+    //         ->whereIn('enroll_status', ['Enrolled'])->get()->count();
+    //     // $studentTotal = Student::get()->count();
+    //     $teacherTotal = Teacher::get()->count();
+    //     $ectionTotal = Section::join('school_years', 'sections.school_year_id', 'school_years.id')
+    //         ->where('school_years.status', 1)
+    //         ->get()
+    //         ->count();
+    //     $njhs = Enrollment::where('enroll_status', 'Enrolled')->where('student_type', 'JHS')
+    //         ->where('school_year_id', Config::get('activeAY')->id)
+    //         ->count();
+    //     $nshs = Enrollment::where('enroll_status', 'Enrolled')->where('student_type', 'SHS')
+    //         ->where('school_year_id', Config::get('activeAY')->id)
+    //         ->count();
+    //     return view('administrator/dashboard', compact('enrollTotal', 'studentTotal', 'teacherTotal', 'ectionTotal', 'data', 'appointies', 'njhs', 'nshs'));
+    // }
+
+    // reset password
+    public function resetPassword($id,$type){
+        $passwordNow=rand(99,1000).'-'.rand(99,1000);
+        if ($type==="student") {
+            $student = Student::whereId($id)
+            ->update([
+                'password'=>Hash::make($passwordNow),
+                'orig_password'=>Crypt::encrypt($passwordNow),
+            ]);
+            if ($student) {
+                $query = Student::select("orig_password")->whereId($id)->first();
+                Helper::myLog('reset','student password',$query->student_firstname);
+                return Crypt::decrypt($query->orig_password);
+            } else {
+                return response()->json(['msg'=>'Sorry student not found']);
+            }
+            
+        } else {
+            $teacher = Teacher::whereId($id)
+            ->update([
+                'password'=>Hash::make($passwordNow),
+                'orig_password'=>Crypt::encrypt($passwordNow),
+            ]);
+            if ($teacher) {
+                $query = Teacher::select("orig_password")->whereId($id)->first();
+                Helper::myLog('reset','teacher password',$query->teacher_firstname);
+                return Crypt::decrypt($query->orig_password);
+            } else {
+                return response()->json(['msg'=>'Sorry teacher not found']);
+            }
+        }
     }
 
     public function announcement()
@@ -162,6 +223,10 @@ class AdminController extends Controller
     {
         $teachers = Teacher::all();
         return view('administrator/management/assign', compact('teachers'));
+    }
+
+    public function grading(){
+        return view('administrator/management/grading');
     }
 
     public function chairman()

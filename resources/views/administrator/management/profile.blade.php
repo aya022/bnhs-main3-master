@@ -99,10 +99,11 @@
     <div class="row">
         <div class="col-md-8 mb-3">
             <div class="card shadow">
-                <div class="card-header">
+                {{-- <div class="card-header">
                     <p style="font-size: 20px;">School Profile</p>
-                </div>
-                <div class="card-body m-3">
+                </div> --}}
+                <div class="card-body">
+                    <h5 class="card-title">Manage School Profile</h5><hr>
                     <form enctype="multipart/form-data" id="schooProfileForm">@csrf
                         <input type="hidden" name="id" value="{{ $data->id ?? '' }}">
                         <div class="row">
@@ -150,7 +151,7 @@
                 {{-- {{empty($data->school_enrollment_url)}} --}}
                 <div class="col-md-12 col-12">
                     <div class="card mb-3 shadow">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <p style="font-size: 20px;">Grade Input Deadline</p>
                             <div class="card-header-action">
                             
@@ -164,24 +165,25 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
+                            <h5 class="card-title">Grade Input Deadline</h5><hr>
                             <div class="row">
                                 <div class="form-group col-12">
                                     <p class="alert alert-warning">
-                                        <i class="fas fa-exclamation-triangle"></i> To protect the data from new changes, disable the teacher's grading sheet. <br> 
-                                        Set time and date for the deadline.
+                                        <i class="fas fa-exclamation-triangle"></i> Set time and date for the grade deadline.
                                     </p>
                                     <form method="POST" id="dealineform">@csrf
                                         <div class="form-group">
-                                            <label>Deadline</label>
-                                            <input type="datetime-local" name="from" class="form-control" required><br>
+                                            <label class="mb-2">Deadline</label>
+                                            <input type="datetime-local" value="{{ $data->grade_deadline ?? '' }}" name="from" class="form-control" required><br>
                                         </div>
                                         {{-- <div class="form-group">
-                                            <label>To</label>   
+                                            <label>To</label>
                                             <input type="datetime-local" name="to" class="form-control" required><br>
                                         </div> --}}
-                                        <input type="submit" name="btngrade" class="btn btn-primary">
+                                        {{-- <input type="submit" name="btngrade" class="btn btn-primary"> --}}
+                                        <button type="submit" id="btngrade" class="btn btn-primary">Save Changes</button>
                                     </form>
                                 </div>
                                 <div class="form-group col-lg-3 col-md-3 col-sm-12">
@@ -200,10 +202,11 @@
                     </div>
 
                     <div class="card mb-3 shadow">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <p style="font-size: 20px;">Manage Enrollment Status</p>
-                        </div>
+                        </div> --}}
                         <div class="card-body pb-0">
+                            <h5 class="card-title">Manage Enrollment Status</h5><hr>
                             <form id="enrollStatusForm">@csrf
                                 <div class="input-group mb-3">
                                     <div class="input-group-text" id="btnGroupAddon"><b>Enrollment Status:</b></div>

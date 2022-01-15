@@ -28,7 +28,9 @@ class AppointmentFactory extends Factory
             'address' => $this->faker->address(),
             'purpose' => $this->faker->sentence($nbWords = 5, $variableNbWords = true),
             'set_date' => date("m/") . date("d") . date("/Y"),
-            'appoint_no' => rand(99, 100) . '-' . rand(99, 100)
+            'appoint_no' => rand(99, 100) . '-' . rand(99, 100),
+            'appointee' => $this->faker->randomElement($array = array('Parent','Student','Guest')),
+            'status' => $this->faker->randomElement($array = array('0', '1'))
         ];
     }
 }
