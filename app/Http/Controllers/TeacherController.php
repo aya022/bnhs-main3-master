@@ -140,10 +140,8 @@ class TeacherController extends Controller
             $arr['teacher_lastname'] = $value->teacher_lastname;
             $arr['teacher_gender'] = $value->teacher_gender;
             $arr['username'] = $value->username;
-            // $arr['orig_password'] = Crypt::decrypt($value->orig_password);
             $data[] = $arr;
         }
-        // return $data;
         return response()->json(['data' => $data]);
     }
 
@@ -177,12 +175,11 @@ class TeacherController extends Controller
     {
         return Teacher::findOrFail($id)->delete();
     }
+    
     public function edit(Teacher $teacher)
     {
         return response()->json($teacher);
     }
-
-
 
     public function assign()
     {
@@ -364,16 +361,11 @@ class TeacherController extends Controller
             "teacher_lastname",
             "teacher_firstname",
             "teacher_middlename",
-            // DB::raw("CONCAT(teacher_lastname,', ', teacher_firstname,' ', teacher_middlename) AS fullname")
-            // DB::raw("CONCAT(teachers.teacher_lastname,', ',teachers.teacher_firstname,' ',teachers.teacher_middlename) as fullname")
             )
             ->orderBy('teacher_lastname', 'asc')
             ->get();
         $total = Teacher::select('teacher_gender', DB::raw('COUNT(if(teacher_gender="Female",1,NULL)) as ftotal'), DB::raw('COUNT(if(teacher_gender="Male",1,NULL)) as mtotal'))
             ->groupBy('teacher_gender')->first();
-        // $Male = Teacher::select(DB::raw("COUNT(if (teacher_gender='Male',1,NULL)) as Male"), DB::raw("COUNT(if (teacher_gender='Female',1,NULL)) as Female"))->groupBy('teacher_gender')->first();
-        // $Female = Teacher::select(DB::raw("COUNT(if (teacher_gender='Female',1,NULL)) as Female"))->pluck('Female');
-        // dd($dataNow);
         return view('administrator/masterlist/partial/teacherPrint', compact('dataNow', 'total'));
     }
 }

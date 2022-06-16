@@ -33,9 +33,9 @@ const table_teacher = $("#teacherTable").DataTable({
                 let fullname =  data.teacher_lastname+", "+data.teacher_firstname+" "+data.teacher_middlename
                 return `
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" style="font-size:13px" class="btn btn-sm text-white btn-info tedit btnEdit_${data.id}" id="${data.id}">Update</button>
-                        <button type="button" style="font-size:13px" class="btn btn-sm text-white btn-danger pl-3 pr-3 tdelete btnDelete_${data.id}" id="${data.id}">Remove</button>
-                        <button type="button" class="btn btn-sm btn-warning text-white treset btnReset_${data.id} pl-3 pr-3" value="${fullname}" id="${data.id}">Reset</button>
+                        <button type="button" style="font-size:13px" class="btn btn-sm btn-info text-white tedit btnEdit_${data.id}" id="${data.id}">Update</button>
+                        <button type="button" style="font-size:13px" class="btn btn-sm btn-dark pl-3 pr-3 tdelete btnDelete_${data.id}" id="${data.id}">Archive</button>
+                        <button type="button" class="btn btn-sm btn-info text-white treset btnReset_${data.id} pl-3 pr-3" value="${fullname}" id="${data.id}">Reset</button>
                     </div>
                     `;
             },
@@ -142,6 +142,16 @@ $("#teacherForm").submit(function (e) {
 //         });
 // });
 
+// info
+$(document).on("click", ".tInfo", function (e) {
+    e.preventDefault();
+    let fullname = $(this).val();
+    let id = $(this).attr("id");
+    $(".showName").text(fullname);
+    $(".textshow").text("Are you sure you want to reset password?");
+    $("#tInfoModal").modal("show");
+});
+
 // delete Modal
 $(document).on("click", ".tdelete", function () {
     let id = $(this).attr("id");
@@ -165,7 +175,7 @@ $(document).on("click", ".deleteTeacher", function () {
         $(".deleteTeacher").html("Yes");
         $(this).val('')
         $("#teachertDeleteModal").modal("hide");
-        getToast("success", "Successfully", "Deleted one record");
+        getToast("success", "Successfully", "Archive one record");
         $("#teacherForm")[0].reset();
         table_teacher.ajax.reload();
     })

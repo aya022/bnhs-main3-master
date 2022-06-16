@@ -87,9 +87,7 @@ class AppointmentController extends Controller
         $lastDateOfMonth = "12/" . $lastDayOfMonth . date("/Y");
         $firstDateOfMonth = date('m/') . "01" . date('/Y'); //, strtotime(' +1 day')
         $currentDateNow = date("m/d/Y");
-        $data = Appointment::select('set_date as start', DB::raw('COUNT(set_date) as title')) //
-            // ->where('set_date', '>=', $firstDateOfMonth)
-            // ->where('set_date', '<=', $lastDateOfMonth)
+        $data = Appointment::select('set_date as start', DB::raw('COUNT(set_date) as title'))
             ->whereBetween('set_date', [$firstDateOfMonth, $lastDateOfMonth])
             ->groupBy('set_date')
             ->orderBy('set_date', 'asc')

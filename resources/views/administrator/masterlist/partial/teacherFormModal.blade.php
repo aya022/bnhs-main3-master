@@ -39,8 +39,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                    <button type="button" class="btn btn-secondary text-white" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info text-white" id="btnSave">Save</button>
                 </div>
             </div>
         </div>

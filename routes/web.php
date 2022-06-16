@@ -126,7 +126,10 @@ Route::middleware(['auth:web', 'preventBackHistory'])->name('admin.')->prefix('a
 
     // student-route
     Route::get('student', [AdminController::class, 'student'])->name('student');
-    Route::post('student/save', [StudentController::class, 'store']);
+    Route::post('student/save/{student}', [StudentController::class, 'store']);
+    Route::post('student/upload/{student}', [StudentController::class, 'upload1']);
+    Route::get('student/upload/list/{student}', [StudentController::class, 'checkList']);
+    Route::post('student/upload/list/update', [StudentController::class, 'checkListUpdate']);
     Route::get('student/list', [StudentController::class, 'list']);
     Route::delete('student/delete/{student}', [StudentController::class, 'destroy']);
     Route::get('student/edit/{student}', [StudentController::class, 'edit']);
@@ -169,7 +172,8 @@ Route::middleware(['auth:web', 'preventBackHistory'])->name('admin.')->prefix('a
     Route::post('subject/save', [SubjectController::class, 'store']);
     Route::get('subject/edit/{subject}', [SubjectController::class, 'edit']);
     Route::delete('subject/delete/{subject}', [SubjectController::class, 'destroy']);
-    Route::get('subjects/check/{subject_code}/{shs_term}', [SubjectController::class, 'checkSubjects']);
+    Route::get('subject/check/{subject_code}/{grade_level}', [SubjectController::class, 'checkSubject']);
+    // Route::get('subjects/check/{subject_code}/{shs_term}', [SubjectController::class, 'checkSubjects']);
 
     //subject shs route
     Route::post('subject/shs/save', [SubjectSHSController::class, 'store']);

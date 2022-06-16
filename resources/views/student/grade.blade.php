@@ -20,7 +20,7 @@
 
     <div class="card">
         <div class="card-header">
-            <p style="font-size: 25px;">Section: <span style="font-size: 15px" class="txtSectionName badge bg-success pt-1 pb-1"></span></p>
+            <p style="font-size: 25px;">Section: <span style="font-size: 15px" class="txtSectionName badge bg-info pt-1 pb-1"></span></p>
         </div>
         <div class="card-body pb-1">
             <div class="">

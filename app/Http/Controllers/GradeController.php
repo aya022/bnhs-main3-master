@@ -84,22 +84,6 @@ class GradeController extends Controller
                         'fourth' => $request->value,
                         'avg' => $request->avg
                     ]);
-
-
-                    // $dataAvg = Grade::select('avg', 'student_id', 'subject_id')->find($request->grade_id);
-                    // if ($dataAvg->avg < 75) {
-                    //     $enrollGradeLevel = Enrollment::select('grade_level')
-                    //         ->join('students', 'enrollments.student_id', 'students.id')
-                    //         ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
-                    //         ->where('school_years.status', 1)
-                    //         ->where('students.id', $dataAvg->student_id)->first();
-                    //     return BackSubject::create([
-                    //         'student_id' => $dataAvg->student_id,
-                    //         'subject_id' => $dataAvg->subject_id,
-                    //         'grade_level' => $enrollGradeLevel->grade_level,
-                    //         'prev_avg' => $dataAvg->avg,
-                    //     ]);
-                    // }
                     break;
                 default:
                     return false;
@@ -107,23 +91,6 @@ class GradeController extends Controller
             }
         }
     }
-
-    // public function partialNotify($id){
-
-    //     $data1 = Grade::select('subjects.descriptive_title','grades.created_at','student_id')
-    //     ->join('students','grades.student_id','students.id')
-    //     ->join('subjects','grades.subject_id','subjects.id')
-    //     ->where('grades.id',$id)
-    //     ->first();
-    
-    //    $data['title']=$data1->descriptive_title;
-    //    $data['bodyMessage']=auth()->user()->fullname . " is posted grade in ".$data1->descriptive_title ?? "Admin" ." is posted grade in ".$data1->descriptive_title;
-    //    $data['type']='grade';
-    //    $data['icon']='fa-check';
-    //    $data['created_at']=$data1->created_at;
-    //    $student=Student::whereId($data1->student_id)->first(); 
-    //    $student->notify(new NotifyUser($data));
-    // }
 
     public function searchBySection($grade_level)
     {
@@ -139,12 +106,9 @@ class GradeController extends Controller
         if (empty(Helper::activeAY())) {
             return response()->json(['warning' => 'No Academic Year Active']);
         } else {
-            // return $section;
-                // $data = Assign::select('subject_id')->where('section_id', $section->id)->pluck('subject_id')->toArray();
-                return response()->json(Subject::where('grade_level', $section->grade_level)
-                    ->whereIn('subject_for', [$section->class_type, 'GENERAL'])
-                    // ->whereNotIn('id', $data)
-                    ->get());
+            return response()->json(Subject::where('grade_level', $section->grade_level)
+                ->whereIn('subject_for', [$section->class_type, 'GENERAL'])
+                ->get());
         }
     }
 
@@ -164,9 +128,7 @@ class GradeController extends Controller
             ->get();
 
         /**
-         * 
          * register the subj of student using load the section when the teacher want to grade
-         * 
          */
         if (!empty($toGradeStudentID)) {
             foreach ($toGradeStudentID as $value) {

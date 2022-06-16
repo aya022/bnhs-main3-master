@@ -21,10 +21,9 @@ class SubjectController extends Controller
             'subject_for' => $request->subject_for,
         ]);
     }
-
-    public function checkSubjects($subject_code, $term)
+    public function checkSubject($subject_code, $grade_level)
     {
-        return Subject::where([['subject_code', $subject_code], ['term', $term]])->exists();
+        return Subject::where([['subject_code', $subject_code], ['grade_level', $grade_level]])->exists();
     }
 
     public function edit(Subject $subject)

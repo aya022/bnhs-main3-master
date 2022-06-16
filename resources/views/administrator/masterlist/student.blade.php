@@ -1,13 +1,16 @@
 @extends('../layout/app')
 @section('moreCss')
+{{-- <link rel="stylesheet" href="{{ asset('css/datatable/datatables.min.css') }}"> --}}
 <link rel="stylesheet" href="{{ asset('css/datatable/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/datatable/responsive.bootstrap4.min.css') }}">
 @endsection
 @section('content')
 <!-- Modal -->
 @include('administrator/masterlist/partial/modal')
+@include('administrator/masterlist/partial/upload')
 @include('administrator/masterlist/partial/studentDeleteModal')
 @include('administrator/masterlist/partial/resetTeacherPass')
+@include('administrator/masterlist/partial/req')
 {{-- Modal end --}}
 
 <div class="container-fluid">
@@ -57,10 +60,11 @@
                                 <th>Fullname</th>
                                 <th>Gender</th>
                                 <th>Contact No.</th>
-                                <th>Completer</th>
+                                {{-- <th>Completer</th> --}}
                                 <th>Username</th>
                                 {{-- <th>Passwsord</th> --}}
-                                <th width="15%">Action</th>
+                                <th>Requirement</th>
+                                <th width="15%" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -79,6 +83,15 @@
 <script src="{{ asset('js/datatable/responsive.bootstrap4.min.js') }}"></script>
 <script>
     const active={{ json_encode($studentId) }}
+
+    
+    $(document).ready(function() {
+        $('button').tooltip();
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('button'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new coreui.Tooltip(tooltipTriggerEl)
+        })
+    })
 </script>
 <script src="{{ asset('administrator/masterlist/student.js') }}"></script>
 @endsection

@@ -57,8 +57,7 @@ class Teacher extends Authenticatable
     {
         return ucwords("{$this->teacher_firstname} {$this->teacher_lastname}");
     }
-
-
+    
     public function section()
     {
         return $this->hasOne(Section::class);

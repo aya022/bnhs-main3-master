@@ -21,28 +21,6 @@ const subjectTable = (level) => {
     })
         .done(function (data) {
             if (data.length > 0) {
-                // data.forEach((val) => {
-                //     htmlHold += `
-                //     <tr>
-                //         <td>
-                //             ${i++}
-                //         </td>
-                //         <td>
-                //             ${val.subject_code}
-                //         </td>
-                //         <td>
-                //             ${val.descriptive_title}
-                //         </td>
-                //         <td>
-                //             ${val.subject_for}
-                //         </td>
-                //         <td>
-                //             <div class="btn-group" role="group" aria-label="Basic example">
-                //                 <button type="button" style="font-size:12px" class="btn btn-sm btn-info text-white pb-2 pt-2 pl-3 pr-3 editSubject editSub_${val.id}" id="${val.id}">Update</button>
-                //             </div>
-                //         </td>
-                //     </tr>`;
-                // });
                 data.forEach((val) => {
                     htmlHold += `
                     <tr>
@@ -58,14 +36,36 @@ const subjectTable = (level) => {
                         <td>
                             ${val.subject_for}
                         </td>
-                        <td class="text-center">
+                        <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button type="button" style="font-size:12px" class="btn btn-sm btn-info text-white pb-2 pt-2 pl-3 pr-3 editSubject editSub_${val.id}" id="${val.id}">Update</button>
-                                <button type="button" style="font-size:12px" class="btn btn-sm btn-danger text-white pb-2 pt-2 pl-3 pr-3 deleteSubject deleteSub_${val.id}" id="${val.id}">Delete</button>
                             </div>
                         </td>
                     </tr>`;
                 });
+                // data.forEach((val) => {
+                //     htmlHold += `
+                //     <tr>
+                //         <td>
+                //             ${i++}
+                //         </td>
+                //         <td>
+                //             ${val.subject_code}
+                //         </td>
+                //         <td>
+                //             ${val.descriptive_title}
+                //         </td>
+                //         <td>
+                //             ${val.subject_for}
+                //         </td>
+                //         <td class="text-center">
+                //             <div class="btn-group" role="group" aria-label="Basic example">
+                //                 <button type="button" style="font-size:12px" class="btn btn-sm btn-info text-white pb-2 pt-2 pl-3 pr-3 editSubject editSub_${val.id}" id="${val.id}">Update</button>
+                //                 <button type="button" style="font-size:12px" class="btn btn-sm btn-danger text-white pb-2 pt-2 pl-3 pr-3 deleteSubject deleteSub_${val.id}" id="${val.id}">Delete</button>
+                //             </div>
+                //         </td>
+                //     </tr>`;
+                // });
             } else {
                 htmlHold = `
                     <tr>
@@ -137,7 +137,11 @@ $('input[name="subject_code"]').on("blur", function () {
         })
             .done(function (data) {
                 if (data) {
-                    getToast("warning", "This subject", "is already added" );
+                    getToast(
+                        "warning",
+                        "Warning",
+                        "This subject is already added"
+                    );
                     $('input[name="subject_code"]').addClass("is-invalid");
                 } else {
                     $('input[name="subject_code"]').removeClass("is-invalid");

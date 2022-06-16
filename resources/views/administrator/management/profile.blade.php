@@ -140,7 +140,7 @@
                                     </div>
                                 </div>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="btnSaveSP">Save Changes</button>
+                        <button type="submit" class="btn btn-info text-white" id="btnSaveSP">Save Changes</button>
                     </form>
                 </div>
             </div>
@@ -183,7 +183,7 @@
                                             <input type="datetime-local" name="to" class="form-control" required><br>
                                         </div> --}}
                                         {{-- <input type="submit" name="btngrade" class="btn btn-primary"> --}}
-                                        <button type="submit" id="btngrade" class="btn btn-primary">Save Changes</button>
+                                        <button type="submit" id="btngrade" class="btn btn-info text-white">Submit</button>
                                     </form>
                                 </div>
                                 <div class="form-group col-lg-3 col-md-3 col-sm-12">

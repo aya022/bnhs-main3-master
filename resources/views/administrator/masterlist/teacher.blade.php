@@ -53,8 +53,8 @@
                     <div class="col-lg-4 col-md-4" style="text-align: right">
                         <!-- Button trigger modal -->
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button class="btn float-right btn-primary my-4"  id="btnMidalTeacher" data-coreui-toggle="modal" data-coreui-target="#staticBackdrop">
-                                <i class="fas fa-plus-circle"></i>&nbsp;Add Teacher
+                            <button class="btn float-right btn-info text-white my-4"  id="btnMidalTeacher" data-coreui-toggle="modal" data-coreui-target="#staticBackdrop">
+                                <i class="fas fa-plus-circle"></i>&nbsp;Add
                             </button>
                             {{-- <button class="btn float-right btn-success text-white my-4" id="btnModalExport" data-coreui-toggle="modal">
                                 <i class="fas fa-file-export"></i>&nbsp;Import Excel

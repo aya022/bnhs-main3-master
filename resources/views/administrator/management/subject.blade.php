@@ -96,8 +96,8 @@
                                         <option value="SPJ">SPJ - Special Program Journalism</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary btnSaveSubject text-white">Submit</button>
-                                <button type="submit" class="btn btn-warning cancelSubject text-white">Cancel</button>
+                                <button type="submit" class="btn btn-info text-white btnSaveSubject text-white">Submit</button>
+                                <button type="submit" class="btn btn-secondary text-white cancelSubject text-white">Cancel</button>
                             </form>
                         </div>
                     </div>
@@ -106,17 +106,7 @@
 
             <!-- SHS -->
             
-            <div class="card mb-4">
-                {{-- <div class="card-header">
-                    <div class="row justify-content-between">
-                        <div class="col-4">
-                            <p style="font-size: 20px;">Manage Subject for Senior High</p>
-                        </div>
-                        <div class="col-2 float-right">
-                            <button class="btn btn-primary add_subject"><i class="fas fa-plus-circle icon"></i> Add SH Subject</button>
-                        </div>
-                    </div>
-                </div> --}}
+            {{-- <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">
                         <div class="row justify-content-between">
@@ -151,7 +141,6 @@
                             <thead>
                                 <tr>
                                     <th>Type</th>
-                                    {{-- <th>Strand</th> --}}
                                     <th>Subject Code</th>
                                     <th>Descriptive Title</th>
                                     <th>Prerequisite</th>
@@ -162,7 +151,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div><!-- section-body -->
 </section>

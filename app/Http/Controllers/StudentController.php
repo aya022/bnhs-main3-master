@@ -45,6 +45,38 @@ class StudentController extends Controller
         return view('student/dashboard', compact('enrolledData','post'));
     }
 
+    public function upload1(Request $request)
+    {
+        Student::whereId(auth()->user()->id)->create([
+            'req_grade' => $request->new_req_grade,
+        ]);
+        return redirect()->back();
+    }
+
+    public function checkList(Student $student) {
+        return response()->json(
+            $student
+        );
+    }
+
+    public function checkListUpdate (Request $request) {
+
+        switch ($request->name) {
+            case 'grade':
+                return Student::whereId($request->studID)->update(['grade'=>$request->value]);
+                break;
+            case 'good':
+                return Student::whereId($request->studID)->update(['goodMoral'=>$request->value]);
+                break;
+            case 'psa':
+                return Student::whereId($request->studID)->update(['psa'=>$request->value]);
+                break;
+            default:
+                return false;
+                break;
+        }
+    }
+
     public function store(Request $request)
     {
         if (isset($request->id)) {
@@ -117,9 +149,6 @@ class StudentController extends Controller
             'province' =>  $request->province,
             'city' =>  $request->city,
             'barangay' =>  $request->barangay,
-            // 'last_school_attended' => $request->last_school_attended,
-            // 'last_schoolyear_attended' => $request->last_schoolyear_attended,
-            // 'isbalik_aral' => !empty($request->last_schoolyear_attended) ? 'Yes' : 'No',
             'mother_name' => $request->mother_name,
             'mother_contact_no' => $request->mother_contact_no,
             'father_name' => $request->father_name,
@@ -138,26 +167,6 @@ class StudentController extends Controller
         return response()->json($student);
     }
 
-    // public function list()
-    // {
-    //     $data = array();
-    //     $sqlData = Student::select("*")->whereNotNull('orig_password')->get();
-    //     foreach ($sqlData as $key => $value) {
-    //         $arr = array();
-    //         $arr['id'] = $value->id;
-    //         $arr['roll_no'] = $value->roll_no;
-    //         $arr['student_firstname'] = $value->student_firstname;
-    //         $arr['student_middlename'] = $value->student_middlename;
-    //         $arr['student_lastname'] = $value->student_lastname;
-    //         $arr['student_contact'] = $value->student_contact;
-    //         $arr['gender'] = $value->gender;
-    //         $arr['username'] = $value->username;
-    //         // $arr['orig_password'] = Crypt::decrypt($value->orig_password);
-    //         $data[] = $arr;
-    //     }
-    //     // return $data;
-    //     return response()->json(['data' => $data]);
-    // }
     public function list()
     {
         $data = array();
@@ -176,10 +185,11 @@ class StudentController extends Controller
             $arr['gender'] = $value->gender;
             $arr['completer'] = $value->completer;
             $arr['username'] = $value->username;
-            // $arr['orig_password'] = Crypt::decrypt($value->orig_password);
+            $arr['req_psa'] = $value->req_psa;
+            $arr['req_grade'] = $value->req_grade;
+            $arr['req_goodmoral'] = $value->req_goodmoral;
             $data[] = $arr;
         }
-        // return $data;
         return response()->json(['data' => $data]);
     }
 
@@ -217,7 +227,6 @@ class StudentController extends Controller
                 ->leftjoin('teachers', 'assigns.teacher_id', 'teachers.id')
                 ->where('grades.student_id', Auth::user()->id)
                 ->where('grades.section_id', $section)
-                // ->where('assigns.grade_level', $level)
                 ->where('assigns.section_id', $section)
                 ->get()
         );
@@ -239,37 +248,26 @@ class StudentController extends Controller
 
     public function enrollment()
     {
-        // $dataArr = array();
-        // $ifexist = Enrollment::select('enrollments.enroll_status', 'enrollments.action_taken', 'section_name', 'enrollments.grade_level','enrollments.curriculum','enrollments.tracking_no')
-        //     ->join('students', 'enrollments.student_id', 'students.id')
-        //     ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
-        //     ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
-        //     ->where('school_years.status', 1)
-        //     ->where('students.id', Auth::user()->id)
-        //     ->first();
-        // if ($ifexist) {
-        //     $dataArr['status'] = $ifexist->enroll_status;
-        //     $dataArr['action_taken'] = $ifexist->action_taken;
-        //     $dataArr['section'] = $ifexist->section_name;
-        //     $dataArr['curriculum'] = $ifexist->curriculum;
-        //     $dataArr['tracking_no'] = $ifexist->tracking_no;
-        //     $dataArr['grade_level'] = 'Grade ' . $ifexist->grade_level;
-        // } else {
-        //     $putDataForPreviuosLevel=Enrollment::select('enrollments.created_at','enrollments.enroll_status', 'enrollments.action_taken', 'section_name', 'enrollments.grade_level','enrollments.curriculum')
-        //         ->join('students', 'enrollments.student_id', 'students.id')
-        //         ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
-        //         ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
-        //         // ->where('school_years.status', 1)
-        //         ->where('students.id', Auth::user()->id)
-        //         ->latest()->first();
-        //         $dataArr['curriculum'] = $putDataForPreviuosLevel->curriculum;
-        //         $dataArr['grade_level'] = 'Grade ' . $putDataForPreviuosLevel->grade_level;
-        //         $dataArr['status'] = 'Ongoing';
-        //         $dataArr['action_taken'] = 'None';
-        // }
-        // $eStatus = $this->enrollStatus();
-        // return view('student/enrollment', compact('eStatus', 'dataArr'));
         $dataArr = array();
+        $stud = Student::select('req_grade', 'req_psa', 'req_goodmoral', 'grade','goodMoral','psa')
+            ->where('id', Auth::user()->id)
+            ->first();
+        if ($stud) {
+            $dataArr['req_grade'] = $stud->req_grade;
+            $dataArr['req_psa'] = $stud->req_psa;
+            $dataArr['req_goodmoral'] = $stud->req_goodmoral;
+            $dataArr['grade'] = $stud->grade;
+            $dataArr['goodMoral'] = $stud->goodMoral;
+            $dataArr['psa'] = $stud->psa;
+        } else {
+            $dataArr['req_grade'] = 'None';
+            $dataArr['req_psa'] = 'None';
+            $dataArr['req_goodmoral'] = 'None';
+            $dataArr['grade'] = 'None';
+            $dataArr['goodMoral'] = 'None';
+            $dataArr['psa'] = 'None';
+        }
+        
         $ifexist = Enrollment::select('enrollments.enroll_status', 'enrollments.action_taken', 'section_name', 'enrollments.grade_level','enrollments.curriculum','enrollments.tracking_no')
             ->join('students', 'enrollments.student_id', 'students.id')
             ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
@@ -289,12 +287,10 @@ class StudentController extends Controller
             ->join('students', 'enrollments.student_id', 'students.id')
             ->leftjoin('sections', 'enrollments.section_id', 'sections.id')
             ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
-            // ->where('school_years.status', 1)
             ->where('students.id', Auth::user()->id)
             ->latest()->first();
             $dataArr['curriculum'] = $putDataForPreviuosLevel->curriculum;
             $dataArr['grade_level'] = 'Grade ' . $putDataForPreviuosLevel->grade_level;
-            // $dataArr['status'] = $putDataForPreviuosLevel->enroll_status;
             $dataArr['status'] = 'Ongoing';
             $dataArr['action_taken'] = 'None';
         }
@@ -310,13 +306,11 @@ class StudentController extends Controller
 
     public function selfEnroll(Request $request)
     {
-        // $countFail =  BackSubject::where('back_subjects.student_id', $request->id)->where('remarks', 'none')->get();
         $countFail =  Grade::where('student_id', $request->id)->where('avg','<',75)->whereNull('remarks')->get();
         $action_taken = $countFail->count() == 0 ? 'Promoted' : ($countFail->count() < 3 ? 'Partialy Promoted' : 'Retained');
         $studInfo = Enrollment::select('grade_level', 'curriculum')->where('student_id', $request->id)->latest()->first();
 
         if ($action_taken == 'Retained') { //if student retained in year level means this is backsubject will reset in grade level
-            // BackSubject::where('student_id', $request->id)->where('grade_level', $countFail[0]->grade_level)->delete();
             $subjects = Subject::where('grade_level', $countFail[0]->grade_level)->whereIn('subject_for', [$studInfo->curriculum, 'GENERAL'])->get();
             foreach ($subjects as $subject) {
                 Grade::where('student_id',$request->id)
@@ -332,7 +326,6 @@ class StudentController extends Controller
 
         return Enrollment::create([
             'student_id' => $request->id,
-            // 'section_id' => $request->section_id,
             'grade_level' => $countFail->count() >= 3 ? $countFail[0]->grade_level : ($studInfo->grade_level + 1),
             'school_year_id' => Helper::activeAY()->id,
             'date_of_enroll' => date("d/m/Y"),
@@ -347,16 +340,7 @@ class StudentController extends Controller
     }
 
     /**
-     * 
-     * 
-     * 
-     * 
-     * 
      *  ADMIN SIDE TO
-     * 
-     * 
-     * 
-     * 
      */
     public function viewRecord(Student $student)
     {
@@ -420,22 +404,9 @@ class StudentController extends Controller
     }
 
     public function storeProfileImage(Request $request){
-        // $destinationPath = public_path('image/profile');
-        // $request->file->move($destinationPath,$name);
-        
-        
-        
         $this->deleteOldImage();
         $image = $request->file('file');
-        // $input['imagename'] = time().'.'.$image->extension();
         $name = time().rand(1000,10000).rand(1000,10000).'.'.$request->file->getClientOriginalExtension();
-        
-        // $filePath = public_path('image/profile');
-        
-        // $img = Image::make($image->path());
-        // $img->resize(110, 110, function ($const) {
-        //     $const->aspectRatio();
-        // })->save($filePath.'/'.$name);
         $filePath = public_path('image/profile');
         $image->move($filePath, $name);
         return Student::where('id',Auth::user()->id)->update(['profile_image'=>$name]);

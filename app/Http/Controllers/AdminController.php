@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Appointment;
+use App\Models\Chairman;
 use App\Models\Enrollment;
 use App\Models\Grade;
 use App\Models\SchoolProfile;
@@ -13,6 +14,7 @@ use App\Models\Strand;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
+use App\Models\Holiday;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -51,41 +53,6 @@ class AdminController extends Controller
             ->count();
         return view('administrator/dashboard', compact('enrollTotal', 'studentTotal', 'teacherTotal', 'ectionTotal', 'data', 'appointies'));
     }
-    // public function dashboard()
-    // {
-    //     $appointies = Appointment::select('fullname', 'address', 'purpose')
-    //         ->where('set_date', date('m/d/Y'))->limit(7)->orderBy('fullname')->get();
-    //     $data = response()->json(
-    //         Enrollment::select('enrollments.grade_level', DB::raw("COUNT(enrollments.grade_level) as total"))
-    //             ->join('sections', 'enrollments.section_id', 'sections.id')
-    //             ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
-    //             ->where('school_years.status', 1)
-    //             ->where('enrollments.enroll_status', 'Enrolled')
-    //             ->groupBy('enrollments.grade_level')
-    //             ->orderBy('enrollments.grade_level')
-    //             ->get()
-    //     );
-    //     $enrollTotal = Enrollment::join('school_years', 'enrollments.school_year_id', 'school_years.id')
-    //         ->where('school_years.status', 1)
-    //         ->whereIn('enroll_status', ['Pending'])->get()->count();
-    //     $studentTotal = Enrollment::join('school_years', 'enrollments.school_year_id', 'school_years.id')
-    //         ->where('school_years.status', 1)
-    //         ->whereIn('enroll_status', ['Enrolled'])->get()->count();
-    //     // $studentTotal = Student::get()->count();
-    //     $teacherTotal = Teacher::get()->count();
-    //     $ectionTotal = Section::join('school_years', 'sections.school_year_id', 'school_years.id')
-    //         ->where('school_years.status', 1)
-    //         ->get()
-    //         ->count();
-    //     $njhs = Enrollment::where('enroll_status', 'Enrolled')->where('student_type', 'JHS')
-    //         ->where('school_year_id', Config::get('activeAY')->id)
-    //         ->count();
-    //     $nshs = Enrollment::where('enroll_status', 'Enrolled')->where('student_type', 'SHS')
-    //         ->where('school_year_id', Config::get('activeAY')->id)
-    //         ->count();
-    //     return view('administrator/dashboard', compact('enrollTotal', 'studentTotal', 'teacherTotal', 'ectionTotal', 'data', 'appointies', 'njhs', 'nshs'));
-    // }
-
     // reset password
     public function resetPassword($id,$type){
         $passwordNow=rand(99,1000).'-'.rand(99,1000);
@@ -183,12 +150,9 @@ class AdminController extends Controller
     }
 
     public function backUpRemove($file_name){
-        // return ;
-        //  $file = Storage::disk('Laravel')->get($file_name);
         $directory=storage_path()."\app\Laravel\'".$file_name;
         $value= str_replace("'","",$directory);
         unlink($value);
-    //    return   Storage::deleteDirectory(storage_path('laravel/'.$file_name));
         return redirect()->back();
     }
 
@@ -272,14 +236,7 @@ class AdminController extends Controller
 
     public function storeAY(Request $request)
     {
-
-        // $data = SchoolYear::where('to', '>', $request->to)->get()->count();
-        // if ($data) {
-        //     return true;
-        // } else {
-        // SchoolYear::where('id', '>', 0)->update(['status' => 0]);
         return SchoolYear::updateOrCreate(['id' => $request->id], $request->all());
-        // }
     }
 
     public function listAY()
@@ -347,7 +304,6 @@ class AdminController extends Controller
                     ]
                 );
                 break;
-
             default:
                 return false;
                 break;

@@ -62,8 +62,8 @@
                                     <label class="mb-2">Confirm Password</label>
                                     <input type="password" name="confirmPassword" class="form-control" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary btnSaveUser">Submit</button>
-                                <button type="button" class="btn btn-warning cancelUser">Cancel</button>
+                                <button type="submit" class="btn btn-info text-white btnSaveUser">Submit</button>
+                                <button type="button" class="btn btn-secondary text-white cancelUser">Cancel</button>
                             </form>
                         </div>
                     </div>

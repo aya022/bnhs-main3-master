@@ -6,12 +6,6 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>eBNHS . Login</title>
     <link rel="shortcut icon" href="{{ asset('image/logo/bn.jpg') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('css/coreuistyle/coreui.min.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/coreuistyle/prism.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/coreuistyle/simple-bar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/coreuistyle/simplebar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/coreuistyle/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}"> --}}
 
     <link rel="stylesheet" href="{{ asset('css/coreuistyle/coreui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/coreuistyle/prism.css') }}">
@@ -23,7 +17,6 @@
     @yield('moreCss')
     <link rel="stylesheet" href="{{ asset('css/toast/iziToast.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css') }}">
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css"> --}}
 </head>
 
 <body>
@@ -108,16 +101,6 @@
     <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset('js/toast/iziToast.min.js') }}"></script>
     <script src="{{ asset('js/global.js') }}"></script>
-    {{-- <script src="{{ asset('js/coreui/coreui.bundle.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/coreui/prism-autoloader.min.js') }}"></script>
-    <script src="{{ asset('js/coreui/prism-normalize-whitespace.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/coreui/prism-unescaped-markup.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/coreui/prism.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/coreui/simplebar.min.js') }}"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.js"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/unescaped-markup/prism-unescaped-markup.min.js"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/normalize-whitespace/prism-normalize-whitespace.js"></script> --}}
 </body>
 
 </html>

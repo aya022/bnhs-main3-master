@@ -110,7 +110,7 @@
                                 <option value="12_1st">Grade 12 First Sem</option>
                                 <option value="12_2nd">Grade 12 Second Sem</option> --}}
                             </select>
-                            <button class="btn btn-primary" id="button-addon2" name="btnExport" type="button"><i class="fas fa-file-export"></i>&nbsp;&nbsp;Export Enrollee</button>
+                            <button class="btn btn-info text-white" id="button-addon2" name="btnExport" type="button"><i class="fas fa-file-export"></i>&nbsp;&nbsp;Export Enrollee</button>
                         </div>
                         {{-- <div class="mb-3">
                             

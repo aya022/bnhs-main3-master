@@ -208,32 +208,6 @@ class EnrollmentController extends Controller
 
     public function storeStudenRequest($request)
     {
-        // return  Student::create([
-        //     'roll_no' => $request->roll_no,
-        //     // 'curriculum' => $request->curriculum,
-        //     'student_firstname' => Str::title($request->student_firstname),
-        //     'student_middlename' => Str::title($request->student_middlename),
-        //     'student_lastname' => Str::title($request->student_lastname),
-        //     'date_of_birth' => $request->date_of_birth,
-        //     'student_contact' => $request->student_contact,
-        //     'gender' => $request->gender,
-        //     'region' => $request->region,
-        //     'province' => $request->province,
-        //     'city' => $request->city,
-        //     'barangay' => $request->barangay,
-        //     // 'last_school_attended' => $request->last_school_attended,
-        //     'last_schoolyear_attended' => $request->last_schoolyear_attended,
-        //     'isbalik_aral' => !empty($request->last_schoolyear_attended) ? 'yes' : 'no',
-        //     'mother_name' => Str::title($request->mother_name),
-        //     'mother_contact_no' => $request->mother_contact_no,
-        //     'father_name' => Str::title($request->father_name),
-        //     'father_contact_no' => $request->father_contact_no,
-        //     'guardian_name' => Str::title($request->guardian_name),
-        //     'guardian_contact_no' => $request->guardian_contact_no,
-        //     'username' => Helper::create_username($request->student_firstname, $request->student_lastname),
-        //     'orig_password' => Crypt::encrypt("bnhs"),
-        //     'password' => Hash::make("bnhs"),
-        // ]);
         return  Student::create([
             'roll_no' => $request->roll_no,
             'student_firstname' => Str::title($request->student_firstname),
@@ -310,71 +284,6 @@ class EnrollmentController extends Controller
                 return response()->json( [ 'warning' => 'This student is have already record' ] );
             }
         }
-
-        // if (Auth::user()->chairman_info->grade_level == 7) {
-        //     //grade 7 only
-        //     $isLRN = Student::where('roll_no', $lrn)->exists();
-        //     if ($isLRN) {
-        //         return response()->json(['warning' => 'This student are already Enrolled']);
-        //     }
-        // } else {
-        //     //grade 8-10 only
-        //     $student = Enrollment::join('students', 'enrollments.student_id', 'students.id')
-        //         ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
-        //         ->where('school_years.status', 1)
-        //         ->where('roll_no', $lrn)->exists();
-        //     // determin where grade level inrolled
-        //     $findStudentGL = Enrollment::join('students', 'enrollments.student_id', 'students.id')
-        //         ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
-        //         ->where('school_years.status', 1)
-        //         ->where('roll_no', $lrn)
-        //         ->first();
-        //     if ($student) {
-        //         return response()->json(['warning' => 'You are already Enrolled in ' . $findStudentGL->curriculum . ' curriculum <br> grade ' . $findStudentGL->grade_level . ' student']);
-        //     } else {
-        //         if ($status == "upperclass") {
-        //             // $isAlreadyinMasterlist = Student::where('roll_no', $lrn)->where('curriculum', $curriculum)->exists();
-        //             $isAlreadyinMasterlist = Enrollment::join('students', 'enrollments.student_id', 'students.id')
-        //                 ->where('students.roll_no', $lrn)
-        //                 ->where('enrollments.curriculum', $curriculum)
-        //                 ->exists();
-        //             $findStudent = Student::where('students.roll_no', $lrn)->first();
-        //             if ($isAlreadyinMasterlist) {
-        //                 //get all stundent information
-        //                 return response()->json([
-        //                     'student' => $findStudent
-        //                 ]);
-        //             } else {
-        //                 //if curriculum is not belong to the chairman enrollment form!!!
-        //                 if ($findStudent) {
-        //                     return response()->json(['warning' => '
-        //                     This student is not enrolled in this program (curriculum), <br>and his or her curriculum is  included to <b>' . $findStudent->curriculum . '</b>']);
-        //                 } else {
-        //                     return response()->json(
-        //                         [
-        //                             'warning' => 'This student is can\'t find'
-        //                         ]
-        //                     );
-        //                 }
-        //             }
-        //         } else {
-        //             $state = Enrollment::join('students', 'enrollments.student_id', 'students.id')
-        //                 ->join('school_years', 'enrollments.school_year_id', 'school_years.id')
-        //                 ->where('school_years.status', 1)
-        //                 ->where('roll_no', $lrn)
-        //                 ->exists();
-        //             if ($state) {
-        //                 return response()->json(
-        //                     [
-        //                         'warning' => 'This student is already enrolled'
-        //                     ]
-        //                 );
-        //             } else {
-        //                 return false;
-        //             }
-        //         }
-        //     }
-        // }
     }
 // section filter
     public function filterSection($curriculum)
@@ -419,23 +328,6 @@ class EnrollmentController extends Controller
             $this->enrolledSubject($request->enroll_id);
         }
     }
-
-    // public function setSection(Request $request)
-    // {
-    //     if ($request->status_now == 'force') {
-    //         if ($this->totalStudentInSection($request->section_again) >= 45) {
-    //             return response()->json(['warning' => 'This section reach the maximum number of student']);
-    //         } else {
-    //             $this->updateSection($request);
-    //         }
-    //     } else {
-    //         if ($this->totalStudentInSection($request->section_again) > 40) {
-    //             return response()->json(['warning' => 'Section is full']);
-    //         } else {
-    //             $this->updateSection($request);
-    //         }
-    //     }
-    // }
     
     public function setSection(Request $request)
     {
@@ -452,28 +344,6 @@ class EnrollmentController extends Controller
                 $this->updateSection($request);
             }
         }
-
-        // $stud_data = Enrollment::select('student_id', 'enroll_status', 'section_id')->whereId($request->enroll_id)->first();
-        // if ($stud_data->enroll_status == 'Pending') {
-        //     $this->updateUserAccount($stud_data->student_id);
-        //     return  Enrollment::whereId($request->enroll_id)
-        //         ->where('school_year_id', Helper::activeAY()->id)
-        //         ->update([
-        //             'section_id' => $request->section,
-        //             'enroll_status' => 'Enrolled',
-        //         ]);
-        // } else {
-        //     Enrollment::where('section_id',$stud_data->section_id)
-        //     ->where('student_id',$stud_data->student_id)
-        //     ->update([
-        //         'section_id'=>$request->section
-        //     ]);
-        //     return  Enrollment::whereId($request->enroll_id)
-        //         ->where('school_year_id', Helper::activeAY()->id)
-        //         ->update([
-        //             'section_id' => $request->section
-        //     ]);
-        // }
     
     }
 

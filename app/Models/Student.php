@@ -19,7 +19,6 @@ class Student extends Authenticatable
         'username' => 'string',
     ];
 
-
     public function getFullnameAttribute()
     {
         return ucwords("{$this->student_firstname} {$this->student_lastname}");

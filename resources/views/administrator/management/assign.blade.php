@@ -98,8 +98,8 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary btnSaveAssign">Submit</button>
-                                <button type="submit" class="btn btn-warning cancelAssign">Cancel</button>
+                                <button type="submit" class="btn btn-info text-white btnSaveAssign">Submit</button>
+                                <button type="submit" class="btn btn-secondary text-white cancelAssign">Cancel</button>
                             </form>
                         </div>
                     </div>

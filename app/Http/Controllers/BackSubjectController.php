@@ -19,11 +19,6 @@ class BackSubjectController extends Controller
             ->where('grades.avg','<',75)
             ->where('students.id', auth()->user()->id)
             ->get()
-            // BackSubject::select('subjects.descriptive_title', 'back_subjects.id', 'back_subjects.grade_level', 'back_subjects.prev_avg', 'back_subjects.avg_now', 'back_subjects.remarks')
-            //     ->join('students', 'back_subjects.student_id', 'students.id')
-            //     ->join('subjects', 'back_subjects.subject_id', 'subjects.id')
-            //     ->where('students.id', Auth::user()->id)
-            //     ->get()
         );
     }
 
@@ -34,20 +29,10 @@ class BackSubjectController extends Controller
             "data"=>Grade::select('grades.student_id', 'students.roll_no', DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname"))
             ->join('students','grades.student_id','students.id')
             ->join('subjects','grades.subject_id','subjects.id')
-            // ->whereNull('grades.avg')
-            // ->whereIn('grades.remarks',[null,'Passed'])
             ->where('grades.avg','<',75)
-            // ->whereNull('grades.avg','<',75)
             ->groupBy('grades.student_id', 'students.roll_no', 'fullname')
             ->get()]
         );
-
-        // return response()->json([
-        //     'data' => BackSubject::select('back_subjects.student_id', 'students.roll_no', DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname"))
-        //         ->join('students', 'back_subjects.student_id', 'students.id')
-        //         ->groupBy('back_subjects.student_id', 'students.roll_no', 'fullname')
-        //         ->get()
-        // ]);
     }
 
     public function backrecordView($id)
@@ -58,26 +43,7 @@ class BackSubjectController extends Controller
             ->join('subjects','grades.subject_id','subjects.id')
             ->where('grades.avg','<',75)
             ->where('students.id', $id)
-            // ->whereIn('grades.remarks',[null,'Passed'])
-            // ->orWhereIn('grades.remarks',[null,'Passed'])
             ->get()
-
-            // BackSubject::select(
-            //     'students.id as student_id',
-            //     'subjects.descriptive_title',
-            //     'back_subjects.id',
-            //     'back_subjects.grade_level',
-            //     'back_subjects.prev_avg',
-            //     'back_subjects.avg_now',
-            //     'back_subjects.remarks',
-            //     'back_subjects.conducted_from',
-            //     'back_subjects.conducted_to',
-            //     DB::raw("CONCAT(students.student_lastname,', ',students.student_firstname,' ',students.student_middlename) as fullname")
-            // )
-            //     ->join('students', 'back_subjects.student_id', 'students.id')
-            //     ->join('subjects', 'back_subjects.subject_id', 'subjects.id')
-            //     ->where('students.id', $id)
-            //     ->get()
         );
     }
 
@@ -91,12 +57,6 @@ class BackSubjectController extends Controller
                 'conducted_to' => $request->conducted_to,
             ]);
         }
-        // if (!empty($request->avg_now)) {
-        //     return BackSubject::where('id', $id)->update([
-        //         'avg_now' => $request->avg_now,
-        //         'remarks' => 'Passed',
-        //     ]);
-        // }
     }
 
     public function monitorSeniorHighFailSubject($student)

@@ -261,9 +261,6 @@ class ChairmanController extends Controller
                     "roll_no",
                     "student_contact",
                     "section_name",
-                    // "students.created_at"->format('d.m.Y'),
-                    // "students.created_at",
-                    // "DATE(students.created_at)",
                     DB::raw("CONCAT(student_lastname,', ',student_firstname,' ', student_middlename) AS fullname")
                 )
                     ->selectRaw("DATE(students.created_at) AS date")

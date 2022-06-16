@@ -13,7 +13,7 @@ let CheckandVerify = () => {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 };
 
@@ -49,6 +49,6 @@ $(".btnCheckandVerify").on("click", function () {
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });

@@ -26,26 +26,48 @@ const studentTable = $("#studentTable").DataTable({
         },
         { data: "gender" },
         { data: "student_contact" },
+        // {
+        //     data: null,
+        //     render: function (data) {
+        //         return data.completer=='No'? `<span class="badge bg-info pt-1 pb-1">No</span>`: `<span class="badge bg-success pt-1 pb-1">Completer</span>`;
+        //     }
+        // },
+        { data: "username" },
+        // { data: "orig_password" },
+        // {
+        //     data: null,
+        //     render: function (data) {
+        //         return `
+        //         <button type="button" class="btn btn-info btn-sm text-white upload btnUpload_${data.id}  pl-3 pr-3" id="${data.id}">Upload</button>`;
+        //     },
+        // },
         {
             data: null,
             render: function (data) {
-                return data.completer=='No'? `<span class="badge bg-info pt-1 pb-1">No</span>`: `<span class="badge bg-success pt-1 pb-1">Completer</span>`;
+                if (data.req_grade != null || data.req_goodmoral != null || data.req_psa != null) {
+                     return `
+                        <button type="button" class="btn text-white pt-0 pb-0 pl-3 pr-3 btnRequirement" value="${data.fullname + "^" + data.req_grade + '^' + data.req_goodmoral + '^' + data.req_psa}"><i class="fas fa-eye text-info"></i></button>
+                    `;
+                } else {
+                    return `<button type="button"  data-bs-toggle="tooltip" data-bs-placement="top" title="Update requirements" class="btn text-white upload pl-3 pr-3" value="${data.id}"><i class="fas fa-pen text-info"></i></button>`;
+                }        
+                // return `<button type="button"  data-bs-toggle="tooltip" data-bs-placement="top" title="Update requirements" class="btn text-white upload pl-3 pr-3" value="${data.id}"><i class="fas fa-pen text-info"></i></button>`;           
             }
         },
-        { data: "username" },
-        // { data: "orig_password" },
         {
             data: null,
             render: function (data) {
                 let fullname =  data.student_lastname+", "+data.student_firstname+" "+data.student_middlename
                 return `
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-sm btn-danger text-white sdelete btnDelete_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}">Remove</button>
-                    <button type="button" class="btn btn-sm btn-info  text-white sedit btnEdit_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}">Update</button>
-                    <button type="button" class="btn btn-sm btn-warning text-white sreset btnReset_${data.id} pl-3 pr-3" id="${data.id}" value="${fullname}">Reset</button>
-                    ${active.filter(val => (val == data.id)) != '' ? `
-                    <a href="student/view/record/${data.id}" class="btn btn-sm btn-secondary text-white vstudent btnView_${data.id} pt-0 pb-0 " id="${data.id}">View</a>
-                    ` :""}
+                <div class="text-center">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-sm btn-info text-white sedit btnEdit_${data.id}  pl-3 pr-3" id="${data.id}">Update</button>
+                        <button type="button" class="btn btn-sm btn-dark sdelete btnDelete_${data.id}  pl-3 pr-3" id="${data.id}">Archive</button>
+                        <button type="button" class="btn btn-sm btn-info text-white  sreset btnReset_${data.id} pl-3 pr-3  " id="${data.id}" value="${fullname}">Reset</button>
+                        ${active.filter(val => (val == data.id)) != '' ? `
+                        <a href="student/view/record/${data.id}" class="btn btn-sm btn-info text-white  vstudent btnView_${data.id} pl-3 pr-3" id="${data.id}">Grades</a>
+                        ` :""}
+                    </div>
                 </div>`;
             },
             /**
@@ -56,6 +78,89 @@ const studentTable = $("#studentTable").DataTable({
              */
         },
     ],
+});
+/**
+ * upload requirement
+ */
+ $(document).on("click", ".upload", function () {
+    let id = $(this).val();
+    $('.btnUpload1').val(id);
+    // $('.btnUpload2').val(id);
+    // $('.btnUpload3').val(id);
+        
+
+    //display data
+    $.ajax({
+        url: "student/upload/list/" + id,
+        type: "GET",
+    }).done(function(data){
+        $('.sname').text(data.student_firstname+' '+data.student_lastname)
+        $("input[name='studID']").val(data.id)
+        $('input[name="grade"]').prop('checked',data.grade);
+        $('input[name="good"]').prop('checked',data.goodMoral);
+        $('input[name="psa"]').prop('checked',data.psa);
+        $("#uploadModal").modal("show");
+    }) .fail(function (jqxHR, textStatus, errorThrown) {
+        console.log(jqxHR, textStatus, errorThrown);
+        getToast("error", "Error", errorThrown);
+    });
+}); 
+
+
+//insert data
+
+$(".checkme").on('click',function(){
+    let name=$(this).attr("name");
+    let studID  = $("input[name='studID']").val()
+    $.ajax({
+        url: "student/upload/list/update",
+        type: "POST",
+        data: {
+            studID,
+            name,
+            value:$(this).is(":checked")?1:0,
+            _token: $('input[name="_token"]').val()
+        }
+      
+    })
+        .done(function (response) {
+            getToast("success", "Successfully", "Checklist updated");
+            studentTable.ajax.reload();
+        })
+        .fail(function (jqxHR, textStatus, errorThrown) {
+            console.log(jqxHR, textStatus, errorThrown);
+            getToast("error", "Error", errorThrown);
+        });
+})
+
+
+$("#studentReq").submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: "student/upload" + $(this).val(),
+        type: "POST",
+        data: new FormData(this),
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function () {
+            $("#btnUpload1").html(`Uploading...
+                <div class="spinner-border spinner-border-sm" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>`);
+        },
+    })
+        .done(function (response) {
+            $("#btnUpload1").html("Save");
+            getToast("success", "Successfully", "Uploaded requirement");
+            $("#studentReq")[0].reset();
+        $("#uploadModal").modal("hide");
+            studentTable.ajax.reload();
+        })
+        .fail(function (jqxHR, textStatus, errorThrown) {
+            console.log(jqxHR, textStatus, errorThrown);
+            getToast("error", "Error", errorThrown);
+        });
 });
 
 /**
@@ -152,40 +257,6 @@ $("#studentForm").submit(function (e) {
         });
 });
 
-// $(document).on("click", ".sdelete", function () {
-//     let id = $(this).attr("id");
-//     $.ajax({
-//         url: "student/delete/" + id,
-//         type: "DELETE",
-//         data: { _token: $('input[name="_token"]').val() },
-//         beforeSend: function () {
-//             $(".btnDelete_" + id)
-//                 .html(
-//                     `
-//             <div class="spinner-border spinner-border-sm" role="status">
-//                 <span class="sr-only">Loading...</span>
-//             </div>`
-//                 )
-//                 .attr("disabled", true);
-//         },
-//     })
-//         .done(function (response) {
-//             $(".btnDelete_" + id)
-//                 .html("Delete")
-//                 .attr("disabled", false);
-//             getToast("success", "Successfully", "deleted one record");
-//             $("#studentForm")[0].reset();
-//             studentTable.ajax.reload();
-//         })
-//         .fail(function (jqxHR, textStatus, errorThrown) {
-//             console.log(jqxHR, textStatus, errorThrown);
-//             $(".btnDelete_" + id)
-//                 .html("Delete")
-//                 .attr("disabled", false);
-//             getToast("error", "Error", errorThrown);
-//         });
-// });
-
 // delete Modal
 $(document).on("click", ".sdelete", function () {
     let id = $(this).attr("id");
@@ -209,7 +280,7 @@ $(document).on("click", ".deleteStudent", function () {
         $(".deleteStudent").html("Yes");
         $(this).val('')
         $("#studentDeleteModal").modal("hide");
-        getToast("success", "Successfully", "Deleted one record");
+        getToast("success", "Successfully", "Archive one record");
         $("#studentForm")[0].reset();
         studentTable.ajax.reload();
     })
@@ -291,3 +362,31 @@ $(document).on("click", ".sedit", function () {
             getToast("error", "Error", errorThrown);
         });
 });
+
+$(document).on('click', ".btnRequirement", function () {
+    let dirNow = $('input[name="dirNow"]').val();
+    let req_grade = document.getElementById("req_grade");
+    req_grade.setAttribute('src', dirNow + $(this).val().split("^")[1]);
+    let req_psa = document.getElementById("req_psa");
+    req_psa.setAttribute('src', dirNow + $(this).val().split("^")[3]);
+    let req_goodmoral = document.getElementById("req_goodmoral");
+    req_goodmoral.setAttribute('src', dirNow + $(this).val().split("^")[2]);
+    let datecreate = document.getElementById("dateSub");
+    $("#viewRequirementTitle").text($(this).val().split("^")[0]);
+    $("#viewRequirementModal").modal("show")
+});
+
+$("#req_grade").on('click', function () {
+    urlNow = $(this).attr("src");
+    window.open(urlNow,'_target')
+})
+
+$("#req_goodmoral").on('click', function () {
+    urlNow = $(this).attr("src");
+    window.open(urlNow,'_target')
+})
+
+$("#req_psa").on('click', function () {
+    urlNow = $(this).attr("src");
+    window.open(urlNow,'_target')
+})

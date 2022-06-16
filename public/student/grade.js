@@ -106,7 +106,7 @@ let gradeTable = (level, section) => {
             }
             $("#gradeTable").html(htmlHold);
             $("#overallGrade").text(Math.round(overallGrade / 8));
-            $("#overallRemark").text(Math.round(overallGrade / 8) > 75 ? "Passed" : "Failed" );
+            $("#overallRemark").text(Math.round(overallGrade / 8) > 75 ? "Passed" : "Incomplete" );
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);

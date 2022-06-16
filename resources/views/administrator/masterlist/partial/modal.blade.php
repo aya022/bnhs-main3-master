@@ -17,8 +17,10 @@
                             <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                                 aria-controls="nav-profile" aria-selected="false">Parent Details</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="contact-tab2" data-toggle="tab" href="#uploadReq" role="tab" aria-controls="contact" aria-selected="false">Upload Requirements</a>
+                        </li>
                     </ul>
-
 
                     {{-- <form id="studentForm">@csrf --}}
                         <input type="hidden" name="id">
@@ -103,8 +105,7 @@
                                     </div>
                                     <div class="form-group mb-3 col-md-4">
                                         <label class="mb-2">Contact No.</label>
-                                        <input type="text" class="form-control" name="student_contact"
-                                            pattern="^[0-9]{11}$" onkeypress="return numberOnly(event)" maxlength="11">
+                                        <input type="text" class="form-control" name="student_contact" onkeypress="return numberOnly(event)" maxlength="11">
                                     </div>
                                 </div>
 
@@ -163,12 +164,49 @@
                                 </div>
                                 {{-- end parent details here --}}
                             </div>
+                            <form id="studentReq" method="POST">@csrf
+                                <div class="tab-pane fade" id="uploadReq" role="tabpanel" aria-labelledby="contact-tab2">
+                                    <!-- tab 3 -->
+                                    <div class="mt-3">
+                                        <div class="alert alert-warning">
+                                            <small><b>File format: (png, jpeg, jpg)</b></small>
+                                        </div>
+                                        <div class="form-group mt-2 row">
+                                            <label class="form-label" for="customFile">Latest Copy of Grades</label>
+                                            <div class="col-8 mb-3">
+                                                <input type="file" class="form-control" name="req_grade" accept="image/*" onchange="validate_fileupload(this.value);">
+                                            </div>
+                                            <div class="col-4">
+                                                <button type="submit" class="btn btn-info text-white pl-4 pr-4" id="btnUpload1">Upload</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="form-label" for="customFile">Good Moral Certificate</label>
+                                            <div class="col-8 mb-3">
+                                                <input type="file" class="form-control" name="req_goodmoral" accept=".png,.jpg,.jpeg"  onchange="validate_fileupload(this.value);">
+                                            </div>
+                                            <div class="col-4">
+                                                <button type="submit" class="btn btn-info text-white pl-4 pr-4" id="btnUpload2">Upload</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="form-label" for="customFile">PSA Birth Certificate</label>
+                                            <div class="col-8 mb-3">
+                                                <input type="file" class="form-control" name="req_psa" accept=".png,.jpg,.jpeg"  onchange="validate_fileupload(this.value);">
+                                            </div>
+                                            <div class="col-4">
+                                                <button type="submit" class="btn btn-info text-white pl-4 pr-4" id="btnUpload3">Upload</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     {{-- </form> --}}
                 </div>
                 <div class="modal-footer pt-0">
-                    <button type="button" class="btn btn-warning pl-2 pr-2" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary pl-4 pr-4" id="btnSaveStudent">Save</button>
+                    <button type="button" class="btn btn-secondary text-white pl-2 pr-2" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info text-white pl-4 pr-4" id="btnSaveStudent">Save</button>
                 </div>
             </div>
         </div>

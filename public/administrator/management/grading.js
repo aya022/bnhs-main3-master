@@ -10,7 +10,7 @@ let searchBySection = (grade_level) => {
             if (data.warning) {
                 getToast("warning", "Warning", data.warning);
             } else {
-                sectionHTML += `<label>Section</label>
+                sectionHTML += `<label class="mb-2">Section</label>
                         <select class="form-select" name="section_id">`;
                         sectionHTML += `<option>Choose Section</option>`;
                 data.forEach((element) => {
@@ -34,7 +34,7 @@ let searhBySubject = (section) => {
         dataType: "json",
     })
         .done(function (data) {
-            subjectHTML += ` <label>Subject</label>
+            subjectHTML += ` <label class="mb-2">Subject</label>
                 <select class="form-select" name="subject_id">`;
             subjectHTML += `<option>Choose Subject</option>`;
             data.forEach((element) => {

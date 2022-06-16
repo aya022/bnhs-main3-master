@@ -10,7 +10,7 @@
                 <p class="alert alert-warning">
                     You can retrieve this on archive after removing from the list.
                 </p>
-                Are you sure you want to remove this teacher?
+                <p>Are you sure you want to archive this teacher?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger text-white pl-3 pr-3 deleteTeacher">Yes</button>

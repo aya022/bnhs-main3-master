@@ -174,9 +174,9 @@
                                 @forelse ($appointies as $item)
                                 <li class="media">
                                     <div class="media-body">
-                                        <div class="float-right">{{  $item->created_at->diffForHumans() }}</div>
-                                        <div class="media-title">{{ $item->fullname }}</div>
-                                        <span class="text-small text-muted">{{ $item->address }}</span>
+                                        <div class="float-right text-primary"><b>{{  $item->created_at->diffForHumans() }}</b></div>
+                                        <div class="media-title"><b>{{ $item->fullname }}</b></div>
+                                        <span class="text-small text-muted" style="text-transform: capitalize;">{{ $item->address }}</span>
                                     </div><hr>
                                 </li>
                                 @empty
@@ -184,7 +184,7 @@
                                 @endforelse
                             </ul>
                             <div class="text-center pt-1 pb-1">
-                                <a href="{{ route('admin.appointment') }}" class="btn btn-primary btn-sm btn-round">
+                                <a href="{{ route('admin.appointment') }}" class="btn btn-info btn-sm text-white">
                                     View All
                                 </a>
                             </div>

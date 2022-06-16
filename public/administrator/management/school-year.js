@@ -22,13 +22,12 @@ let school_year_Table = $("#school_year_Table").DataTable({
         {
             data: null,
             render: function (data) {
-                return `<label class="custom-switch">
-                            <input type="radio" name="option" class="custom-switch-input switchMe "
+                return `<div class="form-check form-switch form-switch-lg">
+                            <input type="checkbox" name="option" class="form-check-input switchMe "
                             id="${data.id}" ${
                     data.status == "1" ? "checked" : ""
                 }>
-                            <span class="custom-switch-indicator"></span>
-                        </label>
+                        </div>
                         `;
             },
         },

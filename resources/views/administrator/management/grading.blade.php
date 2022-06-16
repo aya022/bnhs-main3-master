@@ -38,7 +38,7 @@
         </div>
         <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Manage Grade</h5><hr>
                     <div class="table-responsive">
@@ -74,7 +74,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Filter data</h5><hr>
                     <div class="form-group mb-3">@csrf
-                        <label class="mb-2"></label>Grade Level</label>
+                        <label class="mb-2">Grade Level</label>
                         <select class="form-select" name="grade_level">
                             <option >Choose Grade Level</option>
                             <option value="7">Grade 7</option>

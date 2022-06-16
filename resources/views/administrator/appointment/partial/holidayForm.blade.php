@@ -23,15 +23,15 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="mystatus" class="mb-2">Status</label>
-                        <select id="mystatus" class="form-control" name="status" required>
+                        <select id="mystatus" class="form-select" name="status" required>
                             <option value="Enable">Enable</option>
                             <option value="Disable">Disable</option>
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning text-white btnCancelHoliday">Close</button>
-                    <button type="submit" class="btn btn-primary btnSaveHoliday">Save</button>
+                    <button type="button" class="btn btn-secondary text-white btnCancelHoliday">Close</button>
+                    <button type="submit" class="btn btn-info text-white btnSaveHoliday">Save</button>
                 </div>
             </div>
         </div>

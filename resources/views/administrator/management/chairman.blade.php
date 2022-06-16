@@ -104,8 +104,8 @@
                                             </select>
                                         </div>
                                         <div class="forrm-group">
-                                            <button class="btn btn-primary btnSavechairman" id="button-addon2" name="btnExport" type="submit">Submit</button>
-                                            <button class="btn btn-warning cancelchairman" id="button-addon2" name="btnExport" type="submit">Cancel</button>
+                                            <button class="btn btn-info text-white btnSavechairman" id="button-addon2" name="btnExport" type="submit">Submit</button>
+                                            <button class="btn btn-secondary text-white cancelchairman" id="button-addon2" name="btnExport" type="submit">Cancel</button>
                                         </div>
                                     {{-- </div> --}}
                                 {{-- </div> --}}

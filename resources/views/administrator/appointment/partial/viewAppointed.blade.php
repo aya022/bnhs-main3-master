@@ -9,14 +9,22 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <div class="float-left mb-3">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-sm btn-icon icon-left btn-info text-white" id="printAppointed">
+                            <i class="fas fa-print"></i> Print Now
+                        </button>
+                        <button type="button" class="btn btn-sm btn-icon icon-left btn-info text-white" id="btnSendEmail">
+                            <i class="fa fa-paper-plane"></i> Send Email for All
+                        </button>
+                    </div>
+                    {{-- <div class="float-left mb-3">
                         <button type="button" class="btn btn-icon icon-left btn-info text-white mr-3" id="printAppointed">
                             <i class="fas fa-print"></i> Print Now
                         </button>
                         <button type="button" class="btn btn-icon icon-left btn-primary mr-3" id="btnSendEmail">
                             <i class="fa fa-paper-plane"></i> Send Email for All
                         </button>
-                    </div>
+                    </div> --}}
                     <div class="row">
                         <div class="col-12">
                             {{-- <p class="alert alert-info">
@@ -64,8 +72,10 @@
                         </textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning text-white sendCancel">Close</button>
-                        <button type="submit" class="btn btn-primary btnSendEmail">Send</button>
+                        <button type="button" class="btn btn-secondary text-white sendCancel">Close</button>
+                        <button type="submit" class="btn btn-info text-white btnSendEmail">
+                            <i class="fa fa-paper-plane"></i>  Send
+                        </button>
                     </div>
                 </form>
             </div>

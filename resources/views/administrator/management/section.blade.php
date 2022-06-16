@@ -102,9 +102,9 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary btnSaveSection"
+                                <button type="submit" class="btn btn-info text-white btnSaveSection"
                                     {{ (session()->has('sessionAY')!="")?now()->year==(1-session('sessionAY')->to)?'disabled':'':'' }}>Submit</button>
-                                <button type="submit" class="btn btn-warning text-white cancelSection">Cancel</button>
+                                <button type="submit" class="btn btn-secondary text-white text-white cancelSection">Cancel</button>
                             </form>
                         </div>
                     </div>

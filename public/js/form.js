@@ -143,7 +143,7 @@ $("#enrollForm").submit(function (e) {
         .fail(function (jqxHR, textStatus, errorThrown) {
             $(".btnEnroll").html("Submit");
             $(".btnEnroll").attr("disabled", false);
-            getToast("error", "Eror", errorThrown);
+            // getToast("error", "Eror", errorThrown);
         });
 });
 

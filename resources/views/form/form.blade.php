@@ -77,40 +77,50 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-12 mt-3">
                                 <p style="font-size: 13px;" class="alert alert-warning shadow">
                                     <b><i class="fas fa-exclamation-triangle"></i> Please put N/A if not Applicable.<br>
                                     <i class="fas fa-exclamation-triangle"></i> Please fill out all the required field and provide an accurate and complete information to avoid inconvenience.</b>
                                 </p>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- -->
                         <div class="card card-primary shadow mt-2">
                             <div class="card-body">
-                                <h3>Enrollment Form</h3>
-                            <form id="enrollForm" autocomplete="off">@csrf
+                                <h3>Enrollment Form</h3><hr>
+                                    <p style="font-size: 15px;">
+                                        <i class="fas fa-exclamation-triangle text-warning"></i> Please put N/A if not Applicable.<br>
+                                            <b style="color: #ff0000">*</b><i> Required.</i>
+                                    </p>
+                            <form id="enrollForm" class="needs-validation" novalidate="" autocomplete="off">@csrf
                                 <div class="row">
                                     <div class="col-md-6 col-lg-4">
                                         <div class="row">
                                             <div class="form-group col-12 mb-3">
-                                                <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Learning Reference Number (LRN)</label>
+                                                <label class="form-label">Learning Reference Number (LRN) <b style="color: #ff0000">*</b></label>
                                                 <input name="roll_no" type="text" class="form-control" onkeypress="return numberOnly(event)" maxlength="12" required autofocus>
+                                                <div class="invalid-feedback">
+                                                    LRN is required!
+                                                </div>
                                             </div>
                                             <div class="form-group col-12 mb-3">
-                                                <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Status</label>
-                                                <select name="status" class="form-select" id="">
-                                                    <option value="">Select Status</option>
+                                                <label class="form-label">Status <b style="color: #ff0000">*</b></label>
+                                                <select name="status" class="form-select" id="" required>
+                                                    <option selected disabled value="">Select Status <b style="color: #ff0000">*</b></option>
                                                     <option value="new">Incoming grade 7</option>
                                                     {{-- <option value="new_eleven">Incoming grade 11</option> --}}
                                                     <option value="transferee">Transferee</option>
                                                     <option value="balikAral">Balik Aral</option>
                                                 </select>
+                                                <div class="invalid-feedback">
+                                                    Status is required!
+                                                </div>
                                             </div>
                                             <div class="form-group col-12 mb-3">
-                                                <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Grade level to Enroll</label>
-                                                <select name="grade_level" class="form-select" id="">
-                                                    <option value="">Select Grade level</option>
+                                                <label class="form-label">Grade level to Enroll <b style="color: #ff0000">*</b></label>
+                                                <select name="grade_level" class="form-select" id="" required>
+                                                    <option selected disabled value="">Select Grade level</option>
                                                     <option value="7">Grade 7</option>
                                                     <option value="8">Grade 8</option>
                                                     <option value="9">Grade 9</option>
@@ -118,34 +128,49 @@
                                                     {{-- <option value="11">Grade 11</option>
                                                     <option value="12">Grade 12</option> --}}
                                                 </select>
+                                                <div class="invalid-feedback">
+                                                    Grade Level is required!
+                                                </div>
                                             </div>
                                         </div>
                         
                                             <div class="form-group mb-3" id="forBalik">
-                                                <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Last school year attended (Balik-Aral)</label>
-                                                <input name="last_schoolyear_attended" type="text" class="form-control" placeholder="eg. 2018-2019" style="text-transform: capitalize;">
+                                                <label class="form-label">Last school year attended (Balik-Aral) <b style="color: #ff0000">*</b></label>
+                                                <input name="last_schoolyear_attended" type="text" class="form-control" placeholder="eg. 2018-2019" style="text-transform: capitalize;" required>
+                                                <div class="invalid-feedback">
+                                                    Last school year is required!
+                                                </div>
                                             </div>
                         
                                             <div class="row">
                                                 <div class="form-group col-12 mb-3" id="forcurriculum">
-                                                    <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Curriculum</label>
-                                                    <select name="curriculum" class="form-select">
+                                                    <label class="form-label">Curriculum <b style="color: #ff0000">*</b></label>
+                                                    <select name="curriculum" class="form-select" required>
                                                         <option value="">Select Curriculum</option>
                                                         {{-- <option value="STEM">STEM - Science Technology Engineering and Mathematics</option> --}}
                                                         <option value="BEC">BEC - Basic Education Curriculum</option>
                                                         {{-- <option value="SPA">SPA - Special Program Art</option> --}}
                                                         {{-- <option value="SPJ">SPJ - Special Program Journalism</option> --}}
                                                     </select>
+                                                    <div class="invalid-feedback">
+                                                        Curriculum is required!
+                                                    </div>
                                                 </div>
                                                 <div class="form-group col-12 mb-3" id="forStrand">
-                                                    <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Strand & Specialization</label>
-                                                    <select name="strand" class="form-select">
+                                                    <label class="form-label">Strand & Specialization</label>
+                                                    <select name="strand" class="form-select" required>
                                                         <option value="">Select Strand</option>
                                                     </select>
+                                                    <div class="invalid-feedback">
+                                                        Please fill this field
+                                                    </div>
                                                 </div>
                                                 <div class="form-group col-12 mb-3">
-                                                    <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Last school attended</label>
+                                                    <label class="form-label">Last school attended <b style="color: #ff0000">*</b></label>
                                                     <input name="last_school_attended" type="text" class="form-control" required style="text-transform: capitalize;">
+                                                    <div class="invalid-feedback">
+                                                        Name of school is required!
+                                                    </div>
                                                 </div>
                                             </div>
                                     </div>
@@ -173,32 +198,44 @@
                                                 <!-- personal information -->
                                                 <div class="row">
                                                     <div class="form-group col-6 mb-3 mt-3">
-                                                        <label class="form-label" for="frist_name"><b style="color: #ff0000">*</b>&nbsp;First Name</label>
+                                                        <label class="form-label" for="frist_name">First Name <b style="color: #ff0000">*</b></label>
                                                         <input id="frist_name" type="text" class="form-control" name="student_firstname" autofocus required style="text-transform: capitalize;">
+                                                        <div class="invalid-feedback">
+                                                            First Name is required!
+                                                        </div>
                                                     </div>
                                                     <div class="form-group col-6 mb-3 mt-3">
                                                         <label class="form-label" for="last_name">Middle Name</label>
                                                         <input id="last_name field_ucfirst" type="text" class="form-control" name="student_middlename" style="text-transform: capitalize;">
                                                     </div>
                                                     <div class="form-group col-6 mb-3">
-                                                        <label class="form-label" for="last_name"><b style="color: #ff0000">*</b>&nbsp;Last Name</label>
+                                                        <label class="form-label" for="last_name">Last Name <b style="color: #ff0000">*</b></label>
                                                         <input id="last_name field_ucfirst" type="text" class="form-control" name="student_lastname" style="text-transform: capitalize;" required>
+                                                        <div class="invalid-feedback">
+                                                            Last Name is required!
+                                                        </div>
                                                     </div>
                                                     <div class="form-group col-6 mb-3">
                                                         <label class="form-label">Extension Name <i>(Optional)</i> </label>
                                                         <input type="text" class="form-control" placeholder="example (Jr, Sr, etc.)" style="text-transform: capitalize;" name="student_extension">
-                                                        </div>
-                                                    <div class="form-group col-lg-4 mb-3">
-                                                        <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Date of Birth</label>
-                                                        <input type="date" class="form-control" name="date_of_birth" required>
                                                     </div>
                                                     <div class="form-group col-lg-4 mb-3">
-                                                        <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Gender</label>
+                                                        <label class="form-label">Date of Birth <b style="color: #ff0000">*</b></label>
+                                                        <input type="date" class="form-control" name="date_of_birth" required>
+                                                        <div class="invalid-feedback">
+                                                            Date of Birth is required!
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-4 mb-3">
+                                                        <label class="form-label">Gender <b style="color: #ff0000">*</b></label>
                                                         <select name="gender" class="form-select" id="" required>
                                                             <option value="">Select Gender</option>
                                                             <option value="Male">Male</option>
                                                             <option value="Female">Female</option>
                                                         </select>
+                                                        <div class="invalid-feedback">
+                                                            Gender is required!
+                                                        </div>
                                                     </div>
                                                     <div class="form-group col-lg-4 mb-3">
                                                         <label class="form-label">Student Contact No.</label>
@@ -210,34 +247,46 @@
                                                 <!-- address -->
                                                 <div class="row">
                                                     <div class="form-group col-md-6 mb-3">
-                                                        <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Region</label>
-                                                        <select name="region_text" id="region" class="form-select form-control" >
-                                                            <option value="">Select Region</option>
+                                                        <label class="form-label">Region <b style="color: #ff0000">*</b></label>
+                                                        <select name="region_text" id="region" class="form-select" required>
+                                                            <option disabled selected value="">Select Region</option>
                                                             <input type="hidden" name="region" id="">
                                                         </select>
+                                                        <div class="invalid-feedback">
+                                                            Region is required!
+                                                        </div>
                                                     </div>
                                                     <div class="form-group col-md-6 mb-3">
-                                                        <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Province</label>
-                                                        <select name="province_text" id="province" class="form-select form-control" >
-                                                            <option value="">Select Province</option>
+                                                        <label class="form-label">Province <b style="color: #ff0000">*</b></label>
+                                                        <select name="province_text" id="province" class="form-select form-control" required>
+                                                            <option selected disabled value="">Select Province</option>
                                                             <input type="hidden" name="province" id="">
                                                         </select>
+                                                        <div class="invalid-feedback">
+                                                            Province is required!
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-md-6 mb-3">
-                                                        <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Municipality/City</label>
-                                                        <select name="city_text" id="city" class="form-select form-control" >
-                                                            <option value="">Select Municipality/City</option>
+                                                        <label class="form-label">Municipality/City <b style="color: #ff0000">*</b></label>
+                                                        <select name="city_text" id="city" class="form-select form-control" required>
+                                                            <option selected disabled value="">Select Municipality/City</option>
                                                             <input type="hidden" name="city" id="">
                                                         </select>
+                                                        <div class="invalid-feedback">
+                                                            Municipality/City is required!
+                                                        </div>
                                                     </div>
                                                     <div class="form-group col-md-6 mb-3">
-                                                        <label class="form-label"><b style="color: #ff0000">*</b>&nbsp;Barangay</label>
-                                                        <select name="barangay_text" id="barangay" class="form-select" >
-                                                            <option value="">Select Barangay</option>
+                                                        <label class="form-label">Barangay <b style="color: #ff0000">*</b></label>
+                                                        <select name="barangay_text" id="barangay" class="form-select" required>
+                                                            <option selected disabled value="">Select Barangay</option>
                                                             <input type="hidden" name="barangay" id="">
                                                         </select>
+                                                        <div class="invalid-feedback">
+                                                            Barangay is required!
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <!-- end -->

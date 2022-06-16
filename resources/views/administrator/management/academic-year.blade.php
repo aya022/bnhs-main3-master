@@ -45,7 +45,7 @@
                                     <input type="text" readonly class="form-control" required pattern="^[0-9]{4}$" maxlength="4" name="to" placeholder="Year to (eg. 2020)">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <button type="submit" class="btn btn-primary btn-block" id="btnSaveAY">Save</button>
+                                    <button type="submit" class="btn btn-info text-white btn-block" id="btnSaveAY">Submit</button>
                                 </div>
                                 {{-- <div class="col-4 mb-3">
                                     <div class="form-group">

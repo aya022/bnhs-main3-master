@@ -15,16 +15,27 @@ let archiveTable = (type) => {
             { data: "roll_no" },
             { data: "fullname" },
             { data: "gender" },
+            // {
+            //     data: null,
+            //     render: function (data) {
+            //         let fullname =  data.fullname
+            //         return `
+            //         <div class="btn-group" role="group" aria-label="Basic example">
+            //             <button type="button" class="btn btn-sm btn-info text-white srestore btnRestore_${data.id} pt-0 pb-0 " id="${data.id}">Restore</span>
+            //             </button>
+            //             <button type="button" class="btn btn-sm btn-danger text-white Studdelete btnDelete_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}" value="${fullname}">Delete</span>
+            //             </button>
+            //         </div>
+            //         `;
+            //     },
+            // },
             {
                 data: null,
                 render: function (data) {
+                    let fullname =  data.fullname
                     return `
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-sm btn-danger text-white sdelete btnDelete_${data.id}  pt-0 pb-0 pl-2 pr-2" id="${data.id}">
-                        <i class="fas fa-trash"></i> <span>Delete</span>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-primary text-white srestore btnRestore_${data.id} pt-0 pb-0 " id="${data.id}">
-                        <i class="fas fa-save"></i> <span>Restore</span>
+                        <button type="button" class="btn btn-sm btn-info text-white srestore btnRestore_${data.id} pt-0 pb-0 " id="${data.id}">Restore</span>
                         </button>
                     </div>
                     `;
@@ -33,14 +44,24 @@ let archiveTable = (type) => {
         ],
     });
 };
-
 /**
  *
  * DELETE
  *
  */
+// delete Modal
 
-$(document).on("click", ".sdelete", function () {
+// info
+// $(document).on("click", ".Studdelete", function () {
+//     let fullname = $(this).val();
+//     let id = $(this).attr("id");
+//     $(".showName").text(fullname)
+//     $("#sDeleteModal").modal("show");
+//     $(".yesDelete").val(id);
+// });
+
+
+$(document).on("click", ".Studdelete", function () {
     let id = $(this).attr("id");
     let type = $("select[name='archiveType']").val();
     $.ajax({
@@ -62,7 +83,7 @@ $(document).on("click", ".sdelete", function () {
             $(".btnDelete_" + id)
                 .html("Delete")
                 .attr("disabled", false);
-            getToast("success", "Success", "deleted one record");
+            getToast("success", "Successfully", "deleted one record");
             $("#studentForm")[0].reset();
             archiveTable($("select[name='archiveType']").val());
         })
@@ -71,7 +92,7 @@ $(document).on("click", ".sdelete", function () {
             $(".btnDelete_" + id)
                 .html("Delete")
                 .attr("disabled", false);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });
 
@@ -95,18 +116,18 @@ $(document).on("click", ".srestore", function () {
     })
         .done(function (response) {
             $(".btnRestore_" + id)
-                .html(`<i class="fas fa-save"></i> <span>Restore</span>`)
+                .html(`<Restore</span>`)
                 .attr("disabled", false);
-            getToast("info", "Restore", "You restore one record");
+            getToast("success", "Successfully", "restored one record");
             $("#studentForm")[0].reset();
             archiveTable($("select[name='archiveType']").val());
         })
         .fail(function (jqxHR, textStatus, errorThrown) {
             console.log(jqxHR, textStatus, errorThrown);
             $(".btnRestore_" + id)
-                .html(`<i class="fas fa-save"></i> <span>Restore</span>`)
+                .html(`Restore</span>`)
                 .attr("disabled", false);
-            getToast("error", "Eror", errorThrown);
+            getToast("error", "Error", errorThrown);
         });
 });
 

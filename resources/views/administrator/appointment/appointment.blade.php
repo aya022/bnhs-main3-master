@@ -45,7 +45,7 @@
             <div class="col-lg-2 col-md-2" style="text-align: right">
                 {{-- <button class="btn btn-icon icon-left btn-info my-4 float-right text-white" id="btnModalHoliday"><i class="fas fa-plus-circle"></i> Add Holiday</button> --}}
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-coreui-toggle="modal" data-coreui-target="#staticBackdrop" id="btnModalHoliday">
+                <button type="button" class="btn btn-info text-white" data-coreui-toggle="modal" data-coreui-target="#staticBackdrop" id="btnModalHoliday">
                     <i class="fas fa-plus-circle"></i> Add Event
                 </button>
             </div>
@@ -93,12 +93,10 @@
                         <div class="card shadow">
                             <div class="card-body">
                                 <h5 class="card-title">Legend</h5><hr>
-                                <ul>
-                                    <li style="background-color: #db5a44" class="text-center text-white">Full Appointment</li>
-                                    <li></li>
-                                    <li style="background-color: #9999ff" class="text-center text-white">Event</li>
-                                    <li></li>
-                                    <li style="background-color: #66cc66" class="text-center text-white">Vacant Appointment</li>
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-primary">Event</li>
+                                    <li class="list-group-item list-group-item-success">Vacant Appointment </li>
+                                    <li class="list-group-item list-group-item-danger">Full Appointment</li>
                                 </ul>
                             </div>
                         </div>

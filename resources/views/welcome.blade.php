@@ -49,8 +49,8 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">Requirements</a></li>
-          <li><a class="nav-link scrollto" href="#services">Tract and Strand</a></li>
+          {{-- <li><a class="nav-link scrollto" href="#about">Requirements</a></li> --}}
+          <li><a class="nav-link scrollto" href="#services">Requirements</a></li>
           <li><a class="nav-link scrollto" href="#pricing">Mission, Vision and Core</a></li>
           <li><a class="getstarted scrollto" href="{{ route('auth.login') }}">
             <i class="ri-login-box-line"></i>&nbsp;&nbsp;Login</a></li>
@@ -98,9 +98,35 @@
   <main id="main">
 
     <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+    {{-- <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
+        <div class="section-title">
+          <h2>Pre-Enrollment Requirements</h2>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-6">
+            <h6 class="mb-1"><b>REQUIREMENTS FOR INCOMING GRADE 7, TRANSFEREES, AND BALIK ARAL</b></h6>
+            <ul>
+              <li><i class="ri-check-double-line"></i>Copy of Latest Grades</li>
+              <li><i class="ri-check-double-line"></i>Copy of Good Moral Certificate</li>
+              <li><i class="ri-check-double-line"></i>Copy of PSA Birth Certificate</li>
+            </ul>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <p>
+              Balaogan Nationa High School Portal innovates the manual enrollment into automated process that can help and improve the speed of enrollment transaction. It has also an appoinment feature where the guest can schedule their appointment to the school.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section --> --}}
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
         <div class="section-title">
           <h2>Pre-Enrollment Requirements</h2>
           {{-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. </p> --}}
@@ -121,15 +147,7 @@
             </p>
           </div>
         </div>
-
-      </div>
-    </section><!-- End About Section -->
-
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
+        {{-- <div class="section-title">
           <h2>Tract and Strand</h2>
           <p>Each student in Senior High School can choose among three tracks: Academic; Technical-Vocational-Livelihood; and Sports and Arts. The Academic track includes three strands: Business, Accountancy, Management (BAM); Humanities, Education, Social Sciences (HESS); and Science, Technology, Engineering, Mathematics (STEM).</p>
 
@@ -191,7 +209,7 @@
               horticulture.</p>
             </div>
           </div>
-        </div>
+        </div> --}}
       </div>
     </section><!-- End Sevices Section -->
 

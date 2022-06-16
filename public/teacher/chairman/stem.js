@@ -102,12 +102,11 @@ let tableCurriculum = $("#tableCurriculum").DataTable({
             },
         },
         { data: "state" },
-        // { data: "date"},
         {
             data:null,
             render: function (data) {
                 if (data.req_psa == "" || data.req_psa == null || data.req_grade == "" || data.req_grade == null || data.req_goodmoral == "" || data.req_goodmoral == null) {
-                    return `--- No upload ---`;
+                    return `--- None ---`;
                 } else {
                     return data.date;
                 }

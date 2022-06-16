@@ -122,7 +122,7 @@ let showMySubject = (strand, grade_level,student,term) => {
 }
 
 let checkSubject = (arr, id) => {
-    return arr.some(item => item === id)?'checked':''
+    return arr.some(item => item === id)?'checked':'';
 }
 
 let disabledSubject = (arr, id) => {
